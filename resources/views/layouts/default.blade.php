@@ -6,14 +6,14 @@
 </head>
 
 <body>
-    <div class="container">
-        <header class="row">
+    <div class="container max-w-max">
+        <header>
             @include('partials.header')
         </header>
         <div id="main" class="row">
             @yield('content')
         </div>
-        <footer class="row">
+        <footer>
             @include('partials.footer')
         </footer>
     </div>
