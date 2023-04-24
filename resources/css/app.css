@@ -1,0 +1,13 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*Repel effect for images*/
+  img {
+    transition: transform 0.2s ease-out;
+  }
+  
+  img.repel {
+    cursor: pointer;
+  }
+  
