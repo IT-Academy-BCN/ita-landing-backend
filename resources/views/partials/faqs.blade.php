@@ -1,17 +1,4 @@
-<!DOCTYPE html>
-<html lang=en>
-<head>
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Landing</title>
-
-        <!-- Styles -->
-        <script src="https://cdn.tailwindcss.com"></script>
-    </head>
-</head>
-<body>
     <section>
         <h1 class="text-center text-2xl"><strong>Preguntas Frecuentes</strong></h1>
           <ul class="grid my-10 ml-32 ">
@@ -67,4 +54,3 @@
               </li>
           </ul>
     </section>
-</body>
