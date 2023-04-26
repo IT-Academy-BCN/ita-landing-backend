@@ -6,6 +6,7 @@
 
 {{-- includes de cada issue --}}
 @include('partials.slogan')
+@include('partials.projects-section')
 @include('partials.team-section')
 @include('partials.faqs')
 

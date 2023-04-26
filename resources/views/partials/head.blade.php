@@ -12,3 +12,4 @@
         margin-bottom:200px
     }
 </style>
+<script src="https://kit.fontawesome.com/68f3ec3982.js" crossorigin="anonymous"></script>
