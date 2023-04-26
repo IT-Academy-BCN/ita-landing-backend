@@ -7,5 +7,6 @@
 {{-- includes de cada issue --}}
 @include('partials.slogan')
 @include('partials.team-section')
+@include('partials.faqs')
 
 @stop
