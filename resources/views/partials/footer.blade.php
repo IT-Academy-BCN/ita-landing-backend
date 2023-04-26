@@ -9,8 +9,8 @@
           />
         </div>
         <div class="flex justify-center mt-10 font-semibold">
-          <a class="mx-5" href="">Barcelona Activa</a>
-          <a class="mx-5" href="">IT Academy</a>
+          <a class="mx-5" href="https://www.barcelonactiva.cat/es/inicio">Barcelona Activa</a>
+          <a class="mx-5" href="https://www.barcelonactiva.cat/es/itacademy">IT Academy</a>
           <a class="mx-5" href="">¿Cómo colaborar?</a>
         </div>
         <div class="flex justify-center mt-20 font-medium pb-3">
