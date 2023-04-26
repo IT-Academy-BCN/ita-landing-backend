@@ -40,7 +40,7 @@ npm install
 ```
 npm run dev
 ```
-9. Run the Laravel server: 
+11. Run the Laravel server in another terminal: 
 ```
 php artisan serve
 ```
