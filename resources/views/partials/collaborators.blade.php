@@ -14,15 +14,66 @@
             </div>
         </div>
     </div>
-    <div class="flex justify-end my-5">
+    <div class="flex justify-end my-5 mr-10">
         <a class="font-bold text-[#025E7E] active:underline " href="">Ver Todos ></a>
     </div>
     <div class="flex justify-center">
-        <div class="grid-rows-3">
-            <div class="flex justify-center">
-                <img class="mask mask-circle h-20 w-20" src="{{ asset('img/collaborators/Joel_test.jpg') }}" />
-                <p class="text-xl mt-6 ml-5">Joël Arana</p>
+        <div class="grid grid-cols-3 gap-3 w-3/4">
+            <div class="flex justify-center my-5">
+                <div class="w-24 h-24 overflow-hidden rounded-full">
+                    <img class="w-full h-full object-cover" src="{{ asset('img/collaborators/Joel_test.jpg') }}" />
+                </div>
+                <p class="text-2xl mt-8 ml-5">Joël Arana</p>
             </div>
+            <div class="flex justify-center my-5">
+                <div class="w-24 h-24 overflow-hidden rounded-full">
+                    <img class="w-full h-full object-cover" src="{{ asset('img/collaborators/Joel_test.jpg') }}" />
+                </div>
+                <p class="text-2xl mt-8 ml-5">Joël Arana</p>
+            </div>            
+            <div class="flex justify-center my-5">
+                <div class="w-24 h-24 overflow-hidden rounded-full">
+                    <img class="w-full h-full object-cover" src="{{ asset('img/collaborators/Joel_test.jpg') }}" />
+                </div>
+                <p class="text-2xl mt-8 ml-5">Joël Arana</p>
+            </div>
+            <div class="flex justify-center my-5">
+                <div class="w-24 h-24 overflow-hidden rounded-full">
+                    <img class="w-full h-full object-cover" src="{{ asset('img/collaborators/Joel_test.jpg') }}" />
+                </div>
+                <p class="text-2xl mt-8 ml-5">Joël Arana</p>
+            </div>
+            <div class="flex justify-center my-5">
+                <div class="w-24 h-24 overflow-hidden rounded-full">
+                    <img class="w-full h-full object-cover" src="{{ asset('img/collaborators/Joel_test.jpg') }}" />
+                </div>
+                <p class="text-2xl mt-8 ml-5">Joël Arana</p>
+            </div>
+            <div class="flex justify-center my-5">
+                <div class="w-24 h-24 overflow-hidden rounded-full">
+                    <img class="w-full h-full object-cover" src="{{ asset('img/collaborators/Joel_test.jpg') }}" />
+                </div>
+                <p class="text-2xl mt-8 ml-5">Joël Arana</p>
+            </div>
+            <div class="flex justify-center my-5">
+                <div class="w-24 h-24 overflow-hidden rounded-full">
+                    <img class="w-full h-full object-cover" src="{{ asset('img/collaborators/Joel_test.jpg') }}" />
+                </div>
+                <p class="text-2xl mt-8 ml-5">Joël Arana</p>
+            </div>
+            <div class="flex justify-center my-5">
+                <div class="w-24 h-24 overflow-hidden rounded-full">
+                    <img class="w-full h-full object-cover" src="{{ asset('img/collaborators/Joel_test.jpg') }}" />
+                </div>
+                <p class="text-2xl mt-8 ml-5">Joël Arana</p>
+            </div>
+            <div class="flex justify-center my-5">
+                <div class="w-24 h-24 overflow-hidden rounded-full">
+                    <img class="w-full h-full object-cover" src="{{ asset('img/collaborators/Joel_test.jpg') }}" />
+                </div>
+                <p class="text-2xl mt-8 ml-5">Joël Arana</p>
+            </div>
+            
         </div>
     </div>
 </section>
