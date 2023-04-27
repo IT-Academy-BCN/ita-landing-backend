@@ -11,3 +11,9 @@
     cursor: pointer;
   }
   
+
+/*Customize DaisyUI card style*/
+.card-title {
+  @apply text-projects-title;
+
+}
