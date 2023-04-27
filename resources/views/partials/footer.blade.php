@@ -1,9 +1,9 @@
-<footer class="bg-[#BA007C]">
+<footer class="bg-[#BA007C] w-screen">
     <div class="mx-auto w-full py-6 text-white text-sm">
       <div>
         <div class="flex justify-center items-center">
           <img
-            src="../../../public/images/ITA_footer_logo.png"
+            src="{{ asset('img/itacademylogo.png') }}"
             class="h-10"
             alt="IT Academy Footer Logo"
           />
