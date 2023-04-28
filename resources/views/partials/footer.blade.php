@@ -12,6 +12,7 @@
           <a class="mx-5" href="https://www.barcelonactiva.cat/es/inicio">Barcelona Activa</a>
           <a class="mx-5" href="https://www.barcelonactiva.cat/es/itacademy">IT Academy</a>
           <a class="mx-5" href="">¿Cómo colaborar?</a>
+          <a class="mx-5" href="" id="norms">Normativa</a>
         </div>
         <div class="flex justify-center mt-20 font-medium pb-3">
           <a class="mx-7" href="">Términos</a>
@@ -20,4 +21,5 @@
         </div>
       </div>
     </div>
+    @include('partials.modal')
 </footer>
