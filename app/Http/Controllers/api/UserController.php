@@ -5,6 +5,7 @@ namespace App\Http\Controllers\api;
 use App\Http\Controllers\Controller;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Http\Request;
+use App\Rules\Dni;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 
@@ -23,7 +24,7 @@ class UserController extends Controller
             $validatedData  = $request->validate([
                 'email' => 'required|string|email|max:255|unique:users',
                 'name' => 'string|max:255',
-                'dni' => 'required|string|unique:users',
+                'dni' => ['required','unique:users',new Dni],
                 'password' => 'required|string|min:8|confirmed',
             ], [
                 'email.unique' => 'The email is already in use',
@@ -35,7 +36,7 @@ class UserController extends Controller
             $user = User::create([
                 'email' => $request->email,
                 'name' => $request->name,
-                'dni' => $request->dni,
+                'dni' => strtoupper($request->dni),
                 'password' => Hash::make($request->password),
                 'status' => 'ACTIVE',
                 'role' => 'ADMIN',
