@@ -1,0 +1,57 @@
+<?php
+
+namespace App\Http\Controllers\api;
+
+use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Laravel\Passport\HasApiTokens;
+
+class AuthController extends Controller
+{
+    use HasApiTokens;
+
+     /**
+     * Log in a user and create a session
+     *
+     * @method POST
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function login(Request $request)
+    {
+        // Validate inputs
+            $request->validate([
+                'dni' => 'required',
+                'password' => 'required|string'
+           ]);
+           
+        // Get user's credentials
+           $credentials = [
+                'dni' => $request->dni,
+                'password' => $request->password,
+           ];
+           
+        // Verify user credentials
+            if (Auth::attempt($credentials)) {
+                $user = Auth::user();
+                $token = $user->createToken('authToken')->accessToken;
+                
+                return response()->json([
+                    'result' => [
+                        'message' => 'Logged in successfully!',
+                        'accessToken' => $token,
+                    ],
+                    'status' => true
+                ]);
+            } else {
+                return response()->json([
+                    'result' => [
+                        'message' => 'Invalid credentials',
+                    ],
+                    'status' => false
+                ], 401);
+            }
+    }
+    
+}
