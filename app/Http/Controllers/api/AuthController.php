@@ -5,12 +5,11 @@ namespace App\Http\Controllers\api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Laravel\Passport\HasApiTokens;
+
 
 class AuthController extends Controller
 {
-    use HasApiTokens;
-
+    
      /**
      * Log in a user and create a session
      *
@@ -37,21 +36,11 @@ class AuthController extends Controller
                 $user = Auth::user();
                 $token = $user->createToken('authToken')->accessToken;
                 
-                return response()->json([
-                    'result' => [
-                        'message' => 'Logged in successfully!',
-                        'accessToken' => $token,
-                    ],
-                    'status' => true
-                ]);
+                return response()->json(['result' => ['message' => 'Logged in successfully!', 'access_token' => $token], 'status' => true]);
             } else {
-                return response()->json([
-                    'result' => [
-                        'message' => 'Invalid credentials',
-                    ],
-                    'status' => false
-                ], 401);
+                return response()->json(['result' => ['message' => 'Invalid credentials'], 'status' => false], 401);
             }
     }
-    
+
+
 }
