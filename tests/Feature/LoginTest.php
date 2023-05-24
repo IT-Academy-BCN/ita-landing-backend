@@ -42,7 +42,39 @@ class LoginTest extends TestCase
             ]);
 
         $this->assertAuthenticated();
-    }
+    }   
 
+    /**
+     * A user can not be logged in successfully with a invalid credentials
+     *
+     */
+    public function test_a_user_can_not_be_logged_in(): void
+    {
+        \Artisan::call('passport:install');
+
+        User::create([
+            'name' => 'Gabriela',
+            'email' => 'gaby@gmail.com',
+            'dni' => '39986987S',
+            'password' => bcrypt('password'),
+            'status' => 'ACTIVE',
+            'role' => 'ADMIN',
+        ]);
+
+        $response = $this->postJson(route('login'), [
+            'dni' => '39986987N',
+            'password' => 'wrongPassword'
+        ]);
+        
+        $response->assertStatus(401);
+        $response->assertJson([
+                'result' => [
+                    'message' => 'Invalid credentials'
+                ],
+                'status' => false
+            ]);
+
+        $this->assertGuest();
+    }
     
 }
