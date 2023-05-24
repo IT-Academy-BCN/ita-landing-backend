@@ -21,14 +21,14 @@ class LoginTest extends TestCase
         User::create([
             'name' => 'Gabriela',
             'email' => 'gaby@gmail.com',
-            'dni' => '39986987S',
+            'dni' => '39986946S',
             'password' => bcrypt('password'),
             'status' => 'ACTIVE',
             'role' => 'ADMIN',
         ]);
 
         $response = $this->postJson(route('login'), [
-            'dni' => '39986987S',
+            'dni' => '39986946S',
             'password' => 'password'
         ]);
         
@@ -55,7 +55,7 @@ class LoginTest extends TestCase
         User::create([
             'name' => 'Gabriela',
             'email' => 'gaby@gmail.com',
-            'dni' => '39986987S',
+            'dni' => '39986946S',
             'password' => bcrypt('password'),
             'status' => 'ACTIVE',
             'role' => 'ADMIN',
