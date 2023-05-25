@@ -77,4 +77,15 @@ class LoginTest extends TestCase
         $this->assertGuest();
     }
     
+    /**
+     * A user cannot be logged in successfully with missing fields
+     *
+     */
+    public function test_a_user_cannot_be_logged_in_with_missing_fields(): void
+    {
+        $response = $this->postJson(route('login'), []);
+        
+        $response->assertStatus(422);
+        
+    }
 }
