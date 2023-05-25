@@ -14,5 +14,5 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('pages.home');
+    echo "<h1> Oh oh, I think you're lost :) </h1>";
 });
