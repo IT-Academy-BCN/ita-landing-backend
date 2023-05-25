@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('faqs', function (Blueprint $table) {
             $table->id();
-            $table->varchar('title', 255);
+            $table->char('title', 255);
             $table->longText('description');
             $table->timestamps();
         });

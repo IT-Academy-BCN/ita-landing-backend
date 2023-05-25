@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('apps', function (Blueprint $table) {
             $table->id();
-            $table->varchar('title', 255);
+            $table->char('title', 255);
             $table->longText('description');
             $table->text('url');
             $table->enum('state', ['COMPLETED', 'IN PROGRESS', 'SOON']);
