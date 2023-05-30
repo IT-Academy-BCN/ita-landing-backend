@@ -2,21 +2,20 @@
 
 namespace Tests\Feature;
 
-use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
+use App\Models\User;
 use Tests\TestCase;
 
 class RegisterTest extends TestCase
 {
-    use DatabaseTransactions;
+    use RefreshDatabase;
 
     /**
      * Test basic store user
      */
-    public function testStoreWithValidData(): void
+    public function test_store_with_valid_data(): void
     {
-        $userData = \App\Models\User::factory()->makeOne(['dni' => '35983746Q']);
+        $userData = User::factory()->makeOne(['dni' => '48042812K']);
 
         $response = $this->post('/api/register', [
             'name' => $userData['name'],
@@ -43,9 +42,9 @@ class RegisterTest extends TestCase
     /**
      * Test store user without name
      */
-    public function testStoreWithValidDataAndWithoutName(): void
+    public function test_store_with_valid_data_and_without_name(): void
     {
-        $userData = \App\Models\User::factory()->makeOne(['dni' => '35983746Q']);
+        $userData = User::factory()->makeOne(['dni' => '35983746Q']);
 
         $response = $this->post('/api/register', [
             'email' => $userData['email'],
@@ -70,9 +69,9 @@ class RegisterTest extends TestCase
     /**
      * Test store user with invalid DNI
      */
-    public function testStoreWithInvalidDni(): void
+    public function test_store_with_invalid_dni(): void
     {
-        $userData = \App\Models\User::factory()->makeOne(['dni' => '35983747Q']);
+        $userData = User::factory()->makeOne(['dni' => '35983747Q']);
 
         $response = $this->post('/api/register', [
             'name' => $userData['name'],
@@ -88,13 +87,13 @@ class RegisterTest extends TestCase
             ]);
     }
 
-    
+
     /**
      * Test store user with valid NIE
      */
-    public function testStoreWithValidNie(): void
+    public function test_store_with_valid_nie(): void
     {
-        $userData = \App\Models\User::factory()->makeOne(['dni' => 'Z6383416R']);
+        $userData = User::factory()->makeOne(['dni' => 'Z6383416R']);
 
         $response = $this->post('/api/register', [
             'name' => $userData['name'],
@@ -113,9 +112,9 @@ class RegisterTest extends TestCase
     /**
      * Test store user with invalid NIE
      */
-    public function testStoreWithInvalidNie(): void
+    public function test_store_with_invalid_nie(): void
     {
-        $userData = \App\Models\User::factory()->makeOne(['dni' => 'Z6383416Q']);
+        $userData = User::factory()->makeOne(['dni' => 'Z6383416Q']);
 
         $response = $this->post('/api/register', [
             'name' => $userData['name'],
@@ -134,9 +133,9 @@ class RegisterTest extends TestCase
     /**
      * Test store user without obligatory fields
      */
-    public function testStoreWithoutObligatoryFields(): void
+    public function test_store_with_obligatory_fields(): void
     {
-        $userData = \App\Models\User::factory()->makeOne(['dni' => '36372839H']);
+        $userData = User::factory()->makeOne(['dni' => '36372839H']);
 
         $response = $this->post('/api/register', [
             'dni' => $userData['dni'],
@@ -176,9 +175,9 @@ class RegisterTest extends TestCase
     /**
      * Test store user with short password
      */
-    public function testStoreWithShortPassword(): void
+    public function test_store_with_short_password(): void
     {
-        $userData = \App\Models\User::factory()->makeOne(['dni' => '89137481S', 'password' => 'pas']);
+        $userData = User::factory()->makeOne(['dni' => '89137481S', 'password' => 'pas']);
 
         $response = $this->post('/api/register', [
             'name' => $userData['name'],
@@ -197,10 +196,16 @@ class RegisterTest extends TestCase
     /**
      * Test store user with taken email
      */
-    public function testStoreWithTakenEmail(): void
+    public function test_store_with_taken_email(): void
     {
-        $userData = \App\Models\User::factory()->makeOne(['dni' => '97491829G']);
-        \App\Models\User::create(array_merge($userData->toArray(), ['password' => $userData['password']]));
+        $userData = User::create([
+            'name' => 'name',
+            'email' => 'email@email.com',
+            'dni' => '57591829J',
+            'password' => bcrypt('password'),
+            'status' => 'ACTIVE',
+            'role' => 'ADMIN',
+        ]);
 
         $response = $this->post('/api/register', [
             'email' => $userData['email'],
@@ -218,10 +223,16 @@ class RegisterTest extends TestCase
     /**
      * Test store user with taken DNI
      */
-    public function testStoreWithTakenDNI(): void
+    public function test_store_with_taken_dni(): void
     {
-        $userData = \App\Models\User::factory()->makeOne(['dni' => '57591829J']);
-        \App\Models\User::create(array_merge($userData->toArray(), ['password' => $userData['password']]));
+        $userData = User::create([
+            'name' => 'name',
+            'email' => 'email@email.com',
+            'dni' => '57591829J',
+            'password' => bcrypt('password'),
+            'status' => 'ACTIVE',
+            'role' => 'ADMIN',
+        ]);
 
         $response = $this->post('/api/register', [
             'email' => 'email@email.com',
