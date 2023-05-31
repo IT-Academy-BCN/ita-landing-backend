@@ -37,7 +37,7 @@ class AppController extends Controller
      */
     public function show($id)
     {
-        $app = App::find($id);
+        $app = App::findOrFail($id);
         return response()->json($app);
     }
 
@@ -46,7 +46,18 @@ class AppController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $app = App::findOrFail($id); 
+
+        $validatedData = $request->validate([
+            'title' => 'required|max:255',
+            'description' => 'required',
+            'url' => 'required|url',
+            'state' => 'required|in:COMPLETED,IN PROGRESS,SOON',
+        ]);
+
+        $app->update($validatedData);
+
+        return response()->json($app, 200);
     }
 
     /**
