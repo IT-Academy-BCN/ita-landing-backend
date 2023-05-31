@@ -19,9 +19,17 @@ class AppController extends Controller
     /**
      * Store a newly created App in storage.
      */
-    public function store(Request $request, )
+    public function store(Request $request)
     {
+        $validatedData = $request->validate([
+            'title' => 'required|max:255',
+            'description' => 'required',
+            'url' => 'required|url',
+            'state' => 'required|in:COMPLETED,IN PROGRESS,SOON',
+        ]);
         
+        $app = App::create($validatedData);
+        return response()->json($app, 201);
     }
 
     /**

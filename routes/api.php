@@ -26,3 +26,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::get('/apps', [AppController::class, 'index']);
 Route::get('/apps/{id}', [AppController::class, 'show']);
+Route::post('/apps', [AppController::class, 'store']);
