@@ -5,6 +5,7 @@ namespace App\Http\Controllers\api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Faq;
+use Illuminate\Validation\ValidationException;
 
 class FaqController extends Controller
 {
@@ -46,14 +47,18 @@ class FaqController extends Controller
      */
     public function store(Request $request)
     {
-        $validatedData = $request->validate([
-            'title' => ['required', 'string', 'max:255'],
-            'description' => ['required', 'string'],
-        ]);
-
-        $faq = Faq::create($validatedData);
-
-        return response()->json(['faq' => $faq], 201);
+        try {
+            $validatedData = $request->validate([
+                'title' => ['required', 'string', 'max:255'],
+                'description' => ['required', 'string'],
+            ]);
+    
+            $faq = Faq::create($validatedData);
+    
+            return response()->json(['faq' => $faq], 201);
+        } catch (ValidationException $e) {
+            return response()->json(['errors' => $e->errors()], 422);
+        }
     }
 
     /**
@@ -65,22 +70,26 @@ class FaqController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $faqs = Faq::find($id);
-
-        if (!$faqs) {
-            return response()->json(['error' => 'FAQ not found'], 404);
+        try {
+            $faqs = Faq::find($id);
+        
+            if (!$faqs) {
+                return response()->json(['error' => 'FAQ not found'], 404);
+            }
+        
+            $validatedData = $request->validate([
+                'title' => 'required|string|max:255',
+                'description' => 'required|string',
+            ]);
+        
+            $faqs->title = $validatedData['title'];
+            $faqs->description = $validatedData['description'];
+            $faqs->save();
+        
+            return response()->json(['message' => 'FAQ updated successfully']);
+        } catch (ValidationException $e) {
+            return response()->json(['errors' => $e->errors()], 422);
         }
-
-        $validatedData = $request->validate([
-            'title' => 'required|string|max:255',
-            'description' => 'required|string',
-        ]);
-
-        $faqs->title = $validatedData['title'];
-        $faqs->description = $validatedData['description'];
-        $faqs->save();
-
-        return response()->json(['message' => 'FAQ updated successfully']);
     }
 
     /**
