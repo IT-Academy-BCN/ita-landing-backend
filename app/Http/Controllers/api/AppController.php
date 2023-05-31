@@ -19,9 +19,9 @@ class AppController extends Controller
     /**
      * Store a newly created App in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request, )
     {
-        //
+        
     }
 
     /**
@@ -29,7 +29,8 @@ class AppController extends Controller
      */
     public function show($id)
     {
-        //
+        $app = App::find($id);
+        return response()->json($app);
     }
 
     /**
