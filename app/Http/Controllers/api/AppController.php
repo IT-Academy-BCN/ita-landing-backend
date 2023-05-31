@@ -56,7 +56,6 @@ class AppController extends Controller
         ]);
 
         $app->update($validatedData);
-
         return response()->json($app, 200);
     }
 
@@ -65,6 +64,7 @@ class AppController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $app = App::findOrFail($id)->delete();
+        return response()->json(null, 204);
     }
 }

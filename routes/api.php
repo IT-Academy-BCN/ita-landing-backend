@@ -28,3 +28,4 @@ Route::get('/apps', [AppController::class, 'index']);
 Route::get('/apps/{id}', [AppController::class, 'show']);
 Route::post('/apps', [AppController::class, 'store']);
 Route::post('/apps/{id}', [AppController::class, 'update']);
+Route::delete('/apps/{id}', [AppController::class, 'destroy']);
