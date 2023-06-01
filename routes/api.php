@@ -24,8 +24,10 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/apps', [AppController::class, 'index']);
-Route::get('/apps/{id}', [AppController::class, 'show']);
-Route::post('/apps', [AppController::class, 'store']);
-Route::post('/apps/{id}', [AppController::class, 'update']);
-Route::delete('/apps/{id}', [AppController::class, 'destroy']);
+//Route::middleware(['auth:api'])->group(function () {
+    Route::get('/apps', [AppController::class, 'index'])->name('app.index');
+    Route::get('/apps/{id}', [AppController::class, 'show'])->name('app.show');
+    Route::post('/apps', [AppController::class, 'store'])->name('app.store');
+    Route::put('/apps/{id}', [AppController::class, 'update'])->name('app.update');
+    Route::delete('/apps/{id}', [AppController::class, 'destroy'])->name('app.destroy');
+//});

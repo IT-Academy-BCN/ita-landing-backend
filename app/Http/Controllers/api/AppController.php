@@ -42,7 +42,7 @@ class AppController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update the specified App in storage.
      */
     public function update(Request $request, $id)
     {
@@ -60,7 +60,7 @@ class AppController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Remove the specified App from storage.
      */
     public function destroy($id)
     {
