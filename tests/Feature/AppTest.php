@@ -6,6 +6,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 use App\Models\App;
+use App\Models\User;
 
 class AppTest extends TestCase
 {
@@ -16,8 +17,8 @@ class AppTest extends TestCase
     {
         App::factory(3)->create();
 
-        $response = $this->getJson(route('app.index'));
-
+        $response = $this->withHeaders(['Authorization' => 'Bearer ' . $this->authCreated()])->getJson(route('app.index'));
+       
         $response->assertStatus(200);
         $response->json();
     }
@@ -31,7 +32,7 @@ class AppTest extends TestCase
             'state' => fake()->randomElement(['COMPLETED', 'IN PROGRESS', 'SOON'])
         ];
         
-        $this->postJson(route('app.store'), $app);
+        $this->withHeaders(['Authorization' => 'Bearer ' . $this->authCreated()])->postJson(route('app.store'), $app);
     
         $this->assertDatabaseHas('apps', $app); 
     }
@@ -45,7 +46,7 @@ class AppTest extends TestCase
             'state' => fake()->randomElement(['COMPLETED', 'IN PROGRESS', 'SOON'])
         ];
         
-        $response = $this->postJson(route('app.store'), $app);
+        $response = $this->withHeaders(['Authorization' => 'Bearer ' . $this->authCreated()])->postJson(route('app.store'), $app);
     
         $response->assertStatus(422);
     }
@@ -59,7 +60,7 @@ class AppTest extends TestCase
             'state' => fake()->randomElement(['COMPLETED', 'IN PROGRESS', 'SOON'])
         ];
         
-        $response = $this->postJson(route('app.store'), $app);
+        $response = $this->withHeaders(['Authorization' => 'Bearer ' . $this->authCreated()])->postJson(route('app.store'), $app);
 
         $response->assertJsonValidationErrorFor('url');
     
@@ -74,7 +75,7 @@ class AppTest extends TestCase
             'state' => [],
         ];
         
-        $response = $this->postJson(route('app.store'), $app);
+        $response = $this->withHeaders(['Authorization' => 'Bearer ' . $this->authCreated()])->postJson(route('app.store'), $app);
     
         $response->assertStatus(422);
     }
@@ -83,7 +84,7 @@ class AppTest extends TestCase
     {
         $app = App::factory()->create();
 
-        $response = $this->getJson(route('app.show', $app));
+        $response = $this->withHeaders(['Authorization' => 'Bearer ' . $this->authCreated()])->getJson(route('app.show', $app));
 
         $response->assertJson([
             'title' => $app->title,
@@ -97,7 +98,7 @@ class AppTest extends TestCase
     {
         App::factory()->create();
 
-        $response = $this->getJson(route('app.show', ['id' => '2']));
+        $response = $this->withHeaders(['Authorization' => 'Bearer ' . $this->authCreated()])->getJson(route('app.show', ['id' => '2']));
 
         $response->assertStatus(404);
     }
@@ -113,13 +114,13 @@ class AppTest extends TestCase
             'state' => $app->state,
         ];
         
-        $this->postJson(route('app.store'), $newData);
+        $this->withHeaders(['Authorization' => 'Bearer ' . $this->authCreated()])->postJson(route('app.store'), $newData);
     
         $this->assertDatabaseHas('apps', $newData); 
     }
 
     public function test_can_not_update_an_app_with_missing_field(): void
-    {
+    {   
         $app = App::factory()->create();
 
         $newData = [
@@ -129,7 +130,7 @@ class AppTest extends TestCase
             'state' => $app->state,
         ];
         
-        $response = $this->postJson(route('app.store'), $newData);
+        $response = $this->withHeaders(['Authorization' => 'Bearer ' . $this->authCreated()])->postJson(route('app.store'), $newData);
     
         $response->assertStatus(422); 
     }
@@ -138,7 +139,7 @@ class AppTest extends TestCase
     {
         $app = App::factory()->create();
 
-        $this->deleteJson(route('app.destroy', $app));
+        $this->withHeaders(['Authorization' => 'Bearer ' . $this->authCreated()])->deleteJson(route('app.destroy', $app));
         
         $this->assertDatabaseCount('apps', 0);
     }
@@ -147,9 +148,25 @@ class AppTest extends TestCase
     {
         App::factory()->create();
 
-        $response = $this->deleteJson(route('app.destroy', ['id' => '2']));
+        $response = $this->withHeaders(['Authorization' => 'Bearer ' . $this->authCreated()])->deleteJson(route('app.destroy', ['id' => '2']));
 
         $response->assertStatus(404);
+    }
+
+    private function authCreated()
+    {
+        \Artisan::call('passport:install');
+
+        $user = User::create([
+            'name' => 'Gabriela',
+            'email' => 'gaby@gmail.com',
+            'dni' => '39986946S',
+            'password' => bcrypt('password'),
+            'status' => 'ACTIVE',
+            'role' => 'ADMIN',
+        ]);
+        return $token = $user->createToken('auth_token')->accessToken;
+        
     }
 
 }
