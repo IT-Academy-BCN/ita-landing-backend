@@ -37,6 +37,20 @@ class AppTest extends TestCase
         $this->assertDatabaseHas('apps', $app); 
     }
 
+    public function test_can_not_store_an_app_without_token(): void
+    {
+        $app = [
+            'title' => fake()->title(),
+            'description' => fake()->text(),
+            'url' => fake()->url(),
+            'state' => fake()->randomElement(['COMPLETED', 'IN PROGRESS', 'SOON'])
+        ];
+        
+        $response = $this->postJson(route('app.store'), $app);
+    
+        $response->assertStatus(401);
+    }
+
     public function test_can_not_store_an_app_with_a_missing_field(): void
     {
         $app = [
@@ -94,6 +108,15 @@ class AppTest extends TestCase
         ]);
     }
 
+    public function test_can_not_show_an_app_without_token(): void
+    {
+        $app = App::factory()->create();
+
+        $response = $this->getJson(route('app.show', $app));
+
+        $response->assertStatus(401);
+    }
+
     public function test_can_not_show_an_app_that_it_doesnt_exists(): void
     {
         App::factory()->create();
@@ -119,6 +142,22 @@ class AppTest extends TestCase
         $this->assertDatabaseHas('apps', $newData); 
     }
 
+    public function test_can_not_update_an_app_without_token(): void
+    {
+        $app = App::factory()->create();
+
+        $newData = [
+            'title' => 'Title updated',
+            'description' => $app->description,
+            'url' => $app->url,
+            'state' => $app->state,
+        ];
+            
+        $response = $this->postJson(route('app.store'), $newData);
+
+        $response->assertStatus(401); 
+    }
+    
     public function test_can_not_update_an_app_with_missing_field(): void
     {   
         $app = App::factory()->create();
@@ -151,6 +190,15 @@ class AppTest extends TestCase
         $response = $this->withHeaders(['Authorization' => 'Bearer ' . $this->authCreated()])->deleteJson(route('app.destroy', ['id' => '2']));
 
         $response->assertStatus(404);
+    }
+
+    public function test_can_not_delete_an_app_without_token(): void
+    {
+        $app = App::factory()->create();
+
+        $response = $this->deleteJson(route('app.destroy', $app));
+
+        $response->assertStatus(401);
     }
 
     private function authCreated()
