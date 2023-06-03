@@ -137,7 +137,7 @@ class AppTest extends TestCase
             'state' => $app->state,
         ];
         
-        $this->withHeaders(['Authorization' => 'Bearer ' . $this->authCreated()])->putJson(route('app.update', ['id' => $app->id]), $newData);
+        $this->withHeaders(['Authorization' => 'Bearer ' . $this->authCreated()])->putJson(route('app.update', $app->id), $newData);
     
         $this->assertDatabaseHas('apps', $newData); 
     }
@@ -153,7 +153,7 @@ class AppTest extends TestCase
             'state' => $app->state,
         ];
             
-        $response = $this->putJson(route('app.update', ['id' => $app->id]), $newData);
+        $response = $this->putJson(route('app.update', $app->id), $newData);
 
         $response->assertStatus(401); 
     }
@@ -169,7 +169,7 @@ class AppTest extends TestCase
             'state' => $app->state,
         ];
         
-        $response = $this->withHeaders(['Authorization' => 'Bearer ' . $this->authCreated()])->putJson(route('app.update', ['id' => $app->id]), $newData);
+        $response = $this->withHeaders(['Authorization' => 'Bearer ' . $this->authCreated()])->putJson(route('app.update', $app->id), $newData);
     
         $response->assertStatus(422); 
     }
