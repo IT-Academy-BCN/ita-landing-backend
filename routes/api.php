@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\api\UserController;
+use App\Http\Controllers\api\FaqController;
 use App\Http\Controllers\api\AuthController;
 
 /*
@@ -19,6 +20,10 @@ use App\Http\Controllers\api\AuthController;
 Route::post('/register', [UserController::class, 'store'])->name('register');
 Route::post('/login', [AuthController::class, 'login'])->name('login');
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::middleware(['auth:api'])->prefix('faqs')->group(function () {
+    Route::get('/', [FaqController::class, 'index']);
+    Route::get('/{id}', [FaqController::class, 'show']);
+    Route::post('/', [FaqController::class, 'store']);
+    Route::put('/{id}', [FaqController::class, 'update']);
+    Route::delete('/{id}', [FaqController::class, 'destroy']);
 });

@@ -23,6 +23,8 @@ class UserFactory extends Factory
             'email' => fake()->unique()->safeEmail(),
             'dni' => $this->faker->regexify('[0-9]{8}[A-Z]'),
             'password' => Hash::make('password'),
+            'status' => 'ACTIVE',
+            'role' => 'ADMIN',
             'email_verified_at' => now(),
             'remember_token' => Str::random(10),
         ];
