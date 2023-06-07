@@ -10,13 +10,19 @@ class CodeController extends Controller
 {
     /**
      * Save a new code in the database
-     *
+     * @return \Illuminate\Http\JsonResponse;
      */
     public function store()
     {
+        $code = $this->generateRandomCode();
+
         Code::create([
-            'code' => $this->generateRandomCode(),
+            'code' => $code,
             'is_used' => false
+        ]);
+        return response()->json([
+            'success' => true,
+            'code' => $code
         ]);
     }
 
