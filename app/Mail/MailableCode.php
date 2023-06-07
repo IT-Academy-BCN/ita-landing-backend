@@ -9,6 +9,7 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
+
 class MailableCode extends Mailable
 {
     use Queueable, SerializesModels;
@@ -39,7 +40,7 @@ class MailableCode extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'view.name',
+            text: 'code', 
             with: [
                 'code' => $this->code,
             ], 

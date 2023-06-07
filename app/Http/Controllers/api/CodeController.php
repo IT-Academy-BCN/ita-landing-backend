@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\api;
 
 use App\Http\Controllers\Controller;
+use App\Mail\MailableCode;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 use App\Models\Code;
 
@@ -20,6 +22,9 @@ class CodeController extends Controller
             'code' => $code,
             'is_used' => false
         ]);
+
+        Mail::to('gmaureirapalma@gmail.com')->send(new MailableCode($code));
+
         return response()->json([
             'success' => true,
             'code' => $code
@@ -32,7 +37,7 @@ class CodeController extends Controller
      */
     public function generateRandomCode()
     {
-        return $code = Str::random(10);
+        return Str::random(10);
     }
 
 

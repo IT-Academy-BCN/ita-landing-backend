@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\api\UserController;
 use App\Http\Controllers\api\FaqController;
 use App\Http\Controllers\api\AuthController;
+use App\Http\Controllers\api\CodeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,3 +28,5 @@ Route::middleware(['auth:api'])->prefix('faqs')->group(function () {
     Route::put('/{id}', [FaqController::class, 'update']);
     Route::delete('/{id}', [FaqController::class, 'destroy']);
 });
+
+Route::get('/send-code', [CodeController::class, 'store']);
