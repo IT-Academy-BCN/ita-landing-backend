@@ -29,4 +29,4 @@ Route::middleware(['auth:api'])->prefix('faqs')->group(function () {
     Route::delete('/{id}', [FaqController::class, 'destroy']);
 });
 
-Route::get('/send-code', [CodeController::class, 'store']);
+Route::get('/send-email/{recipient}', [CodeController::class, 'sendEmail']);

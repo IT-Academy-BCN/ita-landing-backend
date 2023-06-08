@@ -23,12 +23,7 @@ class CodeController extends Controller
             'is_used' => false
         ]);
 
-        Mail::to('gmaureirapalma@gmail.com')->send(new MailableCode($code));
-
-        return response()->json([
-            'success' => true,
-            'code' => $code
-        ]);
+        return $code;
     }
 
     /**
@@ -38,6 +33,22 @@ class CodeController extends Controller
     public function generateRandomCode()
     {
         return Str::random(10);
+    }
+
+    /**
+     * Send email with the generated code to the specified recipient
+     *
+     * @param string $recipient
+     * @param string $code
+     */
+    public function sendEmail($recipient)
+    {
+        Mail::to($recipient)->send(new MailableCode($this->store()));
+
+        return response()->json([
+            'status' => true,
+            'message' => 'Email sent successfully'
+        ]);
     }
 
 
