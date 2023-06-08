@@ -14,7 +14,7 @@ class CodeController extends Controller
 {
     /**
      * Save a new code in the database
-     * @return \Illuminate\Http\JsonResponse;
+     * @return $code;
      */
     public function store()
     {
@@ -30,7 +30,7 @@ class CodeController extends Controller
 
     /**
      * Random code generated.
-     *
+     * @return string
      */
     public function generateRandomCode()
     {
