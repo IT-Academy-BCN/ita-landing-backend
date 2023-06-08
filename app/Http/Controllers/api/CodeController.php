@@ -7,6 +7,8 @@ use App\Mail\MailableCode;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 use App\Models\Code;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class CodeController extends Controller
 {
@@ -38,18 +40,23 @@ class CodeController extends Controller
     /**
      * Send email with the generated code to the specified recipient
      *
-     * @param string $recipient
-     * @param string $code
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function sendEmail($recipient)
+    public function sendEmail(Request $request)
     {
-        Mail::to($recipient)->send(new MailableCode($this->store()));
-
-        return response()->json([
-            'status' => true,
-            'message' => 'Email sent successfully'
+        $validEmail = Validator::make($request->all(), [
+            'email' => 'required|email',
         ]);
-    }
 
+        if ($validEmail->fails()) {
+            return response()->json(['status' => false, 'message' => 'Invalid email', 'errors' => $validEmail->errors()], 400);
 
+        }else{
+
+            $emailAddress = $request->input('email');
+            Mail::to($emailAddress)->send(new MailableCode($this->store()));
+            return response()->json(['status' => true, 'message' => 'Email sent successfully']);
+        }
+    } 
 }
