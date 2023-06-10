@@ -30,4 +30,4 @@ Route::middleware(['auth:api'])->prefix('faqs')->group(function () {
 });
 
 
-Route::post('/send-email', [CodeController::class, 'sendEmail'])->middleware('auth:api');
+Route::post('/send-email', [CodeController::class, 'sendEmail']);
