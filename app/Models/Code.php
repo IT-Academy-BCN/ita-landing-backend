@@ -16,7 +16,7 @@ class Code extends Model
      */
     protected $fillable = [
         'code',
-        'is_used'
+        
     ];
 
 

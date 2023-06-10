@@ -22,7 +22,7 @@ class CodeController extends Controller
 
         Code::create([
             'code' => $code,
-            'is_used' => false
+            
         ]);
 
         return $code;

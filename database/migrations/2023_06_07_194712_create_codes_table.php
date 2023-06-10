@@ -14,7 +14,6 @@ return new class extends Migration
         Schema::create('codes', function (Blueprint $table) {
             $table->id();
             $table->string('code');
-            $table->boolean('is_used')->default(false);
             $table->timestamps();
         });
     }

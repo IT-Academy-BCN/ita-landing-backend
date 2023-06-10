@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Rules\Dni;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
+use App\Models\Code;
 
 class UserController extends Controller
 {
@@ -26,10 +27,12 @@ class UserController extends Controller
                 'name' => 'string|max:255',
                 'dni' => ['required','unique:users',new Dni],
                 'password' => 'required|string|min:8|confirmed',
+                'code' => 'required|unique:codes'
             ], [
                 'email.unique' => 'The email is already in use',
                 'dni.unique' => 'The DNI is already in use',
                 'password.confirmed' => 'The password confirmation does not match.',
+                'code.unique' => 'The code is used already'
             ]);
 
             // Create a new user.
@@ -40,7 +43,9 @@ class UserController extends Controller
                 'password' => Hash::make($request->password),
                 'status' => 'ACTIVE',
                 'role' => 'ADMIN',
+                'code' => $request->code,
             ]);
+        
 
             // Response
             return response()->json([
