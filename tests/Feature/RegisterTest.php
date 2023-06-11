@@ -4,7 +4,9 @@ namespace Tests\Feature;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use App\Models\User;
+use App\Models\Code;
 use Tests\TestCase;
+use Illuminate\Support\Str;
 
 class RegisterTest extends TestCase
 {
@@ -15,7 +17,9 @@ class RegisterTest extends TestCase
      */
     public function test_store_with_valid_data(): void
     {
+        
         $userData = User::factory()->makeOne(['dni' => '48042812K']);
+        $code = $this->createCode();
 
         $response = $this->post('/api/register', [
             'name' => $userData['name'],
@@ -23,6 +27,7 @@ class RegisterTest extends TestCase
             'dni' => $userData['dni'],
             'password' => $userData['password'],
             'password_confirmation' => $userData['password'],
+            'code' => $code['code'],
         ]);
 
         $response->assertStatus(200)
@@ -36,7 +41,19 @@ class RegisterTest extends TestCase
             'dni' => $userData['dni'],
             'status' => 'ACTIVE',
             'role' => 'ADMIN',
+        ])->assertDatabaseHas('codes', [
+            'code' => $code['code']
         ]);
+
+    }
+    
+    private function createCode()
+    {
+        $code = Code::create([
+            'code' => Str::random(10)
+        ]);
+        
+        return $code;
     }
 
     /**
@@ -45,12 +62,14 @@ class RegisterTest extends TestCase
     public function test_store_with_valid_data_and_without_name(): void
     {
         $userData = User::factory()->makeOne(['dni' => '35983746Q']);
+        $code = $this->createCode();
 
         $response = $this->post('/api/register', [
             'email' => $userData['email'],
             'dni' => $userData['dni'],
             'password' => $userData['password'],
             'password_confirmation' => $userData['password'],
+            'code' => $code['code']
         ]);
 
         $response->assertStatus(200)
@@ -63,6 +82,8 @@ class RegisterTest extends TestCase
             'dni' => $userData['dni'],
             'status' => 'ACTIVE',
             'role' => 'ADMIN',
+        ])->assertDatabaseHas('codes', [
+            'code' => $code['code']
         ]);
     }
 
@@ -94,6 +115,7 @@ class RegisterTest extends TestCase
     public function test_store_with_valid_nie(): void
     {
         $userData = User::factory()->makeOne(['dni' => 'Z6383416R']);
+        $code = $this->createCode();
 
         $response = $this->post('/api/register', [
             'name' => $userData['name'],
@@ -101,6 +123,7 @@ class RegisterTest extends TestCase
             'dni' => $userData['dni'],
             'password' => $userData['password'],
             'password_confirmation' => $userData['password'],
+            'code' => $code['code']
         ]);
 
         $response->assertStatus(200)
@@ -246,4 +269,6 @@ class RegisterTest extends TestCase
                 'status' => false,
             ]);
     }
+
+    
 }
