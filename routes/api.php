@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\api\UserController;
 use App\Http\Controllers\api\FaqController;
 use App\Http\Controllers\api\AuthController;
+use App\Http\Controllers\api\ForgetController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -19,6 +21,9 @@ use App\Http\Controllers\api\AuthController;
 
 Route::post('/register', [UserController::class, 'store'])->name('register');
 Route::post('/login', [AuthController::class, 'login'])->name('login');
+
+// recovery password
+Route::post('/forgetpassword', [ForgetController::class, 'forgetPassword'])->name('forgetpassword');
 
 Route::middleware(['auth:api'])->prefix('faqs')->group(function () {
     Route::get('/', [FaqController::class, 'index']);
