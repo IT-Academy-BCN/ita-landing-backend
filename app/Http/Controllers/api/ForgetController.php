@@ -75,16 +75,15 @@ class ForgetController extends Controller
 
         $passwordResets= DB::table('password_reset_tokens')->where('token', $token)->first();
 
-        /** @var User $user */
-        $user= User::where('email',$passwordResets->email)->first();
-        
+                        
         if(!$passwordResets){
 
             return response()->json([
                 'error' => 'Invalid Token!'
             ],400);
         }
-
+        /** @var User $user */
+        $user= User::where('email',$passwordResets->email)->first();
         $user->password = Hash::make($request->password);
         $user->save();
 
