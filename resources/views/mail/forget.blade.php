@@ -7,6 +7,6 @@
     <title>contraseña</title>
 </head>
 <body>
-    esto es una prueba
+    <p>change your password <a href="http://localhost:3000/reset/{{$token}}">here</a> </p>
 </body>
 </html>
