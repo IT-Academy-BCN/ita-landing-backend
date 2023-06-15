@@ -113,7 +113,7 @@ class ResetPasswordTest extends TestCase
 
         DB::table('password_reset_tokens')->insert([
             'email' => $email,
-            'token' => '123456'
+            'token' => '1234567'
         ]);
          
         $response = $this->post(route('resetPassword',$token),[
