@@ -25,10 +25,7 @@ class ForgetController extends Controller
 
         $email = $request->email;
 
-        if(User::where('email',$email)->doesntExist()){
-
-            return response()->json(['error' => 'The email don\'t exist'],404);
-        }
+        $user= User::where('email',$email)->doesntExist();
 
         $token= Str::random(10);
 
@@ -37,7 +34,10 @@ class ForgetController extends Controller
         
         try{
 
-            if($existingMail){
+            if($user){
+                return response()->json(['error' => 'The email don\'t exist'],404);
+                
+            }else if($existingMail){
 
                 DB::table('password_reset_tokens')->where('email', $email)->update([
                     'token' => $token,

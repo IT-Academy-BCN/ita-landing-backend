@@ -23,7 +23,9 @@ class ResetPasswordTest extends TestCase
             'email'=> $user->email
         ]);
 
-        $response->assertStatus(200);
+        $response->assertStatus(200)->assertJsonStructure([
+            'message'
+        ]);
     }
 
     public function test_cant_ask_for_the_email_to_reset_password(): void
@@ -34,6 +36,8 @@ class ResetPasswordTest extends TestCase
             'email'=> 'prueba@prueba.com'
         ]);
 
-        $response->assertStatus(200);
+        $response->assertStatus(404)->assertJsonStructure([
+            'error'
+        ]);
     }
 }
