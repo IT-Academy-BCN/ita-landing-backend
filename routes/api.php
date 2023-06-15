@@ -26,7 +26,7 @@ Route::post('/login', [AuthController::class, 'login'])->name('login');
 // recovery password
 Route::post('/forgetpassword', [ForgetController::class, 'forgetPassword'])->name('forgetpassword');
 
-Route::post('/resetPassword', [ForgetController::class, 'resetPassword'])->name('resetPassword');
+Route::post('/resetPassword/{token}', [ForgetController::class, 'resetPassword'])->name('resetPassword');
 
 Route::middleware(['auth:api'])->prefix('faqs')->group(function () {
     Route::get('/', [FaqController::class, 'index']);

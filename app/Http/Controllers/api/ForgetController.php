@@ -86,7 +86,7 @@ class ForgetController extends Controller
 
         return response()->json([
             'message' => 'success'
-        ]);
+        ],200);
 
     }
 }

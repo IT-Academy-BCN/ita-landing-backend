@@ -6,6 +6,9 @@ use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
+
 
 class ResetPasswordTest extends TestCase
 {
@@ -15,7 +18,7 @@ class ResetPasswordTest extends TestCase
 
      use RefreshDatabase;
 
-    public function test_can_ask_for_the_email_to_reset_password(): void
+    public function test_user_can_ask_for_the_email_to_reset_password(): void
     {
         $user= User::factory()->create();
         
@@ -28,10 +31,9 @@ class ResetPasswordTest extends TestCase
         ]);
     }
 
-    public function test_cant_ask_for_the_email_to_reset_password(): void
+    public function test_user_cant_ask_for_the_email_cause_the_email_dont_exist(): void
     {
-        $user= User::factory()->create();
-        
+         
         $response = $this->post(route('forgetpassword'),[
             'email'=> 'prueba@prueba.com'
         ]);
@@ -40,4 +42,89 @@ class ResetPasswordTest extends TestCase
             'error'
         ]);
     }
+
+    public function test_updating_token_for_an_existing_email_on_reset_password_table(): void
+    {
+        $user= User::factory()->create();
+        $email= $user->email;
+        $token= Str::random(10);
+        
+        DB::table('password_reset_tokens')->insert([
+            'email' => $email,
+            'token' => $token
+        ]); 
+
+        $response = $this->post(route('forgetpassword'),[
+            'email'=> $email
+        ]);
+
+        $response->assertStatus(200)->assertJsonStructure([
+            'message'
+        ]);
+    }
+
+    public function test_user_can_reset_password(): void
+    {
+        $user= User::factory()->create();
+        $email= $user->email;
+        $token= Str::random(10);
+
+        DB::table('password_reset_tokens')->insert([
+            'email' => $email,
+            'token' => $token
+        ]);
+         
+        $response = $this->post(route('resetPassword',$token),[
+            'token'=> $token,
+            'password' =>"newpassword",
+            'password_confirm' => "newpassword"
+        ]);
+
+        $response->assertStatus(200)->assertJsonStructure([
+            'message'
+        ]);
+    }
+
+    public function test_user_cant_reset_password_cause_put_it_wrong(): void
+    {
+        $user= User::factory()->create();
+        $email= $user->email;
+        $token= Str::random(10);
+
+        DB::table('password_reset_tokens')->insert([
+            'email' => $email,
+            'token' => $token
+        ]);
+         
+        $response = $this->post(route('resetPassword',$token),[
+            'token'=> $token,
+            'password' =>"newpassword",
+            'password_confirm' => "newpawwrodd"
+        ]);
+
+        $response->assertStatus(302);
+    }
+
+    public function test_user_have_wrong_token(): void
+    {
+        $user= User::factory()->create();
+        $email= $user->email;
+        $token= Str::random(10);
+
+        DB::table('password_reset_tokens')->insert([
+            'email' => $email,
+            'token' => '123456'
+        ]);
+         
+        $response = $this->post(route('resetPassword',$token),[
+            'token'=> $token,
+            'password' =>"newpassword",
+            'password_confirm' => "newpassword"
+        ]);
+
+        $response->assertStatus(400)->assertJsonStructure([
+            'error'
+        ]);
+    }
+
 }
