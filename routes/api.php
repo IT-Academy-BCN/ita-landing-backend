@@ -7,6 +7,7 @@ use App\Http\Controllers\api\FaqController;
 use App\Http\Controllers\api\AuthController;
 use App\Http\Controllers\api\ForgetController;
 
+use App\Http\Controllers\api\AppController;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,3 +35,13 @@ Route::middleware(['auth:api'])->prefix('faqs')->group(function () {
     Route::put('/{id}', [FaqController::class, 'update']);
     Route::delete('/{id}', [FaqController::class, 'destroy']);
 });
+
+Route::middleware(['auth:api'])->group(function () {
+    Route::get('/apps', [AppController::class, 'index'])->name('app.index');
+    Route::get('/apps/{id}', [AppController::class, 'show'])->name('app.show');
+    Route::post('/apps', [AppController::class, 'store'])->name('app.store');
+    Route::put('/apps/{id}', [AppController::class, 'update'])->name('app.update');
+    Route::delete('/apps/{id}', [AppController::class, 'destroy'])->name('app.destroy');
+});
+    
+    

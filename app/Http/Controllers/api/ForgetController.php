@@ -48,10 +48,7 @@ class ForgetController extends Controller
                 DB::table('password_reset_tokens')->insert([
                     'email' => $email,
                     'token' => $token
-                ]);
-    
-                
-    
+                ]);                
             }
 
             //send email
