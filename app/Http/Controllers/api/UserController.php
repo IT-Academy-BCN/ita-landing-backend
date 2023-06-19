@@ -11,7 +11,7 @@ use App\Models\User;
 
 class UserController extends Controller
 {
-    /**
+/**
  * @OA\Post(
  *   path="/register",
  *   tags={"User"},
