@@ -15,7 +15,8 @@ class FaqController extends Controller
  *   tags={"Faqs"},
  *   summary="Get list of frequently asked questions (FAQs)",
  *   description="This endpoint is used to get a list of all frequently asked questions.",
- *   @OA\Response(
+ * security={{"bearer": {}}},  
+ * @OA\Response(
  *     response="200",
  *     description="Frequently asked questions list."
  *   )
@@ -42,6 +43,7 @@ class FaqController extends Controller
  *       example=1
  *     )
  *   ),
+ *   security={{"bearer": {}}},
  *   @OA\Response(
  *     response="200",
  *     description="FAQ details."
@@ -85,6 +87,7 @@ class FaqController extends Controller
  *       )
  *     )
  *   ),
+ *   security={{"bearer": {}}},
  *   @OA\Response(
  *     response="201",
  *     description="Details of the FAQ created."
@@ -141,6 +144,7 @@ class FaqController extends Controller
  *       )
  *     )
  *   ),
+ *   security={{"bearer": {}}},
  *   @OA\Response(
  *     response="200",
  *     description="Updated FAQ details."
@@ -187,6 +191,7 @@ class FaqController extends Controller
  *       example=1
  *     )
  *   ),
+ *   security={{"bearer": {}}},
  *   @OA\Response(
  *     response="200",
  *     description="Success message indicating that the FAQ has been removed."

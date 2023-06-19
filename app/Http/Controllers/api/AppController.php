@@ -14,6 +14,7 @@ class AppController extends Controller
  *   tags={"Apps"},
  *   summary="Apps list",
  *   description="This endpoint is used to take a list of all the apps",
+ *   security={{"bearer": {}}},
  *   @OA\Response(
  *     response="200",
  *     description="Apps list."
@@ -60,6 +61,7 @@ class AppController extends Controller
  *       )
  *     )
  *   ),
+ *   security={{"bearer": {}}},
  *   @OA\Response(
  *     response="201",
  *     description="Details of the application created."
@@ -95,6 +97,7 @@ class AppController extends Controller
  *       example=1
  *     )
  *   ),
+ *   security={{"bearer": {}}},
  *   @OA\Response(
  *     response="200",
  *     description="Details of the application."
@@ -123,6 +126,7 @@ class AppController extends Controller
  *       example=1
  *     )
  *   ),
+ *   security={{"bearer": {}}},
  *   @OA\RequestBody(
  *     required=true,
  *     @OA\MediaType(
@@ -190,6 +194,7 @@ class AppController extends Controller
  *       example=1
  *     )
  *   ),
+ *   security={{"bearer": {}}},
  *   @OA\Response(
  *     response="200",
  *     description="Success message indicating that the application has been removed."

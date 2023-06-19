@@ -8,9 +8,9 @@ use Illuminate\Routing\Controller as BaseController;
 
 /**
  * @OA\Info(
- *   title="IT Landing page API",
+ *   title="ITA Landing page API documentation",
  *   version="1.0.0",
- *   description="Documentation needed for the API Rest for the landing page to IT Academy. Some useful links above:
+ *   description="Documentation needed for the API Rest for the landing page to IT Academy. Some useful links below:
  *   [ITA Landing Backend](https://github.com/IT-Academy-BCN/ita-landing-backend)
  *   [ITA Landing Frontend](https://github.com/IT-Academy-BCN/ita-landing-frontend)"
  * )

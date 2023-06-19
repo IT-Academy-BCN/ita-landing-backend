@@ -1,8 +1,8 @@
 {
     "openapi": "3.0.0",
     "info": {
-        "title": "IT Landing page API",
-        "description": "Documentation needed for the API Rest for the landing page to IT Academy. Some useful links above:\n *   [ITA Landing Backend](https://github.com/IT-Academy-BCN/ita-landing-backend)\n *   [ITA Landing Frontend](https://github.com/IT-Academy-BCN/ita-landing-frontend)",
+        "title": "ITA Landing page API documentation",
+        "description": "Documentation needed for the API Rest for the landing page to IT Academy. Some useful links below:\n *   [ITA Landing Backend](https://github.com/IT-Academy-BCN/ita-landing-backend)\n *   [ITA Landing Frontend](https://github.com/IT-Academy-BCN/ita-landing-frontend)",
         "version": "1.0.0"
     },
     "servers": [
@@ -23,7 +23,12 @@
                     "200": {
                         "description": "Apps list."
                     }
-                }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
             },
             "post": {
                 "tags": [
@@ -69,7 +74,12 @@
                     "201": {
                         "description": "Details of the application created."
                     }
-                }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
             }
         },
         "/apps/{id}": {
@@ -96,7 +106,12 @@
                     "200": {
                         "description": "Details of the application."
                     }
-                }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
             },
             "put": {
                 "tags": [
@@ -154,7 +169,12 @@
                     "200": {
                         "description": "Updated application details."
                     }
-                }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
             },
             "delete": {
                 "tags": [
@@ -179,7 +199,12 @@
                     "200": {
                         "description": "Success message indicating that the application has been removed."
                     }
-                }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
             }
         },
         "/login": {
@@ -229,7 +254,12 @@
                     "200": {
                         "description": "Frequently asked questions list."
                     }
-                }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
             },
             "post": {
                 "tags": [
@@ -262,7 +292,12 @@
                     "201": {
                         "description": "Details of the FAQ created."
                     }
-                }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
             }
         },
         "/faqs/{id}": {
@@ -289,7 +324,12 @@
                     "200": {
                         "description": "FAQ details."
                     }
-                }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
             },
             "put": {
                 "tags": [
@@ -334,7 +374,12 @@
                     "200": {
                         "description": "Updated FAQ details."
                     }
-                }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
             },
             "delete": {
                 "tags": [
@@ -359,7 +404,12 @@
                     "200": {
                         "description": "Success message indicating that the FAQ has been removed."
                     }
-                }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
             }
         },
         "/register": {
@@ -569,19 +619,11 @@
             }
         },
         "securitySchemes": {
-            "passport": {
-                "type": "oauth2",
-                "description": "Laravel passport oauth2 security.",
-                "in": "header",
-                "scheme": "https",
-                "flows": {
-                    "password": {
-                        "authorizationUrl": "http://localhost/oauth/authorize",
-                        "tokenUrl": "http://localhost/oauth/token",
-                        "refreshUrl": "http://localhost/token/refresh",
-                        "scopes": []
-                    }
-                }
+            "bearer": {
+                "type": "apiKey",
+                "description": "Enter token in format (Bearer token here)",
+                "name": "Authorization",
+                "in": "header"
             }
         }
     },
