@@ -290,6 +290,51 @@
                         "description": "FAQ details."
                     }
                 }
+            },
+            "put": {
+                "tags": [
+                    "Faqs"
+                ],
+                "summary": "Update an existing Frequently Asked Question (FAQ)",
+                "description": "This endpoint is used to update the details of an existing FAQ.",
+                "operationId": "298c526d87efd21cc6ae1fb930bdf2e2",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "FAQ ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "title": {
+                                        "type": "string",
+                                        "example": "New title of my FAQ"
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "example": "New description of my FAQ"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Updated FAQ details."
+                    }
+                }
             }
         },
         "/register": {

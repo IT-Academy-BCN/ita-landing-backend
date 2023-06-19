@@ -107,13 +107,46 @@ class FaqController extends Controller
         }
     }
 
-    /**
-     * Update specific FAQ.
-     *
-     * @param  Request  $request
-     * @param  Faq  $id
-     * @return \Illuminate\Http\JsonResponse
-     */
+/** 
+ * @OA\Put(
+ *   path="/faqs/{id}",
+ *   tags={"Faqs"},
+ *   summary="Update an existing Frequently Asked Question (FAQ)",
+ *   description="This endpoint is used to update the details of an existing FAQ.",
+ *   @OA\Parameter(
+ *     name="id",
+ *     in="path",
+ *     required=true,
+ *     description="FAQ ID",
+ *     @OA\Schema(
+ *       type="integer",
+ *       example=1
+ *     )
+ *   ),
+ *   @OA\RequestBody(
+ *     required=true,
+ *     @OA\MediaType(
+ *       mediaType="application/json",
+ *       @OA\Schema(
+ *         @OA\Property(
+ *           property="title",
+ *           type="string",
+ *           example="New title of my FAQ"
+ *         ),
+ *         @OA\Property(
+ *           property="description",
+ *           type="string",
+ *           example="New description of my FAQ"
+ *         )
+ *       )
+ *     )
+ *   ),
+ *   @OA\Response(
+ *     response="200",
+ *     description="Updated FAQ details."
+ *   )
+ * )
+ */
     public function update(Request $request, $id)
     {
         try {
