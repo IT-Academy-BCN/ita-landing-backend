@@ -11,6 +11,21 @@
         }
     ],
     "paths": {
+        "/apps": {
+            "get": {
+                "tags": [
+                    "Apps"
+                ],
+                "summary": "Apps list",
+                "description": "This endpoint is used to take a list of all the apps",
+                "operationId": "6a8d04ab8dee652f12fb06a852e2bf2e",
+                "responses": {
+                    "200": {
+                        "description": "Apps list."
+                    }
+                }
+            }
+        },
         "/login": {
             "post": {
                 "tags": [

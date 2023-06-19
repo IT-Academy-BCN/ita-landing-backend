@@ -8,9 +8,18 @@ use App\Models\App;
 
 class AppController extends Controller
 {
-    /**
-     * Display a listing of the Apps.
-     */
+/**
+ * @OA\Get(
+ *   path="/apps",
+ *   tags={"Apps"},
+ *   summary="Apps list",
+ *   description="This endpoint is used to take a list of all the apps",
+ *   @OA\Response(
+ *     response="200",
+ *     description="Apps list."
+ *   )
+ * )
+ */
     public function index()
     {
         return response()->json(App::all());
