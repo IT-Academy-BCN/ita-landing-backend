@@ -2,7 +2,7 @@
     "openapi": "3.0.0",
     "info": {
         "title": "IT Landing page API",
-        "description": "Documentation needed for the API Rest for the landing page to IT Academy.",
+        "description": "Documentation needed for the API Rest for the landing page to IT Academy. Some useful links above:\n *   [ITA Landing Backend](https://github.com/IT-Academy-BCN/ita-landing-backend)\n *   [ITA Landing Frontend](https://github.com/IT-Academy-BCN/ita-landing-frontend)",
         "version": "1.0.0"
     },
     "servers": [

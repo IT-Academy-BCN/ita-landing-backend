@@ -7,12 +7,13 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
 
 /**
- * @OA\OpenApi(
- *   @OA\Info(
- *     title="IT Landing page API",
- *     version="1.0.0",
- *     description="Documentation needed for the API Rest for the landing page to IT Academy."
- *   ),
+ * @OA\Info(
+ *   title="IT Landing page API",
+ *   version="1.0.0",
+ *   description="Documentation needed for the API Rest for the landing page to IT Academy. Some useful links above:
+ *   [ITA Landing Backend](https://github.com/IT-Academy-BCN/ita-landing-backend)
+ *   [ITA Landing Frontend](https://github.com/IT-Academy-BCN/ita-landing-frontend)"
+ * )
  *   @OA\Server(
  *     url="https://127.0.0.1:8000/api"
  *   )
