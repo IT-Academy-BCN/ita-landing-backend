@@ -9,12 +9,18 @@ use Illuminate\Validation\ValidationException;
 
 class FaqController extends Controller
 {
-    /**
-     * Get a list of all faqs.
-     *
-     * @param
-     * @return \Illuminate\Http\JsonResponse
-     */
+/**
+ * @OA\Get(
+ *   path="/faqs",
+ *   tags={"Faqs"},
+ *   summary="Get list of frequently asked questions (FAQs)",
+ *   description="This endpoint is used to get a list of all frequently asked questions.",
+ *   @OA\Response(
+ *     response="200",
+ *     description="Frequently asked questions list."
+ *   )
+ * )
+ */
     public function index()
     {
         return response()->json(['faqs' => Faq::all()]);
