@@ -107,7 +107,7 @@ class AppController extends Controller
         return response()->json($app);
     }
 
-/*
+/**
  * @OA\Put(
  *   path="/apps/{id}",
  *   tags={"Apps"},
@@ -158,6 +158,7 @@ class AppController extends Controller
  *   )
  * )
  */
+
     public function update(Request $request, $id)
     {
         $app = App::findOrFail($id); 
@@ -173,7 +174,7 @@ class AppController extends Controller
         return response()->json($app, 200);
     }
 
-/*
+/**
  * @OA\Delete(
  *   path="/apps/{id}",
  *   tags={"Apps"},
@@ -195,6 +196,7 @@ class AppController extends Controller
  *   )
  * )
  */
+
     public function destroy($id)
     {
         $app = App::findOrFail($id)->delete();

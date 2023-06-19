@@ -97,6 +97,89 @@
                         "description": "Details of the application."
                     }
                 }
+            },
+            "put": {
+                "tags": [
+                    "Apps"
+                ],
+                "summary": "Update an existing app",
+                "description": "This endpoint is used to update the details of an existing application.",
+                "operationId": "f0a3b76b5fb4c3db8489ffc621c78e70",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Application ID.",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "title": {
+                                        "type": "string",
+                                        "example": "New title of my application"
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "example": "New description of my application"
+                                    },
+                                    "url": {
+                                        "type": "string",
+                                        "example": "https://myapp.com/new-version"
+                                    },
+                                    "state": {
+                                        "type": "string",
+                                        "enum": [
+                                            "COMPLETED",
+                                            "IN PROGRESS",
+                                            "SOON"
+                                        ],
+                                        "example": "IN PROGRESS"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Updated application details."
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Apps"
+                ],
+                "summary": "Delete an app",
+                "description": "This endpoint is used to remove an existing application.",
+                "operationId": "0653e8a5c8c3e3fe6c19e5dfc2737578",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Application ID.",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success message indicating that the application has been removed."
+                    }
+                }
             }
         },
         "/login": {
