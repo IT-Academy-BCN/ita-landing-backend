@@ -107,9 +107,57 @@ class AppController extends Controller
         return response()->json($app);
     }
 
-    /**
-     * Update the specified App in storage.
-     */
+/*
+ * @OA\Put(
+ *   path="/apps/{id}",
+ *   tags={"Apps"},
+ *   summary="Update an existing app",
+ *   description="This endpoint is used to update the details of an existing application.",
+ *   @OA\Parameter(
+ *     name="id",
+ *     in="path",
+ *     required=true,
+ *     description="Application ID.",
+ *     @OA\Schema(
+ *       type="integer",
+ *       example=1
+ *     )
+ *   ),
+ *   @OA\RequestBody(
+ *     required=true,
+ *     @OA\MediaType(
+ *       mediaType="application/json",
+ *       @OA\Schema(
+ *         @OA\Property(
+ *           property="title",
+ *           type="string",
+ *           example="New title of my application"
+ *         ),
+ *         @OA\Property(
+ *           property="description",
+ *           type="string",
+ *           example="New description of my application"
+ *         ),
+ *         @OA\Property(
+ *           property="url",
+ *           type="string",
+ *           example="https://myapp.com/new-version"
+ *         ),
+ *         @OA\Property(
+ *           property="state",
+ *           type="string",
+ *           example="IN PROGRESS",
+ *           enum={"COMPLETED", "IN PROGRESS", "SOON"}
+ *         )
+ *       )
+ *     )
+ *   ),
+ *   @OA\Response(
+ *     response="200",
+ *     description="Updated application details."
+ *   )
+ * )
+ */
     public function update(Request $request, $id)
     {
         $app = App::findOrFail($id); 
@@ -125,9 +173,28 @@ class AppController extends Controller
         return response()->json($app, 200);
     }
 
-    /**
-     * Remove the specified App from storage.
-     */
+/*
+ * @OA\Delete(
+ *   path="/apps/{id}",
+ *   tags={"Apps"},
+ *   summary="Delete an app",
+ *   description="This endpoint is used to remove an existing application.",
+ *   @OA\Parameter(
+ *     name="id",
+ *     in="path",
+ *     required=true,
+ *     description="Application ID.",
+ *     @OA\Schema(
+ *       type="integer",
+ *       example=1
+ *     )
+ *   ),
+ *   @OA\Response(
+ *     response="200",
+ *     description="Success message indicating that the application has been removed."
+ *   )
+ * )
+ */
     public function destroy($id)
     {
         $app = App::findOrFail($id)->delete();
