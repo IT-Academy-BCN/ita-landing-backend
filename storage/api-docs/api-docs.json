@@ -335,6 +335,31 @@
                         "description": "Updated FAQ details."
                     }
                 }
+            },
+            "delete": {
+                "tags": [
+                    "Faqs"
+                ],
+                "summary": "Delete a frequently asked question (FAQ)",
+                "description": "This endpoint is used to delete an existing FAQ.",
+                "operationId": "3be266696befa084a5ad295ec5f3c2c0",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "FAQ ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success message indicating that the FAQ has been removed."
+                    }
+                }
             }
         },
         "/register": {

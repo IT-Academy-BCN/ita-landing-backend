@@ -171,13 +171,28 @@ class FaqController extends Controller
         }
     }
 
-    /**
-     * Delete a specific FAQ.
-     *
-     * @param  Request  $request
-     * @param  Faq  $id
-     * @return \Illuminate\Http\JsonResponse
-     */
+/**
+ * @OA\Delete(
+ *   path="/faqs/{id}",
+ *   tags={"Faqs"},
+ *   summary="Delete a frequently asked question (FAQ)",
+ *   description="This endpoint is used to delete an existing FAQ.",
+ *   @OA\Parameter(
+ *     name="id",
+ *     in="path",
+ *     required=true,
+ *     description="FAQ ID",
+ *     @OA\Schema(
+ *       type="integer",
+ *       example=1
+ *     )
+ *   ),
+ *   @OA\Response(
+ *     response="200",
+ *     description="Success message indicating that the FAQ has been removed."
+ *   )
+ * )
+ */
     public function destroy($id)
     {
         $faqs = Faq::find($id);
