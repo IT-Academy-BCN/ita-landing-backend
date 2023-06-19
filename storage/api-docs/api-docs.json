@@ -494,6 +494,78 @@
                     }
                 },
                 "type": "object"
+            },
+            "User": {
+                "title": "User",
+                "description": "User model",
+                "properties": {
+                    "id": {
+                        "description": "ID",
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "name": {
+                        "description": "Name",
+                        "type": "string",
+                        "example": "John Doe"
+                    },
+                    "email": {
+                        "description": "Email",
+                        "type": "string",
+                        "example": "johndoe@example.com"
+                    },
+                    "dni": {
+                        "description": "DNI",
+                        "type": "string",
+                        "example": "123456789"
+                    },
+                    "status": {
+                        "description": "Status",
+                        "type": "string",
+                        "enum": [
+                            "ACTIVE",
+                            "INACTIVE"
+                        ],
+                        "example": "ACTIVE"
+                    },
+                    "role": {
+                        "description": "Role",
+                        "type": "string",
+                        "enum": [
+                            "ADMIN",
+                            "REGISTERED"
+                        ],
+                        "example": "ADMIN"
+                    },
+                    "email_verified_at": {
+                        "description": "Email verification timestamp",
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2023-06-19T12:00:00+00:00"
+                    },
+                    "password": {
+                        "description": "Password",
+                        "type": "string",
+                        "example": "********"
+                    },
+                    "remember_token": {
+                        "description": "Remember token",
+                        "type": "string"
+                    },
+                    "created_at": {
+                        "description": "Creation timestamp",
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2023-06-19T12:00:00+00:00"
+                    },
+                    "updated_at": {
+                        "description": "Last update timestamp",
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2023-06-19T13:30:00+00:00"
+                    }
+                },
+                "type": "object"
             }
         },
         "securitySchemes": {
