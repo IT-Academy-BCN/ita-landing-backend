@@ -26,12 +26,28 @@ class FaqController extends Controller
         return response()->json(['faqs' => Faq::all()]);
     }
 
-    /**
-     * Get an specific FAQ.
-     *
-     * @param Faq $id
-     * @return \Illuminate\Http\JsonResponse
-     */
+/**
+ * @OA\Get(
+ *   path="/faqs/{id}",
+ *   tags={"Faqs"},
+ *   summary="Get details of a specific Frequently Asked Question (FAQ)",
+ *   description="This endpoint is used to get the details of a specific FAQ.",
+ *   @OA\Parameter(
+ *     name="id",
+ *     in="path",
+ *     required=true,
+ *     description="FAQ ID.",
+ *     @OA\Schema(
+ *       type="integer",
+ *       example=1
+ *     )
+ *   ),
+ *   @OA\Response(
+ *     response="200",
+ *     description="FAQ details."
+ *   )
+ * )
+ */
     public function show($id)
     {
         $faq = Faq::find($id);

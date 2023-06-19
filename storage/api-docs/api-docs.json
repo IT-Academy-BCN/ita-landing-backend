@@ -265,6 +265,33 @@
                 }
             }
         },
+        "/faqs/{id}": {
+            "get": {
+                "tags": [
+                    "Faqs"
+                ],
+                "summary": "Get details of a specific Frequently Asked Question (FAQ)",
+                "description": "This endpoint is used to get the details of a specific FAQ.",
+                "operationId": "d256f13ed0ba2a91933a8d18c13a9a41",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "FAQ ID.",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "FAQ details."
+                    }
+                }
+            }
+        },
         "/register": {
             "post": {
                 "tags": [
