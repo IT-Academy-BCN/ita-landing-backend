@@ -25,9 +25,47 @@ class AppController extends Controller
         return response()->json(App::all());
     }
 
-    /**
-     * Store a newly created App in storage.
-     */
+/**
+ * @OA\Post(
+ *   path="/apps",
+ *   tags={"Apps"},
+ *   summary="Create a new app",
+ *   description="This endpoint is used to create a new application.",
+ *   @OA\RequestBody(
+ *     required=true,
+ *     @OA\MediaType(
+ *       mediaType="application/json",
+ *       @OA\Schema(
+ *         @OA\Property(
+ *           property="title",
+ *           type="string",
+ *           example="My application"
+ *         ),
+ *         @OA\Property(
+ *           property="description",
+ *           type="string",
+ *           example="Description of my application"
+ *         ),
+ *         @OA\Property(
+ *           property="url",
+ *           type="string",
+ *           example="https://myapp.com"
+ *         ),
+ *         @OA\Property(
+ *           property="state",
+ *           type="string",
+ *           example="COMPLETED",
+ *           enum={"COMPLETED", "IN PROGRESS", "SOON"}
+ *         )
+ *       )
+ *     )
+ *   ),
+ *   @OA\Response(
+ *     response="201",
+ *     description="Details of the application created."
+ *   )
+ * )
+ */    
     public function store(Request $request)
     {
         $validatedData = $request->validate([

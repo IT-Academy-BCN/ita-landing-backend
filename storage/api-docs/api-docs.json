@@ -24,6 +24,52 @@
                         "description": "Apps list."
                     }
                 }
+            },
+            "post": {
+                "tags": [
+                    "Apps"
+                ],
+                "summary": "Create a new app",
+                "description": "This endpoint is used to create a new application.",
+                "operationId": "582b37c93248c2ed1252ac653f1d9868",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "title": {
+                                        "type": "string",
+                                        "example": "My application"
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "example": "Description of my application"
+                                    },
+                                    "url": {
+                                        "type": "string",
+                                        "example": "https://myapp.com"
+                                    },
+                                    "state": {
+                                        "type": "string",
+                                        "enum": [
+                                            "COMPLETED",
+                                            "IN PROGRESS",
+                                            "SOON"
+                                        ],
+                                        "example": "COMPLETED"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Details of the application created."
+                    }
+                }
             }
         },
         "/login": {
