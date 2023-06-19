@@ -35,34 +35,7 @@
                 "requestBody": {
                     "required": true,
                     "content": {
-                        "application/json": {
-                            "schema": {
-                                "properties": {
-                                    "title": {
-                                        "type": "string",
-                                        "example": "My application"
-                                    },
-                                    "description": {
-                                        "type": "string",
-                                        "example": "Description of my application"
-                                    },
-                                    "url": {
-                                        "type": "string",
-                                        "example": "https://myapp.com"
-                                    },
-                                    "state": {
-                                        "type": "string",
-                                        "enum": [
-                                            "COMPLETED",
-                                            "IN PROGRESS",
-                                            "SOON"
-                                        ],
-                                        "example": "COMPLETED"
-                                    }
-                                },
-                                "type": "object"
-                            }
-                        }
+                        "application/json": {}
                     }
                 },
                 "responses": {
@@ -410,21 +383,58 @@
             }
         }
     },
-    "tags": [
-        {
-            "name": "User",
-            "description": "Operations for a user"
-        },
-        {
-            "name": "Apps",
-            "description": "Operations for an app"
-        },
-        {
-            "name": "Faqs",
-            "description": "Operations for a faq"
-        }
-    ],
     "components": {
+        "schemas": {
+            "App": {
+                "title": "App",
+                "description": "App model",
+                "properties": {
+                    "id": {
+                        "description": "ID",
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "title": {
+                        "description": "Title",
+                        "type": "string",
+                        "example": "My application"
+                    },
+                    "description": {
+                        "description": "Description",
+                        "type": "string",
+                        "example": "Description of my application"
+                    },
+                    "url": {
+                        "description": "URL",
+                        "type": "string",
+                        "example": "https://myapp.com"
+                    },
+                    "state": {
+                        "description": "State",
+                        "type": "string",
+                        "enum": [
+                            "COMPLETED",
+                            "IN PROGRESS",
+                            "SOON"
+                        ],
+                        "example": "COMPLETED"
+                    },
+                    "created_at": {
+                        "description": "Creation timestamp",
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2023-06-19T12:00:00+00:00"
+                    },
+                    "updated_at": {
+                        "description": "Last update timestamp",
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2023-06-19T13:30:00+00:00"
+                    }
+                },
+                "type": "object"
+            }
+        },
         "securitySchemes": {
             "passport": {
                 "type": "oauth2",
@@ -441,5 +451,19 @@
                 }
             }
         }
-    }
+    },
+    "tags": [
+        {
+            "name": "User",
+            "description": "Operations for a user"
+        },
+        {
+            "name": "Apps",
+            "description": "Operations for an app"
+        },
+        {
+            "name": "Faqs",
+            "description": "Operations for a faq"
+        }
+    ]
 }
