@@ -15,7 +15,7 @@ use Illuminate\Routing\Controller as BaseController;
  *   [ITA Landing Frontend](https://github.com/IT-Academy-BCN/ita-landing-frontend)"
  * )
  *   @OA\Server(
- *     url="https://127.0.0.1:8000/api"
+ *     url="http://127.0.0.1:8000/api"
  *   )
  * )
  *
