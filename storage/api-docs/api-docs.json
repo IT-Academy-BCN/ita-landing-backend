@@ -230,6 +230,39 @@
                         "description": "Frequently asked questions list."
                     }
                 }
+            },
+            "post": {
+                "tags": [
+                    "Faqs"
+                ],
+                "summary": "Create a new Frequently Asked Question (FAQ)",
+                "description": "This endpoint is used to create a new FAQ.",
+                "operationId": "1f9b4e9514398ba7a6984241e9ea6d2c",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "title": {
+                                        "type": "string",
+                                        "example": "My frequently asked question"
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "example": "Description of my FAQ"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Details of the FAQ created."
+                    }
+                }
             }
         },
         "/register": {

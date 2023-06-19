@@ -45,12 +45,36 @@ class FaqController extends Controller
         ]);
     }
 
-    /**
-     * Save a new FAQ from request.
-     *
-     * @param Request $request
-     * @return \Illuminate\Http\JsonResponse
-     */
+/**
+ * @OA\Post(
+ *   path="/faqs",
+ *   tags={"Faqs"},
+ *   summary="Create a new Frequently Asked Question (FAQ)",
+ *   description="This endpoint is used to create a new FAQ.",
+ *   @OA\RequestBody(
+ *     required=true,
+ *     @OA\MediaType(
+ *       mediaType="application/json",
+ *       @OA\Schema(
+ *         @OA\Property(
+ *           property="title",
+ *           type="string",
+ *           example="My frequently asked question"
+ *         ),
+ *         @OA\Property(
+ *           property="description",
+ *           type="string",
+ *           example="Description of my FAQ"
+ *         )
+ *       )
+ *     )
+ *   ),
+ *   @OA\Response(
+ *     response="201",
+ *     description="Details of the FAQ created."
+ *   )
+ * )
+ */
     public function store(Request $request)
     {
         try {
