@@ -1,0 +1,94 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "IT Landing page API",
+        "description": "Documentation needed for the API Rest for the landing page to IT Academy.",
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "https://127.0.0.1:8000/api"
+        }
+    ],
+    "paths": {
+        "/register": {
+            "post": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "User Register",
+                "description": "This endpoint is used to register a new user in the application.",
+                "operationId": "a8feedb2a70af8691107d1f3759004fc",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "email": {
+                                        "type": "string",
+                                        "example": "example@example.com"
+                                    },
+                                    "name": {
+                                        "type": "string",
+                                        "example": "John Doe"
+                                    },
+                                    "dni": {
+                                        "type": "string",
+                                        "example": "12345678A"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "example": "password123"
+                                    },
+                                    "password_confirmation": {
+                                        "type": "string",
+                                        "example": "password123"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "User created successfully."
+                    }
+                }
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "User",
+            "description": "Operations for a user"
+        },
+        {
+            "name": "Apps",
+            "description": "Operations for an app"
+        },
+        {
+            "name": "Faqs",
+            "description": "Operations for a faq"
+        }
+    ],
+    "components": {
+        "securitySchemes": {
+            "passport": {
+                "type": "oauth2",
+                "description": "Laravel passport oauth2 security.",
+                "in": "header",
+                "scheme": "https",
+                "flows": {
+                    "password": {
+                        "authorizationUrl": "http://localhost/oauth/authorize",
+                        "tokenUrl": "http://localhost/oauth/token",
+                        "refreshUrl": "http://localhost/token/refresh",
+                        "scopes": []
+                    }
+                }
+            }
+        }
+    }
+}
