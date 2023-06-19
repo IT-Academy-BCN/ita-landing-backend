@@ -79,9 +79,28 @@ class AppController extends Controller
         return response()->json($app, 201);
     }
 
-    /**
-     * Display the specified App.
-     */
+/**
+ * @OA\Get(
+ *   path="/apps/{id}",
+ *   tags={"Apps"},
+ *   summary="Get details of an application",
+ *   description="This endpoint is used to get the details of a specific application.",
+ *   @OA\Parameter(
+ *     name="id",
+ *     in="path",
+ *     required=true,
+ *     description="Application ID.",
+ *     @OA\Schema(
+ *       type="integer",
+ *       example=1
+ *     )
+ *   ),
+ *   @OA\Response(
+ *     response="200",
+ *     description="Details of the application."
+ *   )
+ * )
+ */    
     public function show($id)
     {
         $app = App::findOrFail($id);

@@ -72,6 +72,33 @@
                 }
             }
         },
+        "/apps/{id}": {
+            "get": {
+                "tags": [
+                    "Apps"
+                ],
+                "summary": "Get details of an application",
+                "description": "This endpoint is used to get the details of a specific application.",
+                "operationId": "825512ce69acff9946367daacb087b41",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Application ID.",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Details of the application."
+                    }
+                }
+            }
+        },
         "/login": {
             "post": {
                 "tags": [
