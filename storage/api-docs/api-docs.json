@@ -35,7 +35,34 @@
                 "requestBody": {
                     "required": true,
                     "content": {
-                        "application/json": {}
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "title": {
+                                        "type": "string",
+                                        "example": "My application"
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "example": "Description of my application"
+                                    },
+                                    "url": {
+                                        "type": "string",
+                                        "example": "https://myapp.com"
+                                    },
+                                    "state": {
+                                        "type": "string",
+                                        "enum": [
+                                            "COMPLETED",
+                                            "IN PROGRESS",
+                                            "SOON"
+                                        ],
+                                        "example": "COMPLETED"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
                     }
                 },
                 "responses": {
@@ -418,6 +445,40 @@
                             "SOON"
                         ],
                         "example": "COMPLETED"
+                    },
+                    "created_at": {
+                        "description": "Creation timestamp",
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2023-06-19T12:00:00+00:00"
+                    },
+                    "updated_at": {
+                        "description": "Last update timestamp",
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2023-06-19T13:30:00+00:00"
+                    }
+                },
+                "type": "object"
+            },
+            "Faq": {
+                "title": "Faq",
+                "description": "Faq model",
+                "properties": {
+                    "id": {
+                        "description": "ID",
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "title": {
+                        "description": "Title",
+                        "type": "string",
+                        "example": "FAQ Title"
+                    },
+                    "description": {
+                        "description": "Description",
+                        "type": "string",
+                        "example": "FAQ Description"
                     },
                     "created_at": {
                         "description": "Creation timestamp",
