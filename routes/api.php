@@ -29,12 +29,12 @@ Route::middleware(['auth:api'])->prefix('faqs')->group(function () {
     Route::delete('/{id}', [FaqController::class, 'destroy']);
 });
 
-Route::middleware(['auth:api'])->group(function () {
-    Route::get('/apps', [AppController::class, 'index'])->name('app.index');
-    Route::get('/apps/{id}', [AppController::class, 'show'])->name('app.show');
-    Route::post('/apps', [AppController::class, 'store'])->name('app.store');
-    Route::put('/apps/{id}', [AppController::class, 'update'])->name('app.update');
-    Route::delete('/apps/{id}', [AppController::class, 'destroy'])->name('app.destroy');
+Route::middleware(['auth:api'])->prefix('apps')->group(function () {
+    Route::get('/', [AppController::class, 'index'])->name('app.index');
+    Route::get('/{id}', [AppController::class, 'show'])->name('app.show');
+    Route::post('/', [AppController::class, 'store'])->name('app.store');
+    Route::put('/{id}', [AppController::class, 'update'])->name('app.update');
+    Route::delete('/{id}', [AppController::class, 'destroy'])->name('app.destroy');
 });
     
     
