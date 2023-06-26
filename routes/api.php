@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\api\UserController;
 use App\Http\Controllers\api\FaqController;
 use App\Http\Controllers\api\AuthController;
+use App\Http\Controllers\api\CodeController;
 use App\Http\Controllers\api\AppController;
 
 /*
@@ -28,6 +29,9 @@ Route::middleware(['auth:api'])->prefix('faqs')->group(function () {
     Route::put('/{id}', [FaqController::class, 'update']);
     Route::delete('/{id}', [FaqController::class, 'destroy']);
 });
+
+
+Route::post('/send-email', [CodeController::class, 'sendEmail'])->middleware('auth:api');
 
 Route::middleware(['auth:api'])->group(function () {
     Route::get('/apps', [AppController::class, 'index'])->name('app.index');
