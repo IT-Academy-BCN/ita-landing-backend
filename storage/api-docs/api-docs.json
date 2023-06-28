@@ -23,12 +23,7 @@
                     "200": {
                         "description": "Apps list."
                     }
-                },
-                "security": [
-                    {
-                        "bearer": []
-                    }
-                ]
+                }
             },
             "post": {
                 "tags": [
