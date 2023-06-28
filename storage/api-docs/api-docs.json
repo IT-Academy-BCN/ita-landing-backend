@@ -23,12 +23,7 @@
                     "200": {
                         "description": "Apps list."
                     }
-                },
-                "security": [
-                    {
-                        "bearer": []
-                    }
-                ]
+                }
             },
             "post": {
                 "tags": [
@@ -254,12 +249,7 @@
                     "200": {
                         "description": "Frequently asked questions list."
                     }
-                },
-                "security": [
-                    {
-                        "bearer": []
-                    }
-                ]
+                }
             },
             "post": {
                 "tags": [

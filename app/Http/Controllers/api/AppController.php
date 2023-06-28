@@ -14,7 +14,6 @@ class AppController extends Controller
  *   tags={"Apps"},
  *   summary="Apps list",
  *   description="This endpoint is used to take a list of all the apps",
- *   security={{"bearer": {}}},
  *   @OA\Response(
  *     response="200",
  *     description="Apps list."
