@@ -13,7 +13,17 @@ class AppTest extends TestCase
     use RefreshDatabase;
     
     
-    public function test_can_get_all_apps(): void
+    public function test_can_get_all_apps_unauthenticated_user(): void
+    {
+        App::factory(3)->create();
+
+        $response = $this->getJson(route('app.index'));
+       
+        $response->assertStatus(200);
+        $response->json();
+    }
+
+    public function test_can_get_all_apps_authenticated_user(): void
     {
         App::factory(3)->create();
 
