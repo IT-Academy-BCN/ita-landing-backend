@@ -14,8 +14,7 @@ class FaqController extends Controller
  *   path="/faqs",
  *   tags={"Faqs"},
  *   summary="Get list of frequently asked questions (FAQs)",
- *   description="This endpoint is used to get a list of all frequently asked questions.",
- * security={{"bearer": {}}},  
+ *   description="This endpoint is used to get a list of all frequently asked questions.",  
  * @OA\Response(
  *     response="200",
  *     description="Frequently asked questions list."
