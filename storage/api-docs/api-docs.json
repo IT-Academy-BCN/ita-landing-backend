@@ -254,12 +254,7 @@
                     "200": {
                         "description": "Frequently asked questions list."
                     }
-                },
-                "security": [
-                    {
-                        "bearer": []
-                    }
-                ]
+                }
             },
             "post": {
                 "tags": [

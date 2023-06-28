@@ -23,6 +23,7 @@ Route::post('/register', [UserController::class, 'store'])->name('register');
 Route::post('/login', [AuthController::class, 'login'])->name('login');
 
 Route::get('/faqs', [FaqController::class, 'index']);
+Route::get('/apps', [AppController::class, 'index'])->name('app.index');
 
 Route::middleware(['auth:api'])->prefix('faqs')->group(function () {
     
@@ -36,7 +37,6 @@ Route::middleware(['auth:api'])->prefix('faqs')->group(function () {
 Route::post('/send-email', [CodeController::class, 'sendEmail'])->middleware('auth:api');
 
 Route::middleware(['auth:api'])->group(function () {
-    Route::get('/apps', [AppController::class, 'index'])->name('app.index');
     Route::get('/apps/{id}', [AppController::class, 'show'])->name('app.show');
     Route::post('/apps', [AppController::class, 'store'])->name('app.store');
     Route::put('/apps/{id}', [AppController::class, 'update'])->name('app.update');
