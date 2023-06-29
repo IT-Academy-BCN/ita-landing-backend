@@ -8,15 +8,55 @@ use Illuminate\Http\Request;
 use App\Rules\Dni;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
+use App\Models\Code;
 
 class UserController extends Controller
 {
-     /**
-     * Create a new user.
-     *
-     * @param  Request  $request
-     * @return \Illuminate\Http\JsonResponse
-     */
+/**
+ * @OA\Post(
+ *   path="/register",
+ *   tags={"User"},
+ *   summary="User Register",
+ *   description="This endpoint is used to register a new user in the application.",
+ *   @OA\RequestBody(
+ *     required=true,
+ *     @OA\MediaType(
+ *       mediaType="application/json",
+ *       @OA\Schema(
+ *         @OA\Property(
+ *           property="email",
+ *           type="string",
+ *           example="example@example.com"
+ *         ),
+ *         @OA\Property(
+ *           property="name",
+ *           type="string",
+ *           example="John Doe"
+ *         ),
+ *         @OA\Property(
+ *           property="dni",
+ *           type="string",
+ *           example="12345678A"
+ *         ),
+ *         @OA\Property(
+ *           property="password",
+ *           type="string",
+ *           example="password123"
+ *         ),
+ *         @OA\Property(
+ *           property="password_confirmation",
+ *           type="string",
+ *           example="password123"
+ *         )
+ *       )
+ *     )
+ *   ),
+ *   @OA\Response(
+ *     response="200",
+ *     description="User created successfully."
+ *   )
+ * )
+ */
     public function store(Request $request)
     {
         // Input validation
@@ -26,6 +66,7 @@ class UserController extends Controller
                 'name' => 'string|max:255',
                 'dni' => ['required','unique:users',new Dni],
                 'password' => 'required|string|min:8|confirmed',
+                'code' => 'required|exists:codes,code,is_used,0'
             ], [
                 'email.unique' => 'The email is already in use',
                 'dni.unique' => 'The DNI is already in use',
@@ -40,8 +81,11 @@ class UserController extends Controller
                 'password' => Hash::make($request->password),
                 'status' => 'ACTIVE',
                 'role' => 'ADMIN',
+                'code' => $request->code,
             ]);
-
+            
+            $this->is_usedUpdated($request->code);
+            
             // Response
             return response()->json([
                 'result' => [
@@ -56,5 +100,12 @@ class UserController extends Controller
                 ],
             );
         }
+    }
+
+    private function is_usedUpdated ($code)
+    {
+        $code = Code::where('code', $code)->where('is_used', false)->firstOrFail();
+        $code->is_used = true;
+        $code->save();
     }
 }

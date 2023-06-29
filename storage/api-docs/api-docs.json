@@ -1,0 +1,634 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "ITA Landing page API documentation",
+        "description": "Documentation needed for the API Rest for the landing page to IT Academy. Some useful links below:\n *   [ITA Landing Backend](https://github.com/IT-Academy-BCN/ita-landing-backend)\n *   [ITA Landing Frontend](https://github.com/IT-Academy-BCN/ita-landing-frontend)",
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://127.0.0.1:8000/api"
+        }
+    ],
+    "paths": {
+        "/apps": {
+            "get": {
+                "tags": [
+                    "Apps"
+                ],
+                "summary": "Apps list",
+                "description": "This endpoint is used to take a list of all the apps",
+                "operationId": "6a8d04ab8dee652f12fb06a852e2bf2e",
+                "responses": {
+                    "200": {
+                        "description": "Apps list."
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Apps"
+                ],
+                "summary": "Create a new app",
+                "description": "This endpoint is used to create a new application.",
+                "operationId": "582b37c93248c2ed1252ac653f1d9868",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "title": {
+                                        "type": "string",
+                                        "example": "My application"
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "example": "Description of my application"
+                                    },
+                                    "url": {
+                                        "type": "string",
+                                        "example": "https://myapp.com"
+                                    },
+                                    "state": {
+                                        "type": "string",
+                                        "enum": [
+                                            "COMPLETED",
+                                            "IN PROGRESS",
+                                            "SOON"
+                                        ],
+                                        "example": "COMPLETED"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Details of the application created."
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/apps/{id}": {
+            "get": {
+                "tags": [
+                    "Apps"
+                ],
+                "summary": "Get details of an application",
+                "description": "This endpoint is used to get the details of a specific application.",
+                "operationId": "825512ce69acff9946367daacb087b41",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Application ID.",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Details of the application."
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Apps"
+                ],
+                "summary": "Update an existing app",
+                "description": "This endpoint is used to update the details of an existing application.",
+                "operationId": "f0a3b76b5fb4c3db8489ffc621c78e70",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Application ID.",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "title": {
+                                        "type": "string",
+                                        "example": "New title of my application"
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "example": "New description of my application"
+                                    },
+                                    "url": {
+                                        "type": "string",
+                                        "example": "https://myapp.com/new-version"
+                                    },
+                                    "state": {
+                                        "type": "string",
+                                        "enum": [
+                                            "COMPLETED",
+                                            "IN PROGRESS",
+                                            "SOON"
+                                        ],
+                                        "example": "IN PROGRESS"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Updated application details."
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Apps"
+                ],
+                "summary": "Delete an app",
+                "description": "This endpoint is used to remove an existing application.",
+                "operationId": "0653e8a5c8c3e3fe6c19e5dfc2737578",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Application ID.",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success message indicating that the application has been removed."
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/login": {
+            "post": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Login",
+                "description": "This endpoint is used for a user to log into the app and get an access token.",
+                "operationId": "1da689c688cc418e88f9e9d668f01b16",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "dni": {
+                                        "type": "string",
+                                        "example": "12345678A"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "example": "password123"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Access token for the user."
+                    }
+                }
+            }
+        },
+        "/faqs": {
+            "get": {
+                "tags": [
+                    "Faqs"
+                ],
+                "summary": "Get list of frequently asked questions (FAQs)",
+                "description": "This endpoint is used to get a list of all frequently asked questions.",
+                "operationId": "9aa180f9db923d3a04a1a3fceb22cc19",
+                "responses": {
+                    "200": {
+                        "description": "Frequently asked questions list."
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Faqs"
+                ],
+                "summary": "Create a new Frequently Asked Question (FAQ)",
+                "description": "This endpoint is used to create a new FAQ.",
+                "operationId": "1f9b4e9514398ba7a6984241e9ea6d2c",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "title": {
+                                        "type": "string",
+                                        "example": "My frequently asked question"
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "example": "Description of my FAQ"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Details of the FAQ created."
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/faqs/{id}": {
+            "get": {
+                "tags": [
+                    "Faqs"
+                ],
+                "summary": "Get details of a specific Frequently Asked Question (FAQ)",
+                "description": "This endpoint is used to get the details of a specific FAQ.",
+                "operationId": "d256f13ed0ba2a91933a8d18c13a9a41",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "FAQ ID.",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "FAQ details."
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Faqs"
+                ],
+                "summary": "Update an existing Frequently Asked Question (FAQ)",
+                "description": "This endpoint is used to update the details of an existing FAQ.",
+                "operationId": "298c526d87efd21cc6ae1fb930bdf2e2",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "FAQ ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "title": {
+                                        "type": "string",
+                                        "example": "New title of my FAQ"
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "example": "New description of my FAQ"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Updated FAQ details."
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Faqs"
+                ],
+                "summary": "Delete a frequently asked question (FAQ)",
+                "description": "This endpoint is used to delete an existing FAQ.",
+                "operationId": "3be266696befa084a5ad295ec5f3c2c0",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "FAQ ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success message indicating that the FAQ has been removed."
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/register": {
+            "post": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "User Register",
+                "description": "This endpoint is used to register a new user in the application.",
+                "operationId": "a8feedb2a70af8691107d1f3759004fc",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "email": {
+                                        "type": "string",
+                                        "example": "example@example.com"
+                                    },
+                                    "name": {
+                                        "type": "string",
+                                        "example": "John Doe"
+                                    },
+                                    "dni": {
+                                        "type": "string",
+                                        "example": "12345678A"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "example": "password123"
+                                    },
+                                    "password_confirmation": {
+                                        "type": "string",
+                                        "example": "password123"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "User created successfully."
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "App": {
+                "title": "App",
+                "description": "App model",
+                "properties": {
+                    "id": {
+                        "description": "ID",
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "title": {
+                        "description": "Title",
+                        "type": "string",
+                        "example": "My application"
+                    },
+                    "description": {
+                        "description": "Description",
+                        "type": "string",
+                        "example": "Description of my application"
+                    },
+                    "url": {
+                        "description": "URL",
+                        "type": "string",
+                        "example": "https://myapp.com"
+                    },
+                    "state": {
+                        "description": "State",
+                        "type": "string",
+                        "enum": [
+                            "COMPLETED",
+                            "IN PROGRESS",
+                            "SOON"
+                        ],
+                        "example": "COMPLETED"
+                    },
+                    "created_at": {
+                        "description": "Creation timestamp",
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2023-06-19T12:00:00+00:00"
+                    },
+                    "updated_at": {
+                        "description": "Last update timestamp",
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2023-06-19T13:30:00+00:00"
+                    }
+                },
+                "type": "object"
+            },
+            "Faq": {
+                "title": "Faq",
+                "description": "Faq model",
+                "properties": {
+                    "id": {
+                        "description": "ID",
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "title": {
+                        "description": "Title",
+                        "type": "string",
+                        "example": "FAQ Title"
+                    },
+                    "description": {
+                        "description": "Description",
+                        "type": "string",
+                        "example": "FAQ Description"
+                    },
+                    "created_at": {
+                        "description": "Creation timestamp",
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2023-06-19T12:00:00+00:00"
+                    },
+                    "updated_at": {
+                        "description": "Last update timestamp",
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2023-06-19T13:30:00+00:00"
+                    }
+                },
+                "type": "object"
+            },
+            "User": {
+                "title": "User",
+                "description": "User model",
+                "properties": {
+                    "id": {
+                        "description": "ID",
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "name": {
+                        "description": "Name",
+                        "type": "string",
+                        "example": "John Doe"
+                    },
+                    "email": {
+                        "description": "Email",
+                        "type": "string",
+                        "example": "johndoe@example.com"
+                    },
+                    "dni": {
+                        "description": "DNI",
+                        "type": "string",
+                        "example": "123456789"
+                    },
+                    "status": {
+                        "description": "Status",
+                        "type": "string",
+                        "enum": [
+                            "ACTIVE",
+                            "INACTIVE"
+                        ],
+                        "example": "ACTIVE"
+                    },
+                    "role": {
+                        "description": "Role",
+                        "type": "string",
+                        "enum": [
+                            "ADMIN",
+                            "REGISTERED"
+                        ],
+                        "example": "ADMIN"
+                    },
+                    "email_verified_at": {
+                        "description": "Email verification timestamp",
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2023-06-19T12:00:00+00:00"
+                    },
+                    "password": {
+                        "description": "Password",
+                        "type": "string",
+                        "example": "********"
+                    },
+                    "remember_token": {
+                        "description": "Remember token",
+                        "type": "string"
+                    },
+                    "created_at": {
+                        "description": "Creation timestamp",
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2023-06-19T12:00:00+00:00"
+                    },
+                    "updated_at": {
+                        "description": "Last update timestamp",
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2023-06-19T13:30:00+00:00"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "securitySchemes": {
+            "bearer": {
+                "type": "apiKey",
+                "description": "Enter token in format (Bearer token here)",
+                "name": "Authorization",
+                "in": "header"
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "User",
+            "description": "Operations for a user"
+        },
+        {
+            "name": "Apps",
+            "description": "Operations for an app"
+        },
+        {
+            "name": "Faqs",
+            "description": "Operations for a faq"
+        }
+    ]
+}
