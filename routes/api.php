@@ -31,7 +31,7 @@ Route::middleware(['auth:api'])->prefix('faqs')->group(function () {
 });
 
 
-Route::post('/send-email', [CodeController::class, 'sendEmail'])->middleware('auth:api');
+Route::post('/send-code-by-email', [CodeController::class, 'sendCodeByEmail'])->middleware('auth:api');
 
 Route::middleware(['auth:api'])->group(function () {
     Route::get('/apps', [AppController::class, 'index'])->name('app.index');
