@@ -116,10 +116,9 @@
                 <div class="u-col u-col-100" style="max-width: 100%; min-width: 320px; display: table-cell; vertical-align: top;">
                   <div style="width: 100% !important;">
                     <!--[if (!mso)&(!IE)]><!-->
-                    <div
-                      style="border-top: 0px solid transparent; border-left: 0px solid transparent; border-bottom: 0px solid transparent; border-right: 0px solid transparent; padding-top:0px; padding-bottom:0px; padding-right: 0px; padding-left: 0px;">
+                    <div style="border-top: 0px solid transparent; border-left: 0px solid transparent; border-bottom: 0px solid transparent; border-right: 0px solid transparent; padding-top:0px; padding-bottom:0px; padding-right: 0px; padding-left: 0px;">
                       <!--<![endif]-->
-                      <table style="font-family: 'Lato', sans-serif; border-collapse: collapse; table-layout: fixed; border-spacing: 0px; mso-table-lspace: 0pt; mso-table-rspace: 0pt; vertical-align: top; border-collapse: collapse !important; background-color: transparent; width: 100%;"
+                      <table style="font-family: 'Lato', sans-serif; border-collapse: collapse; table-layout: fixed; border-spacing: 0px; mso-table-lspace: 0pt; mso-table-rspace: 0pt; vertical-align: top; border-collapse: collapse !important; background-color: #67e8f9; width: 100%;"
                         cellpadding="0" cellspacing="0">
                         <tbody>
                           <tr style="vertical-align: top;">
@@ -129,8 +128,9 @@
                                 <!--<![endif]-->
                                 <div style="font-size: 14px; line-height: 1.5; text-align: center; color: #000000; font-family: 'Lato', sans-serif;">
                                   <p style="font-size: 18px; line-height: 1.5; word-break: break-word; text-align: center; font-family: 'Lato', sans-serif; font-weight: bold; margin: 0;">
-                                    Reset your password
+                                    Please reset your password
                                   </p>
+                                  <img align="center" border="0" src="{{ asset('images/lock.png') }}" alt="Image" title="Image" style="outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;clear: both;display: inline-block !important;border: none;height: auto;float: none;width: 10%;max-width: 58px;" width="58"/>
                                 </div>
                                 <!--[if !mso]><!-->
                               </div>
@@ -154,10 +154,9 @@
                 <div class="u-col u-col-100" style="max-width: 100%; min-width: 320px; display: table-cell; vertical-align: top;">
                   <div style="width: 100% !important;">
                     <!--[if (!mso)&(!IE)]><!-->
-                    <div
-                      style="border-top: 0px solid transparent; border-left: 0px solid transparent; border-bottom: 0px solid transparent; border-right: 0px solid transparent; padding-top: 0px; padding-bottom: 0px; padding-right: 0px; padding-left: 0px;">
+                    <div style="border-top: 0px solid transparent; border-left: 0px solid transparent; border-bottom: 0px solid transparent; border-right: 0px solid transparent; padding-top: 0px; padding-bottom: 0px; padding-right: 0px; padding-left: 0px;">
                       <!--<![endif]-->
-                      <table style="font-family: 'Lato', sans-serif; border-collapse: collapse; table-layout: fixed; border-spacing: 0px; mso-table-lspace: 0pt; mso-table-rspace: 0pt; vertical-align: top; border-collapse: collapse !important; background-color: transparent; width: 100%;"
+                      <table style="font-family: 'Lato', sans-serif; border-collapse: collapse; table-layout: fixed; border-spacing: 0px; mso-table-lspace: 0pt; mso-table-rspace: 0pt; vertical-align: top; border-collapse: collapse !important; background-color: #67e8f9; width: 100%;"
                         cellpadding="0" cellspacing="0">
                         <tbody>
                           <tr style="vertical-align: top;">
@@ -195,7 +194,7 @@
                     <div
                       style="border-top: 0px solid transparent; border-left: 0px solid transparent; border-bottom: 0px solid transparent; border-right: 0px solid transparent; padding-top: 0px; padding-bottom: 0px; padding-right: 0px; padding-left: 0px;">
                       <!--<![endif]-->
-                      <table style="font-family: 'Lato', sans-serif; border-collapse: collapse; table-layout: fixed; border-spacing: 0px; mso-table-lspace: 0pt; mso-table-rspace: 0pt; vertical-align: top; border-collapse: collapse !important; background-color: transparent; width: 100%;"
+                      <table style="font-family: 'Lato', sans-serif; border-collapse: collapse; table-layout: fixed; border-spacing: 0px; mso-table-lspace: 0pt; mso-table-rspace: 0pt; vertical-align: top; border-collapse: collapse !important; background-color: #67e8f9; width: 100%;"
                         cellpadding="0" cellspacing="0">
                         <tbody>
                           <tr style="vertical-align: top;">
@@ -204,9 +203,9 @@
                               <div style="color: #000000; font-size: 14px; line-height: 1.5; text-align: center; font-family: 'Lato', sans-serif;">
                                 <!--<![endif]-->
                                 <a href="https://example.com/reset-password" target="_blank"
-                                  style="word-break: break-word; text-decoration: underline; color: #007C89; font-size: 16px; line-height: 1.5; font-family: 'Lato', sans-serif;">
-                                  <span style="text-decoration: underline; color: #007C89;">
-                                    Reset Password
+                                  style="word-break: break-word; text-decoration: underline; color: #15803d; font-size: 16px; line-height: 1.5; font-family: 'Lato', sans-serif; font-weight: bold;">
+                                  <span style="text-decoration: underline; color: #15803d;">
+                                    Reset your Password
                                   </span>
                                 </a>
                                 <!--[if !mso]><!-->
@@ -234,7 +233,7 @@
                     <div
                       style="border-top: 0px solid transparent; border-left: 0px solid transparent; border-bottom: 0px solid transparent; border-right: 0px solid transparent; padding-top: 0px; padding-bottom: 0px; padding-right: 0px; padding-left: 0px;">
                       <!--<![endif]-->
-                      <table style="font-family: 'Lato', sans-serif; border-collapse: collapse; table-layout: fixed; border-spacing: 0px; mso-table-lspace: 0pt; mso-table-rspace: 0pt; vertical-align: top; border-collapse: collapse !important; background-color: transparent; width: 100%;"
+                      <table style="font-family: 'Lato', sans-serif; border-collapse: collapse; table-layout: fixed; border-spacing: 0px; mso-table-lspace: 0pt; mso-table-rspace: 0pt; vertical-align: top; border-collapse: collapse !important; background-color: #f0abfc; width: 100%;"
                         cellpadding="0" cellspacing="0">
                         <tbody>
                           <tr style="vertical-align: top;">
