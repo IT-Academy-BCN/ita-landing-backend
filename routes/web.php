@@ -28,4 +28,10 @@ use App\Http\Controllers\CollaboratorsController;
 
 // });
 
-Route::get('/collaborators',[CollaboratorsController::class,'Collaborator']);
+Route::get('/collaborators/php',[CollaboratorsController::class,'CollaboratorPhp']);
+Route::get('/collaborators/react',[CollaboratorsController::class,'CollaboratorFrontedReact']);
+Route::get('/collaborators/angular',[CollaboratorsController::class,'CollaboratorFrontedAngular']);
+Route::get('/collaborators/java',[CollaboratorsController::class,'CollaboratorJava']);
+
+
+
