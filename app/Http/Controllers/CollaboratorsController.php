@@ -15,7 +15,14 @@ class CollaboratorsController extends Controller
 
         $data = $response->json();
 
-        return $data;
+        $phpCollaborators = [];
+        foreach ($data as $collaborator) {
+        $phpCollaborators[] = [
+            'photo' => $collaborator['avatar_url'],
+            'name' => $collaborator['login'],
+        ];
+    }
+        return $phpCollaborators;
 
     }
 
@@ -26,7 +33,15 @@ class CollaboratorsController extends Controller
 
         $data = $response->json();
 
-        return $data;
+        $reactCollaborators = [];
+        foreach ($data as $collaborator) {
+        $reactCollaborators[] = [
+            'photo' => $collaborator['avatar_url'],
+            'name' => $collaborator['login'],
+        ];
+    }
+
+        return $reactCollaborators;
 
     }
 
@@ -37,7 +52,15 @@ class CollaboratorsController extends Controller
 
         $data = $response->json();
 
-        return $data;
+        $angularCollaborators = [];
+        foreach ($data as $collaborator) {
+        $angularCollaborators[] = [
+            'photo' => $collaborator['avatar_url'],
+            'name' => $collaborator['login'],
+        ];
+    }
+
+        return $angularCollaborators;
 
     }
 
@@ -48,7 +71,15 @@ class CollaboratorsController extends Controller
 
         $data = $response->json();
 
-        return $data;
+        $javaCollaborators = [];
+        foreach ($data as $collaborator) {
+        $javaCollaborators[] = [
+            'photo' => $collaborator['avatar_url'],
+            'name' => $collaborator['login'],
+        ];
+    }
+
+        return $javaCollaborators;
 
     }
 }
