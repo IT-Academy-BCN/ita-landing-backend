@@ -67,7 +67,7 @@ class CollaboratorsController extends Controller
     public function collaboratorJava(){
 
         $url = env('URL_SERVER_API','https://api.github.com');
-        $response = Http::withToken('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')->get($url.'/ita-challenges-backend/collaborators');
+        $response = Http::withToken('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')->get($url.'/ita-challenges-backend/collaborators');
 
         $data = $response->json();
 
