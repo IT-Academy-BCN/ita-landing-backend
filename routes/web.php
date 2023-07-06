@@ -2,7 +2,6 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Http;
-use App\Http\Controllers\CollaboratorsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,10 +27,8 @@ use App\Http\Controllers\CollaboratorsController;
 
 // });
 
-Route::get('/collaborators/{area}',[CollaboratorsController::class,'index']);
-// Route::get('/collaborators/react',[CollaboratorsController::class,'CollaboratorFrontedReact']);
-// Route::get('/collaborators/angular',[CollaboratorsController::class,'CollaboratorFrontedAngular']);
-// Route::get('/collaborators/java',[CollaboratorsController::class,'CollaboratorJava']);
+
+
 
 
 

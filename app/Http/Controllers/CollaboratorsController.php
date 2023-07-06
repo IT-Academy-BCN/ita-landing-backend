@@ -8,6 +8,38 @@ use Illuminate\Support\Facades\Http;
 
 class CollaboratorsController extends Controller
 {
+    private $token;
+
+    public function __construct()
+    {
+        $this->token = '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';
+    }
+
+    /**
+ * @OA\Get(
+ *   path="/collaborators/{area}",
+ *   tags={"Collaborators"},
+ *   summary="User Collaborators",
+ *   description="This endpoint is used to get persons that work on the project with the specific area.",
+ *   @OA\Parameter(
+ *     name="area",
+ *     in="path",
+ *     required=true,
+ *     description="name of the area",
+ *     @OA\Schema(
+ *       type="integer",
+ *       example=php
+ *     ),
+ *   ,
+ *   @OA\Response(
+ *     response="200",
+ *     description="Collaborators deatails."
+ *   )
+ * )
+ */
+
+
+
 
     public function index($area)
 {
@@ -23,14 +55,12 @@ class CollaboratorsController extends Controller
         return $this->collaboratorNode();
     }
 
-    // Manejar caso cuando no se proporciona una pestaña válida
-    // Por ejemplo, redirigir o devolver un mensaje de error
 }
 
     public function collaboratorPhp(){
 
         $url = env('URL_SERVER_API','https://api.github.com');
-        $response = Http::withToken('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')->get($url.'/ita-landing-backend/collaborators');
+        $response = Http::withToken($this->token)->get($url.'/ita-landing-backend/collaborators');
 
         $data = $response->json();
 
@@ -49,15 +79,15 @@ class CollaboratorsController extends Controller
     public function collaboratorFrontedReact(){
 
         $url = env('URL_SERVER_API','https://api.github.com');
-        $response = Http::withToken('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')->get($url.'/ita-landing-frontend/collaborators');
+        $response = Http::withToken($this->token)->get($url.'/ita-landing-frontend/collaborators');
 
         $data = $response->json();
 
         $reactCollaborators = [];
         foreach ($data as $collaborator) {
         $reactCollaborators[] = [
-            'photo' => $collaborator['avatar_url'],
             'name' => $collaborator['login'],
+            'photo' => $collaborator['avatar_url'],            
             'url' => $collaborator['html_url']
         ];
     }
@@ -69,7 +99,7 @@ class CollaboratorsController extends Controller
     public function collaboratorFrontedAngular(){
 
         $url = env('URL_SERVER_API','https://api.github.com');
-        $response = Http::withToken('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')->get($url.'/ita-challenges-frontend/collaborators');
+        $response = Http::withToken($this->token)->get($url.'/ita-challenges-frontend/collaborators');
 
         $data = $response->json();
 
@@ -89,15 +119,15 @@ class CollaboratorsController extends Controller
     public function collaboratorJava(){
 
         $url = env('URL_SERVER_API','https://api.github.com');
-        $response = Http::withToken('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')->get($url.'/ita-challenges-backend/collaborators');
+        $response = Http::withToken($this->token)->get($url.'/ita-challenges-backend/collaborators');
 
         $data = $response->json();
 
         $javaCollaborators = [];
         foreach ($data as $collaborator) {
         $javaCollaborators[] = [
-            'photo' => $collaborator['avatar_url'],
             'name' => $collaborator['login'],
+            'photo' => $collaborator['avatar_url'],            
             'url' => $collaborator['html_url']
         ];
     }
@@ -109,15 +139,15 @@ class CollaboratorsController extends Controller
     public function collaboratorNode(){
 
         $url = env('URL_SERVER_API','https://api.github.com');
-        $response = Http::withToken('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')->get($url.'/ita-wiki/collaborators');
+        $response = Http::withToken($this->token)->get($url.'/ita-wiki/collaborators');
 
         $data = $response->json();
 
         $nodeCollaborators = [];
         foreach ($data as $collaborator) {
         $nodeCollaborators[] = [
-            'photo' => $collaborator['avatar_url'],
             'name' => $collaborator['login'],
+            'photo' => $collaborator['avatar_url'],            
             'url' => $collaborator['html_url']
         ];
     }

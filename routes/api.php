@@ -7,6 +7,8 @@ use App\Http\Controllers\api\FaqController;
 use App\Http\Controllers\api\AuthController;
 use App\Http\Controllers\api\CodeController;
 use App\Http\Controllers\api\AppController;
+use App\Http\Controllers\CollaboratorsController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -42,5 +44,8 @@ Route::middleware(['auth:api'])->group(function () {
     Route::put('/apps/{id}', [AppController::class, 'update'])->name('app.update');
     Route::delete('/apps/{id}', [AppController::class, 'destroy'])->name('app.destroy');
 });
+
+//getting the collaborators of the projects
+Route::get('/collaborators/{area}',[CollaboratorsController::class,'index']);
     
     
