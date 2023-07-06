@@ -402,82 +402,6 @@
                 ]
             }
         },
-        "/forgetpassword": {
-            "post": {
-                "tags": [
-                    "User"
-                ],
-                "summary": "send email to recovery password",
-                "description": "This endpoint is used send an email to a register user to reset the password.",
-                "operationId": "e8c67874815e6460635b371338786653",
-                "requestBody": {
-                    "required": true,
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "properties": {
-                                    "email": {
-                                        "type": "string",
-                                        "example": "example@example.com"
-                                    }
-                                },
-                                "type": "object"
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "200": {
-                        "description": "check your email"
-                    },
-                    "404": {
-                        "description": "The email don\\'t exist"
-                    }
-                }
-            }
-        },
-        "/resetPassword/{token}": {
-            "post": {
-                "tags": [
-                    "User"
-                ],
-                "summary": "User recovery password",
-                "description": "This endpoint is used to update the password of the user.",
-                "operationId": "13496de4d6bc9967864a67f0bd3ee9c6",
-                "requestBody": {
-                    "required": true,
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "properties": {
-                                    "token": {
-                                        "type": "string",
-                                        "example": "abcdefghij"
-                                    },
-                                    "password": {
-                                        "type": "string",
-                                        "example": "password"
-                                    },
-                                    "password_confirm": {
-                                        "type": "string",
-                                        "example": "password"
-                                    }
-                                },
-                                "type": "object"
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "200": {
-                        "description": "success"
-                    },
-                    "400": {
-                        "description": "Invalid Token!"
-                    }
-                }
-            }
-        },
         "/register": {
             "post": {
                 "tags": [
@@ -521,6 +445,82 @@
                 "responses": {
                     "200": {
                         "description": "User created successfully."
+                    }
+                }
+            }
+        },
+        "/forgetpassword": {
+            "post": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "send email to recovery password",
+                "description": "This endpoint is used send an email to a register user to reset the password.",
+                "operationId": "b3fcf0e2f4ce27a5a38aee5e05d2a3dc",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "email": {
+                                        "type": "string",
+                                        "example": "example@example.com"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "check your email"
+                    },
+                    "404": {
+                        "description": "The email don\\'t exist"
+                    }
+                }
+            }
+        },
+        "/resetPassword/{token}": {
+            "post": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "User recovery password",
+                "description": "This endpoint is used to update the password of the user.",
+                "operationId": "507cd6dc5b7f27ddef8bb66c5c846e79",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "token": {
+                                        "type": "string",
+                                        "example": "abcdefghij"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "example": "password"
+                                    },
+                                    "password_confirm": {
+                                        "type": "string",
+                                        "example": "password"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "success"
+                    },
+                    "400": {
+                        "description": "Invalid Token!"
                     }
                 }
             }
