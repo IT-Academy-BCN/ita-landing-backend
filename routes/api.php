@@ -22,6 +22,10 @@ use App\Http\Controllers\api\AppController;
 Route::post('/register', [UserController::class, 'store'])->name('register');
 Route::post('/login', [AuthController::class, 'login'])->name('login');
 
+// recovery password
+Route::post('/forgetpassword', [UserController::class, 'forgetPassword'])->name('forget.password');
+Route::post('/resetPassword/{token}', [UserController::class, 'resetPassword'])->name('reset.password');
+
 Route::get('/faqs', [FaqController::class, 'index']);
 Route::get('/apps', [AppController::class, 'index'])->name('app.index');
 
