@@ -8,6 +8,25 @@ use Illuminate\Support\Facades\Http;
 
 class CollaboratorsController extends Controller
 {
+
+    public function index($area)
+{
+    if ($area === 'php') {
+        return $this->collaboratorPhp();
+    } elseif ($area === 'react') {
+        return $this->collaboratorFrontedReact();
+    }elseif ($area === 'angular') {
+        return $this->collaboratorFrontedAngular();
+    }elseif ($area === 'java') {
+        return $this->collaboratorJava();
+    }elseif ($area === 'node') {
+        return $this->collaboratorNode();
+    }
+
+    // Manejar caso cuando no se proporciona una pestaña válida
+    // Por ejemplo, redirigir o devolver un mensaje de error
+}
+
     public function collaboratorPhp(){
 
         $url = env('URL_SERVER_API','https://api.github.com');
@@ -18,8 +37,9 @@ class CollaboratorsController extends Controller
         $phpCollaborators = [];
         foreach ($data as $collaborator) {
         $phpCollaborators[] = [
-            'photo' => $collaborator['avatar_url'],
             'name' => $collaborator['login'],
+            'photo' => $collaborator['avatar_url'],            
+            'url' => $collaborator['html_url']
         ];
     }
         return $phpCollaborators;
@@ -38,6 +58,7 @@ class CollaboratorsController extends Controller
         $reactCollaborators[] = [
             'photo' => $collaborator['avatar_url'],
             'name' => $collaborator['login'],
+            'url' => $collaborator['html_url']
         ];
     }
 
@@ -57,6 +78,7 @@ class CollaboratorsController extends Controller
         $angularCollaborators[] = [
             'photo' => $collaborator['avatar_url'],
             'name' => $collaborator['login'],
+            'url' => $collaborator['html_url']
         ];
     }
 
@@ -76,10 +98,30 @@ class CollaboratorsController extends Controller
         $javaCollaborators[] = [
             'photo' => $collaborator['avatar_url'],
             'name' => $collaborator['login'],
+            'url' => $collaborator['html_url']
         ];
     }
 
         return $javaCollaborators;
+
+    }
+
+    public function collaboratorNode(){
+
+        $url = env('URL_SERVER_API','https://api.github.com');
+        $response = Http::withToken('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')->get($url.'/ita-wiki/collaborators');
+
+        $data = $response->json();
+
+        $nodeCollaborators = [];
+        foreach ($data as $collaborator) {
+        $nodeCollaborators[] = [
+            'photo' => $collaborator['avatar_url'],
+            'name' => $collaborator['login'],
+            'url' => $collaborator['html_url']
+        ];
+    }
+        return $nodeCollaborators;
 
     }
 }
