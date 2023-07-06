@@ -6,7 +6,7 @@ use App\Http\Controllers\api\UserController;
 use App\Http\Controllers\api\FaqController;
 use App\Http\Controllers\api\AuthController;
 use App\Http\Controllers\api\ForgetController;
-
+use App\Http\Controllers\api\CodeController;
 use App\Http\Controllers\api\AppController;
 
 /*
@@ -25,19 +25,23 @@ Route::post('/login', [AuthController::class, 'login'])->name('login');
 
 // recovery password
 Route::post('/forgetpassword', [ForgetController::class, 'forgetPassword'])->name('forgetpassword');
-
 Route::post('/resetPassword/{token}', [ForgetController::class, 'resetPassword'])->name('resetPassword');
 
+Route::get('/faqs', [FaqController::class, 'index']);
+Route::get('/apps', [AppController::class, 'index'])->name('app.index');
+
 Route::middleware(['auth:api'])->prefix('faqs')->group(function () {
-    Route::get('/', [FaqController::class, 'index']);
+    
     Route::get('/{id}', [FaqController::class, 'show']);
     Route::post('/', [FaqController::class, 'store']);
     Route::put('/{id}', [FaqController::class, 'update']);
     Route::delete('/{id}', [FaqController::class, 'destroy']);
 });
 
+
+Route::post('/send-email', [CodeController::class, 'sendEmail'])->middleware('auth:api');
+
 Route::middleware(['auth:api'])->group(function () {
-    Route::get('/apps', [AppController::class, 'index'])->name('app.index');
     Route::get('/apps/{id}', [AppController::class, 'show'])->name('app.show');
     Route::post('/apps', [AppController::class, 'store'])->name('app.store');
     Route::put('/apps/{id}', [AppController::class, 'update'])->name('app.update');

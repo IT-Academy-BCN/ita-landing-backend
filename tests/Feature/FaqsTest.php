@@ -12,45 +12,10 @@ class FaqsTest extends TestCase
     use RefreshDatabase;
 
     /**
-     * Test index method.
+     * Test index method. Unauthenticated user have access to this route too.
      */
     public function test_index(): void
-    {
-        \Artisan::call('passport:install');
-
-        $user = User::factory()->create();
-        $token = $user->createToken('TestToken')->accessToken;
-        
-        $faqs = [
-            [
-                'title' => fake()->sentence,
-                'description' => fake()->paragraph,
-            ],
-            [
-                'title' => fake()->sentence,
-                'description' => fake()->paragraph,
-            ],
-        ];
-        
-        Faq::insert($faqs);
-
-        $response = $this->actingAs($user)->withHeaders([
-            'Authorization' => 'Bearer ' . $token,
-        ])->get('/api/faqs');
-
-        $response->assertStatus(200)
-            ->assertJson([
-                'faqs' => $faqs
-            ]);
-    }
-
-    /**
-     * Test index method without token.
-     */
-    public function test_index_without_token(): void
-    {
-        \Artisan::call('passport:install');
-
+    {   
         $faqs = [
             [
                 'title' => fake()->sentence,
@@ -66,7 +31,38 @@ class FaqsTest extends TestCase
 
         $response = $this->get('/api/faqs');
 
-        $response->assertStatus(302);
+        $response->assertStatus(200)
+            ->assertJson([
+                'faqs' => $faqs
+            ]);
+    }
+
+    /**
+     * Test index method with token. Authenticated user have access to this route too.
+     */
+    public function test_index_with_token(): void
+    {
+        \Artisan::call('passport:install');
+
+        $user = User::factory()->create();
+        $token = $user->createToken('auth_token')->accessToken;
+
+        $faqs = [
+            [
+                'title' => fake()->sentence,
+                'description' => fake()->paragraph,
+            ],
+            [
+                'title' => fake()->sentence,
+                'description' => fake()->paragraph,
+            ],
+        ];
+        
+        Faq::insert($faqs);
+
+        $response = $this->actingAs($user)->withHeaders(['Authorization' => 'Bearer ' . $token,])->get('/api/faqs');
+
+        $response->assertStatus(200)->assertJson(['faqs' => $faqs]);
     }
 
     /**
