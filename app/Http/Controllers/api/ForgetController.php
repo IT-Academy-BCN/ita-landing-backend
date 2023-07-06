@@ -19,11 +19,11 @@ use Illuminate\Support\Facades\Mail;
 
 class ForgetController extends Controller
 {
-    /** Getting the email to recovery password
+/**
  * @OA\Post(
  *   path="/forgetpassword",
  *   tags={"User"},
- *   summary="User recovery password",
+ *   summary="send email to recovery password",
  *   description="This endpoint is used send an email to a register user to reset the password.",
  *   @OA\RequestBody(
  *     required=true,
@@ -93,6 +93,46 @@ class ForgetController extends Controller
         }
  
     }
+
+    /**
+ * @OA\Post(
+ *   path="/resetPassword/{token}",
+ *   tags={"User"},
+ *   summary="User recovery password",
+ *   description="This endpoint is used to update the password of the user.",
+ *   @OA\RequestBody(
+ *     required=true,
+ *     @OA\MediaType(
+ *       mediaType="application/json",
+ *       @OA\Schema(
+ *         @OA\Property(
+ *           property="token",
+ *           type="string",
+ *           example="abcdefghij"
+ *         ),
+ *          @OA\Property(
+ *           property="password",
+ *           type="string",
+ *           example="password"
+ *         ),
+ *          @OA\Property(
+ *           property="password_confirm",
+ *           type="string",
+ *           example="password"
+ *         ),        
+ *       )
+ *     )
+ *   ),
+ *   @OA\Response(
+ *     response="200",
+ *     description="success"
+ *   ),
+ *   @OA\Response(
+ *     response="400",
+ *     description="Invalid Token!"
+ *   )
+ * )
+ */
 
     public function resetPassword(ResetRequest $request){
 
