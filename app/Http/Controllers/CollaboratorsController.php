@@ -15,7 +15,7 @@ class CollaboratorsController extends Controller
         $this->token = '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';
     }
 
-    /**
+/**
  * @OA\Get(
  *   path="/collaborators/{area}",
  *   tags={"Collaborators"},
@@ -27,20 +27,40 @@ class CollaboratorsController extends Controller
  *     required=true,
  *     description="name of the area",
  *     @OA\Schema(
- *       type="integer",
- *       example=php
- *     ),
- *   ,
+ *       type="string",
+ *       example="php"
+ *     )
+ *   ),
  *   @OA\Response(
  *     response="200",
- *     description="Collaborators deatails."
+ *     description="Collaborators details.",
+ *     @OA\JsonContent(
+ *       @OA\Property(
+ *         type="array",
+ *         property="rows",
+ *         @OA\Items(
+ *           type="object",
+ *           @OA\Property(
+ *             property="name",
+ *             type="string",
+ *             example="CloudSalander"
+ *           ),
+ *           @OA\Property(
+ *             property="photo",
+ *             type="string",
+ *             example="https://avatars.githubusercontent.com/u/1247767?v=4"
+ *           ),
+ *           @OA\Property(
+ *             property="url",
+ *             type="string",
+ *             example="https://api.github.com/users/CloudSalander"
+ *           )
+ *         )
+ *       )
+ *     )
  *   )
  * )
  */
-
-
-
-
     public function index($area)
 {
     if ($area === 'php') {
