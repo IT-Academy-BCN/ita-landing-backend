@@ -80,7 +80,7 @@ class CollaboratorsController extends Controller
     public function collaboratorPhp(){
 
         $url = env('URL_SERVER_API','https://api.github.com');
-        $response = Http::withToken($this->token)->get($url.'/ita-landing-backend/collaborators');
+        $response = Http::withToken($this->token)->get($url.'/ita-landing-backend/collaborators?affiliation=direct');
 
         $data = $response->json();
 
@@ -99,7 +99,7 @@ class CollaboratorsController extends Controller
     public function collaboratorFrontedReact(){
 
         $url = env('URL_SERVER_API','https://api.github.com');
-        $response = Http::withToken($this->token)->get($url.'/ita-landing-frontend/collaborators');
+        $response = Http::withToken($this->token)->get($url.'/ita-landing-frontend/collaborators?affiliation=direct');
 
         $data = $response->json();
 
@@ -119,7 +119,7 @@ class CollaboratorsController extends Controller
     public function collaboratorFrontedAngular(){
 
         $url = env('URL_SERVER_API','https://api.github.com');
-        $response = Http::withToken($this->token)->get($url.'/ita-challenges-frontend/collaborators');
+        $response = Http::withToken($this->token)->get($url.'/ita-challenges-frontend/collaborators?affiliation=direct');
 
         $data = $response->json();
 
@@ -139,7 +139,7 @@ class CollaboratorsController extends Controller
     public function collaboratorJava(){
 
         $url = env('URL_SERVER_API','https://api.github.com');
-        $response = Http::withToken($this->token)->get($url.'/ita-challenges-backend/collaborators');
+        $response = Http::withToken($this->token)->get($url.'/ita-challenges-backend/collaborators?affiliation=direct');
 
         $data = $response->json();
 
@@ -159,7 +159,7 @@ class CollaboratorsController extends Controller
     public function collaboratorNode(){
 
         $url = env('URL_SERVER_API','https://api.github.com');
-        $response = Http::withToken($this->token)->get($url.'/ita-wiki/collaborators');
+        $response = Http::withToken($this->token)->get($url.'/ita-wiki/collaborators?affiliation=direct');
 
         $data = $response->json();
 
