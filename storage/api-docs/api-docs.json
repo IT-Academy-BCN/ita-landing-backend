@@ -449,14 +449,14 @@
                 }
             }
         },
-        "/forgetpassword": {
+        "/forget-password": {
             "post": {
                 "tags": [
                     "User"
                 ],
                 "summary": "send email to recovery password",
                 "description": "This endpoint is used send an email to a register user to reset the password.",
-                "operationId": "b3fcf0e2f4ce27a5a38aee5e05d2a3dc",
+                "operationId": "6dc3a821a584d03adef3e42dd853f81c",
                 "requestBody": {
                     "required": true,
                     "content": {
@@ -483,14 +483,14 @@
                 }
             }
         },
-        "/resetPassword/{token}": {
+        "/reset-password/{token}": {
             "post": {
                 "tags": [
                     "User"
                 ],
                 "summary": "User recovery password",
                 "description": "This endpoint is used to update the password of the user.",
-                "operationId": "507cd6dc5b7f27ddef8bb66c5c846e79",
+                "operationId": "3ce335a32d71c446cb79709dbda4ce58",
                 "requestBody": {
                     "required": true,
                     "content": {

@@ -118,7 +118,7 @@ class UserController extends Controller
 
     /**
  * @OA\Post(
- *   path="/forgetpassword",
+ *   path="/forget-password",
  *   tags={"User"},
  *   summary="send email to recovery password",
  *   description="This endpoint is used send an email to a register user to reset the password.",
@@ -193,7 +193,7 @@ class UserController extends Controller
 
     /**
  * @OA\Post(
- *   path="/resetPassword/{token}",
+ *   path="/reset-password/{token}",
  *   tags={"User"},
  *   summary="User recovery password",
  *   description="This endpoint is used to update the password of the user.",
