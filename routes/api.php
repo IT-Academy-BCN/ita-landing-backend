@@ -7,7 +7,7 @@ use App\Http\Controllers\api\FaqController;
 use App\Http\Controllers\api\AuthController;
 use App\Http\Controllers\api\CodeController;
 use App\Http\Controllers\api\AppController;
-use App\Http\Controllers\CollaboratorsController;
+use App\Http\Controllers\api\CollaboratorsController;
 
 
 /*

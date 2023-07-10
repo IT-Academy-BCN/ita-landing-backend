@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -12,7 +12,7 @@ class CollaboratorsController extends Controller
 
     public function __construct()
     {
-        $this->token = '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';
+        $this->token = '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';
     }
 
 /**
@@ -75,6 +75,9 @@ class CollaboratorsController extends Controller
         return $this->collaboratorNode();
     }
 
+    return response()->json([
+        'message' => 'this area is invalid'
+    ],404);
 }
 
     public function collaboratorPhp(){
@@ -92,7 +95,7 @@ class CollaboratorsController extends Controller
             'url' => $collaborator['html_url']
         ];
     }
-        return $phpCollaborators;
+        return response()->json($phpCollaborators,200);
 
     }
 
@@ -111,9 +114,7 @@ class CollaboratorsController extends Controller
             'url' => $collaborator['html_url']
         ];
     }
-
-        return $reactCollaborators;
-
+        return response()->json( $reactCollaborators,200);
     }
 
     public function collaboratorFrontedAngular(){
@@ -130,10 +131,8 @@ class CollaboratorsController extends Controller
             'name' => $collaborator['login'],
             'url' => $collaborator['html_url']
         ];
-    }
-
-        return $angularCollaborators;
-
+    }   
+        return response()->json($angularCollaborators,200);       
     }
 
     public function collaboratorJava(){
@@ -151,9 +150,8 @@ class CollaboratorsController extends Controller
             'url' => $collaborator['html_url']
         ];
     }
-
-        return $javaCollaborators;
-
+        
+    return response()->json($javaCollaborators,200);
     }
 
     public function collaboratorNode(){
@@ -170,8 +168,7 @@ class CollaboratorsController extends Controller
             'photo' => $collaborator['avatar_url'],            
             'url' => $collaborator['html_url']
         ];
-    }
-        return $nodeCollaborators;
-
+    }    
+    return response()->json($nodeCollaborators,200);
     }
 }
