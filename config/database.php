@@ -62,7 +62,7 @@ return [
                 PDO::MYSQL_ATTR_SSL_CA => env('MYSQL_ATTR_SSL_CA'),
             ]) : [],
             'dump' => [
-                'dump_binary_path' => '/Applications/XAMPP/bin', //for laragon "C:\laragon\bin\mysql\mysql-5.7.24-winx64\bin"
+                'dump_binary_path' => '/Applications/XAMPP/bin', //switch to server dump binary path
                 'use_single_transaction',
                 'timeout' => 60 * 5, // 5 minute timeout
                 ],
