@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\api;
 
 use App\Http\Controllers\Controller;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 
@@ -12,25 +13,15 @@ class CollaboratorsController extends Controller
 
     public function __construct()
     {
-        $this->token = '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';
+        $this->token = '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';
     }
 
 /**
  * @OA\Get(
- *   path="/collaborators/{area}",
+ *   path="/collaborators",
  *   tags={"Collaborators"},
  *   summary="User Collaborators",
- *   description="This endpoint is used to get persons that work on the project with the specific area.",
- *   @OA\Parameter(
- *     name="area",
- *     in="path",
- *     required=true,
- *     description="name of the area",
- *     @OA\Schema(
- *       type="string",
- *       example="php"
- *     )
- *   ),
+ *   description="This endpoint return all the collaborators",
  *   @OA\Response(
  *     response="200",
  *     description="Collaborators details.",
@@ -61,24 +52,52 @@ class CollaboratorsController extends Controller
  *   )
  * )
  */
-    public function index($area)
-{
-    if ($area === 'php') {
-        return $this->collaboratorPhp();
-    } elseif ($area === 'react') {
-        return $this->collaboratorFrontedReact();
-    }elseif ($area === 'angular') {
-        return $this->collaboratorFrontedAngular();
-    }elseif ($area === 'java') {
-        return $this->collaboratorJava();
-    }elseif ($area === 'node') {
-        return $this->collaboratorNode();
-    }
 
-    return response()->json([
-        'message' => 'this area is invalid'
-    ],404);
+public function index()
+{
+
+    try {
+        $allCollaborators= array_merge(
+            $this->collaboratorPhp(),
+            $this->collaboratorFrontedReact(),
+            $this->collaboratorFrontedAngular(),
+            $this->collaboratorJava(),
+            $this->collaboratorNode()
+        );
+    
+        $uniqueCollaborators = [];
+        foreach ($allCollaborators as $collaborator) {
+            if (!in_array($collaborator, $uniqueCollaborators)) {
+                $uniqueCollaborators[] = $collaborator;
+            }
+        }
+        return response()->json($uniqueCollaborators,200);
+
+    } catch (Exception $e) {
+        return response()->json([
+        'message' => 'something went wrong'],404);
+    }
 }
+
+//old index 
+//     public function index($area)
+// {
+//     if ($area === 'php') {
+//         return $this->collaboratorPhp();
+//     } elseif ($area === 'react') {
+//         return $this->collaboratorFrontedReact();
+//     }elseif ($area === 'angular') {
+//         return $this->collaboratorFrontedAngular();
+//     }elseif ($area === 'java') {
+//         return $this->collaboratorJava();
+//     }elseif ($area === 'node') {
+//         return $this->collaboratorNode();
+//     }
+
+//     return response()->json([
+//         'message' => 'this area is invalid'
+//     ],404);
+// }
 
     public function collaboratorPhp(){
 
@@ -95,7 +114,7 @@ class CollaboratorsController extends Controller
             'url' => $collaborator['html_url']
         ];
     }
-        return response()->json($phpCollaborators,200);
+        return $phpCollaborators;
 
     }
 
@@ -114,7 +133,7 @@ class CollaboratorsController extends Controller
             'url' => $collaborator['html_url']
         ];
     }
-        return response()->json( $reactCollaborators,200);
+        return $reactCollaborators;
     }
 
     public function collaboratorFrontedAngular(){
@@ -132,7 +151,7 @@ class CollaboratorsController extends Controller
             'url' => $collaborator['html_url']
         ];
     }   
-        return response()->json($angularCollaborators,200);       
+        return $angularCollaborators;       
     }
 
     public function collaboratorJava(){
@@ -151,7 +170,7 @@ class CollaboratorsController extends Controller
         ];
     }
         
-    return response()->json($javaCollaborators,200);
+    return $javaCollaborators;
     }
 
     public function collaboratorNode(){
@@ -169,6 +188,6 @@ class CollaboratorsController extends Controller
             'url' => $collaborator['html_url']
         ];
     }    
-    return response()->json($nodeCollaborators,200);
+    return $nodeCollaborators;
     }
 }

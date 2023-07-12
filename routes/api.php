@@ -46,6 +46,6 @@ Route::middleware(['auth:api'])->group(function () {
 });
 
 //getting the collaborators of the projects
-Route::get('/collaborators/{area}',[CollaboratorsController::class,'index']);
+Route::get('/collaborators',[CollaboratorsController::class,'index']);
     
     

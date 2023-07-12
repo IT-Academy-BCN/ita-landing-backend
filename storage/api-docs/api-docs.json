@@ -11,62 +11,6 @@
         }
     ],
     "paths": {
-        "/collaborators/{area}": {
-            "get": {
-                "tags": [
-                    "Collaborators"
-                ],
-                "summary": "User Collaborators",
-                "description": "This endpoint is used to get persons that work on the project with the specific area.",
-                "operationId": "14af26b9a01d282b328c224abad56673",
-                "parameters": [
-                    {
-                        "name": "area",
-                        "in": "path",
-                        "description": "name of the area",
-                        "required": true,
-                        "schema": {
-                            "type": "string",
-                            "example": "php"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Collaborators details.",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "rows": {
-                                            "type": "array",
-                                            "items": {
-                                                "properties": {
-                                                    "name": {
-                                                        "type": "string",
-                                                        "example": "CloudSalander"
-                                                    },
-                                                    "photo": {
-                                                        "type": "string",
-                                                        "example": "https://avatars.githubusercontent.com/u/1247767?v=4"
-                                                    },
-                                                    "url": {
-                                                        "type": "string",
-                                                        "example": "https://api.github.com/users/CloudSalander"
-                                                    }
-                                                },
-                                                "type": "object"
-                                            }
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
         "/apps": {
             "get": {
                 "tags": [
@@ -289,6 +233,50 @@
                 "responses": {
                     "200": {
                         "description": "Access token for the user."
+                    }
+                }
+            }
+        },
+        "/collaborators": {
+            "get": {
+                "tags": [
+                    "Collaborators"
+                ],
+                "summary": "User Collaborators",
+                "description": "This endpoint return all the collaborators",
+                "operationId": "1d2e1d8e5e2550c8fb894daf04b3a76b",
+                "responses": {
+                    "200": {
+                        "description": "Collaborators details.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "rows": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "name": {
+                                                        "type": "string",
+                                                        "example": "CloudSalander"
+                                                    },
+                                                    "photo": {
+                                                        "type": "string",
+                                                        "example": "https://avatars.githubusercontent.com/u/1247767?v=4"
+                                                    },
+                                                    "url": {
+                                                        "type": "string",
+                                                        "example": "https://api.github.com/users/CloudSalander"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
                     }
                 }
             }
