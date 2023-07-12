@@ -13,41 +13,13 @@ class CollaboratorTest extends TestCase
     /**
      * A basic feature test example.
      */
-    public function test_index_get_php_collaborators(): void
+    public function test_index_get_all_collaborators(): void
     {
-        $response = $this->get('/api/collaborators/php');
+        $response = $this->get('/api/collaborators');
 
         $response->assertStatus(200);
     }
-
-    public function test_index_get_react_collaborators(): void
-    {
-        $response = $this->get('/api/collaborators/react');
-
-        $response->assertStatus(200);
-    }
-
-    public function test_index_get_angular_collaborators(): void
-    {
-        $response = $this->get('/api/collaborators/angular');
-
-        $response->assertStatus(200);
-    }
-
-    public function test_index_get_java_collaborators(): void
-    {
-        $response = $this->get('/api/collaborators/java');
-
-        $response->assertStatus(200);
-    }
-
-    public function test_index_get_node_collaborators(): void
-    {
-        $response = $this->get('/api/collaborators/node');
-
-        $response->assertStatus(200);
-    }
-
+    
     public function test_inserting_on_index_a_area_that_dont_exist(): void
     {
         $response = $this->get('/api/collaborators/prueba');
@@ -61,7 +33,7 @@ class CollaboratorTest extends TestCase
 
         $response= $collaboratorsController->collaboratorPhp();
 
-        $this->assertEquals(200, $response->getStatusCode());
+        $this->assertIsArray($response);
     }
 
     public function test_collaborator_react_function(){
@@ -70,7 +42,7 @@ class CollaboratorTest extends TestCase
 
         $response= $collaboratorsController->collaboratorFrontedReact();
 
-        $this->assertEquals(200, $response->getStatusCode());
+        $this->assertIsArray($response);
     }
 
     public function test_collaborator_angular_function(){
@@ -79,7 +51,7 @@ class CollaboratorTest extends TestCase
 
         $response= $collaboratorsController->collaboratorFrontedAngular();
 
-        $this->assertEquals(200, $response->getStatusCode());
+        $this->assertIsArray($response);
     }
 
     public function test_collaborator_java_function(){
@@ -88,7 +60,7 @@ class CollaboratorTest extends TestCase
 
         $response= $collaboratorsController->collaboratorJava();
 
-        $this->assertEquals(200, $response->getStatusCode());
+        $this->assertIsArray($response);
     }
 
     public function test_collaborator_node_function(){
@@ -97,6 +69,6 @@ class CollaboratorTest extends TestCase
 
         $response= $collaboratorsController->collaboratorNode();
 
-        $this->assertEquals(200, $response->getStatusCode());
+        $this->assertIsArray($response);
     }
 }
