@@ -8,6 +8,8 @@ use App\Http\Controllers\api\AuthController;
 use App\Http\Controllers\api\CodeController;
 use App\Http\Controllers\api\AppController;
 
+use App\Http\Controllers\api\ForgetController;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -33,8 +35,9 @@ Route::middleware(['auth:api'])->prefix('faqs')->group(function () {
     Route::delete('/{id}', [FaqController::class, 'destroy']);
 });
 
+Route::post('/forgetpassword', [ForgetController::class, 'forgetPassword'])->name('forgetpassword');
 
-Route::post('/send-email', [CodeController::class, 'sendEmail'])->middleware('auth:api');
+Route::post('/send-code-by-email', [CodeController::class, 'sendCodeByEmail'])->middleware('auth:api');
 
 Route::middleware(['auth:api'])->group(function () {
     Route::get('/apps/{id}', [AppController::class, 'show'])->name('app.show');
