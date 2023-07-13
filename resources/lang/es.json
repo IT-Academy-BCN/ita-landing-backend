@@ -1,0 +1,12 @@
+{
+    "app": {
+        "title": "Title",
+        "description": "Description",
+        "url": "URL",
+        "state": "State"
+    },
+    "faq": {
+        "title": "Title",
+        "description": "Description"
+    }
+}
