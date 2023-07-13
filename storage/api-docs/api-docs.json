@@ -245,7 +245,7 @@
         "/codes": {
             "post": {
                 "tags": [
-                    "User"
+                    "Code"
                 ],
                 "summary": "Save a new code in the database.",
                 "description": "Saves a new code in the database and returns the code value.",
@@ -294,7 +294,7 @@
         "/send-code-by-email": {
             "post": {
                 "tags": [
-                    "User"
+                    "Code"
                 ],
                 "summary": "Send a code by email.",
                 "description": "Sends a generated code to the specified email address.",

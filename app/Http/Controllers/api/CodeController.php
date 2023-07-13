@@ -21,7 +21,7 @@ class CodeController extends Controller
      *
      * @OA\Post(
      *     path="/codes",
-     *     tags={"User"},
+     *     tags={"Code"},
      *     summary="Save a new code in the database.",
      *     description="Saves a new code in the database and returns the code value.",
      *     @OA\Response(
@@ -66,7 +66,7 @@ class CodeController extends Controller
      *
      * @OA\Post(
      *     path="/send-code-by-email",
-     *     tags={"User"},
+     *     tags={"Code"},
      *     summary="Send a code by email.",
      *     description="Sends a generated code to the specified email address.",
      *     security={{ "bearerAuth": {} }},
