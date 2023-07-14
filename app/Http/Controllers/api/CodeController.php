@@ -19,24 +19,7 @@ class CodeController extends Controller
      *
      * @return string
      *
-     * @OA\Post(
-     *     path="/codes",
-     *     tags={"Code"},
-     *     summary="Save a new code in the database.",
-     *     description="Saves a new code in the database and returns the code value.",
-     *     @OA\Response(
-     *         response=200,
-     *         description="Success response",
-     *         @OA\JsonContent(
-     *             @OA\Property(property="code", type="string", example="ABC123", description="The generated code"),
-     *             @OA\Property(property="is_used", type="boolean", example=false, description="Indicates if the code is used"),
-     *             @OA\Property(property="user_id", type="integer", example=1, description="The user ID associated with the code"),
-     *             @OA\Property(property="created_at", type="string", format="date-time", description="The timestamp of when the code was created"),
-     *             @OA\Property(property="updated_at", type="string", format="date-time", description="The timestamp of when the code was last updated")
-     *         )
-     *     )
-     * )
-     */
+     **/
     public function store()
     {
         $code = $this->generateRandomCode();
@@ -66,7 +49,7 @@ class CodeController extends Controller
      *
      * @OA\Post(
      *     path="/send-code-by-email",
-     *     tags={"Code"},
+     *     tags={"User"},
      *     summary="Send a code by email.",
      *     description="Sends a generated code to the specified email address.",
      *     security={{ "bearerAuth": {} }},

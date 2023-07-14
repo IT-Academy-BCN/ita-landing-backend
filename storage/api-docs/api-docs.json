@@ -242,59 +242,10 @@
                 }
             }
         },
-        "/codes": {
-            "post": {
-                "tags": [
-                    "Code"
-                ],
-                "summary": "Save a new code in the database.",
-                "description": "Saves a new code in the database and returns the code value.",
-                "operationId": "c8c8c440573a12458ae68cd62addf9cd",
-                "responses": {
-                    "200": {
-                        "description": "Success response",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "code": {
-                                            "description": "The generated code",
-                                            "type": "string",
-                                            "example": "ABC123"
-                                        },
-                                        "is_used": {
-                                            "description": "Indicates if the code is used",
-                                            "type": "boolean",
-                                            "example": false
-                                        },
-                                        "user_id": {
-                                            "description": "The user ID associated with the code",
-                                            "type": "integer",
-                                            "example": 1
-                                        },
-                                        "created_at": {
-                                            "description": "The timestamp of when the code was created",
-                                            "type": "string",
-                                            "format": "date-time"
-                                        },
-                                        "updated_at": {
-                                            "description": "The timestamp of when the code was last updated",
-                                            "type": "string",
-                                            "format": "date-time"
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
         "/send-code-by-email": {
             "post": {
                 "tags": [
-                    "Code"
+                    "User"
                 ],
                 "summary": "Send a code by email.",
                 "description": "Sends a generated code to the specified email address.",

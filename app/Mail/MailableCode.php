@@ -39,12 +39,7 @@ class MailableCode extends Mailable
      */
     public function content(): Content
     {
-        return new Content(
-            text: 'code', 
-            with: [
-                'code' => $this->code,
-            ], 
-        );
+        return new Content(view: 'code' );
     }
 
     /**

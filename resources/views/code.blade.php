@@ -1,23 +1,28 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
         }
         .container {
-            max-width: 600px;
-            margin: 0 auto;
-            padding: 20px;
+            font-family: Arial, sans-serif;
             background: linear-gradient(to right, #00f, #f0f);
+            max-width: 600px;
+            padding: 20px;
+            text-align: center;
+            color: #fff;
         }
         .code {
             font-size: 24px;
             font-weight: bold;
-            color: #fff;
-            text-align: center;
             margin-top: 20px;
         }
     </style>

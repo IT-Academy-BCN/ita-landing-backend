@@ -9,7 +9,6 @@ use App\Http\Controllers\api\CodeController;
 use App\Http\Controllers\api\AppController;
 
 use App\Http\Controllers\api\ForgetController;
-
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -20,7 +19,6 @@ use App\Http\Controllers\api\ForgetController;
 | be assigned to the "api" middleware group. Make something great!
 |
 */
-Route::group(['middleware' => ['api', 'locale']], function () {
 Route::post('/register', [UserController::class, 'store'])->name('register');
 Route::post('/login', [AuthController::class, 'login'])->name('login');
 
@@ -42,6 +40,4 @@ Route::middleware(['auth:api'])->group(function () {
     Route::post('/apps', [AppController::class, 'store'])->name('app.store');
     Route::put('/apps/{id}', [AppController::class, 'update'])->name('app.update');
     Route::delete('/apps/{id}', [AppController::class, 'destroy'])->name('app.destroy');
-});
-
 });
