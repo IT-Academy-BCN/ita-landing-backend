@@ -10,10 +10,11 @@ use Illuminate\Support\Facades\Http;
 class CollaboratorsController extends Controller
 {
     private $token;
+    
 
     public function __construct()
     {
-        $this->token = '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';
+        $this->token = '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';
     }
 
 /**
@@ -79,115 +80,58 @@ public function index()
     }
 }
 
-//old index 
-//     public function index($area)
-// {
-//     if ($area === 'php') {
-//         return $this->collaboratorPhp();
-//     } elseif ($area === 'react') {
-//         return $this->collaboratorFrontedReact();
-//     }elseif ($area === 'angular') {
-//         return $this->collaboratorFrontedAngular();
-//     }elseif ($area === 'java') {
-//         return $this->collaboratorJava();
-//     }elseif ($area === 'node') {
-//         return $this->collaboratorNode();
-//     }
+public function collaboratorLogic($collaborator){
 
-//     return response()->json([
-//         'message' => 'this area is invalid'
-//     ],404);
-// }
+    $url = env('URL_SERVER_API','https://api.github.com');
+    $response = Http::withToken($this->token)->get($url.$collaborator);
+
+    $data = $response->json();
+
+    $allCollaborators = [];
+    foreach ($data as $collaborator) {
+    $allCollaborators[] = [
+        'name' => $collaborator['login'],
+        'photo' => $collaborator['avatar_url'],            
+        'url' => $collaborator['html_url']
+    ];
+    }
+        return $allCollaborators;
+
+    }
 
     public function collaboratorPhp(){
 
-        $url = env('URL_SERVER_API','https://api.github.com');
-        $response = Http::withToken($this->token)->get($url.'/ita-landing-backend/collaborators?affiliation=direct');
+        $collaborator = '/ita-landing-backend/collaborators?affiliation=direct';
 
-        $data = $response->json();
-
-        $phpCollaborators = [];
-        foreach ($data as $collaborator) {
-        $phpCollaborators[] = [
-            'name' => $collaborator['login'],
-            'photo' => $collaborator['avatar_url'],            
-            'url' => $collaborator['html_url']
-        ];
-    }
-        return $phpCollaborators;
+        return $this->collaboratorLogic($collaborator);
 
     }
 
     public function collaboratorFrontedReact(){
 
-        $url = env('URL_SERVER_API','https://api.github.com');
-        $response = Http::withToken($this->token)->get($url.'/ita-landing-frontend/collaborators?affiliation=direct');
-
-        $data = $response->json();
-
-        $reactCollaborators = [];
-        foreach ($data as $collaborator) {
-        $reactCollaborators[] = [
-            'name' => $collaborator['login'],
-            'photo' => $collaborator['avatar_url'],            
-            'url' => $collaborator['html_url']
-        ];
-    }
-        return $reactCollaborators;
+        $collaborator= '/ita-landing-frontend/collaborators?affiliation=direct';
+       
+        return $this->collaboratorLogic($collaborator);
     }
 
     public function collaboratorFrontedAngular(){
 
-        $url = env('URL_SERVER_API','https://api.github.com');
-        $response = Http::withToken($this->token)->get($url.'/ita-challenges-frontend/collaborators?affiliation=direct');
+        $collaborator = '/ita-challenges-frontend/collaborators?affiliation=direct';
 
-        $data = $response->json();
-
-        $angularCollaborators = [];
-        foreach ($data as $collaborator) {
-        $angularCollaborators[] = [
-            'photo' => $collaborator['avatar_url'],
-            'name' => $collaborator['login'],
-            'url' => $collaborator['html_url']
-        ];
-    }   
-        return $angularCollaborators;       
+        return $this->collaboratorLogic($collaborator); 
     }
 
     public function collaboratorJava(){
-
-        $url = env('URL_SERVER_API','https://api.github.com');
-        $response = Http::withToken($this->token)->get($url.'/ita-challenges-backend/collaborators?affiliation=direct');
-
-        $data = $response->json();
-
-        $javaCollaborators = [];
-        foreach ($data as $collaborator) {
-        $javaCollaborators[] = [
-            'name' => $collaborator['login'],
-            'photo' => $collaborator['avatar_url'],            
-            'url' => $collaborator['html_url']
-        ];
-    }
         
-    return $javaCollaborators;
+        $collaborator = '/ita-challenges-backend/collaborators?affiliation=direct';
+
+        return $this->collaboratorLogic($collaborator);        
     }
 
     public function collaboratorNode(){
 
-        $url = env('URL_SERVER_API','https://api.github.com');
-        $response = Http::withToken($this->token)->get($url.'/ita-wiki/collaborators?affiliation=direct');
+        $collaborator ='/ita-wiki/collaborators?affiliation=direct';
 
-        $data = $response->json();
-
-        $nodeCollaborators = [];
-        foreach ($data as $collaborator) {
-        $nodeCollaborators[] = [
-            'name' => $collaborator['login'],
-            'photo' => $collaborator['avatar_url'],            
-            'url' => $collaborator['html_url']
-        ];
-    }    
-    return $nodeCollaborators;
+        return $this->collaboratorLogic($collaborator);
     }
 }
