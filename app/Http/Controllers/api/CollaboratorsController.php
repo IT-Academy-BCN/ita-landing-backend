@@ -14,7 +14,7 @@ class CollaboratorsController extends Controller
 
     public function __construct()
     {
-        $this->token = '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';
+        $this->token = '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';
     }
 
 /**
