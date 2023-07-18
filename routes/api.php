@@ -30,7 +30,7 @@ Route::get('/faqs', [FaqController::class, 'index']);
 Route::get('/apps', [AppController::class, 'index'])->name('app.index');
 
 Route::middleware(['auth:api'])->prefix('faqs')->group(function () {
-    
+        
     Route::get('/{id}', [FaqController::class, 'show']);
     Route::post('/', [FaqController::class, 'store']);
     Route::put('/{id}', [FaqController::class, 'update']);

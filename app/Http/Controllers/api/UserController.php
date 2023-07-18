@@ -233,10 +233,10 @@ class UserController extends Controller
 
  public function resetPassword(ResetRequest $request){
 
-    $token = $request->token;
+    $token = $request->route('token');
 
-    $passwordResets= DB::table('password_reset_tokens')->where('token', $token)->first();
-
+    $passwordResets= DB::table('password_reset_tokens')->where('token', $token)->first();   
+    
                     
     if(!$passwordResets){
 
@@ -248,6 +248,7 @@ class UserController extends Controller
     $user= User::where('email',$passwordResets->email)->first();
     $user->password = Hash::make($request->password);
     $user->save();
+    DB::table('password_reset_tokens')->where('email', $passwordResets->email)->update(['token' => null]);
 
     return response()->json([
         'message' => 'success'

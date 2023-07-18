@@ -497,10 +497,6 @@
                         "application/json": {
                             "schema": {
                                 "properties": {
-                                    "token": {
-                                        "type": "string",
-                                        "example": "abcdefghij"
-                                    },
                                     "password": {
                                         "type": "string",
                                         "example": "password"
