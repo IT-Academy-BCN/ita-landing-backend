@@ -237,14 +237,26 @@
                 }
             }
         },
-        "/collaborators": {
+        "/collaborators/{area}": {
             "get": {
                 "tags": [
                     "Collaborators"
                 ],
                 "summary": "User Collaborators",
-                "description": "This endpoint return all the collaborators",
-                "operationId": "1d2e1d8e5e2550c8fb894daf04b3a76b",
+                "description": "This endpoint is used to get persons that work on the specific project",
+                "operationId": "76c6c77e7057fbc3ba434dc982216781",
+                "parameters": [
+                    {
+                        "name": "area",
+                        "in": "path",
+                        "description": "name of the area",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "landing"
+                        }
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "Collaborators details.",

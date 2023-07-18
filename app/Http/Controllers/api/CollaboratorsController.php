@@ -14,15 +14,25 @@ class CollaboratorsController extends Controller
 
     public function __construct()
     {
-        $this->token = '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';
+        $this->token = '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';
     }
 
 /**
  * @OA\Get(
- *   path="/collaborators",
+ *   path="/collaborators/{area}",
  *   tags={"Collaborators"},
  *   summary="User Collaborators",
- *   description="This endpoint return all the collaborators",
+ *   description="This endpoint is used to get persons that work on the specific project",
+ *   @OA\Parameter(
+ *     name="area",
+ *     in="path",
+ *     required=true,
+ *     description="name of the area",
+ *     @OA\Schema(
+ *       type="string",
+ *       example="landing"
+ *     )
+ *   ),
  *   @OA\Response(
  *     response="200",
  *     description="Collaborators details.",
@@ -54,30 +64,18 @@ class CollaboratorsController extends Controller
  * )
  */
 
-public function index()
+ public function index($area)
 {
-
-    try {
-        $allCollaborators= array_merge(
-            $this->collaboratorPhp(),
-            $this->collaboratorFrontedReact(),
-            $this->collaboratorFrontedAngular(),
-            $this->collaboratorJava(),
-            $this->collaboratorNode()
-        );
-    
-        $uniqueCollaborators = [];
-        foreach ($allCollaborators as $collaborator) {
-            if (!in_array($collaborator, $uniqueCollaborators)) {
-                $uniqueCollaborators[] = $collaborator;
-            }
-        }
-        return response()->json($uniqueCollaborators,200);
-
-    } catch (Exception $e) {
-        return response()->json([
-        'message' => 'something went wrong'],404);
+    if ($area === 'landing') {
+        return $this->collaboratorPhp();
+    } elseif ($area === 'wiki') {
+        return $this->collaboratorItaWiki();
+    }elseif ($area === 'challenges') {
+        return $this->collaboratorItaChallenges();
     }
+    return response()->json([
+        'message' => 'this area is invalid'
+    ],404);
 }
 
 public function collaboratorLogic($collaborator){
@@ -99,6 +97,20 @@ public function collaboratorLogic($collaborator){
 
     }
 
+    public function uniqueCollaborators(...$arrays){
+
+        $allCollaborators = array_merge(...$arrays);
+
+        $uniqueCollaborators = [];
+        foreach ($allCollaborators as $collaborator) {
+            if (!in_array($collaborator, $uniqueCollaborators)) {
+                $uniqueCollaborators[] = $collaborator;
+            }
+        }
+
+        return $uniqueCollaborators;
+    }
+
     public function collaboratorPhp(){
 
         $collaborator = '/ita-landing-backend/collaborators?affiliation=direct';
@@ -107,31 +119,31 @@ public function collaboratorLogic($collaborator){
 
     }
 
-    public function collaboratorFrontedReact(){
+    public function collaboratorItaWiki(){
 
-        $collaborator= '/ita-landing-frontend/collaborators?affiliation=direct';
+        $collaboratorReact= '/ita-landing-frontend/collaborators?affiliation=direct';
+        $collaboratorNode ='/ita-wiki/collaborators?affiliation=direct';
        
-        return $this->collaboratorLogic($collaborator);
+        $react= $this->collaboratorLogic($collaboratorReact);
+        $node= $this->collaboratorLogic($collaboratorNode);
+
+        $uniqueCollaborators = $this-> uniqueCollaborators($react,$node);
+
+        return $uniqueCollaborators;
     }
 
-    public function collaboratorFrontedAngular(){
+    public function collaboratorItaChallenges(){
 
-        $collaborator = '/ita-challenges-frontend/collaborators?affiliation=direct';
+        $collaboratorAngular = '/ita-challenges-frontend/collaborators?affiliation=direct';
+        $collaboratorJava = '/ita-challenges-backend/collaborators?affiliation=direct';
 
-        return $this->collaboratorLogic($collaborator); 
+        $angular = $this->collaboratorLogic($collaboratorAngular);
+        $java = $this->collaboratorLogic($collaboratorJava);
+          
+        $uniqueCollaborators = $this->uniqueCollaborators($angular,$java);
+
+        return $uniqueCollaborators; 
     }
 
-    public function collaboratorJava(){
-        
-        $collaborator = '/ita-challenges-backend/collaborators?affiliation=direct';
-
-        return $this->collaboratorLogic($collaborator);        
-    }
-
-    public function collaboratorNode(){
-
-        $collaborator ='/ita-wiki/collaborators?affiliation=direct';
-
-        return $this->collaboratorLogic($collaborator);
-    }
+       
 }
