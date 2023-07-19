@@ -9,14 +9,7 @@ use Illuminate\Support\Facades\Http;
 
 class CollaboratorsController extends Controller
 {
-    private $token;
     
-
-    public function __construct()
-    {
-        $this->token = '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';
-    }
-
 /**
  * @OA\Get(
  *   path="/collaborators/{area}",
@@ -67,7 +60,7 @@ class CollaboratorsController extends Controller
  public function index($area)
 {
     if ($area === 'landing') {
-        return $this->collaboratorPhp();
+        return $this->collaboratorLanding();
     } elseif ($area === 'wiki') {
         return $this->collaboratorItaWiki();
     }elseif ($area === 'challenges') {
@@ -81,7 +74,7 @@ class CollaboratorsController extends Controller
 public function collaboratorLogic($collaborator){
 
     $url = env('URL_SERVER_API','https://api.github.com');
-    $response = Http::withToken($this->token)->get($url.$collaborator);
+    $response = Http::withToken(env('MY_TOKEN'))->get($url.$collaborator);
 
     $data = $response->json();
 
@@ -111,11 +104,11 @@ public function collaboratorLogic($collaborator){
         return $uniqueCollaborators;
     }
 
-    public function collaboratorPhp(){
+    public function collaboratorLanding(){
 
-        $collaborator = '/ita-landing-backend/collaborators?affiliation=direct';
+        $collaboratorPhp = '/ita-landing-backend/collaborators?affiliation=direct';
 
-        return $this->collaboratorLogic($collaborator);
+        return $this->collaboratorLogic($collaboratorPhp);
 
     }
 

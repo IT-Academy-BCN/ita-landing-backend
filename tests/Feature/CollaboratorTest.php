@@ -13,62 +13,59 @@ class CollaboratorTest extends TestCase
     /**
      * A basic feature test example.
      */
-    public function test_index_get_all_collaborators(): void
+    public function test_index_get_collaborators_landing(): void
     {
-        $response = $this->get('/api/collaborators');
+        $response = $this->get('/api/collaborators/landing');
+        $response->assertStatus(200);
+    }
 
+    public function test_index_get_collaborators_ita_wiki(): void
+    {
+        $response = $this->get('/api/collaborators/wiki');
+        $response->assertStatus(200);
+    }
+
+    public function test_index_get_collaborators_challenges(): void
+    {
+        $response = $this->get('/api/collaborators/challenges');
         $response->assertStatus(200);
     }
     
     public function test_inserting_on_index_a_area_that_dont_exist(): void
     {
         $response = $this->get('/api/collaborators/prueba');
-
         $response->assertStatus(404);
     }
 
-    public function test_collaborator_php_function(){
+    public function test_collaborators_logic(): void
+    {
 
+        $php = '/ita-landing-backend/collaborators?affiliation=direct';
         $collaboratorsController = new CollaboratorsController();
-
-        $response= $collaboratorsController->collaboratorPhp();
+        $response= $collaboratorsController->collaboratorLogic($php);
 
         $this->assertIsArray($response);
     }
 
-    public function test_collaborator_react_function(){
+    public function test_collaborator_landing_function(){
 
         $collaboratorsController = new CollaboratorsController();
-
-        $response= $collaboratorsController->collaboratorFrontedReact();
-
+        $response= $collaboratorsController->collaboratorLanding();
         $this->assertIsArray($response);
     }
 
-    public function test_collaborator_angular_function(){
+    public function test_collaborator_ita_wiki_function(){
 
         $collaboratorsController = new CollaboratorsController();
-
-        $response= $collaboratorsController->collaboratorFrontedAngular();
-
+        $response= $collaboratorsController->collaboratorItaWiki();
         $this->assertIsArray($response);
     }
 
-    public function test_collaborator_java_function(){
+    public function test_collaborator_challenges_function(){
 
         $collaboratorsController = new CollaboratorsController();
-
-        $response= $collaboratorsController->collaboratorJava();
-
+        $response= $collaboratorsController->collaboratorItaChallenges();
         $this->assertIsArray($response);
     }
 
-    public function test_collaborator_node_function(){
-
-        $collaboratorsController = new CollaboratorsController();
-
-        $response= $collaboratorsController->collaboratorNode();
-
-        $this->assertIsArray($response);
-    }
 }
