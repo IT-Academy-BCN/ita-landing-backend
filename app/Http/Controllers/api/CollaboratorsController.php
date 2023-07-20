@@ -112,6 +112,10 @@ public function collaboratorLogic($collaborator){
         $php = $this->collaboratorLogic($collaboratorPhp);
         $react =$this->collaboratorLogic($collaboratorReact);
 
+        $uniqueCollaborators = $this->uniqueCollaborators($php,$react);
+
+        return $uniqueCollaborators;
+
     }
 
     public function collaboratorItaWiki(){
