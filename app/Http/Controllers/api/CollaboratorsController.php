@@ -107,22 +107,19 @@ public function collaboratorLogic($collaborator){
     public function collaboratorLanding(){
 
         $collaboratorPhp = '/ita-landing-backend/collaborators?affiliation=direct';
+        $collaboratorReact= '/ita-landing-frontend/collaborators?affiliation=direct';
 
-        return $this->collaboratorLogic($collaboratorPhp);
+        $php = $this->collaboratorLogic($collaboratorPhp);
+        $react =$this->collaboratorLogic($collaboratorReact);
 
     }
 
     public function collaboratorItaWiki(){
 
-        $collaboratorReact= '/ita-landing-frontend/collaborators?affiliation=direct';
-        $collaboratorNode ='/ita-wiki/collaborators?affiliation=direct';
-       
-        $react= $this->collaboratorLogic($collaboratorReact);
-        $node= $this->collaboratorLogic($collaboratorNode);
+        $collaboratorWiki ='/ita-wiki/collaborators?affiliation=direct';
+    
+        return $this->collaboratorLogic($collaboratorWiki);
 
-        $uniqueCollaborators = $this-> uniqueCollaborators($react,$node);
-
-        return $uniqueCollaborators;
     }
 
     public function collaboratorItaChallenges(){
