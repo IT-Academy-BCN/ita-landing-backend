@@ -7,6 +7,8 @@ use App\Http\Controllers\api\FaqController;
 use App\Http\Controllers\api\AuthController;
 use App\Http\Controllers\api\CodeController;
 use App\Http\Controllers\api\AppController;
+use App\Http\Controllers\api\CollaboratorsController;
+
 
 use App\Http\Controllers\api\ForgetController;
 /*
@@ -24,6 +26,9 @@ Route::post('/login', [AuthController::class, 'login'])->name('login');
 
 Route::get('/faqs', [FaqController::class, 'index']);
 Route::get('/apps', [AppController::class, 'index'])->name('app.index');
+
+Route::get('/collaborators/{area}',[CollaboratorsController::class,'index']);
+
 
 Route::middleware(['auth:api'])->prefix('faqs')->group(function () {
     
@@ -43,3 +48,5 @@ Route::middleware(['auth:api'])->group(function () {
     Route::put('/apps/{id}', [AppController::class, 'update'])->name('app.update');
     Route::delete('/apps/{id}', [AppController::class, 'destroy'])->name('app.destroy');
 });
+
+
