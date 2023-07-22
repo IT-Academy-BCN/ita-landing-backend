@@ -21,6 +21,8 @@ use App\Http\Controllers\api\ForgetController;
 | be assigned to the "api" middleware group. Make something great!
 |
 */
+Route::get('lang/{locale}','LocalizationController@set_lang');
+
 Route::post('/register', [UserController::class, 'store'])->name('register');
 Route::post('/login', [AuthController::class, 'login'])->name('login');
 
