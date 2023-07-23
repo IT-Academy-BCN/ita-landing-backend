@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-
+use App\Models\Traits\Mutators\FaqMutators;
 /**
  * @OA\Schema(
  *     title="Faq",
@@ -46,6 +46,7 @@ use Illuminate\Database\Eloquent\Model;
 class Faq extends Model
 {
     use HasFactory;
+    use FaqMutators;
 
     /**
      * The attributes that are mass assignable.
@@ -54,6 +55,7 @@ class Faq extends Model
      */
     protected $fillable = [
         'title',
-        'description'
+        'description',
+        'locale'
     ];
 }
