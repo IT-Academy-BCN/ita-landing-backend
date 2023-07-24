@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Translatable\HasTranslations;
 
 /**
  * @OA\Schema(
@@ -58,7 +59,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class App extends Model
 {
-    use HasFactory;
-
+    use HasFactory, HasTranslations;
+    protected $translatable = ['title', 'description'];
     protected $fillable = ['title', 'description', 'url', 'state'];
 }

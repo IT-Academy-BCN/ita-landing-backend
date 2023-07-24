@@ -27,6 +27,4 @@ trait Translations
             return $default;
         }
     }
-
-    
 }

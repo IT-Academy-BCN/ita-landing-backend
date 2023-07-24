@@ -53,11 +53,15 @@ class FaqController extends Controller
     {
         $faq = Faq::find($id);
 
+        if (!$faq) {
+            return response()->json(['error' => 'FAQ not found'], 404);
+        }
+
         return response()->json([
             'id' => $faq->id,
             'title' => $faq->title,
             'description' => $faq->description,
-            'created_at'=> $faq->created_at,
+            'created_at' => $faq->created_at,
             'updated_at' => $faq->updated_at
         ]);
     }
@@ -97,12 +101,14 @@ class FaqController extends Controller
     {
         try {
             $validatedData = $request->validate([
-                'title' => ['required', 'string', 'max:255'],
-                'description' => ['required', 'string'],
+                'title' => ['required', 'array'],
+                'title.*' => ['required', 'string', 'max:255'],
+                'description' => ['required', 'array'],
+                'description.*' => ['required', 'string'],
             ]);
-    
+
             $faq = Faq::create($validatedData);
-    
+
             return response()->json(['faq' => $faq], 201);
         } catch (ValidationException $e) {
             return response()->json(['errors' => $e->errors()], 422);
@@ -150,29 +156,31 @@ class FaqController extends Controller
  *   )
  * )
  */
-    public function update(Request $request, $id)
-    {
-        try {
-            $faqs = Faq::find($id);
-        
-            if (!$faqs) {
-                return response()->json(['error' => 'FAQ not found'], 404);
-            }
-        
-            $validatedData = $request->validate([
-                'title' => 'required|string|max:255',
-                'description' => 'required|string',
-            ]);
-        
-            $faqs->title = $validatedData['title'];
-            $faqs->description = $validatedData['description'];
-            $faqs->save();
-        
-            return response()->json(['message' => 'FAQ updated successfully']);
-        } catch (ValidationException $e) {
-            return response()->json(['errors' => $e->errors()], 422);
+public function update(Request $request, $id)
+{
+    try {
+        $faq = Faq::find($id);
+
+        if (!$faq) {
+            return response()->json(['error' => 'FAQ not found'], 404);
         }
+
+        $validatedData = $request->validate([
+            'title' => ['required', 'array'],
+            'title.*' => ['required', 'string', 'max:255'],
+            'description' => ['required', 'array'],
+            'description.*' => ['required', 'string'],
+        ]);
+
+        $faq->setTranslations('title', $validatedData['title']);
+        $faq->setTranslations('description', $validatedData['description']);
+        $faq->save();
+
+        return response()->json(['message' => 'FAQ updated successfully']);
+    } catch (ValidationException $e) {
+        return response()->json(['errors' => $e->errors()], 422);
     }
+}
 
 /**
  * @OA\Delete(

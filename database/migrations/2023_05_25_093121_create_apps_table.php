@@ -13,11 +13,20 @@ return new class extends Migration
     {
         Schema::create('apps', function (Blueprint $table) {
             $table->id();
-            $table->char('title', 255);
-            $table->longText('description');
+            $table->string('locale')->index();
             $table->text('url');
             $table->enum('state', ['COMPLETED', 'IN PROGRESS', 'SOON']);
             $table->timestamps();
+        });
+
+        Schema::create('app_translations', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('app_id')->constrained('apps')->onDelete('cascade');
+            $table->string('title');
+            $table->text('description');
+            $table->string('locale')->index();
+        
+            $table->unique(['app_id', 'locale']);
         });
     }
 
@@ -26,6 +35,10 @@ return new class extends Migration
      */
     public function down(): void
     {
+        Schema::dropIfExists('app_translations');
         Schema::dropIfExists('apps');
     }
 };
+
+
+

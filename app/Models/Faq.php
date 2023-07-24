@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Traits\Mutators\FaqMutators;
+use Spatie\Translatable\HasTranslations;
 /**
  * @OA\Schema(
  *     title="Faq",
@@ -46,13 +47,15 @@ use App\Models\Traits\Mutators\FaqMutators;
 class Faq extends Model
 {
     use HasFactory;
-    use FaqMutators;
+    // use FaqMutators;
+    use HasTranslations;
 
     /**
      * The attributes that are mass assignable.
      *
      * @var array<int, string>
      */
+    protected $translatable = ['title', 'description'];
     protected $fillable = [
         'title',
         'description',
