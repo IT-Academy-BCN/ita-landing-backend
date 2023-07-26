@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Support\Facades\App;
-
+use Illuminate\Support\Facades\Session;
 class Localization
 {
     /**
@@ -16,10 +16,18 @@ class Localization
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (session()->has('locale')){
+        $userLanguage = $request->header('accept-language');
+
+        Session::put('language', $userLanguage);
+
+        \View::share('t', function ($key) {
+
+
+           
+                App::setLocale($request->header("Accept-Language"));
             
-            App::setLocale(session()->get('locale'));
-        }
+            return $key;
+        });
 
         return $next($request);
     }

@@ -95,8 +95,10 @@ return [
     |
     */
 
-    'fallback_locale' => 'en',
+    'fallback_locale' => 'ca',
 
+    'supported_locales' => ['ca', 'es', 'fr', 'en'],
+    
     /*
     |--------------------------------------------------------------------------
     | Faker Locale
