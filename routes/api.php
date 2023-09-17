@@ -24,6 +24,10 @@ use App\Http\Controllers\api\ForgetController;
 Route::post('/register', [UserController::class, 'store'])->name('register');
 Route::post('/login', [AuthController::class, 'login'])->name('login');
 
+// recovery password
+Route::post('/forget-password', [UserController::class, 'forgetPassword'])->name('forget.password');
+Route::post('/reset-password/{token}', [UserController::class, 'resetPassword'])->name('reset.password');
+
 Route::get('/faqs', [FaqController::class, 'index']);
 Route::get('/apps', [AppController::class, 'index'])->name('app.index');
 
@@ -31,7 +35,7 @@ Route::get('/collaborators/{area}',[CollaboratorsController::class,'index']);
 
 
 Route::middleware(['auth:api'])->prefix('faqs')->group(function () {
-    
+        
     Route::get('/{id}', [FaqController::class, 'show']);
     Route::post('/', [FaqController::class, 'store']);
     Route::put('/{id}', [FaqController::class, 'update']);

@@ -22,7 +22,7 @@ class ResetPasswordTest extends TestCase
     {
         $user= User::factory()->create();
         
-        $response = $this->post(route('forgetpassword'),[
+        $response = $this->post(route('forget.password'),[
             'email'=> $user->email
         ]);
 
@@ -34,7 +34,7 @@ class ResetPasswordTest extends TestCase
     public function test_user_cant_ask_for_the_email_cause_the_email_dont_exist(): void
     {
          
-        $response = $this->post(route('forgetpassword'),[
+        $response = $this->post(route('forget.password'),[
             'email'=> 'prueba@prueba.com'
         ]);
 
@@ -54,7 +54,7 @@ class ResetPasswordTest extends TestCase
             'token' => $token
         ]); 
 
-        $response = $this->post(route('forgetpassword'),[
+        $response = $this->post(route('forget.password'),[
             'email'=> $email
         ]);
 
@@ -74,8 +74,7 @@ class ResetPasswordTest extends TestCase
             'token' => $token
         ]);
          
-        $response = $this->post(route('resetPassword',$token),[
-            'token'=> $token,
+        $response = $this->post(route('reset.password',$token),[
             'password' =>"newpassword",
             'password_confirm' => "newpassword"
         ]);
@@ -96,7 +95,7 @@ class ResetPasswordTest extends TestCase
             'token' => $token
         ]);
          
-        $response = $this->post(route('resetPassword',$token),[
+        $response = $this->post(route('reset.password',$token),[
             'token'=> $token,
             'password' =>"newpassword",
             'password_confirm' => "newpawwrodd"
@@ -116,7 +115,7 @@ class ResetPasswordTest extends TestCase
             'token' => '1234567'
         ]);
          
-        $response = $this->post(route('resetPassword',$token),[
+        $response = $this->post(route('reset.password',$token),[
             'token'=> $token,
             'password' =>"newpassword",
             'password_confirm' => "newpassword"
