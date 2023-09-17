@@ -91,7 +91,7 @@ class UserController extends Controller
                 'code' => $request->code,
             ]);
             
-            $this->is_usedUpdated($request->code);
+            $this->is_usedUpdated($request->code, $user->id);
             
             // Response
             return response()->json([
@@ -109,10 +109,11 @@ class UserController extends Controller
         }
     }
 
-    private function is_usedUpdated ($code)
+    private function is_usedUpdated($code, $userId)
     {
         $code = Code::where('code', $code)->where('is_used', false)->firstOrFail();
         $code->is_used = true;
+        $code->user_id = $userId; // Assign the user ID in the 'user_id' column (table:codes)
         $code->save();
     }
 
