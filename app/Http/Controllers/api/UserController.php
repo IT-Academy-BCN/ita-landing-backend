@@ -54,7 +54,7 @@ class UserController extends Controller
  *           property="password_confirmation",
  *           type="string",
  *           example="password123"
- *         )
+ *         ),
  *         @OA\Property(
  *           property="code",
  *           type="boolean",
