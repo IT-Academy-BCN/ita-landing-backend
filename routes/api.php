@@ -42,7 +42,6 @@ Route::middleware(['auth:api'])->prefix('faqs')->group(function () {
     Route::delete('/{id}', [FaqController::class, 'destroy']);
 });
 
-Route::post('/forgetpassword', [ForgetController::class, 'forgetPassword'])->name('forgetpassword');
 
 Route::post('/send-code-by-email', [CodeController::class, 'sendCodeByEmail'])->middleware('auth:api');
 
