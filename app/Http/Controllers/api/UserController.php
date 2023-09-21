@@ -55,6 +55,11 @@ class UserController extends Controller
  *           type="string",
  *           example="password123"
  *         )
+ *         @OA\Property(
+ *           property="code",
+ *           type="boolean",
+ *           example=false
+ *         )
  *       )
  *     )
  *   ),
