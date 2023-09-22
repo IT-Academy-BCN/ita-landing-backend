@@ -57,8 +57,8 @@ class UserController extends Controller
  *         ),
  *         @OA\Property(
  *           property="code",
- *           type="boolean",
- *           example=false
+ *           type="string",
+ *           example="A1BC23D"
  *         )
  *       )
  *     )

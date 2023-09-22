@@ -590,8 +590,8 @@
                                         "example": "password123"
                                     },
                                     "code": {
-                                        "type": "boolean",
-                                        "example": false
+                                        "type": "string",
+                                        "example": "A1BC23D"
                                     }
                                 },
                                 "type": "object"
