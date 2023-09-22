@@ -34,6 +34,12 @@ use Illuminate\Database\Eloquent\Model;
  *         example="https://myapp.com"
  *     ),
  *     @OA\Property(
+ *         property="github",
+ *         type="string",
+ *         description="URL to Github repo",
+ *         example="https://github.com/IT-Academy-BCN"
+ *     ),
+ *     @OA\Property(
  *         property="state",
  *         type="string",
  *         description="State",

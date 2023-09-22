@@ -52,6 +52,11 @@ class AppController extends Controller
  *           example="https://myapp.com"
  *         ),
  *         @OA\Property(
+ *           property="github",
+ *           type="string",
+ *           example="https://github.com/IT-Academy-BCN/ita-landing"
+ *         ),
+ *         @OA\Property(
  *           property="state",
  *           type="string",
  *           example="COMPLETED",
