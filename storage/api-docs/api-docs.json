@@ -2,7 +2,7 @@
     "openapi": "3.0.0",
     "info": {
         "title": "ITA Landing page API documentation",
-        "description": "Documentation needed for the API Rest for the landing page to IT Academy. Some useful links below:\n *   [ITA Landing Backend](https://github.com/IT-Academy-BCN/ita-landing-backend)\n *   [ITA Landing Frontend](https://github.com/IT-Academy-BCN/ita-landing-frontend)",
+        "description": "Documentation needed for the API Rest for the landing page to IT Academy. Some useful links below:\r\n *   [ITA Landing Backend](https://github.com/IT-Academy-BCN/ita-landing-backend)\r\n *   [ITA Landing Frontend](https://github.com/IT-Academy-BCN/ita-landing-frontend)",
         "version": "1.0.0"
     },
     "servers": [
@@ -18,7 +18,7 @@
                 ],
                 "summary": "Apps list",
                 "description": "This endpoint is used to take a list of all the apps",
-                "operationId": "6a8d04ab8dee652f12fb06a852e2bf2e",
+                "operationId": "8b4f431a3f8c046117666d917b66a4ce",
                 "responses": {
                     "200": {
                         "description": "Apps list."
@@ -31,7 +31,7 @@
                 ],
                 "summary": "Create a new app",
                 "description": "This endpoint is used to create a new application.",
-                "operationId": "582b37c93248c2ed1252ac653f1d9868",
+                "operationId": "8e84dcd9e356601c3c38592fc664164b",
                 "requestBody": {
                     "required": true,
                     "content": {
@@ -84,7 +84,7 @@
                 ],
                 "summary": "Get details of an application",
                 "description": "This endpoint is used to get the details of a specific application.",
-                "operationId": "825512ce69acff9946367daacb087b41",
+                "operationId": "389a6e8bb4ed556a851ac859840fbd06",
                 "parameters": [
                     {
                         "name": "id",
@@ -114,7 +114,7 @@
                 ],
                 "summary": "Update an existing app",
                 "description": "This endpoint is used to update the details of an existing application.",
-                "operationId": "f0a3b76b5fb4c3db8489ffc621c78e70",
+                "operationId": "e8b8a12523b15040e461c67206432c04",
                 "parameters": [
                     {
                         "name": "id",
@@ -177,7 +177,7 @@
                 ],
                 "summary": "Delete an app",
                 "description": "This endpoint is used to remove an existing application.",
-                "operationId": "0653e8a5c8c3e3fe6c19e5dfc2737578",
+                "operationId": "45d59a56ce81b06e0ba705cde8907cf9",
                 "parameters": [
                     {
                         "name": "id",
@@ -202,62 +202,6 @@
                 ]
             }
         },
-        "/collaborators/{area}": {
-            "get": {
-                "tags": [
-                    "Collaborators"
-                ],
-                "summary": "User Collaborators",
-                "description": "This endpoint is used to get persons that work on the specific project",
-                "operationId": "76c6c77e7057fbc3ba434dc982216781",
-                "parameters": [
-                    {
-                        "name": "area",
-                        "in": "path",
-                        "description": "name of the area",
-                        "required": true,
-                        "schema": {
-                            "type": "string",
-                            "example": "landing"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Collaborators details.",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "rows": {
-                                            "type": "array",
-                                            "items": {
-                                                "properties": {
-                                                    "name": {
-                                                        "type": "string",
-                                                        "example": "CloudSalander"
-                                                    },
-                                                    "photo": {
-                                                        "type": "string",
-                                                        "example": "https://avatars.githubusercontent.com/u/1247767?v=4"
-                                                    },
-                                                    "url": {
-                                                        "type": "string",
-                                                        "example": "https://api.github.com/users/CloudSalander"
-                                                    }
-                                                },
-                                                "type": "object"
-                                            }
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
         "/login": {
             "post": {
                 "tags": [
@@ -265,7 +209,7 @@
                 ],
                 "summary": "Login",
                 "description": "This endpoint is used for a user to log into the app and get an access token.",
-                "operationId": "1da689c688cc418e88f9e9d668f01b16",
+                "operationId": "522a6e34b5e69b9a568645c98897c2b4",
                 "requestBody": {
                     "required": true,
                     "content": {
@@ -300,7 +244,7 @@
                 ],
                 "summary": "Send a code by email.",
                 "description": "Sends a generated code to the specified email address.",
-                "operationId": "e27b6f2bdf8ba3c30aa0568078609d26",
+                "operationId": "7b1ec80c9684797082ad19771be7be55",
                 "parameters": [
                     {
                         "name": "email",
@@ -390,6 +334,62 @@
                 ]
             }
         },
+        "/collaborators/{area}": {
+            "get": {
+                "tags": [
+                    "Collaborators"
+                ],
+                "summary": "User Collaborators",
+                "description": "This endpoint is used to get persons that work on the specific project",
+                "operationId": "5aebc3fda5920a6b67b351352d8dd22f",
+                "parameters": [
+                    {
+                        "name": "area",
+                        "in": "path",
+                        "description": "name of the area",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "landing"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Collaborators details.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "rows": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "name": {
+                                                        "type": "string",
+                                                        "example": "CloudSalander"
+                                                    },
+                                                    "photo": {
+                                                        "type": "string",
+                                                        "example": "https://avatars.githubusercontent.com/u/1247767?v=4"
+                                                    },
+                                                    "url": {
+                                                        "type": "string",
+                                                        "example": "https://api.github.com/users/CloudSalander"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/faqs": {
             "get": {
                 "tags": [
@@ -397,7 +397,7 @@
                 ],
                 "summary": "Get list of frequently asked questions (FAQs)",
                 "description": "This endpoint is used to get a list of all frequently asked questions.",
-                "operationId": "9aa180f9db923d3a04a1a3fceb22cc19",
+                "operationId": "fc0078351db2f4d7dc20c18dce3ec0dd",
                 "responses": {
                     "200": {
                         "description": "Frequently asked questions list."
@@ -410,7 +410,7 @@
                 ],
                 "summary": "Create a new Frequently Asked Question (FAQ)",
                 "description": "This endpoint is used to create a new FAQ.",
-                "operationId": "1f9b4e9514398ba7a6984241e9ea6d2c",
+                "operationId": "5476ce47b84e52e07181036d24d5848e",
                 "requestBody": {
                     "required": true,
                     "content": {
@@ -450,7 +450,7 @@
                 ],
                 "summary": "Get details of a specific Frequently Asked Question (FAQ)",
                 "description": "This endpoint is used to get the details of a specific FAQ.",
-                "operationId": "d256f13ed0ba2a91933a8d18c13a9a41",
+                "operationId": "13f541321fc881759d823869e3e6f002",
                 "parameters": [
                     {
                         "name": "id",
@@ -480,7 +480,7 @@
                 ],
                 "summary": "Update an existing Frequently Asked Question (FAQ)",
                 "description": "This endpoint is used to update the details of an existing FAQ.",
-                "operationId": "298c526d87efd21cc6ae1fb930bdf2e2",
+                "operationId": "eed1aa9522c71c612585d631bbc859b5",
                 "parameters": [
                     {
                         "name": "id",
@@ -530,7 +530,7 @@
                 ],
                 "summary": "Delete a frequently asked question (FAQ)",
                 "description": "This endpoint is used to delete an existing FAQ.",
-                "operationId": "3be266696befa084a5ad295ec5f3c2c0",
+                "operationId": "cdf9e2f4d7f6aa98c17aa1c285d8ce29",
                 "parameters": [
                     {
                         "name": "id",
@@ -562,7 +562,7 @@
                 ],
                 "summary": "User Register",
                 "description": "This endpoint is used to register a new user in the application.",
-                "operationId": "a8feedb2a70af8691107d1f3759004fc",
+                "operationId": "fff2a35f183e73c4682c9ce05615e55a",
                 "requestBody": {
                     "required": true,
                     "content": {
@@ -609,7 +609,7 @@
                 ],
                 "summary": "send email to recovery password",
                 "description": "This endpoint is used send an email to a register user to reset the password.",
-                "operationId": "6dc3a821a584d03adef3e42dd853f81c",
+                "operationId": "62eee59693b7861e04b6a62f3c4d55f7",
                 "requestBody": {
                     "required": true,
                     "content": {
@@ -643,13 +643,17 @@
                 ],
                 "summary": "User recovery password",
                 "description": "This endpoint is used to update the password of the user.",
-                "operationId": "3ce335a32d71c446cb79709dbda4ce58",
+                "operationId": "b061c2472904940091f88f95d55eede6",
                 "requestBody": {
                     "required": true,
                     "content": {
                         "application/json": {
                             "schema": {
                                 "properties": {
+                                    "token": {
+                                        "type": "string",
+                                        "example": "abcdefghij"
+                                    },
                                     "password": {
                                         "type": "string",
                                         "example": "password"
