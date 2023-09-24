@@ -1,6 +1,6 @@
 <?php 
 
-namespace App\Annotations\OpenApi\userAnnotations;
+namespace App\Annotations\OpenApi\controllersAnnotations\usersAnnotations;
 
 class AnnotationsUsers {
 

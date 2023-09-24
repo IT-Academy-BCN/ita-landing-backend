@@ -1,6 +1,6 @@
 <?php 
 
-namespace App\Annotations\OpenApi\faqsAnnotations;
+namespace App\Annotations\OpenApi\controllersAnnotations\faqsAnnotations;
 
 class AnnotationsFaqs {
 

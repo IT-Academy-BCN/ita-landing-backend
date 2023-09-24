@@ -18,7 +18,7 @@
                 ],
                 "summary": "Apps list",
                 "description": "This endpoint is used to take a list of all the apps",
-                "operationId": "8b4f431a3f8c046117666d917b66a4ce",
+                "operationId": "2e76e8f6af37b36f0080f946f9932838",
                 "responses": {
                     "200": {
                         "description": "Apps list."
@@ -31,7 +31,7 @@
                 ],
                 "summary": "Create a new app",
                 "description": "This endpoint is used to create a new application.",
-                "operationId": "8e84dcd9e356601c3c38592fc664164b",
+                "operationId": "842d368f6d56b7c9cf4cb6c6a7135ef4",
                 "requestBody": {
                     "required": true,
                     "content": {
@@ -84,7 +84,7 @@
                 ],
                 "summary": "Get details of an application",
                 "description": "This endpoint is used to get the details of a specific application.",
-                "operationId": "389a6e8bb4ed556a851ac859840fbd06",
+                "operationId": "da8b7e35bbe80cdbd08f45ddf7654c85",
                 "parameters": [
                     {
                         "name": "id",
@@ -114,7 +114,7 @@
                 ],
                 "summary": "Update an existing app",
                 "description": "This endpoint is used to update the details of an existing application.",
-                "operationId": "e8b8a12523b15040e461c67206432c04",
+                "operationId": "fc74a17ab59eebfe920232d8a5231863",
                 "parameters": [
                     {
                         "name": "id",
@@ -177,7 +177,7 @@
                 ],
                 "summary": "Delete an app",
                 "description": "This endpoint is used to remove an existing application.",
-                "operationId": "45d59a56ce81b06e0ba705cde8907cf9",
+                "operationId": "096c592491f1cb6e0089814952d9ccd4",
                 "parameters": [
                     {
                         "name": "id",
@@ -209,7 +209,7 @@
                 ],
                 "summary": "Login",
                 "description": "This endpoint is used for a user to log into the app and get an access token.",
-                "operationId": "522a6e34b5e69b9a568645c98897c2b4",
+                "operationId": "d78c9f240c3e6bd0250605b3fa8cbf34",
                 "requestBody": {
                     "required": true,
                     "content": {
@@ -244,7 +244,7 @@
                 ],
                 "summary": "Send a code by email.",
                 "description": "Sends a generated code to the specified email address.",
-                "operationId": "7b1ec80c9684797082ad19771be7be55",
+                "operationId": "84ef8ecbb2d1b8a08347619f4fce8dba",
                 "parameters": [
                     {
                         "name": "email",
@@ -341,7 +341,7 @@
                 ],
                 "summary": "User Collaborators",
                 "description": "This endpoint is used to get persons that work on the specific project",
-                "operationId": "5aebc3fda5920a6b67b351352d8dd22f",
+                "operationId": "9ed89cb2a49abd38189ba3c947d6c40f",
                 "parameters": [
                     {
                         "name": "area",
@@ -397,7 +397,7 @@
                 ],
                 "summary": "Get list of frequently asked questions (FAQs)",
                 "description": "This endpoint is used to get a list of all frequently asked questions.",
-                "operationId": "fc0078351db2f4d7dc20c18dce3ec0dd",
+                "operationId": "ecffd44148402d16eceb9a6c23a7c206",
                 "responses": {
                     "200": {
                         "description": "Frequently asked questions list."
@@ -410,7 +410,7 @@
                 ],
                 "summary": "Create a new Frequently Asked Question (FAQ)",
                 "description": "This endpoint is used to create a new FAQ.",
-                "operationId": "5476ce47b84e52e07181036d24d5848e",
+                "operationId": "f745da180f28b0954139a601fc8fccc1",
                 "requestBody": {
                     "required": true,
                     "content": {
@@ -450,7 +450,7 @@
                 ],
                 "summary": "Get details of a specific Frequently Asked Question (FAQ)",
                 "description": "This endpoint is used to get the details of a specific FAQ.",
-                "operationId": "13f541321fc881759d823869e3e6f002",
+                "operationId": "659268d1d09af0b0c1c38da843ca5800",
                 "parameters": [
                     {
                         "name": "id",
@@ -480,7 +480,7 @@
                 ],
                 "summary": "Update an existing Frequently Asked Question (FAQ)",
                 "description": "This endpoint is used to update the details of an existing FAQ.",
-                "operationId": "eed1aa9522c71c612585d631bbc859b5",
+                "operationId": "e574aafe3ec91f35d1279b67ab576c25",
                 "parameters": [
                     {
                         "name": "id",
@@ -530,7 +530,7 @@
                 ],
                 "summary": "Delete a frequently asked question (FAQ)",
                 "description": "This endpoint is used to delete an existing FAQ.",
-                "operationId": "cdf9e2f4d7f6aa98c17aa1c285d8ce29",
+                "operationId": "ae5eab98b5a620c4845a7bc3ccb7bb5a",
                 "parameters": [
                     {
                         "name": "id",
@@ -562,7 +562,7 @@
                 ],
                 "summary": "User Register",
                 "description": "This endpoint is used to register a new user in the application.",
-                "operationId": "fff2a35f183e73c4682c9ce05615e55a",
+                "operationId": "4de30eca448867387bebc132efd38750",
                 "requestBody": {
                     "required": true,
                     "content": {
@@ -609,7 +609,7 @@
                 ],
                 "summary": "send email to recovery password",
                 "description": "This endpoint is used send an email to a register user to reset the password.",
-                "operationId": "62eee59693b7861e04b6a62f3c4d55f7",
+                "operationId": "96d659aae2ff5b335cf05549be885096",
                 "requestBody": {
                     "required": true,
                     "content": {
@@ -643,7 +643,7 @@
                 ],
                 "summary": "User recovery password",
                 "description": "This endpoint is used to update the password of the user.",
-                "operationId": "b061c2472904940091f88f95d55eede6",
+                "operationId": "ac87560950326ad8f1090a5c279ad040",
                 "requestBody": {
                     "required": true,
                     "content": {
@@ -681,7 +681,7 @@
     },
     "components": {
         "schemas": {
-            "App": {
+            "AnnotationsApp": {
                 "title": "App",
                 "description": "App model",
                 "properties": {
@@ -730,7 +730,7 @@
                 },
                 "type": "object"
             },
-            "Faq": {
+            "AnnotationsFaq": {
                 "title": "Faq",
                 "description": "Faq model",
                 "properties": {
@@ -764,7 +764,7 @@
                 },
                 "type": "object"
             },
-            "User": {
+            "AnnotationsUser": {
                 "title": "User",
                 "description": "User model",
                 "properties": {

@@ -1,6 +1,6 @@
 <?php 
 
-namespace App\Annotations\OpenApi\collaboratorsAnnotations;
+namespace App\Annotations\OpenApi\controllersAnnotations\collaboratorsAnnotations;
 
 class AnnotationsCollaborators {
 

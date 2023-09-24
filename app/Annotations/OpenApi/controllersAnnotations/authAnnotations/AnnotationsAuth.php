@@ -1,6 +1,6 @@
 <?php 
 
-namespace App\Annotations\OpenApi\authAnnotations;
+namespace App\Annotations\OpenApi\controllersAnnotations\authAnnotations;
 
 class AnnotationsAuth {
 

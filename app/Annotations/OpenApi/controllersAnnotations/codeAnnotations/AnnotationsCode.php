@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Annotations\OpenApi\codeAnnotations;
+namespace App\Annotations\OpenApi\controllersAnnotations\codeAnnotations;
 
 class AnnotationsCode {
 
