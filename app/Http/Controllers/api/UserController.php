@@ -11,7 +11,7 @@ use App\Models\User;
 use App\Models\Code;
 use App\Http\Requests\ForgetRequest;
 use App\Http\Requests\ResetRequest;
-use App\Mail\ForgetMail;
+use App\Mail\ForgetPasswordMail;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
 use Exception;
@@ -126,8 +126,8 @@ class UserController extends Controller
  * @OA\Post(
  *   path="/forget-password",
  *   tags={"User"},
- *   summary="send email to recovery password",
- *   description="This endpoint is used send an email to a register user to reset the password.",
+ *   summary="send email to reset password",
+ *   description="This endpoint is used to send an email to a registered user to reset the password.",
  *   @OA\RequestBody(
  *     required=true,
  *     @OA\MediaType(
@@ -143,11 +143,11 @@ class UserController extends Controller
  *   ),
  *   @OA\Response(
  *     response="200",
- *     description="check your email"
+ *     description="Password reset email sent out. Check your email"
  *   ),
  *   @OA\Response(
  *     response="404",
- *     description="The email don\'t exist"
+ *     description="The email does not exist"
  *   )
  * )
  */
@@ -156,37 +156,32 @@ class UserController extends Controller
 
     $email = $request->email;
 
-    $user= User::where('email',$email)->doesntExist();
-
-    $token= Str::random(10);
-
-    $existingMail = DB::table('password_reset_tokens')->where('email', $email)->first();
-
-    
     try{
+        // check if user with such email exists
+        $user= User::where('email',$email)->first();
 
-        if($user){
-            return response()->json(['error' => 'The email don\'t exist'],404);
-            
-        }else if($existingMail){
+        if(!$user){
+            return response()->json(['error' => 'The email does not exist'],404);
+        }
 
-            DB::table('password_reset_tokens')->where('email', $email)->update([
-                'token' => $token,
-               ]);
+        // Generate password reset token
+        $token= Str::random(10);
 
+        // Assign password reset token to user's email in 'password_reset_token' table
+        if(DB::table('password_reset_tokens')->where('email', $email)->first()) {
+            DB::table('password_reset_tokens')->where('email', $email)->update([ 'token' => $token, ]);
         } else {
-
             DB::table('password_reset_tokens')->insert([
                 'email' => $email,
                 'token' => $token
-            ]);                
-        }
+            ]); 
+        };
 
-        //send email
+        //send password reset email
+        Mail::to($email)->send(new ForgetPasswordMail($user->name, $token));
 
-        Mail::to($email)->send(new ForgetMail($token));
-
-            return response()->json(['message'=>'check your email'],200);
+        // send confirmation response
+        return response()->json(['message'=>'Password reset email sent out. Check your email'],200);
         
 
     }catch(Exception $exception){
@@ -201,8 +196,8 @@ class UserController extends Controller
  * @OA\Post(
  *   path="/reset-password/{token}",
  *   tags={"User"},
- *   summary="User recovery password",
- *   description="This endpoint is used to update the password of the user.",
+ *   summary="Reset user password",
+ *   description="This endpoint is used to reset the user password.",
  *   @OA\RequestBody(
  *     required=true,
  *     @OA\MediaType(
@@ -219,7 +214,7 @@ class UserController extends Controller
  *           example="password"
  *         ),
  *          @OA\Property(
- *           property="password_confirm",
+ *           property="password_confirmation",
  *           type="string",
  *           example="password"
  *         ),        
@@ -228,7 +223,7 @@ class UserController extends Controller
  *   ),
  *   @OA\Response(
  *     response="200",
- *     description="success"
+ *     description="User password reset successfully"
  *   ),
  *   @OA\Response(
  *     response="400",
@@ -254,10 +249,10 @@ class UserController extends Controller
     $user= User::where('email',$passwordResets->email)->first();
     $user->password = Hash::make($request->password);
     $user->save();
-    DB::table('password_reset_tokens')->where('email', $passwordResets->email)->update(['token' => null]);
+    DB::table('password_reset_tokens')->where('email', $passwordResets->email)->delete();
 
     return response()->json([
-        'message' => 'success'
+        'message' => 'User password reset successfully'
     ],200);
 
 }
