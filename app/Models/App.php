@@ -10,5 +10,5 @@ class App extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['title', 'description', 'url', 'state'];
+    protected $fillable = ['title', 'description', 'url', 'github', 'state'];
 }

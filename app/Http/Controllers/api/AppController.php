@@ -21,6 +21,7 @@ class AppController extends Controller
             'title' => 'required|max:255',
             'description' => 'required',
             'url' => 'required|url',
+            'github' => 'required|url',
             'state' => 'required|in:COMPLETED,IN PROGRESS,SOON',
         ]);
         

@@ -588,6 +588,10 @@
                                     "password_confirmation": {
                                         "type": "string",
                                         "example": "password123"
+                                    },
+                                    "code": {
+                                        "type": "string",
+                                        "example": "A1BC23D"
                                     }
                                 },
                                 "type": "object"
@@ -650,6 +654,10 @@
                         "application/json": {
                             "schema": {
                                 "properties": {
+                                    "token": {
+                                        "type": "string",
+                                        "example": "abcdefghij"
+                                    },
                                     "token": {
                                         "type": "string",
                                         "example": "abcdefghij"
