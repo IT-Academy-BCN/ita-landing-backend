@@ -35,6 +35,12 @@ use Spatie\Translatable\HasTranslations;
  *         example="https://myapp.com"
  *     ),
  *     @OA\Property(
+ *         property="github",
+ *         type="string",
+ *         description="URL to Github repo",
+ *         example="https://github.com/IT-Academy-BCN"
+ *     ),
+ *     @OA\Property(
  *         property="state",
  *         type="string",
  *         description="State",
@@ -61,5 +67,5 @@ class App extends Model
 {
     use HasFactory, HasTranslations;
     protected $translatable = ['title', 'description'];
-    protected $fillable = ['title', 'description', 'url', 'state'];
+    protected $fillable = ['title', 'description', 'url', 'github', 'state'];
 }

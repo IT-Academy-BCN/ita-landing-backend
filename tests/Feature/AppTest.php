@@ -39,6 +39,7 @@ class AppTest extends TestCase
             'title' => fake()->title(),
             'description' => fake()->text(),
             'url' => fake()->url(),
+            'github' => 'https://github.com',
             'state' => fake()->randomElement(['COMPLETED', 'IN PROGRESS', 'SOON'])
         ];
         
@@ -53,6 +54,7 @@ class AppTest extends TestCase
             'title' => fake()->title(),
             'description' => fake()->text(),
             'url' => fake()->url(),
+            'github' => 'https://github.com',
             'state' => fake()->randomElement(['COMPLETED', 'IN PROGRESS', 'SOON'])
         ];
         
@@ -67,6 +69,7 @@ class AppTest extends TestCase
             'title' => '',
             'description' => fake()->text(),
             'url' => fake()->url(),
+            'github' => 'https://github.com',
             'state' => fake()->randomElement(['COMPLETED', 'IN PROGRESS', 'SOON'])
         ];
         
@@ -81,6 +84,7 @@ class AppTest extends TestCase
             'title' => fake()->title(),
             'description' => fake()->text(),
             'url' => 123355, // must be text
+            'github' => 'https://github.com',
             'state' => fake()->randomElement(['COMPLETED', 'IN PROGRESS', 'SOON'])
         ];
         
@@ -96,6 +100,7 @@ class AppTest extends TestCase
             'title' => '',
             'description' => '',
             'url' => '',
+            'github' => '',
             'state' => [],
         ];
         
@@ -114,6 +119,7 @@ class AppTest extends TestCase
             'title' => $app->title,
             'description' => $app->description,
             'url' => $app->url,
+            'github' => $app->github,
             'state' => $app->state,
         ]);
     }
@@ -144,6 +150,7 @@ class AppTest extends TestCase
             'title' => 'Title updated',
             'description' => $app->description,
             'url' => $app->url,
+            'github' => $app->github,
             'state' => $app->state,
         ];
         
@@ -160,6 +167,7 @@ class AppTest extends TestCase
             'title' => 'Title updated',
             'description' => $app->description,
             'url' => $app->url,
+            'github' => $app->github,
             'state' => $app->state,
         ];
             
@@ -176,6 +184,7 @@ class AppTest extends TestCase
             'title' => '',
             'description' => $app->description,
             'url' => $app->url,
+            'github' => $app->github,
             'state' => $app->state,
         ];
         

@@ -21,6 +21,7 @@ class AppFactory extends Factory
             'title' => fake()->title(),
             'description' => fake()->text(),
             'url' => fake()->url(),
+            'github' => fake()->url(),
             'state' => fake()->randomElement(['COMPLETED', 'IN PROGRESS', 'SOON']),
             
         ];

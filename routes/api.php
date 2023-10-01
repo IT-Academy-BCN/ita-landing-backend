@@ -25,6 +25,10 @@ Route::middleware("Setlocale")->group(function () {
     Route::post('/register', [UserController::class, 'store'])->name('register');
     Route::post('/login', [AuthController::class, 'login'])->name('login');
 
+    // recovery password
+    Route::post('/forget-password', [UserController::class, 'forgetPassword'])->name('forget.password');
+    Route::post('/reset-password/{token}', [UserController::class, 'resetPassword'])->name('reset.password');
+
     Route::get('/faqs', [FaqController::class, 'index']);
     Route::get('/apps', [AppController::class, 'index'])->name('app.index');
 
@@ -39,7 +43,6 @@ Route::middleware("Setlocale")->group(function () {
         Route::delete('/{id}', [FaqController::class, 'destroy']);
     });
 
-    Route::post('/forgetpassword', [ForgetController::class, 'forgetPassword'])->name('forgetpassword');
 
     Route::post('/send-code-by-email', [CodeController::class, 'sendCodeByEmail'])->middleware('auth:api');
 
