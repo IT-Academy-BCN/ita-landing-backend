@@ -18,7 +18,7 @@
                 ],
                 "summary": "Apps list",
                 "description": "This endpoint is used to take a list of all the apps",
-                "operationId": "6a8d04ab8dee652f12fb06a852e2bf2e",
+                "operationId": "2e76e8f6af37b36f0080f946f9932838",
                 "responses": {
                     "200": {
                         "description": "Apps list."
@@ -31,7 +31,7 @@
                 ],
                 "summary": "Create a new app",
                 "description": "This endpoint is used to create a new application.",
-                "operationId": "582b37c93248c2ed1252ac653f1d9868",
+                "operationId": "842d368f6d56b7c9cf4cb6c6a7135ef4",
                 "requestBody": {
                     "required": true,
                     "content": {
@@ -49,6 +49,10 @@
                                     "url": {
                                         "type": "string",
                                         "example": "https://myapp.com"
+                                    },
+                                    "github": {
+                                        "type": "string",
+                                        "example": "https://github.com/IT-Academy-BCN/project-1"
                                     },
                                     "state": {
                                         "type": "string",
@@ -84,7 +88,7 @@
                 ],
                 "summary": "Get details of an application",
                 "description": "This endpoint is used to get the details of a specific application.",
-                "operationId": "825512ce69acff9946367daacb087b41",
+                "operationId": "da8b7e35bbe80cdbd08f45ddf7654c85",
                 "parameters": [
                     {
                         "name": "id",
@@ -114,7 +118,7 @@
                 ],
                 "summary": "Update an existing app",
                 "description": "This endpoint is used to update the details of an existing application.",
-                "operationId": "f0a3b76b5fb4c3db8489ffc621c78e70",
+                "operationId": "fc74a17ab59eebfe920232d8a5231863",
                 "parameters": [
                     {
                         "name": "id",
@@ -144,6 +148,10 @@
                                     "url": {
                                         "type": "string",
                                         "example": "https://myapp.com/new-version"
+                                    },
+                                    "github": {
+                                        "type": "string",
+                                        "example": "https://github.com/IT-Academy-BCN/project-1"
                                     },
                                     "state": {
                                         "type": "string",
@@ -177,7 +185,7 @@
                 ],
                 "summary": "Delete an app",
                 "description": "This endpoint is used to remove an existing application.",
-                "operationId": "0653e8a5c8c3e3fe6c19e5dfc2737578",
+                "operationId": "096c592491f1cb6e0089814952d9ccd4",
                 "parameters": [
                     {
                         "name": "id",
@@ -209,7 +217,7 @@
                 ],
                 "summary": "Login",
                 "description": "This endpoint is used for a user to log into the app and get an access token.",
-                "operationId": "1da689c688cc418e88f9e9d668f01b16",
+                "operationId": "d78c9f240c3e6bd0250605b3fa8cbf34",
                 "requestBody": {
                     "required": true,
                     "content": {
@@ -244,7 +252,7 @@
                 ],
                 "summary": "Send a code by email.",
                 "description": "Sends a generated code to the specified email address.",
-                "operationId": "e27b6f2bdf8ba3c30aa0568078609d26",
+                "operationId": "84ef8ecbb2d1b8a08347619f4fce8dba",
                 "parameters": [
                     {
                         "name": "email",
@@ -341,7 +349,7 @@
                 ],
                 "summary": "User Collaborators",
                 "description": "This endpoint is used to get persons that work on the specific project",
-                "operationId": "76c6c77e7057fbc3ba434dc982216781",
+                "operationId": "9ed89cb2a49abd38189ba3c947d6c40f",
                 "parameters": [
                     {
                         "name": "area",
@@ -397,7 +405,7 @@
                 ],
                 "summary": "Get list of frequently asked questions (FAQs)",
                 "description": "This endpoint is used to get a list of all frequently asked questions.",
-                "operationId": "9aa180f9db923d3a04a1a3fceb22cc19",
+                "operationId": "ecffd44148402d16eceb9a6c23a7c206",
                 "responses": {
                     "200": {
                         "description": "Frequently asked questions list."
@@ -410,7 +418,7 @@
                 ],
                 "summary": "Create a new Frequently Asked Question (FAQ)",
                 "description": "This endpoint is used to create a new FAQ.",
-                "operationId": "1f9b4e9514398ba7a6984241e9ea6d2c",
+                "operationId": "f745da180f28b0954139a601fc8fccc1",
                 "requestBody": {
                     "required": true,
                     "content": {
@@ -450,7 +458,7 @@
                 ],
                 "summary": "Get details of a specific Frequently Asked Question (FAQ)",
                 "description": "This endpoint is used to get the details of a specific FAQ.",
-                "operationId": "d256f13ed0ba2a91933a8d18c13a9a41",
+                "operationId": "659268d1d09af0b0c1c38da843ca5800",
                 "parameters": [
                     {
                         "name": "id",
@@ -480,7 +488,7 @@
                 ],
                 "summary": "Update an existing Frequently Asked Question (FAQ)",
                 "description": "This endpoint is used to update the details of an existing FAQ.",
-                "operationId": "298c526d87efd21cc6ae1fb930bdf2e2",
+                "operationId": "e574aafe3ec91f35d1279b67ab576c25",
                 "parameters": [
                     {
                         "name": "id",
@@ -530,7 +538,7 @@
                 ],
                 "summary": "Delete a frequently asked question (FAQ)",
                 "description": "This endpoint is used to delete an existing FAQ.",
-                "operationId": "3be266696befa084a5ad295ec5f3c2c0",
+                "operationId": "ae5eab98b5a620c4845a7bc3ccb7bb5a",
                 "parameters": [
                     {
                         "name": "id",
@@ -562,7 +570,7 @@
                 ],
                 "summary": "User Register",
                 "description": "This endpoint is used to register a new user in the application.",
-                "operationId": "a8feedb2a70af8691107d1f3759004fc",
+                "operationId": "4de30eca448867387bebc132efd38750",
                 "requestBody": {
                     "required": true,
                     "content": {
@@ -588,10 +596,6 @@
                                     "password_confirmation": {
                                         "type": "string",
                                         "example": "password123"
-                                    },
-                                    "code": {
-                                        "type": "string",
-                                        "example": "A1BC23D"
                                     }
                                 },
                                 "type": "object"
@@ -613,7 +617,7 @@
                 ],
                 "summary": "send email to recovery password",
                 "description": "This endpoint is used send an email to a register user to reset the password.",
-                "operationId": "6dc3a821a584d03adef3e42dd853f81c",
+                "operationId": "96d659aae2ff5b335cf05549be885096",
                 "requestBody": {
                     "required": true,
                     "content": {
@@ -647,7 +651,7 @@
                 ],
                 "summary": "User recovery password",
                 "description": "This endpoint is used to update the password of the user.",
-                "operationId": "3ce335a32d71c446cb79709dbda4ce58",
+                "operationId": "ac87560950326ad8f1090a5c279ad040",
                 "requestBody": {
                     "required": true,
                     "content": {
@@ -685,7 +689,7 @@
     },
     "components": {
         "schemas": {
-            "App": {
+            "AnnotationsApp": {
                 "title": "App",
                 "description": "App model",
                 "properties": {
@@ -734,7 +738,7 @@
                 },
                 "type": "object"
             },
-            "Faq": {
+            "AnnotationsFaq": {
                 "title": "Faq",
                 "description": "Faq model",
                 "properties": {
@@ -768,7 +772,7 @@
                 },
                 "type": "object"
             },
-            "User": {
+            "AnnotationsUser": {
                 "title": "User",
                 "description": "User model",
                 "properties": {
