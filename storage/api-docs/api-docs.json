@@ -149,6 +149,10 @@
                                         "type": "string",
                                         "example": "https://myapp.com/new-version"
                                     },
+                                    "github": {
+                                        "type": "string",
+                                        "example": "https://github.com/IT-Academy-BCN/project-1"
+                                    },
                                     "state": {
                                         "type": "string",
                                         "enum": [
