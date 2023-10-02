@@ -2,7 +2,7 @@
     "openapi": "3.0.0",
     "info": {
         "title": "ITA Landing page API documentation",
-        "description": "Documentation needed for the API Rest for the landing page to IT Academy. Some useful links below:\r\n *   [ITA Landing Backend](https://github.com/IT-Academy-BCN/ita-landing-backend)\r\n *   [ITA Landing Frontend](https://github.com/IT-Academy-BCN/ita-landing-frontend)",
+        "description": "Documentation needed for the API Rest for the landing page to IT Academy. Some useful links below:\n *   [ITA Landing Backend](https://github.com/IT-Academy-BCN/ita-landing-backend)\n *   [ITA Landing Frontend](https://github.com/IT-Academy-BCN/ita-landing-frontend)",
         "version": "1.0.0"
     },
     "servers": [
@@ -49,6 +49,10 @@
                                     "url": {
                                         "type": "string",
                                         "example": "https://myapp.com"
+                                    },
+                                    "github": {
+                                        "type": "string",
+                                        "example": "https://github.com/IT-Academy-BCN/project-1"
                                     },
                                     "state": {
                                         "type": "string",
@@ -588,10 +592,6 @@
                                     "password_confirmation": {
                                         "type": "string",
                                         "example": "password123"
-                                    },
-                                    "code": {
-                                        "type": "string",
-                                        "example": "A1BC23D"
                                     }
                                 },
                                 "type": "object"
@@ -654,10 +654,6 @@
                         "application/json": {
                             "schema": {
                                 "properties": {
-                                    "token": {
-                                        "type": "string",
-                                        "example": "abcdefghij"
-                                    },
                                     "token": {
                                         "type": "string",
                                         "example": "abcdefghij"
