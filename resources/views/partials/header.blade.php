@@ -2,7 +2,7 @@
 
     <!-- Logo -->
     <div class="flex-shrink-0">
-      <img src="{{url('images/ITA_header_logo.png');}}" alt="logo" class="scale-90">
+      <img src="{{url('images/ITA_header_logo.png')}}" alt="logo" class="scale-90">
     </div>
 
     <!-- Idiomas + Botón Entrar -->
