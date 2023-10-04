@@ -93,7 +93,7 @@ class CodeController extends Controller
     public function sendCodeByEmail(Request $request)
     {
         if (Auth::user()->role !== 'ADMIN') {
-            return response()->json(['status' => false, 'message' => 'Unauthorized'], 401);
+            return response()->json(['status' => false, 'message' => __('auth.unauthorized')], 401);
         }
 
         $validEmail = Validator::make($request->all(), [
@@ -106,7 +106,7 @@ class CodeController extends Controller
         }else{
             $emailAddress = $request->input('email');
             Mail::to($emailAddress)->send(new MailableCode($this->store()));
-            return response()->json(['status' => true, 'message' => 'Email sent successfully']);
+            return response()->json(['status' => true, 'message' => __('auth.sent')]);
         }
     }
 }

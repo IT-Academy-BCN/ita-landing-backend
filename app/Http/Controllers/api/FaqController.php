@@ -5,6 +5,7 @@ namespace App\Http\Controllers\api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Faq;
+use Astrotomic\Translatable\Validation\RuleFactory;
 use Illuminate\Validation\ValidationException;
 
 class FaqController extends Controller
@@ -54,16 +55,10 @@ class FaqController extends Controller
         $faq = Faq::find($id);
 
         if (!$faq) {
-            return response()->json(['error' => 'FAQ not found'], 404);
+            return response()->json(['error' => __('api.faq_not_found')], 404);
         }
 
-        return response()->json([
-            'id' => $faq->id,
-            'title' => $faq->title,
-            'description' => $faq->description,
-            'created_at' => $faq->created_at,
-            'updated_at' => $faq->updated_at
-        ]);
+        return response()->json($faq);
     }
 
 /**
@@ -100,12 +95,14 @@ class FaqController extends Controller
     public function store(Request $request)
     {
         try {
-            $validatedData = $request->validate([
-                'title' => ['required', 'array'],
-                'title.*' => ['required', 'string', 'max:255'],
-                'description' => ['required', 'array'],
-                'description.*' => ['required', 'string'],
+
+            $rules = RuleFactory::make([
+                '%title%' => ['required', 'string', 'max:255'],
+                '%description%' => ['required_with:%title%', 'string'],
             ]);
+            
+            $validatedData = $request->validate($rules);
+
 
             $faq = Faq::create($validatedData);
 
@@ -156,27 +153,26 @@ class FaqController extends Controller
  *   )
  * )
  */
+
 public function update(Request $request, $id)
 {
     try {
         $faq = Faq::find($id);
 
         if (!$faq) {
-            return response()->json(['error' => 'FAQ not found'], 404);
+            return response()->json(['error' => __('api.faq_not_found')], 404);
         }
 
-        $validatedData = $request->validate([
-            'title' => ['required', 'array'],
-            'title.*' => ['required', 'string', 'max:255'],
-            'description' => ['required', 'array'],
-            'description.*' => ['required', 'string'],
+        $rules = RuleFactory::make([
+            '%title%' => ['string', 'max:255'],
+            '%description%' => ['string'],
         ]);
+        
+        $validatedData = $request->validate($rules);
 
-        $faq->setTranslations('title', $validatedData['title']);
-        $faq->setTranslations('description', $validatedData['description']);
-        $faq->save();
+        $faq->update($validatedData);
+        return response()->json(['message' => __('api.faq_updated')], 200);
 
-        return response()->json(['message' => 'FAQ updated successfully']);
     } catch (ValidationException $e) {
         return response()->json(['errors' => $e->errors()], 422);
     }
@@ -210,11 +206,11 @@ public function update(Request $request, $id)
         $faqs = Faq::find($id);
 
         if (!$faqs) {
-            return response()->json(['error' => 'FAQ not found'], 404);
+            return response()->json(['error' => __('api.faq_not_found')], 404);
         }
 
         $faqs->delete();
 
-        return response()->json(['message' => 'FAQ deleted successfully']);
+        return response()->json(['message' => __('api.faq_deleted')]);
     }
 }

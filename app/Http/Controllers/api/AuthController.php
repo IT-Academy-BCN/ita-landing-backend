@@ -59,9 +59,9 @@ class AuthController extends Controller
                 $user = Auth::user();
                 $token = $user->createToken('authToken')->accessToken;
                 
-                return response()->json(['result' => ['message' => 'Logged in successfully!', 'access_token' => $token], 'status' => true]);
+                return response()->json(['result' => ['message' => __('auth.success'), 'access_token' => $token], 'status' => true]);
             } else {
-                return response()->json(['result' => ['message' => 'Invalid credentials'], 'status' => false], 401);
+                return response()->json(['result' => ['message' => __('auth:failed')], 'status' => false], 401);
             }
     }
 

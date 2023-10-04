@@ -67,7 +67,7 @@ class CollaboratorsController extends Controller
         return $this->collaboratorItaChallenges();
     }
     return response()->json([
-        'message' => 'this area is invalid'
+        'message' => __('api.invalid_area')
     ],404);
 }
 
