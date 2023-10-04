@@ -7,4 +7,16 @@ return[
     'title'         => 'Title',
     'content'       => 'Content',
 
+    /** Collaborators */
+    'invalid_area'  => 'This area is not valid.',
+    
+    /** App */
+    'app_deleted'   => 'App deleted successfully.',
+    'app_not_found' => 'App no found in the database.',
+    'app_updated'   => 'App updated successfully.',
+
+    /** Faq */
+    'Faq_deleted'   => 'Faq deleted successfully.',
+    'faq_not_found' => 'Faq no found in the database.',
+    'faq_updated'   => 'Faq updated successfully.',
 ];
