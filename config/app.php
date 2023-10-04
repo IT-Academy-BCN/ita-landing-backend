@@ -97,7 +97,7 @@ return [
 
     'fallback_locale' => 'ca',
 
-    'supported_locales' => ['ca', 'es', 'fr', 'en'],
+    'supported_locales' => ['ca', 'es'],
     
     /*
     |--------------------------------------------------------------------------
@@ -110,7 +110,7 @@ return [
     |
     */
 
-    'faker_locale' => 'en_US',
+    'faker_locale' => 'es',
 
     /*
     |--------------------------------------------------------------------------
@@ -197,7 +197,6 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         L5Swagger\L5SwaggerServiceProvider::class,
-        Spatie\Translatable\TranslatableServiceProvider::class,
     ],
 
     /*
