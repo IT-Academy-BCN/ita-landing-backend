@@ -4,7 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Spatie\Translatable\HasTranslations;
+use Astrotomic\Translatable\Contracts\Translatable as TranslatableContract;
+use Astrotomic\Translatable\Translatable;
 
 /**
  * @OA\Schema(
@@ -63,9 +64,10 @@ use Spatie\Translatable\HasTranslations;
  *     )
  * )
  */
-class App extends Model
+class App extends Model implements TranslatableContract
 {
-    use HasFactory, HasTranslations;
-    protected $translatable = ['title', 'description'];
-    protected $fillable = ['title', 'description', 'url', 'github', 'state'];
+    use HasFactory,Translatable;
+    
+    public $translatedAttributes = ['title', 'description'];
+    protected $fillable = ['url', 'github', 'state'];
 }

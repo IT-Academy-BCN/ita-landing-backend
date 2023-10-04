@@ -4,8 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Traits\Mutators\FaqMutators;
-use Spatie\Translatable\HasTranslations;
+use Astrotomic\Translatable\Contracts\Translatable as TranslatableContract;
+use Astrotomic\Translatable\Translatable;
 /**
  * @OA\Schema(
  *     title="Faq",
@@ -44,21 +44,15 @@ use Spatie\Translatable\HasTranslations;
  *     )
  * )
  */
-class Faq extends Model
+class Faq extends Model implements TranslatableContract
 {
-    use HasFactory;
-    // use FaqMutators;
-    use HasTranslations;
+    use HasFactory, Translatable;
 
     /**
      * The attributes that are mass assignable.
      *
      * @var array<int, string>
      */
-    protected $translatable = ['title', 'description'];
-    protected $fillable = [
-        'title',
-        'description',
-        'locale'
-    ];
+    protected $translatedAttributes = ['title', 'description'];
+    protected $fillable = ['title', 'description'];
 }

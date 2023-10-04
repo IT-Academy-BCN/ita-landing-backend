@@ -1,7 +1,9 @@
 <?php
 
+use App\Models\App as ModelsApp;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
@@ -12,21 +14,21 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('apps', function (Blueprint $table) {
-            $table->id();
-            $table->string('locale')->index();
-            $table->text('url');
+            $table->increments('id');
+            $table->string('url');
             $table->enum('state', ['COMPLETED', 'IN PROGRESS', 'SOON']);
             $table->timestamps();
         });
 
         Schema::create('app_translations', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('app_id')->constrained('apps')->onDelete('cascade');
+            $table->increments('id');
+            $table->integer('app_id')->unsigned();
+            $table->string('locale')->index();
             $table->string('title');
             $table->text('description');
-            $table->string('locale')->index();
-        
+
             $table->unique(['app_id', 'locale']);
+            $table->foreign('app_id')->references('id')->on('apps')->onDelete('cascade');
         });
     }
 
