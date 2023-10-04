@@ -8,8 +8,7 @@ use App\Http\Controllers\api\AuthController;
 use App\Http\Controllers\api\CodeController;
 use App\Http\Controllers\api\AppController;
 use App\Http\Controllers\api\CollaboratorsController;
-use App\Http\Middleware\Localization;
-use App\Http\Controllers\api\ForgetController;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -20,7 +19,7 @@ use App\Http\Controllers\api\ForgetController;
 | be assigned to the "api" middleware group. Make something great!
 |
 */
-Route::middleware("Setlocale")->group(function () {
+Route::middleware(['SetLocale'])->group(function () {
 
     Route::post('/register', [UserController::class, 'store'])->name('register');
     Route::post('/login', [AuthController::class, 'login'])->name('login');
@@ -37,9 +36,9 @@ Route::middleware("Setlocale")->group(function () {
 
     Route::middleware(['auth:api'])->prefix('faqs')->group(function () {
         
-        Route::get('/{id}', [FaqController::class, 'show']);
-        Route::post('/', [FaqController::class, 'store']);
-        Route::put('/{id}', [FaqController::class, 'update']);
+        Route::get('/{id}', [FaqController::class, 'show'])->name('faq.show');
+        Route::post('/', [FaqController::class, 'store'])->name('faq.store');
+        Route::put('/{id}', [FaqController::class, 'update'])->name('faq.update');
         Route::delete('/{id}', [FaqController::class, 'destroy']);
     });
 
