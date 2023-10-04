@@ -19,56 +19,7 @@ use Illuminate\Support\Facades\Mail;
 
 class UserController extends Controller
 {
-/**
- * @OA\Post(
- *   path="/register",
- *   tags={"User"},
- *   summary="User Register",
- *   description="This endpoint is used to register a new user in the application.",
- *   @OA\RequestBody(
- *     required=true,
- *     @OA\MediaType(
- *       mediaType="application/json",
- *       @OA\Schema(
- *         @OA\Property(
- *           property="email",
- *           type="string",
- *           example="example@example.com"
- *         ),
- *         @OA\Property(
- *           property="name",
- *           type="string",
- *           example="John Doe"
- *         ),
- *         @OA\Property(
- *           property="dni",
- *           type="string",
- *           example="12345678A"
- *         ),
- *         @OA\Property(
- *           property="password",
- *           type="string",
- *           example="password123"
- *         ),
- *         @OA\Property(
- *           property="password_confirmation",
- *           type="string",
- *           example="password123"
- *         ),
- *         @OA\Property(
- *           property="code",
- *           type="string",
- *           example="A1BC23D"
- *         )
- *       )
- *     )
- *   ),
- *   @OA\Response(
- *     response="200",
- *     description="User created successfully."
- *   )
- * )
- */
+
     public function store(Request $request)
     {
         // Input validation
@@ -123,35 +74,6 @@ class UserController extends Controller
         $code->save();
     }
 
-    /**
- * @OA\Post(
- *   path="/forget-password",
- *   tags={"User"},
- *   summary="send email to reset password",
- *   description="This endpoint is used to send an email to a registered user to reset the password.",
- *   @OA\RequestBody(
- *     required=true,
- *     @OA\MediaType(
- *       mediaType="application/json",
- *       @OA\Schema(
- *         @OA\Property(
- *           property="email",
- *           type="string",
- *           example="example@example.com"
- *         ),        
- *       )
- *     )
- *   ),
- *   @OA\Response(
- *     response="200",
- *     description="Password reset email sent out. Check your email"
- *   ),
- *   @OA\Response(
- *     response="404",
- *     description="The email does not exist"
- *   )
- * )
- */
 
  public function forgetPassword(ForgetRequest $request){
 
@@ -192,46 +114,6 @@ class UserController extends Controller
     }
 
 }
-
-    /**
- * @OA\Post(
- *   path="/reset-password/{token}",
- *   tags={"User"},
- *   summary="Reset user password",
- *   description="This endpoint is used to reset the user password.",
- *   @OA\RequestBody(
- *     required=true,
- *     @OA\MediaType(
- *       mediaType="application/json",
- *       @OA\Schema(
- *         @OA\Property(
- *           property="token",
- *           type="string",
- *           example="abcdefghij"
- *         ),
- *          @OA\Property(
- *           property="password",
- *           type="string",
- *           example="password"
- *         ),
- *          @OA\Property(
- *           property="password_confirmation",
- *           type="string",
- *           example="password"
- *         ),        
- *       )
- *     )
- *   ),
- *   @OA\Response(
- *     response="200",
- *     description="User password reset successfully"
- *   ),
- *   @OA\Response(
- *     response="400",
- *     description="Invalid Token!"
- *   )
- * )
- */
 
  public function resetPassword(ResetRequest $request){
 
