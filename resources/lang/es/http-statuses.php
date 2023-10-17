@@ -7,7 +7,7 @@ return [
     '100'          => 'Continuar',
     '101'          => 'Protocolos de conmutación',
     '102'          => 'Procesando',
-    '200'          => 'OK',
+    '200'          => 'DE ACUERDO',
     '201'          => 'Creado',
     '202'          => 'Aceptado',
     '203'          => 'Información no autorizada',
