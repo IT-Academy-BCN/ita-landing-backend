@@ -2,7 +2,7 @@
     "openapi": "3.0.0",
     "info": {
         "title": "ITA Landing page API documentation",
-        "description": "Documentation needed for the API Rest for the landing page to IT Academy. Some useful links below:\n *   [ITA Landing Backend](https://github.com/IT-Academy-BCN/ita-landing-backend)\n *   [ITA Landing Frontend](https://github.com/IT-Academy-BCN/ita-landing-frontend)",
+        "description": "Documentation needed for the API Rest for the landing page to IT Academy. Some useful links below:\n *   [ITA Landing Backend](https://github.com/IT-Academy-BCN/ita-landing-backend)\n *   [ITA Landing Frontend](https://github.com/IT-Academy-BCN/ita-landing-frontend)\n *   This API supports both Catalan and Spanish languages using the 'Accept-Language' header.",
         "version": "1.0.0"
     },
     "servers": [
@@ -17,7 +17,7 @@
                     "Apps"
                 ],
                 "summary": "Apps list",
-                "description": "This endpoint is used to take a list of all the apps",
+                "description": "This endpoint is used to take a list of all the apps. The default response language is Catalan. Clients can specify a different language by setting the 'Accept-Language' header to 'es' for Spanish.",
                 "operationId": "2e76e8f6af37b36f0080f946f9932838",
                 "responses": {
                     "200": {
@@ -30,7 +30,7 @@
                     "Apps"
                 ],
                 "summary": "Create a new app",
-                "description": "This endpoint is used to create a new application.",
+                "description": "This endpoint is used to create a new application. The default response language is Catalan. Clients can specify a different language by setting the 'Accept-Language' header to 'es' for Spanish.",
                 "operationId": "842d368f6d56b7c9cf4cb6c6a7135ef4",
                 "requestBody": {
                     "required": true,
@@ -87,7 +87,7 @@
                     "Apps"
                 ],
                 "summary": "Get details of an application",
-                "description": "This endpoint is used to get the details of a specific application.",
+                "description": "This endpoint is used to get the details of a specific application. The default response language is Catalan. Clients can specify a different language by setting the 'Accept-Language' header to 'es' for Spanish.",
                 "operationId": "da8b7e35bbe80cdbd08f45ddf7654c85",
                 "parameters": [
                     {
