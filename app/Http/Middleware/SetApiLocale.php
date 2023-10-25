@@ -17,7 +17,7 @@ class SetApiLocale
     {
         $locale = $request->header('Accept-Language');
 
-        $supportedLocales = config('translatable.locales'); 
+        $supportedLocales = config('translatable.locales');
         if (!in_array($locale, $supportedLocales)) {
             
             $locale = config('app.locale');

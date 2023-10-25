@@ -52,7 +52,7 @@ class AppController extends Controller
 
     public function update(Request $request, $id)
     {
-        $app = App::find($id); 
+        $app = App::find($id);
 
         if (!$app) {
             return response()->json(['error' => __('api.app_not_found')], 404);
