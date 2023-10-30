@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace App\Annotations\OpenApi\modelsAnnotations\appAnnotations;
 
@@ -31,6 +31,12 @@ use OpenApi as OA;
  *         type="string",
  *         description="URL",
  *         example="https://myapp.com"
+ *     ),
+ *     @OA\Property(
+ *         property="github",
+ *         type="string",
+ *         description="github repository",
+ *         example="https://github.com/IT-Academy-BCN/"
  *     ),
  *     @OA\Property(
  *         property="state",

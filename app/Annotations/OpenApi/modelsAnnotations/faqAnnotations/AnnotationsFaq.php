@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace App\Annotations\OpenApi\modelsAnnotations\faqAnnotations;
 

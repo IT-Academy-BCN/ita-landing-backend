@@ -713,6 +713,11 @@
                         "type": "string",
                         "example": "https://myapp.com"
                     },
+                    "github": {
+                        "description": "github repository",
+                        "type": "string",
+                        "example": "https://github.com/IT-Academy-BCN/"
+                    },
                     "state": {
                         "description": "State",
                         "type": "string",
