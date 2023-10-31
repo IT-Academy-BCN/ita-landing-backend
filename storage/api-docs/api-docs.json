@@ -462,12 +462,30 @@
                             "schema": {
                                 "properties": {
                                     "title": {
-                                        "type": "string",
-                                        "example": "My frequently asked question"
+                                        "properties": {
+                                            "ca": {
+                                                "type": "string",
+                                                "example": "Títol de la meva pregunta freqüent"
+                                            },
+                                            "es": {
+                                                "type": "string",
+                                                "example": "Título de mi pregunta frecuente"
+                                            }
+                                        },
+                                        "type": "object"
                                     },
                                     "description": {
-                                        "type": "string",
-                                        "example": "Description of my FAQ"
+                                        "properties": {
+                                            "ca": {
+                                                "type": "string",
+                                                "example": "Descripció de la meva pregunta freqüent"
+                                            },
+                                            "es": {
+                                                "type": "string",
+                                                "example": "Descripción de mi pregunta frecuente"
+                                            }
+                                        },
+                                        "type": "object"
                                     }
                                 },
                                 "type": "object"
@@ -544,12 +562,30 @@
                             "schema": {
                                 "properties": {
                                     "title": {
-                                        "type": "string",
-                                        "example": "New title of my FAQ"
+                                        "properties": {
+                                            "ca": {
+                                                "type": "string",
+                                                "example": "New Catalan title of my FAQ"
+                                            },
+                                            "es": {
+                                                "type": "string",
+                                                "example": "New Spanish title of my FAQ"
+                                            }
+                                        },
+                                        "type": "object"
                                     },
                                     "description": {
-                                        "type": "string",
-                                        "example": "New description of my FAQ"
+                                        "properties": {
+                                            "ca": {
+                                                "type": "string",
+                                                "example": "New Catalan description of my FAQ"
+                                            },
+                                            "es": {
+                                                "type": "string",
+                                                "example": "New Spanish description of my FAQ"
+                                            }
+                                        },
+                                        "type": "object"
                                     }
                                 },
                                 "type": "object"
