@@ -1,24 +1,24 @@
-<?php 
+<?php
 
 namespace App\Annotations\OpenApi\controllersAnnotations\faqsAnnotations;
 
 class AnnotationsFaqs {
 
-    /**
+/**
  * @OA\Get(
  *   path="/faqs",
  *   tags={"Faqs"},
  *   summary="Get list of frequently asked questions (FAQs)",
- *   description="This endpoint is used to get a list of all frequently asked questions.",  
+ *   description="This endpoint is used to get a list of all frequently asked questions.",
  * @OA\Response(
  *     response="200",
  *     description="Frequently asked questions list."
  *   )
  * )
  */
-    public function index() {}
+   public function index() {}
 
-    /**
+/**
  * @OA\Get(
  *   path="/faqs/{id}",
  *   tags={"Faqs"},
@@ -41,9 +41,9 @@ class AnnotationsFaqs {
  *   )
  * )
  */
-    public function show() {}
+   public function show() {}
 
-    /**
+/**
  * @OA\Post(
  *   path="/faqs",
  *   tags={"Faqs"},
@@ -56,13 +56,31 @@ class AnnotationsFaqs {
  *       @OA\Schema(
  *         @OA\Property(
  *           property="title",
- *           type="string",
- *           example="My frequently asked question"
+ *           type="object",
+ *           @OA\Property(
+ *             property="ca",
+ *             type="string",
+ *             example="Títol de la meva pregunta freqüent"
+ *           ),
+ *           @OA\Property(
+ *             property="es",
+ *             type="string",
+ *             example="Título de mi pregunta frecuente"
+ *           ),
  *         ),
  *         @OA\Property(
  *           property="description",
- *           type="string",
- *           example="Description of my FAQ"
+ *           type="object",
+ *           @OA\Property(
+ *             property="ca",
+ *             type="string",
+ *             example="Descripció de la meva pregunta freqüent"
+ *           ),
+ *           @OA\Property(
+ *             property="es",
+ *             type="string",
+ *             example="Descripción de mi pregunta frecuente"
+ *           ),
  *         )
  *       )
  *     )
@@ -74,9 +92,9 @@ class AnnotationsFaqs {
  *   )
  * )
  */
-    public function store() {}
+   public function store() {}
 
-    /** 
+/**
  * @OA\Put(
  *   path="/faqs/{id}",
  *   tags={"Faqs"},
@@ -99,13 +117,31 @@ class AnnotationsFaqs {
  *       @OA\Schema(
  *         @OA\Property(
  *           property="title",
- *           type="string",
- *           example="New title of my FAQ"
+ *           type="object",
+ *           @OA\Property(
+ *             property="ca",
+ *             type="string",
+ *             example="New Catalan title of my FAQ"
+ *           ),
+ *           @OA\Property(
+ *             property="es",
+ *             type="string",
+ *             example="New Spanish title of my FAQ"
+ *           ),
  *         ),
  *         @OA\Property(
  *           property="description",
- *           type="string",
- *           example="New description of my FAQ"
+ *           type="object",
+ *           @OA\Property(
+ *             property="ca",
+ *             type="string",
+ *             example="New Catalan description of my FAQ"
+ *           ),
+ *           @OA\Property(
+ *             property="es",
+ *             type="string",
+ *             example="New Spanish description of my FAQ"
+ *           ),
  *         )
  *       )
  *     )
@@ -117,9 +153,9 @@ class AnnotationsFaqs {
  *   )
  * )
  */
-    public function update() {}
+   public function update() {}
 
-    /**
+/**
  * @OA\Delete(
  *   path="/faqs/{id}",
  *   tags={"Faqs"},
@@ -142,6 +178,5 @@ class AnnotationsFaqs {
  *   )
  * )
  */
-
-    public function delete() {}
+   public function delete() {}
 }

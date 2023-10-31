@@ -47,6 +47,5 @@ class AnnotationsCode {
      *     )
      * )
      */
-
     public function sendCodeByEmail() {}
 }

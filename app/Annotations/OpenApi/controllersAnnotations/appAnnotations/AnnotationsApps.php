@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace App\Annotations\OpenApi\controllersAnnotations\appAnnotations;
 
@@ -31,13 +31,31 @@ class AnnotationsApps {
  *       @OA\Schema(
  *         @OA\Property(
  *           property="title",
- *           type="string",
- *           example="My application"
+ *           type="object",
+ *           @OA\Property(
+ *             property="ca",
+ *             type="string",
+ *             example="Títol de la meva aplicació"
+ *           ),
+ *           @OA\Property(
+ *             property="es",
+ *             type="string",
+ *             example="Título de mi aplicación"
+ *           ),
  *         ),
  *         @OA\Property(
  *           property="description",
- *           type="string",
- *           example="Description of my application"
+ *           type="object",
+ *           @OA\Property(
+ *             property="ca",
+ *             type="string",
+ *             example="Descripció de la meva aplicació"
+ *           ),
+ *           @OA\Property(
+ *             property="es",
+ *             type="string",
+ *             example="Descripción de mi aplicación"
+ *           ),
  *         ),
  *         @OA\Property(
  *           property="url",
@@ -65,7 +83,7 @@ class AnnotationsApps {
  *   )
  * )
  */
-    public function store() {}
+   public function store() {}
 
     /**
  * @OA\Get(
@@ -89,10 +107,10 @@ class AnnotationsApps {
  *     description="Details of the application."
  *   )
  * )
- */  
-    public function show() {}
+ */
+   public function show() {}
 
-    /**
+/**
  * @OA\Put(
  *   path="/apps/{id}",
  *   tags={"Apps"},
@@ -116,20 +134,38 @@ class AnnotationsApps {
  *       @OA\Schema(
  *         @OA\Property(
  *           property="title",
- *           type="string",
- *           example="New title of my application"
+ *           type="object",
+ *           @OA\Property(
+ *             property="ca",
+ *             type="string",
+ *             example="New Catalan title"
+ *           ),
+ *           @OA\Property(
+ *             property="es",
+ *             type="string",
+ *             example="New Spanish title"
+ *           ),
  *         ),
  *         @OA\Property(
  *           property="description",
- *           type="string",
- *           example="New description of my application"
+ *           type="object",
+ *           @OA\Property(
+ *             property="ca",
+ *             type="string",
+ *             example="New Catalan description"
+ *           ),
+ *           @OA\Property(
+ *             property="es",
+ *             type="string",
+ *             example="New Spanish description"
+ *           ),
  *         ),
  *         @OA\Property(
  *           property="url",
  *           type="string",
  *           example="https://myapp.com/new-version"
  *         ),
- *          @OA\Property(
+ *         @OA\Property(
  *           property="github",
  *           type="string",
  *           example="https://github.com/IT-Academy-BCN/project-1"
@@ -149,9 +185,9 @@ class AnnotationsApps {
  *   )
  * )
  */
-    public function update() {}
+   public function update() {}
 
-    /**
+/**
  * @OA\Delete(
  *   path="/apps/{id}",
  *   tags={"Apps"},
@@ -174,5 +210,5 @@ class AnnotationsApps {
  *   )
  * )
  */
-    public function destroy() {}
+   public function destroy() {}
 }

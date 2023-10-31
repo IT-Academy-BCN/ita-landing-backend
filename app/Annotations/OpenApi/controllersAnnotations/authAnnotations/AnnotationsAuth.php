@@ -1,10 +1,10 @@
-<?php 
+<?php
 
 namespace App\Annotations\OpenApi\controllersAnnotations\authAnnotations;
 
 class AnnotationsAuth {
 
-    /**
+/**
  * @OA\Post(
  *   path="/login",
  *   tags={"User"},
@@ -30,10 +30,9 @@ class AnnotationsAuth {
  *   ),
  *   @OA\Response(
  *     response="200",
- *     description="Access token for the user."
+ *     description="Access token for the user. The response message may vary based on user's language settings."
  *   )
  * )
  */
-
     public function loginUser() {}
 }

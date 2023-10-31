@@ -39,12 +39,30 @@
                             "schema": {
                                 "properties": {
                                     "title": {
-                                        "type": "string",
-                                        "example": "My application"
+                                        "properties": {
+                                            "ca": {
+                                                "type": "string",
+                                                "example": "Títol de la meva aplicació"
+                                            },
+                                            "es": {
+                                                "type": "string",
+                                                "example": "Título de mi aplicación"
+                                            }
+                                        },
+                                        "type": "object"
                                     },
                                     "description": {
-                                        "type": "string",
-                                        "example": "Description of my application"
+                                        "properties": {
+                                            "ca": {
+                                                "type": "string",
+                                                "example": "Descripció de la meva aplicació"
+                                            },
+                                            "es": {
+                                                "type": "string",
+                                                "example": "Descripción de mi aplicación"
+                                            }
+                                        },
+                                        "type": "object"
                                     },
                                     "url": {
                                         "type": "string",
@@ -138,12 +156,30 @@
                             "schema": {
                                 "properties": {
                                     "title": {
-                                        "type": "string",
-                                        "example": "New title of my application"
+                                        "properties": {
+                                            "ca": {
+                                                "type": "string",
+                                                "example": "New Catalan title"
+                                            },
+                                            "es": {
+                                                "type": "string",
+                                                "example": "New Spanish title"
+                                            }
+                                        },
+                                        "type": "object"
                                     },
                                     "description": {
-                                        "type": "string",
-                                        "example": "New description of my application"
+                                        "properties": {
+                                            "ca": {
+                                                "type": "string",
+                                                "example": "New Catalan description"
+                                            },
+                                            "es": {
+                                                "type": "string",
+                                                "example": "New Spanish description"
+                                            }
+                                        },
+                                        "type": "object"
                                     },
                                     "url": {
                                         "type": "string",
@@ -240,7 +276,7 @@
                 },
                 "responses": {
                     "200": {
-                        "description": "Access token for the user."
+                        "description": "Access token for the user. The response message may vary based on user's language settings."
                     }
                 }
             }

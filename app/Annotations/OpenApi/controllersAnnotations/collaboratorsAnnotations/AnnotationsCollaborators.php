@@ -1,10 +1,10 @@
-<?php 
+<?php
 
 namespace App\Annotations\OpenApi\controllersAnnotations\collaboratorsAnnotations;
 
 class AnnotationsCollaborators {
 
-    /**
+/**
  * @OA\Get(
  *   path="/collaborators/{area}",
  *   tags={"Collaborators"},
@@ -50,6 +50,5 @@ class AnnotationsCollaborators {
  *   )
  * )
  */
-
     public function index() {}
 }
