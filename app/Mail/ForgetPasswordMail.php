@@ -10,18 +10,22 @@ use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
 
-class MailableCode extends Mailable
+
+class ForgetPasswordMail extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $code;
+    public $name;
+    public $token;
+    
 
     /**
      * Create a new message instance.
      */
-    public function __construct($code)
+    public function __construct($name, $token)
     {
-        $this->code = $code;
+        $this->name = $name;
+        $this->token = $token;
     }
 
     /**
@@ -30,7 +34,7 @@ class MailableCode extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Personal code to register',
+            subject: 'Please reset your password',
         );
     }
 
@@ -39,7 +43,10 @@ class MailableCode extends Mailable
      */
     public function content(): Content
     {
-        return new Content(view: 'code' );
+
+        return new Content(
+            view: 'mail.forgetPassword',
+        );
     }
 
     /**

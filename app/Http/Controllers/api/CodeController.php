@@ -9,13 +9,17 @@ use Illuminate\Support\Str;
 use App\Models\Code;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Auth;
+
 
 class CodeController extends Controller
 {
     /**
-     * Save a new code in the database
-     * @return $code;
-     */
+     * Save a new code in the database.
+     *
+     * @return string
+     *
+     **/
     public function store()
     {
         $code = $this->generateRandomCode();
@@ -38,13 +42,18 @@ class CodeController extends Controller
     }
 
     /**
-     * Send email with the generated code to the specified recipient
+     * Send a code by email.
      *
-     * @param Request $request
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function sendEmail(Request $request)
+     
+    public function sendCodeByEmail(Request $request)
     {
+        if (Auth::user()->role !== 'ADMIN') {
+            return response()->json(['status' => false, 'message' => 'Unauthorized'], 401);
+        }
+
         $validEmail = Validator::make($request->all(), [
             'email' => 'required|email',
         ]);
@@ -53,10 +62,9 @@ class CodeController extends Controller
             return response()->json(['status' => false, 'message' => 'Invalid email', 'errors' => $validEmail->errors()], 400);
 
         }else{
-
             $emailAddress = $request->input('email');
             Mail::to($emailAddress)->send(new MailableCode($this->store()));
             return response()->json(['status' => true, 'message' => 'Email sent successfully']);
         }
-    } 
+    }
 }
