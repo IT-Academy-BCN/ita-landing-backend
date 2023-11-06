@@ -30,29 +30,29 @@ class AnnotationsApps {
  *       mediaType="application/json",
  *       @OA\Schema(
  *         @OA\Property(
- *           property="title",
+ *           property="ca",
  *           type="object",
  *           @OA\Property(
- *             property="ca",
+ *             property="title",
  *             type="string",
  *             example="Títol de la meva aplicació"
  *           ),
  *           @OA\Property(
- *             property="es",
- *             type="string",
- *             example="Título de mi aplicación"
- *           ),
- *         ),
- *         @OA\Property(
- *           property="description",
- *           type="object",
- *           @OA\Property(
- *             property="ca",
+ *             property="description",
  *             type="string",
  *             example="Descripció de la meva aplicació"
  *           ),
+ *         ),
+ *         @OA\Property(
+ *           property="es",
+ *           type="object",
  *           @OA\Property(
- *             property="es",
+ *             property="title",
+ *             type="string",
+ *             example="Título de mi aplicación"
+ *           ),
+ *           @OA\Property(
+ *             property="description",
  *             type="string",
  *             example="Descripción de mi aplicación"
  *           ),
@@ -133,31 +133,31 @@ class AnnotationsApps {
  *       mediaType="application/json",
  *       @OA\Schema(
  *         @OA\Property(
- *           property="title",
+ *           property="ca",
  *           type="object",
  *           @OA\Property(
- *             property="ca",
+ *             property="title",
  *             type="string",
- *             example="New Catalan title"
+ *             example="Nou títol"
  *           ),
  *           @OA\Property(
- *             property="es",
+ *             property="description",
  *             type="string",
- *             example="New Spanish title"
+ *             example="Nova descripció"
  *           ),
  *         ),
  *         @OA\Property(
- *           property="description",
+ *           property="es",
  *           type="object",
  *           @OA\Property(
- *             property="ca",
+ *             property="title",
  *             type="string",
- *             example="New Catalan description"
+ *             example="Nuevo título"
  *           ),
  *           @OA\Property(
- *             property="es",
+ *             property="description",
  *             type="string",
- *             example="New Spanish description"
+ *             example="Nueva descripción"
  *           ),
  *         ),
  *         @OA\Property(

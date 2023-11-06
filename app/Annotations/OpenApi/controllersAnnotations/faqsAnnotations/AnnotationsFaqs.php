@@ -55,29 +55,29 @@ class AnnotationsFaqs {
  *       mediaType="application/json",
  *       @OA\Schema(
  *         @OA\Property(
- *           property="title",
+ *           property="ca",
  *           type="object",
  *           @OA\Property(
- *             property="ca",
+ *             property="title",
  *             type="string",
  *             example="Títol de la meva pregunta freqüent"
  *           ),
  *           @OA\Property(
- *             property="es",
- *             type="string",
- *             example="Título de mi pregunta frecuente"
- *           ),
- *         ),
- *         @OA\Property(
- *           property="description",
- *           type="object",
- *           @OA\Property(
- *             property="ca",
+ *             property="description",
  *             type="string",
  *             example="Descripció de la meva pregunta freqüent"
  *           ),
+ *         ),
+ *         @OA\Property(
+ *           property="es",
+ *           type="object",
  *           @OA\Property(
- *             property="es",
+ *             property="title",
+ *             type="string",
+ *             example="Título de mi pregunta frecuente"
+ *           ),
+ *           @OA\Property(
+ *             property="description",
  *             type="string",
  *             example="Descripción de mi pregunta frecuente"
  *           ),
@@ -116,31 +116,31 @@ class AnnotationsFaqs {
  *       mediaType="application/json",
  *       @OA\Schema(
  *         @OA\Property(
- *           property="title",
+ *           property="ca",
  *           type="object",
  *           @OA\Property(
- *             property="ca",
+ *             property="title",
  *             type="string",
- *             example="New Catalan title of my FAQ"
+ *             example="Nou títol de FAQ"
  *           ),
  *           @OA\Property(
- *             property="es",
+ *             property="description",
  *             type="string",
- *             example="New Spanish title of my FAQ"
+ *             example="Nova descripció de FAQ"
  *           ),
  *         ),
  *         @OA\Property(
- *           property="description",
+ *           property="es",
  *           type="object",
  *           @OA\Property(
- *             property="ca",
+ *             property="title",
  *             type="string",
- *             example="New Catalan description of my FAQ"
+ *             example="Nueva descripción de FAQ"
  *           ),
  *           @OA\Property(
- *             property="es",
+ *             property="description",
  *             type="string",
- *             example="New Spanish description of my FAQ"
+ *             example="Nueva descripción de GAQ"
  *           ),
  *         )
  *       )
