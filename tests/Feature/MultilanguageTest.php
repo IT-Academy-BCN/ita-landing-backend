@@ -23,7 +23,9 @@ class MultilanguageTest extends TestCase
         $response1 = $this->withHeaders(['Authorization' => 'Bearer ' . $token])->postJson(route('app.store'),);
         $response1->assertStatus(500)->assertSee('El camp url');
 
-        $response2 = $this->withHeaders(['Authorization' => 'Bearer ' . $token, 'Accept-Language' => 'es'])->postJson(route('app.store'),);
+        $response2 = $this->withHeaders([
+            'Authorization' => 'Bearer ' . $token, 'Accept-Language' => 'es'
+            ])->postJson(route('app.store'),);
         $response2->assertStatus(500)->assertSee('El campo url');
 
     }
@@ -42,7 +44,9 @@ class MultilanguageTest extends TestCase
             'state' => 'COMPLETED'
         ];
 
-        $response = $this->withHeaders(['Authorization' => 'Bearer ' . $this->authCreated()])->postJson(route('app.store'), $app);
+        $response = $this->withHeaders([
+            'Authorization' => 'Bearer ' . $this->authCreated()
+            ])->postJson(route('app.store'), $app);
         $response->assertSee('El juego de las sillas');
         $response->assertStatus(201);
     }
@@ -58,7 +62,9 @@ class MultilanguageTest extends TestCase
                      'description' => 'Juego con más de un jugador que consiste en...'],
         ];
 
-        $response = $this->withHeaders(['Authorization' => 'Bearer ' . $this->authCreated()])->postJson(route('faq.store'), $faq);
+        $response = $this->withHeaders([
+            'Authorization' => 'Bearer ' . $this->authCreated()
+            ])->postJson(route('faq.store'), $faq);
         $response->assertSee('consiste el juego de las sillas');
         $response->assertStatus(201);
     }
@@ -83,7 +89,9 @@ class MultilanguageTest extends TestCase
         $target_id = $response1['id'];
 
         $modifications = ['ca' => ['title' => 'El joc de les taules']];
-        $response2 = $this->withHeaders(['Authorization' => 'Bearer ' . $token])->putJson(route('app.update', ['id' => $target_id]), $modifications);
+        $response2 = $this->withHeaders([
+            'Authorization' => 'Bearer ' . $token
+            ])->putJson(route('app.update', ['id' => $target_id]), $modifications);
 
         $response2->assertStatus(200);
 
@@ -100,11 +108,12 @@ class MultilanguageTest extends TestCase
         ];
         
         $token = $this->authCreated();
+        $this->withHeaders(['Authorization' => 'Bearer ' . $token])->postJson(route('faq.store'), $faq);
 
-        $response1 = $this->withHeaders(['Authorization' => 'Bearer ' . $token])->postJson(route('faq.store'), $faq);
-        
         $modifications = ['es' => ['title' => '¿En qué consiste el juego de las mesas?']];
-        $response2 = $this->withHeaders(['Authorization' => 'Bearer ' . $token])->putJson(route('faq.update', ['id' => 1]), $modifications);
+        $response2 = $this->withHeaders([
+            'Authorization' => 'Bearer ' . $token
+            ])->putJson(route('faq.update', ['id' => 1]), $modifications);
 
         $response2->assertStatus(200);
 
@@ -124,14 +133,20 @@ class MultilanguageTest extends TestCase
         ];
 
         $token = $this->authCreated();
-        $response1 = $this->withHeaders(['Authorization' => 'Bearer ' . $token])->postJson(route('app.store'), $app);
+        $this->withHeaders(['Authorization' => 'Bearer ' . $token])->postJson(route('app.store'), $app);
 
         
-        $response2 = $this->withHeaders(['Authorization' => 'Bearer ' . $token, 'Accept-Language' => 'ca'])->getJson(route('app.show', ['id' => 1]));
+        $response2 = $this->withHeaders([
+            'Authorization' => 'Bearer ' . $token,
+            'Accept-Language' => 'ca'
+            ])->getJson(route('app.show', ['id' => 1]));
         $response2->assertStatus(200)->assertSee('joc');
 
 
-        $response3 = $this->withHeaders(['Authorization' => 'Bearer ' . $token, 'Accept-Language' => 'es'])->getJson(route('app.show', ['id' => 1]));
+        $response3 = $this->withHeaders([
+            'Authorization' => 'Bearer ' . $token,
+            'Accept-Language' => 'es'
+            ])->getJson(route('app.show', ['id' => 1]));
         $response3->assertStatus(200)->assertSee('juego');
 
     }
@@ -147,14 +162,20 @@ class MultilanguageTest extends TestCase
         ];
 
         $token = $this->authCreated();
-        $response1 = $this->withHeaders(['Authorization' => 'Bearer ' . $token])->postJson(route('faq.store'), $faq);
+        $this->withHeaders(['Authorization' => 'Bearer ' . $token])->postJson(route('faq.store'), $faq);
 
         
-        $response2 = $this->withHeaders(['Authorization' => 'Bearer ' . $token, 'Accept-Language' => 'ca'])->getJson(route('faq.show', ['id' => 1]));
+        $response2 = $this->withHeaders([
+            'Authorization' => 'Bearer ' . $token,
+            'Accept-Language' => 'ca'
+            ])->getJson(route('faq.show', ['id' => 1]));
         $response2->assertStatus(200)->assertSee('joc');
 
 
-        $response3 = $this->withHeaders(['Authorization' => 'Bearer ' . $token, 'Accept-Language' => 'es'])->getJson(route('faq.show', ['id' => 1]));
+        $response3 = $this->withHeaders([
+            'Authorization' => 'Bearer ' . $token,
+            'Accept-Language' => 'es'
+            ])->getJson(route('faq.show', ['id' => 1]));
         $response3->assertStatus(200)->assertSee('juego');
 
     }
@@ -173,7 +194,7 @@ class MultilanguageTest extends TestCase
             'status' => 'ACTIVE',
             'role' => 'ADMIN',
         ]);
-        return $token = $user->createToken('auth_token')->accessToken;
+        return $user->createToken('auth_token')->accessToken;
         
     }
 
