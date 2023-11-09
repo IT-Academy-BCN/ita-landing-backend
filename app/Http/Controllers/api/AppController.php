@@ -26,8 +26,8 @@ class AppController extends Controller
         ]);
         
         $rules = RuleFactory::make([
-            '%title%' => ['required', 'string', 'max:255'],
-            '%description%' => ['required_with:"%title%"', 'string'],
+            '%title%' => 'required|string|max:255',
+            '%description%' => 'required_with:"%title%"|string',
         ]);
         
         $validatedData += $request->validate($rules);
@@ -52,27 +52,31 @@ class AppController extends Controller
 
     public function update(Request $request, $id)
     {
-        $app = App::find($id); 
+        $app = App::find($id);
 
         if (!$app) {
             return response()->json(['error' => __('api.app_not_found')], 404);
         }
 
         $validatedData = $request->validate([
-            'url' => 'url',
-            'github' => 'url',
+            'url' => 'url:http,https',
+            'github' => 'url:http,https',
             'state' => 'in:COMPLETED,IN PROGRESS,SOON',
         ]);
         
         $rules = RuleFactory::make([
-            '%title%' => ['string', 'max:255'],
+            '%title%' => ['required', 'string', 'max:255'],
             '%description%' => ['string'],
         ]);
         
         $validatedData += $request->validate($rules);
 
-        $app->update($validatedData);
-        return response()->json(['message' => __('api.app_updated')], 200);
+        if ($app->update($validatedData)) {
+            return response()->json(['message' => __('api.app_updated')], 200);
+        } else {
+            return response()->json(['error' => __('api.update_failed')], 422);
+        }
+        
     }
 
     public function destroy($id)

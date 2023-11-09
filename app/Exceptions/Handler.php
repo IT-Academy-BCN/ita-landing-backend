@@ -52,19 +52,21 @@ class Handler extends ExceptionHandler
 
     public function render($request, Throwable $exception)
     {
-        if ($exception instanceof ModelNotFoundException) {
-            return response()->json(['error' => 'Resource not found'], Response::HTTP_NOT_FOUND);
+        switch(true) {
+            case $exception instanceof ModelNotFoundException:
+                return response()->json(['error' => 'Resource not found.'], 204);
+                break;
+            case $exception instanceof ValidationException:
+                return response()->json(['error'=> $exception->getMessage()], 422);
+                break;
+            case $exception instanceof HttpException:
+                return response()->json([
+                    'error'=> 'Something wrong with the server: ' . $exception->getMessage()
+                ], 500);
+                break;
+            default:
+            return parent::render($request, $exception);
         }
-
-        if ($exception instanceof ValidationException) {
-            return response()->json(['error' => $exception->getMessage()], Response::HTTP_INTERNAL_SERVER_ERROR);
-        }
-
-        if ($exception instanceof HttpException) {
-            return response()->json(['error' => 'Somethings wrong with the server: '.$exception->getMessage()], Response::HTTP_INTERNAL_SERVER_ERROR);
-        }
-
-        return parent::render($request, $exception);
     }
 }
 
