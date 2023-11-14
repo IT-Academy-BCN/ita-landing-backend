@@ -69,7 +69,8 @@ return [
     |
     */
 
-    'timezone' => 'UTC',
+    // Set this in your .env file with, for example, APP_TIMEZONE='Europe/Madrid', otherwise it's gonna be UTC by default
+    'timezone' => env('APP_TIMEZONE', 'UTC'),
 
     /*
     |--------------------------------------------------------------------------
