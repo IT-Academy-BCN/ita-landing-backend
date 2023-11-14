@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\api;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\Models\Faq;
+use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
 
 class FaqController extends Controller
@@ -22,8 +22,8 @@ class FaqController extends Controller
             'id' => $faq->id,
             'title' => $faq->title,
             'description' => $faq->description,
-            'created_at'=> $faq->created_at,
-            'updated_at' => $faq->updated_at
+            'created_at' => $faq->created_at,
+            'updated_at' => $faq->updated_at,
         ]);
     }
 
@@ -34,9 +34,9 @@ class FaqController extends Controller
                 'title' => ['required', 'string', 'max:255'],
                 'description' => ['required', 'string'],
             ]);
-    
+
             $faq = Faq::create($validatedData);
-    
+
             return response()->json(['faq' => $faq], 201);
         } catch (ValidationException $e) {
             return response()->json(['errors' => $e->errors()], 422);
@@ -47,20 +47,20 @@ class FaqController extends Controller
     {
         try {
             $faqs = Faq::find($id);
-        
-            if (!$faqs) {
+
+            if (! $faqs) {
                 return response()->json(['error' => 'FAQ not found'], 404);
             }
-        
+
             $validatedData = $request->validate([
                 'title' => 'required|string|max:255',
                 'description' => 'required|string',
             ]);
-        
+
             $faqs->title = $validatedData['title'];
             $faqs->description = $validatedData['description'];
             $faqs->save();
-        
+
             return response()->json(['message' => 'FAQ updated successfully']);
         } catch (ValidationException $e) {
             return response()->json(['errors' => $e->errors()], 422);
@@ -71,7 +71,7 @@ class FaqController extends Controller
     {
         $faqs = Faq::find($id);
 
-        if (!$faqs) {
+        if (! $faqs) {
             return response()->json(['error' => 'FAQ not found'], 404);
         }
 

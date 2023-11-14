@@ -18,7 +18,7 @@ class FaqFactory extends Factory
     {
         return [
             'title' => fake()->sentence,
-            'description' => fake()->paragraph
+            'description' => fake()->paragraph,
         ];
     }
 }

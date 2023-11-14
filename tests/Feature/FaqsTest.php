@@ -2,10 +2,10 @@
 
 namespace Tests\Feature;
 
+use App\Models\Faq;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
-use App\Models\User;
-use App\Models\Faq;
 
 class FaqsTest extends TestCase
 {
@@ -15,7 +15,7 @@ class FaqsTest extends TestCase
      * Test index method. Unauthenticated user have access to this route too.
      */
     public function test_index(): void
-    {   
+    {
         $faqs = [
             [
                 'title' => fake()->sentence,
@@ -26,14 +26,14 @@ class FaqsTest extends TestCase
                 'description' => fake()->paragraph,
             ],
         ];
-        
+
         Faq::insert($faqs);
 
         $response = $this->get('/api/faqs');
 
         $response->assertStatus(200)
             ->assertJson([
-                'faqs' => $faqs
+                'faqs' => $faqs,
             ]);
     }
 
@@ -57,10 +57,10 @@ class FaqsTest extends TestCase
                 'description' => fake()->paragraph,
             ],
         ];
-        
+
         Faq::insert($faqs);
 
-        $response = $this->actingAs($user)->withHeaders(['Authorization' => 'Bearer ' . $token,])->get('/api/faqs');
+        $response = $this->actingAs($user)->withHeaders(['Authorization' => 'Bearer '.$token])->get('/api/faqs');
 
         $response->assertStatus(200)->assertJson(['faqs' => $faqs]);
     }
@@ -69,7 +69,7 @@ class FaqsTest extends TestCase
      * Test show method.
      */
     public function test_show()
-    {        
+    {
         \Artisan::call('passport:install');
 
         $user = User::factory()->create();
@@ -78,14 +78,14 @@ class FaqsTest extends TestCase
         $faq = Faq::factory()->create();
 
         $response = $this->actingAs($user)->withHeaders([
-            'Authorization' => 'Bearer ' . $token,
-        ])->get('/api/faqs/' . $faq->id);
+            'Authorization' => 'Bearer '.$token,
+        ])->get('/api/faqs/'.$faq->id);
 
         $response->assertStatus(200)
             ->assertJson([
                 'id' => $faq->id,
                 'title' => $faq->title,
-                'description' => $faq->description
+                'description' => $faq->description,
             ]);
     }
 
@@ -93,12 +93,12 @@ class FaqsTest extends TestCase
      * Test show method without token.
      */
     public function test_show_without_token()
-    {        
+    {
         \Artisan::call('passport:install');
 
         $faq = Faq::factory()->create();
 
-        $response = $this->get('/api/faqs/' . $faq->id);
+        $response = $this->get('/api/faqs/'.$faq->id);
 
         $response->assertStatus(302);
     }
@@ -115,16 +115,16 @@ class FaqsTest extends TestCase
 
         $data = [
             'title' => 'Test FAQ',
-            'description' => 'This is a test FAQ'
+            'description' => 'This is a test FAQ',
         ];
 
         $response = $this->actingAs($user)->withHeaders([
-            'Authorization' => 'Bearer ' . $token,
+            'Authorization' => 'Bearer '.$token,
         ])->post('/api/faqs', $data);
 
         $response->assertStatus(201)
             ->assertJson([
-                'faq' => $data
+                'faq' => $data,
             ]);
 
         $this->assertDatabaseHas('faqs', $data);
@@ -139,7 +139,7 @@ class FaqsTest extends TestCase
 
         $data = [
             'title' => 'Test FAQ',
-            'description' => 'This is a test FAQ'
+            'description' => 'This is a test FAQ',
         ];
 
         $response = $this->post('/api/faqs', $data);
@@ -159,11 +159,11 @@ class FaqsTest extends TestCase
 
         // Missing title
         $data1 = [
-            'description' => 'This is a test FAQ'
+            'description' => 'This is a test FAQ',
         ];
 
         $response1 = $this->actingAs($user)->withHeaders([
-            'Authorization' => 'Bearer ' . $token,
+            'Authorization' => 'Bearer '.$token,
         ])->post('/api/faqs', $data1);
 
         $response1->assertStatus(422)
@@ -171,11 +171,11 @@ class FaqsTest extends TestCase
 
         // Missing description
         $data2 = [
-            'title' => 'Test FAQ'
+            'title' => 'Test FAQ',
         ];
 
         $response2 = $this->actingAs($user)->withHeaders([
-            'Authorization' => 'Bearer ' . $token,
+            'Authorization' => 'Bearer '.$token,
         ])->post('/api/faqs', $data2);
 
         $response2->assertStatus(422)
@@ -185,7 +185,7 @@ class FaqsTest extends TestCase
         $data3 = [];
 
         $response3 = $this->actingAs($user)->withHeaders([
-            'Authorization' => 'Bearer ' . $token,
+            'Authorization' => 'Bearer '.$token,
         ])->post('/api/faqs', $data3);
 
         $response3->assertStatus(422)
@@ -203,12 +203,12 @@ class FaqsTest extends TestCase
         $token = $user->createToken('TestToken')->accessToken;
 
         $data = [
-            'title' => fake()->paragraph . fake()->paragraph . fake()->paragraph,
-            'description' => 'This is a test FAQ'
+            'title' => fake()->paragraph.fake()->paragraph.fake()->paragraph,
+            'description' => 'This is a test FAQ',
         ];
 
         $response = $this->actingAs($user)->withHeaders([
-            'Authorization' => 'Bearer ' . $token,
+            'Authorization' => 'Bearer '.$token,
         ])->post('/api/faqs', $data);
 
         $response->assertStatus(422)
@@ -229,22 +229,22 @@ class FaqsTest extends TestCase
 
         $data = [
             'title' => 'Updated FAQ',
-            'description' => 'This is an updated FAQ'
+            'description' => 'This is an updated FAQ',
         ];
 
         $response = $this->actingAs($user)->withHeaders([
-            'Authorization' => 'Bearer ' . $token,
-        ])->put('/api/faqs/' . $faq->id, $data);
+            'Authorization' => 'Bearer '.$token,
+        ])->put('/api/faqs/'.$faq->id, $data);
 
         $response->assertStatus(200)
             ->assertJson([
-                'message' => 'FAQ updated successfully'
+                'message' => 'FAQ updated successfully',
             ]);
 
         $this->assertDatabaseHas('faqs', $data);
     }
 
-     /**
+    /**
      * Test update method without token.
      */
     public function test_update_without_token()
@@ -255,10 +255,10 @@ class FaqsTest extends TestCase
 
         $data = [
             'title' => 'Updated FAQ',
-            'description' => 'This is an updated FAQ'
+            'description' => 'This is an updated FAQ',
         ];
 
-        $response = $this->put('/api/faqs/' . $faq->id, $data);
+        $response = $this->put('/api/faqs/'.$faq->id, $data);
 
         $response->assertStatus(302);
     }
@@ -275,14 +275,14 @@ class FaqsTest extends TestCase
 
         $data = [
             'title' => 'Updated FAQ',
-            'description' => 'This is an updated FAQ'
+            'description' => 'This is an updated FAQ',
         ];
 
         $nonExistentId = 9999;
 
         $response = $this->actingAs($user)->withHeaders([
-            'Authorization' => 'Bearer ' . $token,
-        ])->put('/api/faqs/' . $nonExistentId, $data);
+            'Authorization' => 'Bearer '.$token,
+        ])->put('/api/faqs/'.$nonExistentId, $data);
 
         $response->assertStatus(404);
     }
@@ -300,13 +300,13 @@ class FaqsTest extends TestCase
         $faq = Faq::factory()->create();
 
         $data = [
-            'title' => fake()->paragraph . fake()->paragraph . fake()->paragraph,
-            'description' => 'This is an updated FAQ'
+            'title' => fake()->paragraph.fake()->paragraph.fake()->paragraph,
+            'description' => 'This is an updated FAQ',
         ];
 
         $response = $this->actingAs($user)->withHeaders([
-            'Authorization' => 'Bearer ' . $token,
-        ])->put('/api/faqs/' . $faq->id, $data);
+            'Authorization' => 'Bearer '.$token,
+        ])->put('/api/faqs/'.$faq->id, $data);
 
         $response->assertStatus(422)
             ->assertJsonValidationErrors(['title']);
@@ -326,12 +326,12 @@ class FaqsTest extends TestCase
         $faq = $faqs->first();
 
         $response = $this->actingAs($user)->withHeaders([
-            'Authorization' => 'Bearer ' . $token,
-        ])->delete('/api/faqs/' . $faq->id);
+            'Authorization' => 'Bearer '.$token,
+        ])->delete('/api/faqs/'.$faq->id);
 
         $response->assertStatus(200)
             ->assertJson([
-                'message' => 'FAQ deleted successfully'
+                'message' => 'FAQ deleted successfully',
             ]);
 
         $this->assertDatabaseMissing('faqs', ['id' => $faq->id]);
@@ -346,7 +346,7 @@ class FaqsTest extends TestCase
 
         $faq = Faq::factory()->create();
 
-        $response = $this->delete('/api/faqs/' . $faq->id);
+        $response = $this->delete('/api/faqs/'.$faq->id);
 
         $response->assertStatus(302);
 
@@ -366,8 +366,8 @@ class FaqsTest extends TestCase
         $nonExistentId = 9999;
 
         $response = $this->actingAs($user)->withHeaders([
-            'Authorization' => 'Bearer ' . $token,
-        ])->delete('/api/faqs/' . $nonExistentId);
+            'Authorization' => 'Bearer '.$token,
+        ])->delete('/api/faqs/'.$nonExistentId);
 
         $response->assertStatus(404);
     }

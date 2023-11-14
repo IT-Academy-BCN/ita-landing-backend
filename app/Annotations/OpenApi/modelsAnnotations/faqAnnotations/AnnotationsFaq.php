@@ -1,12 +1,14 @@
-<?php 
+<?php
 
 namespace App\Annotations\OpenApi\modelsAnnotations\faqAnnotations;
 
 use OpenApi as OA;
+
 /**
  * @OA\Schema(
  *     title="Faq",
  *     description="Faq model",
+ *
  *     @OA\Property(
  *         property="id",
  *         type="integer",
@@ -41,5 +43,6 @@ use OpenApi as OA;
  *     )
  * )
  */
-
-class AnnotationsFaq {}
+class AnnotationsFaq
+{
+}

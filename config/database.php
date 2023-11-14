@@ -65,7 +65,7 @@ return [
                 'dump_binary_path' => '/Applications/XAMPP/bin', //switch to server dump binary path
                 'use_single_transaction',
                 'timeout' => 60 * 5, // 5 minute timeout
-                ],
+            ],
         ],
 
         'pgsql' => [

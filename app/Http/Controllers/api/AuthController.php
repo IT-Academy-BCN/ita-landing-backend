@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-
 class AuthController extends Controller
 {
     public function login(Request $request)
@@ -14,7 +13,7 @@ class AuthController extends Controller
         // Validate inputs
         $request->validate([
             'dni' => 'required',
-            'password' => 'required|string'
+            'password' => 'required|string',
         ]);
         // Get user's credentials
         $credentials = [

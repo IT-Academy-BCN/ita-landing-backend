@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace App\Annotations\OpenApi;
 
@@ -7,16 +7,15 @@ namespace App\Annotations\OpenApi;
  *   name="User",
  *   description="Operations for a user"
  * )
- *
  * @OA\Tag(
  *   name="Apps",
  *   description="Operations for an app"
  * )
- *
  * @OA\Tag(
  *   name="Faqs",
  *   description="Operations for a faq"
  * )
  */
-
-class AnnotationsTags {}
+class AnnotationsTags
+{
+}

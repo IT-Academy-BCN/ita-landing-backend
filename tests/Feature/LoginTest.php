@@ -2,8 +2,8 @@
 
 namespace Tests\Feature;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use App\Models\User;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class LoginTest extends TestCase
@@ -12,7 +12,6 @@ class LoginTest extends TestCase
 
     /**
      * A user can be logged in successfully with a valid credentials
-     *
      */
     public function test_a_user_can_be_logged_in(): void
     {
@@ -29,7 +28,7 @@ class LoginTest extends TestCase
 
         $response = $this->postJson(route('login'), [
             'dni' => '39986946S',
-            'password' => 'password'
+            'password' => 'password',
         ]);
 
         $response->assertOk();
@@ -38,14 +37,14 @@ class LoginTest extends TestCase
                 'message',
                 'access_token',
             ],
-            'status'
+            'status',
         ]);
 
         $this->assertAuthenticated();
     }
+
     /**
      * A user can not be logged in successfully with a invalid credentials
-     *
      */
     public function test_a_user_can_not_be_logged_in_with_both_fields_wrong(): void
     {
@@ -62,15 +61,15 @@ class LoginTest extends TestCase
 
         $response = $this->postJson(route('login'), [
             'dni' => '39986987N',
-            'password' => 'wrongPassword'
+            'password' => 'wrongPassword',
         ]);
 
         $response->assertStatus(401);
         $response->assertJson([
             'result' => [
-                'message' => 'Invalid credentials'
+                'message' => 'Invalid credentials',
             ],
-            'status' => false
+            'status' => false,
         ]);
 
         $this->assertGuest();
@@ -78,7 +77,6 @@ class LoginTest extends TestCase
 
     /**
      * A user can not be logged in successfully with missing fields
-     *
      */
     public function test_a_user_cannot_be_logged_in_with_missing_fields(): void
     {
@@ -105,15 +103,15 @@ class LoginTest extends TestCase
 
         $response = $this->postJson(route('login'), [
             'dni' => '39986946S',
-            'password' => 'wrongPassword'
+            'password' => 'wrongPassword',
         ]);
 
         $response->assertStatus(401);
         $response->assertJson([
             'result' => [
-                'message' => 'Invalid credentials'
+                'message' => 'Invalid credentials',
             ],
-            'status' => false
+            'status' => false,
         ]);
 
         $this->assertGuest();
@@ -137,22 +135,22 @@ class LoginTest extends TestCase
 
         $response = $this->postJson(route('login'), [
             'dni' => '39986987N',
-            'password' => 'password'
+            'password' => 'password',
         ]);
 
         $response->assertStatus(401);
         $response->assertJson([
             'result' => [
-                'message' => 'Invalid credentials'
+                'message' => 'Invalid credentials',
             ],
-            'status' => false
+            'status' => false,
         ]);
 
         $this->assertGuest();
     }
+
     /**
      *  User last login time is saved and updated
-     *
      */
     public function test_a_user_last_login_is_saved_and_updated(): void
     {
@@ -172,7 +170,7 @@ class LoginTest extends TestCase
 
         $response = $this->postJson(route('login'), [
             'dni' => 'Z2314216F',
-            'password' => 'password'
+            'password' => 'password',
         ]);
 
         $response->assertOk();
@@ -185,7 +183,7 @@ class LoginTest extends TestCase
         // login again
         $response = $this->postJson(route('login'), [
             'dni' => 'Z2314216F',
-            'password' => 'password'
+            'password' => 'password',
         ]);
 
         $response->assertOk();
@@ -194,9 +192,9 @@ class LoginTest extends TestCase
         $second_last_login_at = $user->last_login_at;
         $this->assertNotEquals($first_last_login_at, $second_last_login_at);
     }
+
     /**
      *  User last login time is not saved on failed login
-     *
      */
     public function test_last_login_at_is_not_updated_on_failed_login(): void
     {
@@ -214,7 +212,7 @@ class LoginTest extends TestCase
 
         $response = $this->postJson(route('login'), [
             'dni' => 'Z2314216F',
-            'password' => 'wrongPassword'
+            'password' => 'wrongPassword',
         ]);
         // Check failed login
         $response->assertStatus(401);

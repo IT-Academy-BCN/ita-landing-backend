@@ -8,6 +8,7 @@ use OpenApi as OA;
  * @OA\Schema(
  *     title="User",
  *     description="User model",
+ *
  *     @OA\Property(
  *         property="id",
  *         type="integer",
@@ -87,5 +88,6 @@ use OpenApi as OA;
  *     )
  * )
  */
-
-class AnnotationsUser {}
+class AnnotationsUser
+{
+}
