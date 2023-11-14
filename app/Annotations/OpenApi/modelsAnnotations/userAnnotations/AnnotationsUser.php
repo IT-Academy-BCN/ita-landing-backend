@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace App\Annotations\OpenApi\modelsAnnotations\userAnnotations;
 
@@ -45,6 +45,13 @@ use OpenApi as OA;
  *         description="Role",
  *         enum={"ADMIN", "REGISTERED"},
  *         example="ADMIN"
+ *     ),
+ *     @OA\Property(
+ *         property="last_login_at",
+ *         type="string",
+ *         format="date-time",
+ *         description="Last user log in timestamp",
+ *         example="2023-06-19T12:00:00+00:00"
  *     ),
  *     @OA\Property(
  *         property="email_verified_at",
