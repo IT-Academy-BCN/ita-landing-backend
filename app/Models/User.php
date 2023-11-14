@@ -25,7 +25,8 @@ class User extends Authenticatable
         'dni',
         'password',
         'status',
-        'role'
+        'role',
+        'last_login_at',
     ];
 
     /**
