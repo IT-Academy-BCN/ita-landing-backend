@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use App\Models\User;
+use Database\Factories\UserFactory;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -17,20 +18,12 @@ class LoginTest extends TestCase
     {
         \Artisan::call('passport:install');
 
-        User::create([
-            'name' => 'Gabriela',
-            'email' => 'gaby@gmail.com',
-            'dni' => '39986946S',
-            'password' => bcrypt('password'),
-            'status' => 'ACTIVE',
-            'role' => 'ADMIN',
-        ]);
+        $user = UserFactory::new()->create();
 
         $response = $this->postJson(route('login'), [
-            'dni' => '39986946S',
-            'password' => 'password',
+            'dni' => $user->dni,
+            'password' => 'password', // Default password from the factory
         ]);
-
         $response->assertOk();
         $response->assertJsonStructure([
             'result' => [
@@ -50,17 +43,10 @@ class LoginTest extends TestCase
     {
         \Artisan::call('passport:install');
 
-        User::create([
-            'name' => 'Gabriela',
-            'email' => 'gaby@gmail.com',
-            'dni' => '39986946S',
-            'password' => bcrypt('password'),
-            'status' => 'ACTIVE',
-            'role' => 'ADMIN',
-        ]);
+        UserFactory::new()->create(['dni' => 'Y5177867Y', 'password' => 'password']);
 
         $response = $this->postJson(route('login'), [
-            'dni' => '39986987N',
+            'dni' => 'Z6126330D',
             'password' => 'wrongPassword',
         ]);
 
@@ -92,17 +78,10 @@ class LoginTest extends TestCase
     {
         \Artisan::call('passport:install');
 
-        User::create([
-            'name' => 'Gabriela',
-            'email' => 'gaby@gmail.com',
-            'dni' => '39986946S',
-            'password' => bcrypt('password'),
-            'status' => 'ACTIVE',
-            'role' => 'ADMIN',
-        ]);
+        $user = UserFactory::new()->create(['password' => bcrypt('password')]);
 
         $response = $this->postJson(route('login'), [
-            'dni' => '39986946S',
+            'dni' => $user->dni,
             'password' => 'wrongPassword',
         ]);
 
@@ -124,18 +103,12 @@ class LoginTest extends TestCase
     {
         \Artisan::call('passport:install');
 
-        User::create([
-            'name' => 'Gabriela',
-            'email' => 'gaby@gmail.com',
-            'dni' => '39986946S',
-            'password' => bcrypt('password'),
-            'status' => 'ACTIVE',
-            'role' => 'ADMIN',
-        ]);
+        UserFactory::new()->create(['dni' => 'Y5177867Y']);
+
 
         $response = $this->postJson(route('login'), [
             'dni' => '39986987N',
-            'password' => 'password',
+            'password' => 'password', // Default password from the factory
         ]);
 
         $response->assertStatus(401);
@@ -156,21 +129,14 @@ class LoginTest extends TestCase
     {
         \Artisan::call('passport:install');
 
-        $user = User::create([
-            'name' => 'Francisco',
-            'email' => 'fran@mail.com',
-            'dni' => 'Z2314216F',
-            'password' => bcrypt('password'),
-            'status' => 'ACTIVE',
-            'role' => 'ADMIN',
-        ]);
+        $user = UserFactory::new()->create();
         // Check if field is originally NULL
         $original_last_login_at = $user->last_login_at;
         $this->assertNull($original_last_login_at);
 
         $response = $this->postJson(route('login'), [
-            'dni' => 'Z2314216F',
-            'password' => 'password',
+            'dni' => $user->dni,
+            'password' => 'password', // Default password from the factory
         ]);
 
         $response->assertOk();
@@ -182,8 +148,8 @@ class LoginTest extends TestCase
         sleep(1);
         // login again
         $response = $this->postJson(route('login'), [
-            'dni' => 'Z2314216F',
-            'password' => 'password',
+            'dni' => $user->dni,
+            'password' => 'password', // Default password from the factory
         ]);
 
         $response->assertOk();
@@ -200,18 +166,13 @@ class LoginTest extends TestCase
     {
         \Artisan::call('passport:install');
 
-        $user = User::create([
-            'name' => 'Francisco',
-            'email' => 'fran@mail.com',
-            'dni' => 'Z2314216F',
-            'password' => bcrypt('password'),
-            'status' => 'ACTIVE',
-            'role' => 'ADMIN',
-        ]);
+        $user = UserFactory::new()->create(['password' => bcrypt('password')]);
+
+        // Check if field is originally NULL
         $this->assertNull($user->last_login_at);
 
         $response = $this->postJson(route('login'), [
-            'dni' => 'Z2314216F',
+            'dni' => $user->dni,
             'password' => 'wrongPassword',
         ]);
         // Check failed login
