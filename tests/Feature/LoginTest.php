@@ -105,7 +105,6 @@ class LoginTest extends TestCase
 
         UserFactory::new()->create(['dni' => 'Y5177867Y']);
 
-
         $response = $this->postJson(route('login'), [
             'dni' => '39986987N',
             'password' => 'password', // Default password from the factory
