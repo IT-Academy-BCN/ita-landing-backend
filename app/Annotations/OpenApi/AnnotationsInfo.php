@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace App\Annotations\OpenApi;
 
@@ -10,10 +10,12 @@ namespace App\Annotations\OpenApi;
  *   [ITA Landing Backend](https://github.com/IT-Academy-BCN/ita-landing-backend)
  *   [ITA Landing Frontend](https://github.com/IT-Academy-BCN/ita-landing-frontend)"
  * )
+ *
  *   @OA\Server(
  *     url="http://127.0.0.1:8000/api"
  *   )
  * )
  */
-
-class AnnotationsInfo {}
+class AnnotationsInfo
+{
+}

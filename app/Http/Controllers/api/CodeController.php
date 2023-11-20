@@ -4,13 +4,12 @@ namespace App\Http\Controllers\api;
 
 use App\Http\Controllers\Controller;
 use App\Mail\MailableCode;
-use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Str;
 use App\Models\Code;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
-
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
 
 class CodeController extends Controller
 {
@@ -26,7 +25,7 @@ class CodeController extends Controller
 
         Code::create([
             'code' => $code,
-            'is_used' => false
+            'is_used' => false,
         ]);
 
         return $code;
@@ -34,6 +33,7 @@ class CodeController extends Controller
 
     /**
      * Random code generated.
+     *
      * @return string
      */
     public function generateRandomCode()
@@ -44,10 +44,8 @@ class CodeController extends Controller
     /**
      * Send a code by email.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\JsonResponse
      */
-     
     public function sendCodeByEmail(Request $request)
     {
         if (Auth::user()->role !== 'ADMIN') {
@@ -61,9 +59,10 @@ class CodeController extends Controller
         if ($validEmail->fails()) {
             return response()->json(['status' => false, 'message' => 'Invalid email', 'errors' => $validEmail->errors()], 400);
 
-        }else{
+        } else {
             $emailAddress = $request->input('email');
             Mail::to($emailAddress)->send(new MailableCode($this->store()));
+
             return response()->json(['status' => true, 'message' => 'Email sent successfully']);
         }
     }
