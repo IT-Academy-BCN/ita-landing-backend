@@ -2,12 +2,13 @@
 
 namespace App\Exceptions;
 
-use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Throwable;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\ValidationException;
 use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Symfony\Component\HttpKernel\Exception\HttpException;
+use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 
 class Handler extends ExceptionHandler
 {
@@ -52,18 +53,24 @@ class Handler extends ExceptionHandler
 
     public function render($request, Throwable $exception)
     {
+        //to keep a log for errors
+        Log::error($exception);
+
         switch(true) {
             case $exception instanceof ModelNotFoundException:
-                return response()->json(['error' => 'Resource not found.'], 204);
+                return response()->json(['error' => ['message' => trans('http-statuses.404')]], 404);
                 break;
             case $exception instanceof ValidationException:
-                return response()->json(['error'=> $exception->getMessage()], 422);
+                return response()->json(['error'=> ['message' => trans('http-statuses.422')]], 422);
                 break;
             case $exception instanceof HttpException:
-                return response()->json([
-                    'error'=> 'Something wrong with the server: ' . $exception->getMessage()
-                ], 500);
-                break;
+                    return response()->json([
+                        'error' => [
+                            'message' => trans('http-statuses.' . $exception->getStatusCode())
+                            ]
+                        ], $exception->getStatusCode());
+                    break;
+
             default:
             return parent::render($request, $exception);
         }
