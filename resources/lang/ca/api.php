@@ -14,9 +14,11 @@ return[
     'app_deleted'   => 'App eliminada correctament.',
     'app_not_found' => 'App no trobada a la base de dades.',
     'app_updated'   => 'App actualitzada correctament.',
+    'app_failed' => 'Error en l\'actualització de la app.',
 
     /** Faq */
     'faq_deleted'   => 'Faq eliminada correctament.',
     'faq_not_found' => 'Faq no trobada a la base de dades.',
     'faq_updated'   => 'Faq actualitzada correctament.',
+    'faq_failed' => 'Error en l\'actualització de la faq.',
 ];

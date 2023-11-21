@@ -21,12 +21,12 @@ class MultilanguageTest extends TestCase
         $token = $this->authCreated();
 
         $response1 = $this->withHeaders(['Authorization' => 'Bearer ' . $token])->postJson(route('app.store'),);
-        $response1->assertStatus(500)->assertSee('El camp url');
+        $response1->assertStatus(422)->assertSee('El camp url');
 
         $response2 = $this->withHeaders([
             'Authorization' => 'Bearer ' . $token, 'Accept-Language' => 'es'
             ])->postJson(route('app.store'),);
-        $response2->assertStatus(500)->assertSee('El campo url');
+        $response2->assertStatus(422)->assertSee('El campo url');
 
     }
 
@@ -88,7 +88,10 @@ class MultilanguageTest extends TestCase
         
         $target_id = $response1['id'];
 
-        $modifications = ['ca' => ['title' => 'El joc de les taules']];
+        $modifications = [
+            'ca' => ['title' => 'El joc de les taules'],
+            'es' => ['title' => 'El juego de las sillas']
+        ];
         $response2 = $this->withHeaders([
             'Authorization' => 'Bearer ' . $token
             ])->putJson(route('app.update', ['id' => $target_id]), $modifications);

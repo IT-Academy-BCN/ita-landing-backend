@@ -28,7 +28,7 @@ Route::middleware(['SetLocale'])->group(function () {
     Route::post('/forget-password', [UserController::class, 'forgetPassword'])->name('forget.password');
     Route::post('/reset-password/{token}', [UserController::class, 'resetPassword'])->name('reset.password');
 
-    Route::get('/faqs', [FaqController::class, 'index']);
+    Route::get('/faqs', [FaqController::class, 'index'])->name('faq.index');
     Route::get('/apps', [AppController::class, 'index'])->name('app.index');
 
     Route::get('/collaborators/{area}',[CollaboratorsController::class,'index']);

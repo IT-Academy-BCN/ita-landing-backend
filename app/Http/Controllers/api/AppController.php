@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\App;
 use Astrotomic\Translatable\Validation\RuleFactory;
-
+use Exception;
 
 class AppController extends Controller
 {
@@ -52,29 +52,31 @@ class AppController extends Controller
 
     public function update(Request $request, $id)
     {
-        $app = App::find($id);
+        try {
+            $app = App::find($id);
 
-        if (!$app) {
-            return response()->json(['error' => __('api.app_not_found')], 404);
-        }
+            if (!$app) {
+                return response()->json(['error'=> __('api.app_not_found')],204);
+            }
 
-        $validatedData = $request->validate([
-            'url' => 'url:http,https',
-            'github' => 'url:http,https',
-            'state' => 'in:COMPLETED,IN PROGRESS,SOON',
-        ]);
-        
-        $rules = RuleFactory::make([
-            '%title%' => ['required', 'string', 'max:255'],
-            '%description%' => ['string'],
-        ]);
-        
-        $validatedData += $request->validate($rules);
+            $rules = RuleFactory::make([
+                '%title%' => ['required', 'string', 'max:255'],
+                '%description%' => ['string']
+            ]);
 
-        if ($app->update($validatedData)) {
-            return response()->json(['message' => __('api.app_updated')], 200);
-        } else {
-            return response()->json(['error' => __('api.update_failed')], 422);
+            $validatedData = $request->validate([
+                'url' => 'url:http,https',
+                'github' => 'url:http,https',
+                'state' => 'in:COMPLETED,IN PROGRESS,SOON'
+            ]);
+
+            $validatedData += $request->validate($rules);
+
+            $app->update($validatedData);
+            return response()->json(['message' => __('api.app_updated'), 200]);
+
+        } catch (Exception $e) {
+            return response()->json(['error'=> $e->getMessage()], 422);
         }
         
     }
