@@ -28,7 +28,7 @@ class Dni implements ValidationRule
        $letters = "TRWAGMYFPDXBNJZSQVHLCKE";
  
        if (preg_match($nifRegEx, $nif)) {
-          return ($letters[(substr($nif, 0, 8) % 23)] == $nif[8]);
+          return $letters[(substr($nif, 0, 8) % 23)] == $nif[8];
        }
  
        return false;
@@ -46,7 +46,7 @@ class Dni implements ValidationRule
  
           $r = str_replace(['X', 'Y', 'Z'], [0, 1, 2], $nif);
  
-          return ($letters[(substr($r, 0, 8) % 23)] == $nif[8]);
+          return $letters[(substr($r, 0, 8) % 23)] == $nif[8];
        }
  
        return false;

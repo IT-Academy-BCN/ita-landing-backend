@@ -2,9 +2,10 @@
 
 namespace Tests\Feature;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use App\Models\User;
 use Tests\TestCase;
+use App\Models\User;
+use Illuminate\Support\Facades\Artisan;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class LoginTest extends TestCase
 {
@@ -16,7 +17,7 @@ class LoginTest extends TestCase
      */
     public function test_a_user_can_be_logged_in(): void
     {
-        \Artisan::call('passport:install');
+        Artisan::call('passport:install');
 
         User::create([
             'name' => 'Gabriela',
@@ -42,7 +43,7 @@ class LoginTest extends TestCase
             ]);
 
         $this->assertAuthenticated();
-    }   
+    }
 
     /**
      * A user can not be logged in successfully with a invalid credentials
@@ -50,8 +51,6 @@ class LoginTest extends TestCase
      */
     public function test_a_user_can_not_be_logged_in_with_both_fields_wrong(): void
     {
-        \Artisan::call('passport:install');
-
         User::create([
             'name' => 'Gabriela',
             'email' => 'gaby@gmail.com',
@@ -69,7 +68,7 @@ class LoginTest extends TestCase
         $response->assertStatus(401);
         $response->assertJson([
                 'result' => [
-                    'message' => 'Invalid credentials'
+                    'message' => __('auth.failed')
                 ],
                 'status' => false
             ]);
@@ -94,8 +93,6 @@ class LoginTest extends TestCase
      */
     public function test_a_user_cannot_be_logged_in_with_wrong_password(): void
     {
-        \Artisan::call('passport:install');
-
         User::create([
             'name' => 'Gabriela',
             'email' => 'gaby@gmail.com',
@@ -113,7 +110,7 @@ class LoginTest extends TestCase
         $response->assertStatus(401);
         $response->assertJson([
             'result' => [
-                'message' => 'Invalid credentials'
+                'message' => __('auth.failed')
             ],
             'status' => false
         ]);
@@ -126,8 +123,6 @@ class LoginTest extends TestCase
      */
     public function test_a_user_cannot_be_logged_in_with_wrong_dni(): void
     {
-        \Artisan::call('passport:install');
-
         User::create([
             'name' => 'Gabriela',
             'email' => 'gaby@gmail.com',
@@ -145,7 +140,7 @@ class LoginTest extends TestCase
         $response->assertStatus(401);
         $response->assertJson([
             'result' => [
-                'message' => 'Invalid credentials'
+                'message' => __('auth.failed')
             ],
             'status' => false
         ]);

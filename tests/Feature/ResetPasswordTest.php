@@ -38,21 +38,19 @@ class ResetPasswordTest extends TestCase
             'email'=> 'prueba@prueba.com'
         ]);
 
-        $response->assertStatus(404)->assertJsonStructure([
-            'error'
-        ]);
+        $response->assertStatus(204);
     }
 
     public function test_updating_token_for_an_existing_email_on_reset_password_table(): void
     {
-        $user= User::factory()->create();
-        $email= $user->email;
-        $token= Str::random(10);
+        $user = User::factory()->create();
+        $email = $user->email;
+        $token = Str::random(10);
         
         DB::table('password_reset_tokens')->insert([
             'email' => $email,
             'token' => $token
-        ]); 
+        ]);
 
         $response = $this->post(route('forget.password'),[
             'email'=> $email
@@ -75,8 +73,8 @@ class ResetPasswordTest extends TestCase
         ]);
          
         $response = $this->post(route('reset.password',$token),[
-            'password' =>"newpassword",
-            'password_confirm' => "newpassword"
+            'password' => 'newpassword',
+            'password_confirmation' => 'newpassword'
         ]);
 
         $response->assertStatus(200)->assertJsonStructure([
@@ -98,10 +96,10 @@ class ResetPasswordTest extends TestCase
         $response = $this->post(route('reset.password',$token),[
             'token'=> $token,
             'password' =>"newpassword",
-            'password_confirm' => "newpawwrodd"
+            'password_confirmation' => "newpawwrodd"
         ]);
 
-        $response->assertStatus(302);
+        $response->assertStatus(422);
     }
 
     public function test_user_have_wrong_token(): void
@@ -118,7 +116,7 @@ class ResetPasswordTest extends TestCase
         $response = $this->post(route('reset.password',$token),[
             'token'=> $token,
             'password' =>"newpassword",
-            'password_confirm' => "newpassword"
+            'password_confirmation' => "newpassword"
         ]);
 
         $response->assertStatus(400)->assertJsonStructure([

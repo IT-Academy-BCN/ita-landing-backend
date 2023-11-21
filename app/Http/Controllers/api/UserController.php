@@ -26,7 +26,7 @@ class UserController extends Controller
         try {
             $validatedData  = $request->validate([
                 'email' => 'required|string|email|max:255|unique:users',
-                'name' => 'string|max:255',
+                'name' => 'nullable|string|max:255',
                 'dni' => ['required','unique:users',new Dni],
                 'password' => 'required|string|min:8|confirmed',
                 'code' => 'required|exists:codes,code,is_used,0'
@@ -34,13 +34,13 @@ class UserController extends Controller
 
             // Create a new user.
             $user = User::create([
-                'email' => $request->email,
-                'name' => $request->name,
-                'dni' => strtoupper($request->dni),
-                'password' => Hash::make($request->password),
+                'email' => $validatedData['email'],
+                'name' => $validatedData['name'],
+                'dni' => strtoupper($validatedData['dni']),
+                'password' => Hash::make($validatedData['password']),
                 'status' => 'ACTIVE',
                 'role' => 'ADMIN',
-                'code' => $request->code,
+                'code' => $validatedData['code'],
             ]);
             
             $this->is_usedUpdated($request->code, $user->id);
@@ -52,6 +52,7 @@ class UserController extends Controller
                 ],
                 'status' => true
             ]);
+            
         } catch (ValidationException $e) {
             return response()->json(
                 [
@@ -66,7 +67,7 @@ class UserController extends Controller
         $code = Code::where('code', $code)->where('is_used', false)->first();
         
         if(!$code) {
-            return response()->json(['error' => __('auth.invalid_code')],404);
+            return response()->json(['error' => __('auth.invalid_code')], 404);
         }
         
         $code->is_used = true;
@@ -75,69 +76,69 @@ class UserController extends Controller
     }
 
 
- public function forgetPassword(ForgetRequest $request){
+    public function forgetPassword(ForgetRequest $request){
 
-    $email = $request->email;
+        $email = $request->email;
 
-    try{
-        // check if user with such email exists
-        $user= User::where('email',$email)->first();
+        try{
+            // check if user with such email exists
+            $user = User::where('email', $email)->first();
 
-        if(!$user){
-            return response()->json(['error' => __('passwords.user')],404);
+            if(!$user){
+                return response()->json(['error' => __('passwords.user')], 204);
+            }
+
+            // Generate password reset token
+            $token= Str::random(10);
+
+            // Assign password reset token to user's email in 'password_reset_token' table
+            if(DB::table('password_reset_tokens')->where('email', $email)->first()) {
+                DB::table('password_reset_tokens')->where('email', $email)->update([ 'token' => $token, ]);
+            } else {
+                DB::table('password_reset_tokens')->insert([
+                    'email' => $email,
+                    'token' => $token
+                ]);
+            }
+
+            //send password reset email
+            Mail::to($email)->send(new ForgetPasswordMail($user->name, $token));
+
+            // send confirmation response
+            return response()->json(['message'=> __('passwords.sent')], 200);
+            
+
+        }catch(Exception $exception){
+
+            return response()->json(['message' => $exception->getMessage()], 404);
+
         }
 
-        // Generate password reset token
-        $token= Str::random(10);
-
-        // Assign password reset token to user's email in 'password_reset_token' table
-        if(DB::table('password_reset_tokens')->where('email', $email)->first()) {
-            DB::table('password_reset_tokens')->where('email', $email)->update([ 'token' => $token, ]);
-        } else {
-            DB::table('password_reset_tokens')->insert([
-                'email' => $email,
-                'token' => $token
-            ]); 
-        };
-
-        //send password reset email
-        Mail::to($email)->send(new ForgetPasswordMail($user->name, $token));
-
-        // send confirmation response
-        return response()->json(['message'=> __('passwords.sent')],200);
-        
-
-    }catch(Exception $exception){
-
-        return response()->json(['message' => $exception->getMessage()],404);
-
     }
 
-}
+    public function resetPassword(ResetRequest $request){
 
- public function resetPassword(ResetRequest $request){
+        $token = $request->route('token');
 
-    $token = $request->route('token');
+        $passwordResets= DB::table('password_reset_tokens')->where('token', $token)->first();
+                        
+        if(!$passwordResets){
 
-    $passwordResets= DB::table('password_reset_tokens')->where('token', $token)->first();   
-    
-                    
-    if(!$passwordResets){
+            return response()->json([
+                'error' => __('passwords.token')
+            ],400);
+        }
+
+        /** @var User $user */
+        $user = User::where('email', $passwordResets->email)->first();
+        $user->password = Hash::make($request->password);
+        $user->save();
+        DB::table('password_reset_tokens')->where('email', $passwordResets->email)->delete();
 
         return response()->json([
-            'error' => __('passwords.token')
-        ],400);
+            'message' => __('passwords.reset')
+        ],200);
+
     }
-    /** @var User $user */
-    $user= User::where('email',$passwordResets->email)->first();
-    $user->password = Hash::make($request->password);
-    $user->save();
-    DB::table('password_reset_tokens')->where('email', $passwordResets->email)->delete();
-
-    return response()->json([
-        'message' => __('passwords.reset')
-    ],200);
-
-}
 
 }
