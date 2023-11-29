@@ -99,7 +99,7 @@ class UserController extends Controller
             }
 
             // Construct the password reset URL
-            $url = env('APP_URL') . '/reset-password/' . $token;
+            $url = env('APP_URL').'/reset-password/'.$token;
             //send password reset email
             Mail::to($email)->send(new ForgetPasswordMail($user->name, $url));
 

@@ -11,12 +11,14 @@ use Illuminate\Queue\SerializesModels;
 class ForgetPasswordMail extends Mailable
 {
     use Queueable, SerializesModels;
-
     use Queueable, SerializesModels;
+
     /**
      * Create a new message instance.
      */
-    public function __construct(public $name, public $url) {}
+    public function __construct(public $name, public $url)
+    {
+    }
 
     /**
      * Get the message envelope.
