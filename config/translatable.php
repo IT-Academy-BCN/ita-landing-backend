@@ -10,11 +10,7 @@ return [
     | Contains an array with the applications available locales.
     |
     */
-    'locales' => [
-        'ca',
-        'es'
-,
-    ],
+    'locales' => ['ca', 'es', 'en'],
 
     /*
     |--------------------------------------------------------------------------
@@ -81,8 +77,7 @@ return [
     | is used first. So "es" will be checked before "es_MX".
     |
     */
-    'fallback_locale' => 'en',
-
+    'fallback_locale' => false,
     /*
     |--------------------------------------------------------------------------
     | Translation Model Namespace
