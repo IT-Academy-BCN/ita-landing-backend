@@ -6,7 +6,7 @@ return[
     'articles'      => 'Articles:',
     'title'         => 'Títol',
     'content'       => 'Contingut',
-    
+
     /** Collaborators */
     'invalid_area'  => 'Aquesta àrea no és vàlida.',
 
@@ -19,4 +19,9 @@ return[
     'faq_deleted'   => 'Faq eliminada correctament.',
     'faq_not_found' => 'Faq no trobada a la base de dades.',
     'faq_updated'   => 'Faq actualitzada correctament.',
+
+    /** Translations */
+    'translation_key_not_available' => 'Aquest idioma no està disponible a l\'aplicació.',
+    'translation_not_found' => 'No hi ha traducció per a aquest idioma.',
+
 ];

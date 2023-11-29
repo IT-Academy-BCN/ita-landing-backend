@@ -9,7 +9,7 @@ return[
 
     /** Collaborators */
     'invalid_area'  => 'Esta área no es válida.',
-    
+
     /** App */
     'app_deleted'   => 'App eliminada correctamente.',
     'app_not_found' => 'App no existe en la base de datos.',
@@ -19,5 +19,9 @@ return[
     'Faq_deleted'   => 'Faq eliminada correctamente.',
     'faq_not_found' => 'Faq no existe en la base de datos.',
     'faq_updated'   => 'Faq actualizada correctamente.',
-    
+
+    /** Translations */
+    'translation_key_not_available' => 'Ese idioma no esta disponible en la aplicación.',
+    'translation_not_found'         => 'No hay traducción para ese idioma.',
+
 ];
