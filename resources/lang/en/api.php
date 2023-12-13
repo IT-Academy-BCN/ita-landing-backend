@@ -23,4 +23,6 @@ return[
     /** Translations */
     'translation_key_not_available' => 'This language is not available in the application.',
     'translation_not_found'         => 'There is no translation for that language.',
+    'faq_translation_updated'       => 'FAQ translation successfully updated.',
+    'faq_translation_deleted'       => 'FAQ translation successfully deleted.',
 ];

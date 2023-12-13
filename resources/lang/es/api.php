@@ -23,5 +23,6 @@ return[
     /** Translations */
     'translation_key_not_available' => 'Ese idioma no esta disponible en la aplicación.',
     'translation_not_found'         => 'No hay traducción para ese idioma.',
-
+    'faq_translation_updated'       => 'Traducción de la FAQ actualizada correctamente.',
+    'faq_translation_deleted'       => 'Traducción de la FAQ eliminada correctamente.',
 ];
