@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace App\Annotations\OpenApi\controllersAnnotations\usersAnnotations;
 
@@ -66,7 +66,7 @@ class AnnotationsUsers {
  *           property="email",
  *           type="string",
  *           example="example@example.com"
- *         ),        
+ *         ),
  *       )
  *     )
  *   ),
@@ -107,7 +107,7 @@ class AnnotationsUsers {
  *           property="password_confirm",
  *           type="string",
  *           example="password"
- *         ),        
+ *         ),
  *       )
  *     )
  *   ),
@@ -121,6 +121,5 @@ class AnnotationsUsers {
  *   )
  * )
  */
-
     public function resetPassword() {}
 }

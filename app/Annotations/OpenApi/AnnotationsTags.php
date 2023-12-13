@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace App\Annotations\OpenApi;
 
@@ -16,6 +16,11 @@ namespace App\Annotations\OpenApi;
  * @OA\Tag(
  *   name="Faqs",
  *   description="Operations for a faq"
+ * )
+ *
+ * @OA\Tag(
+ *   name="Collaborators",
+ *   description="Operations for Collaborators"
  * )
  */
 
