@@ -3,42 +3,68 @@
 namespace App\Http\Controllers\api;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\Models\Faq;
-use Astrotomic\Translatable\Validation\RuleFactory;
+use Astrotomic\Translatable\Locales;
+use Illuminate\Validation\Rule;
+use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
 
 class FaqController extends Controller
 {
+    //------INDEX------//
+
     public function index()
     {
-        return response()->json(['faqs' => Faq::all()]);
+        return response()->json(['faqs' => Faq::all()], 200);
     }
 
-    public function show($id)
+    //------SHOW------//
+
+    public function show(Request $request, $id)
     {
-        $faq = Faq::find($id);
+        try {
+            $language = $request->query('language');
 
-        if (!$faq) {
-            return response()->json(['error' => __('api.faq_not_found')], 404);
+            $availableLocales = app('translatable.locales')->all();
+
+            $request->validate([
+                'language' => ['sometimes', 'required', 'string', 'max:2', Rule::in($availableLocales),],
+            ]);
+
+            $faq = Faq::find($id);
+
+            if (!$faq) {
+                return response()->json(['error' => __('api.faq_not_found')], 404);
+            }
+            if ($language && !$faq->hasTranslation($language)) {
+                return response()->json(['error' => __('api.translation_not_found')], 406);
+            }
+            $faq = $language ? $faq->translate($language) : $faq;
+
+            return response()->json(['faq' => $faq], 200);
+        } catch (ValidationException $e) {
+            return response()->json(['errors' => $e->errors()], 422);
         }
-
-        return response()->json($faq);
     }
+
+    //------STORE------//
 
     public function store(Request $request)
     {
         try {
+            $language = $request->query('language');
 
-            $rules = RuleFactory::make([
-                '%title%' => ['required', 'string', 'max:255'],
-                '%description%' => ['required_with:%title%', 'string'],
+            $availableLocales = app('translatable.locales')->all();
+
+            $rules = ([
+                'language' => ['required', 'string', 'max:2', Rule::in($availableLocales),],
+                'title' => ['required', 'string', 'max:255', 'unique:faq_translations,title'],
+                'description' => ['required_with:title', 'string'],
             ]);
-            
             $validatedData = $request->validate($rules);
+            $dataWithLocaleKey = [$language => $validatedData];
 
-
-            $faq = Faq::create($validatedData);
+            $faq = Faq::create($dataWithLocaleKey)->setDefaultLocale($language);
 
             return response()->json(['faq' => $faq], 201);
         } catch (ValidationException $e) {
@@ -46,40 +72,68 @@ class FaqController extends Controller
         }
     }
 
-public function update(Request $request, $id)
-{
-    try {
+    //------UPDATE------//
+
+
+    public function update(Request $request, $id)
+    {
+        try {
+            $language = $request->query('language');
+
+            $faq = Faq::find($id);
+
+            if (!$faq) {
+                return response()->json(['error' => __('api.faq_not_found')], 404);
+            }
+            $availableLocales = app('translatable.locales')->all();
+
+            $rules = ([
+                'language' => ['required', 'string', 'max:2', Rule::in($availableLocales),],
+                'title' => ['required', 'string', 'max:255', 'unique:faq_translations,title'],
+                'description' => ['required_with:title', 'string'],
+            ]);
+
+            $validatedData = $request->validate($rules);
+            $dataWithLocaleKey = [$language => $validatedData];
+
+            $faq->update($dataWithLocaleKey);
+
+            return response()->json(['message' => __('api.faq_translation_updated'), 'faq' => $faq], 200);
+
+        } catch (ValidationException $e) {
+            return response()->json(['errors' => $e->errors()], 422);
+        }
+    }
+
+    //------DESTROY------//
+
+    public function destroy(Request $request, $id)
+    {
+        $language = $request->query('language');
+
+        // Check if this language is admited in the application
+        $availableLocales = app('translatable.locales')->all();
+        if ($language && !app(Locales::class)->has($language) || !in_array($language, $availableLocales)) {
+            return response()->json(['error' => __('api.translation_key_not_available')], 422);
+        }
+
         $faq = Faq::find($id);
 
         if (!$faq) {
             return response()->json(['error' => __('api.faq_not_found')], 404);
         }
-
-        $rules = RuleFactory::make([
-            '%title%' => ['string', 'max:255'],
-            '%description%' => ['string'],
-        ]);
-        
-        $validatedData = $request->validate($rules);
-
-        $faq->update($validatedData);
-        return response()->json(['message' => __('api.faq_updated')], 200);
-
-    } catch (ValidationException $e) {
-        return response()->json(['errors' => $e->errors()], 422);
-    }
-}
-
-    public function destroy($id)
-    {
-        $faqs = Faq::find($id);
-
-        if (!$faqs) {
-            return response()->json(['error' => __('api.faq_not_found')], 404);
+        if ($language) {
+            if (!$faq->hasTranslation($language)) {
+                return response()->json(['error' => __('api.translation_not_found')], 406);
+            }
+            $faq->deleteTranslations($language);
+        } else {
+            $faq->delete();
         }
-
-        $faqs->delete();
-
-        return response()->json(['message' => __('api.faq_deleted')]);
+        return response()->json([
+            'message' => $language
+                ? __('api.faq_translation_deleted')
+                : __('api.faq_deleted')
+        ], 200);
     }
 }
