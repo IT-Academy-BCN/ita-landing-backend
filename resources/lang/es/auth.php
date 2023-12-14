@@ -14,12 +14,12 @@ return [
     /** Login */
     'blocked' => 'El usuario ha sido bloqueado.',
     'email_not_verified' => 'Su correo no ha sido verificado.',
-    'failed'   => 'Estas credenciales no coinciden con nuestros registros.',
+    'failed' => 'Estas credenciales no coinciden con nuestros registros.',
     'success' => 'Usuario autenticado satisfactoriamente.',
     'password' => 'La contraseña es incorrecta.',
     'throttle' => 'Demasiados intentos de acceso. Por favor intente nuevamente en :seconds segundos.',
 
     /** Logout */
-    'logout_success' => 'Usuario desatenticado satisfactoriamente.'
+    'logout_success' => 'Usuario desatenticado satisfactoriamente.',
 
 ];

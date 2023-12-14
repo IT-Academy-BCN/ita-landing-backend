@@ -1,12 +1,12 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\api\UserController;
-use App\Http\Controllers\api\FaqController;
+use App\Http\Controllers\api\AppController;
 use App\Http\Controllers\api\AuthController;
 use App\Http\Controllers\api\CodeController;
-use App\Http\Controllers\api\AppController;
 use App\Http\Controllers\api\CollaboratorsController;
+use App\Http\Controllers\api\FaqController;
+use App\Http\Controllers\api\UserController;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,7 +31,6 @@ Route::get('/apps', [AppController::class, 'index'])->name('app.index');
 
 Route::get('/collaborators/{area}', [CollaboratorsController::class, 'index']);
 
-
 Route::middleware(['auth:api'])->prefix('faqs')->group(function () {
 
     Route::get('/{id}/{language?}', [FaqController::class, 'show'])->name('faq.show');
@@ -39,7 +38,6 @@ Route::middleware(['auth:api'])->prefix('faqs')->group(function () {
     Route::put('/{id}/{language?}', [FaqController::class, 'update'])->name('faq.update');
     Route::delete('/{id}/{language?}', [FaqController::class, 'destroy'])->name('faq.destroy');
 });
-
 
 Route::post('/send-code-by-email', [CodeController::class, 'sendCodeByEmail'])->middleware('auth:api');
 

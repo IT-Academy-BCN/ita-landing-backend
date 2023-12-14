@@ -3,20 +3,18 @@
 namespace App\Http\Controllers\api;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Models\App;
 use App\Models\App;
 use Astrotomic\Translatable\Validation\RuleFactory;
-
+use Illuminate\Http\Request;
 
 class AppController extends Controller
 {
-
     public function index()
     {
         return response()->json(App::all());
     }
 
-    
     public function store(Request $request)
     {
         $validatedData = $request->validate([
@@ -24,12 +22,12 @@ class AppController extends Controller
             'github' => 'required|url',
             'state' => 'required|in:COMPLETED,IN PROGRESS,SOON',
         ]);
-        
+
         $rules = RuleFactory::make([
             '%title%' => ['required', 'string', 'max:255'],
             '%description%' => ['required_with:"%title%"', 'string'],
         ]);
-        
+
         $validatedData += $request->validate($rules);
 
         $app = App::create($validatedData);
@@ -37,24 +35,22 @@ class AppController extends Controller
         return response()->json($app, 201);
     }
 
-  
     public function show($id)
     {
         $app = App::find($id);
 
-        if (!$app) {
+        if (! $app) {
             return response()->json(['error' => __('api.app_not_found')], 404);
         }
 
         return response()->json($app);
     }
 
-
     public function update(Request $request, $id)
     {
-        $app = App::find($id); 
+        $app = App::find($id);
 
-        if (!$app) {
+        if (! $app) {
             return response()->json(['error' => __('api.app_not_found')], 404);
         }
 
@@ -63,28 +59,29 @@ class AppController extends Controller
             'github' => 'url',
             'state' => 'in:COMPLETED,IN PROGRESS,SOON',
         ]);
-        
+
         $rules = RuleFactory::make([
             '%title%' => ['string', 'max:255'],
             '%description%' => ['string'],
         ]);
-        
+
         $validatedData += $request->validate($rules);
 
         $app->update($validatedData);
+
         return response()->json(['message' => __('api.app_updated')], 200);
     }
 
     public function destroy($id)
     {
         $app = App::find($id);
-        
-        if (!$app) {
+
+        if (! $app) {
             return response()->json(['error' => __('api.app_not_found')], 404);
         }
 
         $app->delete();
-        
+
         return response()->json(['message' => __('api.app_deleted')]);
     }
 }

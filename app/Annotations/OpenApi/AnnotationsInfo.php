@@ -13,8 +13,11 @@ namespace App\Annotations\OpenApi;
  * [ITA Landing Backend](https://github.com/IT-Academy-BCN/ita-landing-backend)
  * [ITA Landing Frontend](https://github.com/IT-Academy-BCN/ita-landing-frontend)",
  * )
+ *
  * @OA\Server(
  *     url= L5_SWAGGER_CONST_HOST
  * )
  */
-    class AnnotationsInfo {}
+class AnnotationsInfo
+{
+}
