@@ -9,17 +9,15 @@ class CollaboratorsController extends Controller
 {
     public function index($area)
     {
-        if ($area === 'landing') {
-            return $this->collaboratorLanding();
-        } elseif ($area === 'wiki') {
-            return $this->collaboratorItaWiki();
-        } elseif ($area === 'challenges') {
-            return $this->collaboratorItaChallenges();
-        }
 
-        return response()->json([
-            'message' => 'this area is invalid',
-        ], 404);
+        return match ($area) {
+            'landing' => $this->collaboratorLanding(),
+            'wiki' => $this->collaboratorItaWiki(),
+            'challenges' => $this->collaboratorItaChallenges(),
+            'profiles' => $this->collaboratorItaProfiles(),
+            default => response()->json(['message' => 'This area is invalid'], 404),
+            };
+
     }
 
     public function collaboratorLogic($collaborator)
@@ -60,7 +58,6 @@ class CollaboratorsController extends Controller
 
     public function collaboratorLanding()
     {
-
         $collaboratorPhp = '/ita-landing-backend/collaborators?affiliation=direct';
         $collaboratorReact = '/ita-landing-frontend/collaborators?affiliation=direct';
 
@@ -75,7 +72,7 @@ class CollaboratorsController extends Controller
 
     public function collaboratorItaWiki()
     {
-
+        
         $collaboratorWiki = '/ita-wiki/collaborators?affiliation=direct';
 
         return $this->collaboratorLogic($collaboratorWiki);
@@ -84,7 +81,7 @@ class CollaboratorsController extends Controller
 
     public function collaboratorItaChallenges()
     {
-
+        
         $collaboratorAngular = '/ita-challenges-frontend/collaborators?affiliation=direct';
         $collaboratorJava = '/ita-challenges-backend/collaborators?affiliation=direct';
 
@@ -94,5 +91,13 @@ class CollaboratorsController extends Controller
         $uniqueCollaborators = $this->uniqueCollaborators($angular, $java);
 
         return $uniqueCollaborators;
+    }
+
+    public function collaboratorItaProfiles()
+    {
+        // TODO: Add front or backend profiles collaborator like in ITA Challenges?
+        $collaboratorProfiles = '/ita-profiles/collaborators?affiliation=direct';
+        
+        return $this->collaboratorLogic($collaboratorProfiles);
     }
 }
