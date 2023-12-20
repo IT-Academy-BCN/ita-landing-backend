@@ -2,21 +2,24 @@
 
 namespace App\Annotations\OpenApi\controllersAnnotations\appAnnotations;
 
-class AnnotationsApps {
-
+class AnnotationsApps
+{
     /**
- * @OA\Get(
- *   path="/apps",
- *   tags={"Apps"},
- *   summary="Apps list",
- *   description="This endpoint is used to take a list of all the apps",
- *   @OA\Response(
- *     response="200",
- *     description="Apps list."
- *   )
- * )
- */
-    public function index() {}
+     * @OA\Get(
+     *   path="/apps",
+     *   tags={"Apps"},
+     *   summary="Apps list",
+     *   description="This endpoint is used to take a list of all the apps",
+     *
+     *   @OA\Response(
+     *     response="200",
+     *     description="Apps list."
+     *   )
+     * )
+     */
+    public function index()
+    {
+    }
 
 /**
  * @OA\Post(
@@ -212,3 +215,4 @@ class AnnotationsApps {
  */
    public function destroy() {}
 }
+

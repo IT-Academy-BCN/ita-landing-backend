@@ -2,54 +2,61 @@
 
 namespace App\Annotations\OpenApi\controllersAnnotations\usersAnnotations;
 
-class AnnotationsUsers {
-
+class AnnotationsUsers
+{
     /**
- * @OA\Post(
- *   path="/register",
- *   tags={"User"},
- *   summary="User Register",
- *   description="This endpoint is used to register a new user in the application.",
- *   @OA\RequestBody(
- *     required=true,
- *     @OA\MediaType(
- *       mediaType="application/json",
- *       @OA\Schema(
- *         @OA\Property(
- *           property="email",
- *           type="string",
- *           example="example@example.com"
- *         ),
- *         @OA\Property(
- *           property="name",
- *           type="string",
- *           example="John Doe"
- *         ),
- *         @OA\Property(
- *           property="dni",
- *           type="string",
- *           example="12345678A"
- *         ),
- *         @OA\Property(
- *           property="password",
- *           type="string",
- *           example="password123"
- *         ),
- *         @OA\Property(
- *           property="password_confirmation",
- *           type="string",
- *           example="password123"
- *         )
- *       )
- *     )
- *   ),
- *   @OA\Response(
- *     response="200",
- *     description="User created successfully."
- *   )
- * )
- */
-    public function store() {}
+     * @OA\Post(
+     *   path="/register",
+     *   tags={"User"},
+     *   summary="User Register",
+     *   description="This endpoint is used to register a new user in the application.",
+     *
+     *   @OA\RequestBody(
+     *     required=true,
+     *
+     *     @OA\MediaType(
+     *       mediaType="application/json",
+     *
+     *       @OA\Schema(
+     *
+     *         @OA\Property(
+     *           property="email",
+     *           type="string",
+     *           example="example@example.com"
+     *         ),
+     *         @OA\Property(
+     *           property="name",
+     *           type="string",
+     *           example="John Doe"
+     *         ),
+     *         @OA\Property(
+     *           property="dni",
+     *           type="string",
+     *           example="12345678A"
+     *         ),
+     *         @OA\Property(
+     *           property="password",
+     *           type="string",
+     *           example="password123"
+     *         ),
+     *         @OA\Property(
+     *           property="password_confirmation",
+     *           type="string",
+     *           example="password123"
+     *         )
+     *       )
+     *     )
+     *   ),
+     *
+     *   @OA\Response(
+     *     response="200",
+     *     description="User created successfully."
+     *   )
+     * )
+     */
+    public function store()
+    {
+    }
 
     /**
  * @OA\Post(

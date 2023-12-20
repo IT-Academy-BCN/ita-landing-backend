@@ -8,6 +8,7 @@ use OpenApi as OA;
  * @OA\Schema(
  *     title="App",
  *     description="App model",
+ *
  *     @OA\Property(
  *         property="id",
  *         type="integer",
@@ -61,6 +62,4 @@ use OpenApi as OA;
  *     )
  * )
  */
-
-
 class AnnotationsApp {}

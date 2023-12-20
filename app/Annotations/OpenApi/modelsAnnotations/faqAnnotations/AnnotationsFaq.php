@@ -7,6 +7,7 @@ use OpenApi as OA;
  * @OA\Schema(
  *     title="Faq",
  *     description="Faq model",
+ *
  *     @OA\Property(
  *         property="id",
  *         type="integer",
@@ -129,7 +130,7 @@ class AnnotationsFaqTranslation {}
  *         description="Last update timestamp",
  *         example="2023-06-19T13:30:00+00:00"
  *     ),
- *     @OA\Property(
+ *         @OA\Property(
  *         property="id",
  *         type="integer",
  *         description="ID",
@@ -162,5 +163,4 @@ class AnnotationsFaqTranslation {}
  *     ),
  * )
  */
-
  class AnnotationsFaqStored {}
