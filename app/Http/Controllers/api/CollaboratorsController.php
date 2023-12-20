@@ -8,16 +8,20 @@ use Illuminate\Support\Facades\Http;
 class CollaboratorsController extends Controller
 {
     public function index($area)
-    {
+    {   
+        if ($area === 'landing') {
+            return $this->collaboratorLanding();
+        } elseif ($area === 'wiki') {
+            return $this->collaboratorItaWiki();
+        } elseif ($area === 'challenges') {
+            return $this->collaboratorItaChallenges();
+        } elseif ($area === 'profiles') {
+            return $this->collaboratorItaProfiles();
+        }
 
-        return match ($area) {
-            'landing' => $this->collaboratorLanding(),
-            'wiki' => $this->collaboratorItaWiki(),
-            'challenges' => $this->collaboratorItaChallenges(),
-            'profiles' => $this->collaboratorItaProfiles(),
-            default => response()->json(['message' => 'This area is invalid'], 404),
-            };
-
+        return response()->json([
+            'message' => 'this area is invalid',
+        ], 404);
     }
 
     public function collaboratorLogic($collaborator)
@@ -38,7 +42,6 @@ class CollaboratorsController extends Controller
         }
 
         return $allCollaborators;
-
     }
 
     public function uniqueCollaborators(...$arrays)
@@ -75,7 +78,11 @@ class CollaboratorsController extends Controller
         
         $collaboratorWiki = '/ita-wiki/collaborators?affiliation=direct';
 
-        return $this->collaboratorLogic($collaboratorWiki);
+        $wiki = $this->collaboratorLogic($collaboratorWiki);
+
+        $uniqueCollaborators = $this->uniqueCollaborators($wiki);
+
+        return $uniqueCollaborators;
 
     }
 
@@ -93,11 +100,18 @@ class CollaboratorsController extends Controller
         return $uniqueCollaborators;
     }
 
-    public function collaboratorItaProfiles()
+   public function collaboratorItaProfiles()
     {
-        // TODO: Add front or backend profiles collaborator like in ITA Challenges?
-        $collaboratorProfiles = '/ita-profiles/collaborators?affiliation=direct';
-        
-        return $this->collaboratorLogic($collaboratorProfiles);
+        $collaboratorReactProfiles = '/ita-profiles-frontend/collaborators?affiliation=direct';
+        $collaboratorPhpProfiles = '/ita-profiles-backend/collaborators?affiliation=direct';
+
+        $reactProfiles = $this->collaboratorLogic($collaboratorReactProfiles);
+        $phpProfiles = $this->collaboratorLogic($collaboratorPhpProfiles);
+
+        $uniqueCollaborators = $this->uniqueCollaborators($reactProfiles, $phpProfiles);
+
+    
+        return $uniqueCollaborators;
     }
+
 }

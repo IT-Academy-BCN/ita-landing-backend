@@ -28,6 +28,12 @@ class CollaboratorTest extends TestCase
         $response->assertStatus(200);
     }
 
+    public function test_index_get_collaborators_profiles(): void
+    {
+        $response = $this->get('/api/collaborators/profiles');
+        $response->assertStatus(200);
+    }
+
     public function test_inserting_on_index_a_area_that_dont_exist(): void
     {
         $response = $this->get('/api/collaborators/prueba');
@@ -65,6 +71,14 @@ class CollaboratorTest extends TestCase
 
         $collaboratorsController = new CollaboratorsController();
         $response = $collaboratorsController->collaboratorItaChallenges();
+        $this->assertIsArray($response);
+    }
+
+    public function test_collaborator_ita_profiles_function()
+    {
+
+        $collaboratorsController = new CollaboratorsController();
+        $response = $collaboratorsController->collaboratorItaProfiles();
         $this->assertIsArray($response);
     }
 }
