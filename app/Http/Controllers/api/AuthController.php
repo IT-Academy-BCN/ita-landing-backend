@@ -23,12 +23,16 @@ class AuthController extends Controller
         // Verify user credentials
         if (Auth::attempt($credentials)) {
             $user = Auth::user();
+            /** @var \App\Models\User $user */
             $token = $user->createToken('authToken')->accessToken;
 
             // Update 'last_login_at' when user login
             $user->update(['last_login_at' => now()]);
 
-            return response()->json(['result' => ['message' => 'Logged in successfully!', 'access_token' => $token], 'status' => true]);
+            return response()->json([
+                'result' => ['message' => 'Logged in successfully!', 'access_token' => $token],
+                'status' => true
+            ]);
         } else {
             return response()->json(['result' => ['message' => 'Invalid credentials'], 'status' => false], 401);
         }
