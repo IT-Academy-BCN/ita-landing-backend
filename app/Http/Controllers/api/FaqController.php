@@ -113,7 +113,7 @@ class FaqController extends Controller
 
         // Check if this language is admited in the application
         $availableLocales = app('translatable.locales')->all();
-        if ($language && !app(Locales::class)->has($language) || !in_array($language, $availableLocales)) {
+        if ($language && (!app(Locales::class)->has($language) || !in_array($language, $availableLocales))) {
             return response()->json(['error' => __('api.translation_key_not_available')], 422);
         }
 
@@ -127,11 +127,14 @@ class FaqController extends Controller
                 return response()->json(['error' => __('api.translation_not_found')], 406);
             }
             $faq->deleteTranslations($language);
+            // if that was the last translation, delete the whole FAQ
+            $translations = $faq->translations->all();
+            if (!$translations) $faq->delete();
         } else {
             $faq->delete();
         }
         return response()->json([
-            'message' => $language
+            'message' => $translations
                 ? __('api.faq_translation_deleted')
                 : __('api.faq_deleted')
         ], 200);
