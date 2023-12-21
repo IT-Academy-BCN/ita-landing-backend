@@ -18,7 +18,7 @@ return new class extends Migration
             $table->unsignedBigInteger('row_id');
             $table->string('locale');
             $table->longText('translation');
-            
+
         });
     }
 

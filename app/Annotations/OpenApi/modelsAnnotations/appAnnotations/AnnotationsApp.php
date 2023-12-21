@@ -62,4 +62,6 @@ use OpenApi as OA;
  *     )
  * )
  */
-class AnnotationsApp {}
+class AnnotationsApp
+{
+}

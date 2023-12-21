@@ -5,8 +5,8 @@ namespace App\Http\Controllers\api;
 use App\Http\Controllers\Controller;
 use App\Models\Faq;
 use Astrotomic\Translatable\Locales;
-use Illuminate\Validation\Rule;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 use Illuminate\Validation\ValidationException;
 
 class FaqController extends Controller
@@ -28,15 +28,15 @@ class FaqController extends Controller
             $availableLocales = app('translatable.locales')->all();
 
             $request->validate([
-                'language' => ['sometimes', 'required', 'string', 'max:2', Rule::in($availableLocales),],
+                'language' => ['sometimes', 'required', 'string', 'max:2', Rule::in($availableLocales)],
             ]);
 
             $faq = Faq::find($id);
 
-            if (!$faq) {
+            if (! $faq) {
                 return response()->json(['error' => __('api.faq_not_found')], 404);
             }
-            if ($language && !$faq->hasTranslation($language)) {
+            if ($language && ! $faq->hasTranslation($language)) {
                 return response()->json(['error' => __('api.translation_not_found')], 406);
             }
             $faq = $language ? $faq->translate($language) : $faq;
@@ -57,7 +57,7 @@ class FaqController extends Controller
             $availableLocales = app('translatable.locales')->all();
 
             $rules = ([
-                'language' => ['required', 'string', 'max:2', Rule::in($availableLocales),],
+                'language' => ['required', 'string', 'max:2', Rule::in($availableLocales)],
                 'title' => ['required', 'string', 'max:255', 'unique:faq_translations,title'],
                 'description' => ['required_with:title', 'string'],
             ]);
@@ -74,7 +74,6 @@ class FaqController extends Controller
 
     //------UPDATE------//
 
-
     public function update(Request $request, $id)
     {
         try {
@@ -82,13 +81,13 @@ class FaqController extends Controller
 
             $faq = Faq::find($id);
 
-            if (!$faq) {
+            if (! $faq) {
                 return response()->json(['error' => __('api.faq_not_found')], 404);
             }
             $availableLocales = app('translatable.locales')->all();
 
             $rules = ([
-                'language' => ['required', 'string', 'max:2', Rule::in($availableLocales),],
+                'language' => ['required', 'string', 'max:2', Rule::in($availableLocales)],
                 'title' => ['required', 'string', 'max:255', 'unique:faq_translations,title'],
                 'description' => ['required_with:title', 'string'],
             ]);
@@ -113,30 +112,33 @@ class FaqController extends Controller
 
         // Check if this language is admited in the application
         $availableLocales = app('translatable.locales')->all();
-        if ($language && (!app(Locales::class)->has($language) || !in_array($language, $availableLocales))) {
+        if ($language && (! app(Locales::class)->has($language) || ! in_array($language, $availableLocales))) {
             return response()->json(['error' => __('api.translation_key_not_available')], 422);
         }
 
         $faq = Faq::find($id);
 
-        if (!$faq) {
+        if (! $faq) {
             return response()->json(['error' => __('api.faq_not_found')], 404);
         }
         if ($language) {
-            if (!$faq->hasTranslation($language)) {
+            if (! $faq->hasTranslation($language)) {
                 return response()->json(['error' => __('api.translation_not_found')], 406);
             }
             $faq->deleteTranslations($language);
             // if that was the last translation, delete the whole FAQ
             $translations = $faq->translations->all();
-            if (!$translations) $faq->delete();
+            if (! $translations) {
+                $faq->delete();
+            }
         } else {
             $faq->delete();
         }
+
         return response()->json([
             'message' => $translations
                 ? __('api.faq_translation_deleted')
-                : __('api.faq_deleted')
+                : __('api.faq_deleted'),
         ], 200);
     }
 }

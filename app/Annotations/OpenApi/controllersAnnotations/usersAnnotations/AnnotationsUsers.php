@@ -4,7 +4,7 @@ namespace App\Annotations\OpenApi\controllersAnnotations\usersAnnotations;
 
 class AnnotationsUsers
 {
-/** ------STORE------ //
+    /** ------STORE------ //
      * @OA\Post(
      *   path="/register",
      *   tags={"User"},
@@ -63,75 +63,89 @@ class AnnotationsUsers
     {
     }
 
-/** ------forgetPassword()------ //
- * @OA\Post(
- *   path="/forget-password",
- *   tags={"User"},
- *   summary="send email to recovery password",
- *   description="This endpoint is used send an email to a register user to reset the password.",
- *   @OA\RequestBody(
- *     required=true,
- *     @OA\MediaType(
- *       mediaType="application/json",
- *       @OA\Schema(
- *         @OA\Property(
- *           property="email",
- *           type="string",
- *           example="example@example.com"
- *         ),
- *       )
- *     )
- *   ),
- *   @OA\Response(
- *     response="200",
- *     description="check your email"
- *   ),
- *   @OA\Response(
- *     response="404",
- *     description="The email don\'t exist"
- *   )
- * )
- */
-    public function forgetPassword() {}
+    /** ------forgetPassword()------ //
+     * @OA\Post(
+     *   path="/forget-password",
+     *   tags={"User"},
+     *   summary="send email to recovery password",
+     *   description="This endpoint is used send an email to a register user to reset the password.",
+     *
+     *   @OA\RequestBody(
+     *     required=true,
+     *
+     *     @OA\MediaType(
+     *       mediaType="application/json",
+     *
+     *       @OA\Schema(
+     *
+     *         @OA\Property(
+     *           property="email",
+     *           type="string",
+     *           example="example@example.com"
+     *         ),
+     *       )
+     *     )
+     *   ),
+     *
+     *   @OA\Response(
+     *     response="200",
+     *     description="check your email"
+     *   ),
+     *   @OA\Response(
+     *     response="404",
+     *     description="The email don\'t exist"
+     *   )
+     * )
+     */
+    public function forgetPassword()
+    {
+    }
 
-/** ------resetPassword()------ //
- * @OA\Post(
- *   path="/reset-password/{token}",
- *   tags={"User"},
- *   summary="User recovery password",
- *   description="This endpoint is used to update the password of the user.",
- *   @OA\RequestBody(
- *     required=true,
- *     @OA\MediaType(
- *       mediaType="application/json",
- *       @OA\Schema(
- *         @OA\Property(
- *           property="token",
- *           type="string",
- *           example="abcdefghij"
- *         ),
- *          @OA\Property(
- *           property="password",
- *           type="string",
- *           example="password"
- *         ),
- *          @OA\Property(
- *           property="password_confirm",
- *           type="string",
- *           example="password"
- *         ),
- *       )
- *     )
- *   ),
- *   @OA\Response(
- *     response="200",
- *     description="success"
- *   ),
- *   @OA\Response(
- *     response="400",
- *     description="Invalid Token!"
- *   )
- * )
- */
-    public function resetPassword() {}
+    /** ------resetPassword()------ //
+     * @OA\Post(
+     *   path="/reset-password/{token}",
+     *   tags={"User"},
+     *   summary="User recovery password",
+     *   description="This endpoint is used to update the password of the user.",
+     *
+     *   @OA\RequestBody(
+     *     required=true,
+     *
+     *     @OA\MediaType(
+     *       mediaType="application/json",
+     *
+     *       @OA\Schema(
+     *
+     *         @OA\Property(
+     *           property="token",
+     *           type="string",
+     *           example="abcdefghij"
+     *         ),
+     *          @OA\Property(
+     *           property="password",
+     *           type="string",
+     *           example="password"
+     *         ),
+     *          @OA\Property(
+     *           property="password_confirm",
+     *           type="string",
+     *           example="password"
+     *         ),
+     *       )
+     *     )
+     *   ),
+     *
+     *   @OA\Response(
+     *     response="200",
+     *     description="success"
+     *   ),
+     *   @OA\Response(
+     *     response="400",
+     *     description="Invalid Token!"
+     *   )
+     * )
+     */
+    public function resetPassword()
+    {
+    }
 }

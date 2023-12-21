@@ -18,11 +18,12 @@ class FaqFactory extends Factory
     {
         $locales = (app('translatable.locales')->all());
         $language = $locales[array_rand($locales)];
+
         return [
             $language => [
                 'title' => fake($language)->sentence,
-                'description' => fake($language)->paragraph
-            ]
+                'description' => fake($language)->paragraph,
+            ],
         ];
     }
 }

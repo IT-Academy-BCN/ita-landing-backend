@@ -3,6 +3,7 @@
 namespace App\Annotations\OpenApi\modelsAnnotations\faqAnnotations;
 
 use OpenApi as OA;
+
 /** ------- AnnotationsFaq {} -------//
  * @OA\Schema(
  *     title="Faq",
@@ -44,6 +45,7 @@ use OpenApi as OA;
  *         property="translations",
  *         type="array",
  *         description="Array of translations",
+ *
  *         @OA\Items(ref="#/components/schemas/AnnotationsFaqTranslation"),
  *         example={
  *           {
@@ -71,13 +73,15 @@ use OpenApi as OA;
  *     ),
  * )
  */
-
-class AnnotationsFaq {}
+class AnnotationsFaq
+{
+}
 
 /** ------ AnnotationsFaqTranslation {} ------ //
  * @OA\Schema(
  *     title="FaqTranslation",
  *     description="Faq translation model",
+ *
  *     @OA\Property(
  *         property="id",
  *         type="integer",
@@ -110,12 +114,15 @@ class AnnotationsFaq {}
  *     ),
  * )
  */
-class AnnotationsFaqTranslation {}
+class AnnotationsFaqTranslation
+{
+}
 
 /** ------- AnnotationsFaqStored {} -------//
  * @OA\Schema(
  *     title="Faq",
  *     description="Faq model",
+ *
  *     @OA\Property(
  *         property="created_at",
  *         type="string",
@@ -152,6 +159,7 @@ class AnnotationsFaqTranslation {}
  *         property="translations",
  *         type="array",
  *         description="Array of translations",
+ *
  *         @OA\Items(ref="#/components/schemas/AnnotationsFaqTranslation"),
  *         example={
  *           "locale": "ca",
@@ -163,4 +171,6 @@ class AnnotationsFaqTranslation {}
  *     ),
  * )
  */
- class AnnotationsFaqStored {}
+class AnnotationsFaqStored
+{
+}

@@ -28,7 +28,7 @@ class UserController extends Controller
                 'name' => 'string|max:255',
                 'dni' => ['required', 'unique:users', new Dni],
                 'password' => 'required|string|min:8|confirmed',
-                'code' => 'required|exists:codes,code,is_used,0'
+                'code' => 'required|exists:codes,code,is_used,0',
             ]);
 
             // Create a new user.
@@ -47,7 +47,7 @@ class UserController extends Controller
             // Response
             return response()->json([
                 'result' => [
-                    'message' => __('auth.registered')
+                    'message' => __('auth.registered'),
                 ],
                 'status' => true,
             ]);
@@ -64,8 +64,8 @@ class UserController extends Controller
     {
         $code = Code::where('code', $code)->where('is_used', false)->first();
 
-        if(!$code) {
-            return response()->json(['error' => __('auth.invalid_code')],404);
+        if (! $code) {
+            return response()->json(['error' => __('auth.invalid_code')], 404);
         }
 
         $code->is_used = true;
@@ -82,9 +82,9 @@ class UserController extends Controller
             // check if user with such email exists
             $user = User::where('email', $email)->first();
 
-        if(!$user){
-            return response()->json(['error' => __('passwords.user')],404);
-        }
+            if (! $user) {
+                return response()->json(['error' => __('passwords.user')], 404);
+            }
 
             // Generate password reset token
             $token = Str::random(10);
@@ -103,7 +103,7 @@ class UserController extends Controller
             Mail::to($email)->send(new ForgetPasswordMail($user->name, $token));
 
             // send confirmation response
-            return response()->json(['message' =>  __('passwords.sent')], 200);
+            return response()->json(['message' => __('passwords.sent')], 200);
 
         } catch (Exception $exception) {
 
@@ -122,19 +122,19 @@ class UserController extends Controller
 
         if (! $passwordResets) {
 
-        return response()->json([
-            'error' => __('passwords.token')
-        ],400);
-    }
-    /** @var User $user */
-    $user= User::where('email',$passwordResets->email)->first();
-    $user->password = Hash::make($request->password);
-    $user->save();
-    DB::table('password_reset_tokens')->where('email', $passwordResets->email)->delete();
+            return response()->json([
+                'error' => __('passwords.token'),
+            ], 400);
+        }
+        /** @var User $user */
+        $user = User::where('email', $passwordResets->email)->first();
+        $user->password = Hash::make($request->password);
+        $user->save();
+        DB::table('password_reset_tokens')->where('email', $passwordResets->email)->delete();
 
-    return response()->json([
-        'message' => __('passwords.reset')
-    ],200);
+        return response()->json([
+            'message' => __('passwords.reset'),
+        ], 200);
 
     }
 }

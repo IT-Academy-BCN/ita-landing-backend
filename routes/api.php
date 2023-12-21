@@ -28,7 +28,7 @@ Route::post('/reset-password/{token}', [UserController::class, 'resetPassword'])
 Route::get('/faqs', [FaqController::class, 'index']);
 Route::get('/apps', [AppController::class, 'index'])->name('app.index');
 
-Route::get('/collaborators/{area}',[CollaboratorsController::class,'index']);
+Route::get('/collaborators/{area}', [CollaboratorsController::class, 'index']);
 
 Route::middleware(['auth:api'])->controller(FaqController::class)->prefix('faqs')->group(function () {
 

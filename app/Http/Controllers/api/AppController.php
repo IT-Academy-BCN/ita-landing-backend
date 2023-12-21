@@ -4,9 +4,8 @@ namespace App\Http\Controllers\api;
 
 use App\Http\Controllers\Controller;
 use App\Models\App;
-use Illuminate\Http\Request;
 use Astrotomic\Translatable\Validation\RuleFactory;
-
+use Illuminate\Http\Request;
 
 class AppController extends Controller
 {
@@ -39,7 +38,7 @@ class AppController extends Controller
     {
         $app = App::findOrFail($id);
 
-        if (!$app) {
+        if (! $app) {
             return response()->json(['error' => __('api.app_not_found')], 404);
         }
 
@@ -50,7 +49,7 @@ class AppController extends Controller
     {
         $app = App::findOrFail($id);
 
-        if (!$app) {
+        if (! $app) {
             return response()->json(['error' => __('api.app_not_found')], 404);
         }
 
@@ -68,6 +67,7 @@ class AppController extends Controller
         $validatedData += $request->validate($rules);
 
         $app->update($validatedData);
+
         return response()->json(['message' => __('api.app_updated')], 200);
     }
 
@@ -75,7 +75,7 @@ class AppController extends Controller
     {
         $app = App::findOrFail($id);
 
-        if (!$app) {
+        if (! $app) {
             return response()->json(['error' => __('api.app_not_found')], 404);
         }
 
