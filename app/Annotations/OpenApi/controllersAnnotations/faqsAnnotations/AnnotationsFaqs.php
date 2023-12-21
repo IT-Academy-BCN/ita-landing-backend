@@ -227,7 +227,10 @@ class AnnotationsFaqs {
  *   path="/faqs/{id}",
  *   tags={"Faqs"},
  *   summary="Update an existing Frequently Asked Question (FAQ)",
- *   description="This endpoint is used to update the details of an existing FAQ.",
+ *   description="This endpoint is used to update the details of an existing FAQ.
+ *   'Accept-Language' header is the language to interact with the api, it's not the FAQ language.
+ *     Language query parameter it's mandatory.
+ *     If the FAQ doesn't exist in that language, a new translation will be kept for it.",
  *   security={{"bearer": {}}},
  *   @OA\Parameter(
  *     name="Accept-Language",
@@ -315,7 +318,7 @@ class AnnotationsFaqs {
  *   tags={"Faqs"},
  *   summary="Delete a frequently asked question (FAQ)",
  *   description="This endpoint is used to delete an existing FAQ or its translation.
- *     If the language parameter is not provided the whole FAQ will be deleted",
+ *     If the language parameter is not provided, the whole FAQ will be deleted",
  *   security={{"bearer": {}}},
  *   @OA\Parameter(
  *     name="Accept-Language",

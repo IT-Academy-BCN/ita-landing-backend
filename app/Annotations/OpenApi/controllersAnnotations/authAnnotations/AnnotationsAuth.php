@@ -18,7 +18,7 @@ class AnnotationsAuth {
  *         @OA\Property(
  *           property="dni",
  *           type="string",
- *           example="12345678A"
+ *           example="X6288479A"
  *         ),
  *         @OA\Property(
  *           property="password",

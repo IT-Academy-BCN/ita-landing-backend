@@ -262,7 +262,7 @@
                                 "properties": {
                                     "dni": {
                                         "type": "string",
-                                        "example": "12345678A"
+                                        "example": "X6288479A"
                                     },
                                     "password": {
                                         "type": "string",
@@ -555,7 +555,7 @@
                     "Faqs"
                 ],
                 "summary": "Update an existing Frequently Asked Question (FAQ)",
-                "description": "This endpoint is used to update the details of an existing FAQ.",
+                "description": "This endpoint is used to update the details of an existing FAQ.\n *   'Accept-Language' header is the language to interact with the api, it's not the FAQ language.\n *     Language query parameter it's mandatory.\n *     If the FAQ doesn't exist in that language, a new translation will be kept for it.",
                 "operationId": "e574aafe3ec91f35d1279b67ab576c25",
                 "parameters": [
                     {
@@ -657,7 +657,7 @@
                     "Faqs"
                 ],
                 "summary": "Delete a frequently asked question (FAQ)",
-                "description": "This endpoint is used to delete an existing FAQ or its translation.\n *     If the language parameter is not provided the whole FAQ will be deleted",
+                "description": "This endpoint is used to delete an existing FAQ or its translation.\n *     If the language parameter is not provided, the whole FAQ will be deleted",
                 "operationId": "ae5eab98b5a620c4845a7bc3ccb7bb5a",
                 "parameters": [
                     {
@@ -999,7 +999,7 @@
                                     },
                                     "dni": {
                                         "type": "string",
-                                        "example": "12345678A"
+                                        "example": "X6288479A"
                                     },
                                     "password": {
                                         "type": "string",
@@ -1008,6 +1008,10 @@
                                     "password_confirmation": {
                                         "type": "string",
                                         "example": "password123"
+                                    },
+                                    "code": {
+                                        "type": "string",
+                                        "example": "1234"
                                     }
                                 },
                                 "type": "object"
@@ -1340,6 +1344,12 @@
                             "REGISTERED"
                         ],
                         "example": "ADMIN"
+                    },
+                    "last_login_at": {
+                        "description": "Last user log in timestamp",
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2023-06-19T12:00:00+00:00"
                     },
                     "email_verified_at": {
                         "description": "Email verification timestamp",

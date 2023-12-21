@@ -4,7 +4,7 @@ namespace App\Annotations\OpenApi\controllersAnnotations\usersAnnotations;
 
 class AnnotationsUsers
 {
-    /**
+/** ------STORE------ //
      * @OA\Post(
      *   path="/register",
      *   tags={"User"},
@@ -32,7 +32,7 @@ class AnnotationsUsers
      *         @OA\Property(
      *           property="dni",
      *           type="string",
-     *           example="12345678A"
+     *           example="X6288479A"
      *         ),
      *         @OA\Property(
      *           property="password",
@@ -43,6 +43,11 @@ class AnnotationsUsers
      *           property="password_confirmation",
      *           type="string",
      *           example="password123"
+     *         ),
+     *         @OA\Property(
+     *           property="code",
+     *           type="string",
+     *           example="1234"
      *         )
      *       )
      *     )
@@ -58,7 +63,7 @@ class AnnotationsUsers
     {
     }
 
-    /**
+/** ------forgetPassword()------ //
  * @OA\Post(
  *   path="/forget-password",
  *   tags={"User"},
@@ -89,7 +94,7 @@ class AnnotationsUsers
  */
     public function forgetPassword() {}
 
-    /**
+/** ------resetPassword()------ //
  * @OA\Post(
  *   path="/reset-password/{token}",
  *   tags={"User"},
