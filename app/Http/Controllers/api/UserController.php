@@ -23,7 +23,7 @@ class UserController extends Controller
     {
         // Input validation
         try {
-            $validatedData = $request->validate([
+            $request->validate([
                 'email' => 'required|string|email|max:255|unique:users',
                 'name' => 'string|max:255',
                 'dni' => ['required', 'unique:users', new Dni],
@@ -98,8 +98,10 @@ class UserController extends Controller
                 ]);
             }
 
+            // Construct the password reset URL
+            $url = env('APP_URL', 'https://it-academy-landing.netlify.app').'/reset-password/'.$token;
             //send password reset email
-            Mail::to($email)->send(new ForgetPasswordMail($user->name, $token));
+            Mail::to($email)->send(new ForgetPasswordMail($user->name, $url));
 
             // send confirmation response
             return response()->json(['message' => 'Password reset email sent out. Check your email'], 200);
