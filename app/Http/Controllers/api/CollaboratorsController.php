@@ -26,7 +26,7 @@ class CollaboratorsController extends Controller
     public function collaboratorLogic($collaborator)
     {
         $url = env('URL_SERVER_API', 'https://api.github.com');
-        $response = Http::withToken('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')->get($url.$collaborator);
+        $response = Http::withToken(env('MY_TOKEN'))->get($url.$collaborator);
 
         $data = $response->json();
 
