@@ -8,7 +8,8 @@ use Illuminate\Support\Facades\Http;
 class CollaboratorsController extends Controller
 {
     public function index($area)
-    {   if ($area === 'landing') {
+    {
+        if ($area === 'landing') {
             return $this->collaboratorLanding();
         } elseif ($area === 'wiki') {
             return $this->collaboratorItaWiki();
@@ -73,7 +74,7 @@ class CollaboratorsController extends Controller
 
     public function collaboratorItaWiki()
     {
-        
+
         $collaboratorWiki = '/ita-wiki/collaborators?affiliation=direct';
 
         $wiki = $this->collaboratorLogic($collaboratorWiki);
@@ -86,7 +87,7 @@ class CollaboratorsController extends Controller
 
     public function collaboratorItaChallenges()
     {
-        
+
         $collaboratorAngular = '/ita-challenges-frontend/collaborators?affiliation=direct';
         $collaboratorJava = '/ita-challenges-backend/collaborators?affiliation=direct';
 
@@ -98,7 +99,7 @@ class CollaboratorsController extends Controller
         return $uniqueCollaborators;
     }
 
-   public function collaboratorItaProfiles()
+    public function collaboratorItaProfiles()
     {
         $collaboratorReactProfiles = '/ita-profiles-frontend/collaborators?affiliation=direct';
         $collaboratorPhpProfiles = '/ita-profiles-backend/collaborators?affiliation=direct';
@@ -108,8 +109,6 @@ class CollaboratorsController extends Controller
 
         $uniqueCollaborators = $this->uniqueCollaborators($reactProfiles, $phpProfiles);
 
-    
         return $uniqueCollaborators;
     }
-
 }
