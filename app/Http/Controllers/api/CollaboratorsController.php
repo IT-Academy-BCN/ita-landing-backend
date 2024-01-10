@@ -7,20 +7,20 @@ use Illuminate\Support\Facades\Http;
 
 class CollaboratorsController extends Controller
 {
+    public function index($area)
+    {
+        if ($area === 'landing') {
+            return $this->collaboratorLanding();
+        } elseif ($area === 'wiki') {
+            return $this->collaboratorItaWiki();
+        } elseif ($area === 'challenges') {
+            return $this->collaboratorItaChallenges();
+        }
 
- public function index($area)
-{
-    if ($area === 'landing') {
-        return $this->collaboratorLanding();
-    } elseif ($area === 'wiki') {
-        return $this->collaboratorItaWiki();
-    } elseif ($area === 'challenges') {
-        return $this->collaboratorItaChallenges();
+        return response()->json([
+            'message' => __('api.invalid_area'),
+        ], 404);
     }
-    return response()->json([
-        'message' => __('api.invalid_area')
-    ], 404);
-}
 
     public function collaboratorLogic($collaborator)
     {

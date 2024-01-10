@@ -98,8 +98,7 @@ return [
 
     'fallback_locale' => 'ca',
 
-    'supported_locales' => ['ca', 'es'],
-    
+    'supported_locales' => ['ca', 'es', 'en'],
     /*
     |--------------------------------------------------------------------------
     | Faker Locale
@@ -111,7 +110,7 @@ return [
     |
     */
 
-    'faker_locale' => 'es',
+    'faker_locale' => 'ca',
 
     /*
     |--------------------------------------------------------------------------
@@ -184,7 +183,7 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
-        
+
         /*
          * Package Service Providers...
          */

@@ -2,18 +2,14 @@
 
 namespace Tests\Feature;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
-use Tests\TestCase;
-use App\Models\App;
-use App\Models\Faq;
 use App\Models\User;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Artisan;
+use Tests\TestCase;
 
 class MultilanguageTest extends TestCase
 {
     use RefreshDatabase;
-    
 
     /** @test */
     public function get_validation_error_in_multiple_languages(): void
@@ -36,12 +32,12 @@ class MultilanguageTest extends TestCase
 
         $app = [
             'ca' => ['title' => 'El joc de les cadires',
-                     'description' => 'Joc amb més d\'un jugador que consisteix en...'],
+                'description' => 'Joc amb més d\'un jugador que consisteix en...'],
             'es' => ['title' => 'El juego de las sillas',
-                     'description' => 'Juego con más de un jugador que consiste en...'],
+                'description' => 'Juego con más de un jugador que consiste en...'],
             'url' => 'https://chairgame.com',
             'github' => 'https://github.com',
-            'state' => 'COMPLETED'
+            'state' => 'COMPLETED',
         ];
 
         $response = $this->withHeaders([
@@ -57,9 +53,9 @@ class MultilanguageTest extends TestCase
 
         $faq = [
             'ca' => ['title' => 'De què va el joc de les cadires?',
-                     'description' => 'Joc amb més d\'un jugador que consisteix en...'],
+                'description' => 'Joc amb més d\'un jugador que consisteix en...'],
             'es' => ['title' => '¿En qué consiste el juego de las sillas?',
-                     'description' => 'Juego con más de un jugador que consiste en...'],
+                'description' => 'Juego con más de un jugador que consiste en...'],
         ];
 
         $response = $this->withHeaders([
@@ -74,18 +70,18 @@ class MultilanguageTest extends TestCase
     {
         $app = [
             'ca' => ['title' => 'El joc de les cadires',
-                     'description' => 'Joc amb més d\'un jugador que consisteix en...'],
+                'description' => 'Joc amb més d\'un jugador que consisteix en...'],
             'es' => ['title' => 'El juego de las sillas',
-                     'description' => 'Juego con más de un jugador que consiste en...'],
+                'description' => 'Juego con más de un jugador que consiste en...'],
             'url' => 'https://chairgame.com',
             'github' => 'https://github.com',
-            'state' => 'COMPLETED'
+            'state' => 'COMPLETED',
         ];
-        
+
         $token = $this->authCreated();
 
-        $response1 = $this->withHeaders(['Authorization' => 'Bearer ' . $token])->postJson(route('app.store'), $app);
-        
+        $response1 = $this->withHeaders(['Authorization' => 'Bearer '.$token])->postJson(route('app.store'), $app);
+
         $target_id = $response1['id'];
 
         $modifications = [
@@ -105,13 +101,14 @@ class MultilanguageTest extends TestCase
     {
         $faq = [
             'ca' => ['title' => 'De què va el joc de les cadires?',
-                     'description' => 'Joc amb més d\'un jugador que consisteix en...'],
+                'description' => 'Joc amb més d\'un jugador que consisteix en...'],
             'es' => ['title' => '¿En qué consiste el juego de las sillas?',
-                     'description' => 'Juego con más de un jugador que consiste en...'],
+                'description' => 'Juego con más de un jugador que consiste en...'],
         ];
-        
+
         $token = $this->authCreated();
-        $this->withHeaders(['Authorization' => 'Bearer ' . $token])->postJson(route('faq.store'), $faq);
+
+        $response1 = $this->withHeaders(['Authorization' => 'Bearer '.$token])->postJson(route('faq.store'), $faq);
 
         $modifications = ['es' => ['title' => '¿En qué consiste el juego de las mesas?']];
         $response2 = $this->withHeaders([
@@ -127,18 +124,18 @@ class MultilanguageTest extends TestCase
     {
         $app = [
             'ca' => ['title' => 'El joc de les cadires',
-                     'description' => 'Joc amb més d\'un jugador que consisteix en...'],
+                'description' => 'Joc amb més d\'un jugador que consisteix en...'],
             'es' => ['title' => 'El juego de las sillas',
-                     'description' => 'Juego con más de un jugador que consiste en...'],
+                'description' => 'Juego con más de un jugador que consiste en...'],
             'url' => 'https://chairgame.com',
             'github' => 'https://github.com',
-            'state' => 'COMPLETED'
+            'state' => 'COMPLETED',
         ];
 
         $token = $this->authCreated();
         $this->withHeaders(['Authorization' => 'Bearer ' . $token])->postJson(route('app.store'), $app);
 
-        
+
         $response2 = $this->withHeaders([
             'Authorization' => 'Bearer ' . $token,
             'Accept-Language' => 'ca'
@@ -153,21 +150,21 @@ class MultilanguageTest extends TestCase
         $response3->assertStatus(200)->assertSee('juego');
 
     }
-    
+
     /** @test */
     public function get_faq_in_multiple_languages_as_authenticated_user(): void
     {
         $faq = [
             'ca' => ['title' => 'De què va el joc de les cadires?',
-                     'description' => 'Joc amb més d\'un jugador que consisteix en...'],
+                'description' => 'Joc amb més d\'un jugador que consisteix en...'],
             'es' => ['title' => '¿En qué consiste el juego de las sillas?',
-                     'description' => 'Juego con más de un jugador que consiste en...'],
+                'description' => 'Juego con más de un jugador que consiste en...'],
         ];
 
         $token = $this->authCreated();
         $this->withHeaders(['Authorization' => 'Bearer ' . $token])->postJson(route('faq.store'), $faq);
 
-        
+
         $response2 = $this->withHeaders([
             'Authorization' => 'Bearer ' . $token,
             'Accept-Language' => 'ca'
@@ -182,8 +179,6 @@ class MultilanguageTest extends TestCase
         $response3->assertStatus(200)->assertSee('juego');
 
     }
-
-    
 
     private function authCreated()
     {
@@ -198,7 +193,6 @@ class MultilanguageTest extends TestCase
             'role' => 'ADMIN',
         ]);
         return $user->createToken('auth_token')->accessToken;
-        
-    }
 
+    }
 }

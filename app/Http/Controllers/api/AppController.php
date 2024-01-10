@@ -39,7 +39,7 @@ class AppController extends Controller
     {
         $app = App::find($id);
 
-        if (!$app) {
+        if (! $app) {
             return response()->json(['error' => __('api.app_not_found')], 404);
         }
 

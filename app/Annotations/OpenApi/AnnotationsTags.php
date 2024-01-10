@@ -15,6 +15,10 @@ namespace App\Annotations\OpenApi;
  *   name="Faqs",
  *   description="Operations for a faq"
  * )
+ * @OA\Tag(
+ *   name="Collaborators",
+ *   description="Operations for Collaborators"
+ * )
  */
 class AnnotationsTags
 {
