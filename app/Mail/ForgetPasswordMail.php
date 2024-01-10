@@ -11,18 +11,13 @@ use Illuminate\Queue\SerializesModels;
 class ForgetPasswordMail extends Mailable
 {
     use Queueable, SerializesModels;
-
-    public $name;
-
-    public $token;
+    use Queueable, SerializesModels;
 
     /**
      * Create a new message instance.
      */
-    public function __construct($name, $token)
+    public function __construct(public $name, public $url)
     {
-        $this->name = $name;
-        $this->token = $token;
     }
 
     /**
