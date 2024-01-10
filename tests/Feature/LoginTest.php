@@ -21,8 +21,8 @@ class LoginTest extends TestCase
         $user = UserFactory::new()->create();
 
         $response = $this->postJson(route('login'), [
-            'dni' => '39986946S',
-            'password' => 'password'
+            'dni' => $user->dni,
+            'password' => 'password', // Default password from the factory
         ]);
 
         $response->assertOk();
@@ -51,7 +51,6 @@ class LoginTest extends TestCase
             'password' => 'wrongPassword',
         ]);
 
-
         $response->assertStatus(401);
         $response->assertJson([
                 'result' => [
@@ -62,7 +61,6 @@ class LoginTest extends TestCase
 
         $this->assertGuest();
     }
-
 
     /**
      * A user can not be logged in successfully with missing fields

@@ -4,6 +4,8 @@ namespace App\Annotations\OpenApi\controllersAnnotations\appAnnotations;
 
 class AnnotationsApps
 {
+class AnnotationsApps
+{
     /**
      * @OA\Get(
      *   path="/apps",

@@ -5,6 +5,7 @@
         "This file is @generated automatically"
     ],
     "content-hash": "81899c9ed2d9fb1bf99dcbc7717b8322",
+    "content-hash": "81899c9ed2d9fb1bf99dcbc7717b8322",
     "packages": [
         {
             "name": "astrotomic/laravel-translatable",

@@ -48,7 +48,6 @@ class AppTest extends TestCase
             'url' => fake()->url(),
             'github' => 'https://github.com',
             'state' => fake()->randomElement(['COMPLETED', 'IN PROGRESS', 'SOON']),
-            'state' => fake()->randomElement(['COMPLETED', 'IN PROGRESS', 'SOON']),
         ];
 
         $response = $this->withHeaders([
@@ -79,7 +78,6 @@ class AppTest extends TestCase
             'url' => fake()->url(),
             'github' => 'https://github.com',
             'state' => fake()->randomElement(['COMPLETED', 'IN PROGRESS', 'SOON']),
-            'state' => fake()->randomElement(['COMPLETED', 'IN PROGRESS', 'SOON']),
         ];
 
         $response = $this->withHeaders([
@@ -96,7 +94,6 @@ class AppTest extends TestCase
             'description' => fake()->text(),
             'url' => 12345,
             'github' => 'https://github.com',
-            'state' => fake()->randomElement(['COMPLETED', 'IN PROGRESS', 'SOON']),
             'state' => fake()->randomElement(['COMPLETED', 'IN PROGRESS', 'SOON']),
         ];
 
