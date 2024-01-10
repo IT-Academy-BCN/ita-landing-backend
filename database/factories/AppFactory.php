@@ -17,13 +17,13 @@ class AppFactory extends Factory
     public function definition(): array
     {
         return [
-            
+
             'title' => fake()->title(),
             'description' => fake()->text(),
             'url' => fake()->url(),
             'github' => fake()->url(),
             'state' => fake()->randomElement(['COMPLETED', 'IN PROGRESS', 'SOON']),
-            
+
         ];
     }
 }

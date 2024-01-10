@@ -2,24 +2,22 @@
 
 namespace Tests\Feature;
 
-use App\Models\App;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
+use App\Models\App;
 use App\Models\User;
 use Illuminate\Support\Facades\Artisan;
-use Illuminate\Foundation\Testing\WithFaker;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class AppTest extends TestCase
 {
     use RefreshDatabase;
-    
-    
+
     public function test_can_get_all_apps_unauthenticated_user(): void
     {
         App::factory(3)->create();
 
         $response = $this->getJson(route('app.index'));
-       
+
         $response->assertStatus(200);
         $response->json();
     }
@@ -31,7 +29,7 @@ class AppTest extends TestCase
         $response = $this->withHeaders([
             'Authorization' => 'Bearer ' . $this->authCreated()
             ])->getJson(route('app.index'));
-       
+
         $response->assertStatus(200);
         $response->json();
     }
@@ -49,7 +47,8 @@ class AppTest extends TestCase
             ],
             'url' => fake()->url(),
             'github' => 'https://github.com',
-            'state' => fake()->randomElement(['COMPLETED', 'IN PROGRESS', 'SOON'])
+            'state' => fake()->randomElement(['COMPLETED', 'IN PROGRESS', 'SOON']),
+            'state' => fake()->randomElement(['COMPLETED', 'IN PROGRESS', 'SOON']),
         ];
 
         $response = $this->withHeaders([
@@ -65,11 +64,11 @@ class AppTest extends TestCase
             'description' => fake()->text(),
             'url' => fake()->url(),
             'github' => 'https://github.com',
-            'state' => fake()->randomElement(['COMPLETED', 'IN PROGRESS', 'SOON'])
+            'state' => fake()->randomElement(['COMPLETED', 'IN PROGRESS', 'SOON']),
         ];
-        
+
         $response = $this->postJson(route('app.store'), $app);
-    
+
         $response->assertStatus(401);
     }
 
@@ -79,13 +78,14 @@ class AppTest extends TestCase
             'description' => fake()->text(),
             'url' => fake()->url(),
             'github' => 'https://github.com',
-            'state' => fake()->randomElement(['COMPLETED', 'IN PROGRESS', 'SOON'])
+            'state' => fake()->randomElement(['COMPLETED', 'IN PROGRESS', 'SOON']),
+            'state' => fake()->randomElement(['COMPLETED', 'IN PROGRESS', 'SOON']),
         ];
-        
+
         $response = $this->withHeaders([
             'Authorization' => 'Bearer ' . $this->authCreated()
         ])->postJson(route('app.store'), $app);
-    
+
         $response->assertStatus(422);
     }
 
@@ -96,16 +96,17 @@ class AppTest extends TestCase
             'description' => fake()->text(),
             'url' => 12345,
             'github' => 'https://github.com',
-            'state' => fake()->randomElement(['COMPLETED', 'IN PROGRESS', 'SOON'])
+            'state' => fake()->randomElement(['COMPLETED', 'IN PROGRESS', 'SOON']),
+            'state' => fake()->randomElement(['COMPLETED', 'IN PROGRESS', 'SOON']),
         ];
-        
+
         $response = $this->withHeaders([
             'Authorization' => 'Bearer ' . $this->authCreated()
         ])->postJson(route('app.store'), $app);
-        
+
         $response->assertStatus(422);
         $response->assertJsonFragment(['error' => 'Url no és una adreça web vàlida.']);
-    
+
     }
 
     public function test_can_not_store_an_app_with_empty_fields(): void
@@ -117,11 +118,11 @@ class AppTest extends TestCase
             'github' => '',
             'state' => [],
         ];
-        
+
         $response = $this->withHeaders([
             'Authorization' => 'Bearer ' . $this->authCreated()
         ])->postJson(route('app.store'), $app);
-    
+
         $response->assertStatus(422);
     }
 
@@ -179,7 +180,7 @@ class AppTest extends TestCase
         $response1 = $this->withHeaders([
             'Authorization' => 'Bearer ' . $token
             ])->postJson(route('app.store'), $app);
-        
+
         $target_id = $response1['id'];
         $modifications = [
             'ca' => ['title' => 'El joc de les taules'],
@@ -189,7 +190,7 @@ class AppTest extends TestCase
         $response2 = $this->withHeaders([
             'Authorization' => 'Bearer ' . $token
             ])->putJson(route('app.update', ['id' => $target_id]), $modifications);
-        
+
         $response2->assertStatus(200);
     }
 
@@ -204,12 +205,12 @@ class AppTest extends TestCase
             'github' => $app->github,
             'state' => $app->state,
         ];
-            
+
         $response = $this->putJson(route('app.update', $app->id), $newData);
 
         $response->assertStatus(401);
     }
-    
+
     public function test_can_not_update_an_app_with_missing_field(): void
     {
         $app = App::factory()->create();
@@ -220,11 +221,11 @@ class AppTest extends TestCase
             'github' => $app->github,
             'state' => $app->state,
         ];
-        
+
         $response = $this->withHeaders([
             'Authorization' => 'Bearer ' . $this->authCreated()
         ])->putJson(route('app.update', $app->id), $newData);
-    
+
         $response->assertStatus(422);
     }
 
@@ -235,7 +236,7 @@ class AppTest extends TestCase
         $this->withHeaders([
             'Authorization' => 'Bearer ' . $this->authCreated()
         ])->deleteJson(route('app.destroy', $app));
-        
+
         $this->assertDatabaseCount('apps', 0);
     }
 
@@ -272,7 +273,6 @@ class AppTest extends TestCase
             'role' => 'ADMIN',
         ]);
         return $user->createToken('auth_token')->accessToken;
-        
-    }
 
+    }
 }

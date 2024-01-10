@@ -2,11 +2,8 @@
 
 namespace Tests\Feature;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
-use Tests\TestCase;
 use App\Http\Controllers\api\CollaboratorsController;
-use Illuminate\Foundation\Testing\TestResponse;
+use Tests\TestCase;
 
 class CollaboratorTest extends TestCase
 {
@@ -40,7 +37,7 @@ class CollaboratorTest extends TestCase
         $response = $this->get('/api/collaborators/challenges');
         $response->assertStatus(200);
     }
-    
+
     /**
      * @test
      * @group CollaboratorTest
@@ -60,7 +57,7 @@ class CollaboratorTest extends TestCase
 
         $php = '/ita-landing-backend/collaborators?affiliation=direct';
         $collaboratorsController = new CollaboratorsController();
-        $response= $collaboratorsController->collaboratorLogic($php);
+        $response = $collaboratorsController->collaboratorLogic($php);
 
         $this->assertIsArray($response);
     }
@@ -72,7 +69,7 @@ class CollaboratorTest extends TestCase
     public function test_collaborator_landing_function(){
 
         $collaboratorsController = new CollaboratorsController();
-        $response= $collaboratorsController->collaboratorLanding();
+        $response = $collaboratorsController->collaboratorLanding();
         $this->assertIsArray($response);
     }
 
@@ -83,7 +80,7 @@ class CollaboratorTest extends TestCase
     public function test_collaborator_ita_wiki_function(){
 
         $collaboratorsController = new CollaboratorsController();
-        $response= $collaboratorsController->collaboratorItaWiki();
+        $response = $collaboratorsController->collaboratorItaWiki();
         $this->assertIsArray($response);
     }
 
@@ -94,8 +91,7 @@ class CollaboratorTest extends TestCase
     public function test_collaborator_challenges_function(){
 
         $collaboratorsController = new CollaboratorsController();
-        $response= $collaboratorsController->collaboratorItaChallenges();
+        $response = $collaboratorsController->collaboratorItaChallenges();
         $this->assertIsArray($response);
     }
-
 }

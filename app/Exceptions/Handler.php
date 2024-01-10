@@ -5,7 +5,6 @@ namespace App\Exceptions;
 use Throwable;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\ValidationException;
-use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
@@ -66,9 +65,9 @@ class Handler extends ExceptionHandler
             case $exception instanceof HttpException:
                     return response()->json([
                         'error' => [
-                            'message' => trans('http-statuses.' . $exception->getStatusCode())
+                            'message' => trans('http-statuses.' . $exception->status)
                             ]
-                        ], $exception->getStatusCode());
+                        ], $exception->status);
                     break;
 
             default:
@@ -76,4 +75,3 @@ class Handler extends ExceptionHandler
         }
     }
 }
-

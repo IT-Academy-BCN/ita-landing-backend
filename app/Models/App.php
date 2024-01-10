@@ -10,7 +10,7 @@ use Astrotomic\Translatable\Translatable;
 class App extends Model implements TranslatableContract
 {
     use HasFactory,Translatable;
-    
+
     public $translatedAttributes = ['title', 'description'];
     protected $fillable = ['url', 'github', 'state'];
 }

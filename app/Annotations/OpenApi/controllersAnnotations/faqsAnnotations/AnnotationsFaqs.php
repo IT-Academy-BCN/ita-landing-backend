@@ -2,8 +2,8 @@
 
 namespace App\Annotations\OpenApi\controllersAnnotations\faqsAnnotations;
 
-class AnnotationsFaqs {
-
+class AnnotationsFaqs
+{
 /**
  * @OA\Get(
  *   path="/faqs",
@@ -16,7 +16,9 @@ class AnnotationsFaqs {
  *   )
  * )
  */
-   public function index() {}
+   public function index()
+   {
+   }
 
 /**
  * @OA\Get(
@@ -41,7 +43,9 @@ class AnnotationsFaqs {
  *   )
  * )
  */
-   public function show() {}
+   public function show()
+   {
+   }
 
 /**
  * @OA\Post(
@@ -92,7 +96,9 @@ class AnnotationsFaqs {
  *   )
  * )
  */
-   public function store() {}
+   public function store()
+   {
+   }
 
 /**
  * @OA\Put(
@@ -153,7 +159,9 @@ class AnnotationsFaqs {
  *   )
  * )
  */
-   public function update() {}
+   public function update()
+   {
+   }
 
 /**
  * @OA\Delete(
@@ -178,5 +186,7 @@ class AnnotationsFaqs {
  *   )
  * )
  */
-   public function delete() {}
+   public function delete()
+   {
+   }
 }

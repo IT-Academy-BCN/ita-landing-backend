@@ -34,5 +34,7 @@ class AnnotationsAuth {
  *   )
  * )
  */
-    public function loginUser() {}
+    public function loginUser()
+    {
+    }
 }

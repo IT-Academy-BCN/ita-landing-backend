@@ -1,13 +1,13 @@
 <?php
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\api\UserController;
-use App\Http\Controllers\api\FaqController;
+use App\Http\Controllers\api\AppController;
 use App\Http\Controllers\api\AuthController;
 use App\Http\Controllers\api\CodeController;
-use App\Http\Controllers\api\AppController;
 use App\Http\Controllers\api\CollaboratorsController;
+
+use App\Http\Controllers\api\FaqController;
+use App\Http\Controllers\api\UserController;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,11 +31,10 @@ Route::middleware(['SetLocale'])->group(function () {
     Route::get('/faqs', [FaqController::class, 'index'])->name('faq.index');
     Route::get('/apps', [AppController::class, 'index'])->name('app.index');
 
-    Route::get('/collaborators/{area}',[CollaboratorsController::class,'index']);
-
+Route::get('/collaborators/{area}', [CollaboratorsController::class, 'index']);
 
     Route::middleware(['auth:api'])->prefix('faqs')->group(function () {
-        
+
         Route::get('/{id}', [FaqController::class, 'show'])->name('faq.show');
         Route::post('/', [FaqController::class, 'store'])->name('faq.store');
         Route::put('/{id}', [FaqController::class, 'update'])->name('faq.update');

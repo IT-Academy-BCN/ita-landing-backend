@@ -12,9 +12,12 @@ namespace App\Annotations\OpenApi;
  *   This API supports both Catalan and Spanish languages using the 'Accept-Language' header.
  *   The default language is Catalan.",
  * )
- * @OA\Server(
- *   url="http://127.0.0.1:8000/api"
+ *
+ *   @OA\Server(
+ *     url="http://127.0.0.1:8000/api"
+ *   )
  * )
  */
-
-class AnnotationsInfo {}
+class AnnotationsInfo
+{
+}

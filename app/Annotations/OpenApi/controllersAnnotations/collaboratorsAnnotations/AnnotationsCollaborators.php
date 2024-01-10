@@ -2,8 +2,8 @@
 
 namespace App\Annotations\OpenApi\controllersAnnotations\collaboratorsAnnotations;
 
-class AnnotationsCollaborators {
-
+class AnnotationsCollaborators
+{
 /**
  * @OA\Get(
  *   path="/collaborators/{area}",
@@ -50,5 +50,7 @@ class AnnotationsCollaborators {
  *   )
  * )
  */
-    public function index() {}
+    public function index()
+    {
+    }
 }
