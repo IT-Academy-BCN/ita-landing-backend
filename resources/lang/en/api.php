@@ -17,9 +17,10 @@ return [
     'app_updated' => 'App updated successfully.',
 
     /** Faq */
-    'Faq_deleted' => 'Faq deleted successfully.',
-    'faq_not_found' => 'Faq no found in the database.',
-    'faq_updated' => 'Faq updated successfully.',
+    'faq_deleted' => 'FAQ deleted successfully.',
+    'faq_not_found' => 'FAQ no found in the database.',
+    'faq_updated' => 'FAQ updated successfully.',
+    'faq_failed' => 'Error updating the FAQ.',
 
     /** Translations */
     'translation_key_not_available' => 'This language is not available in the application.',
