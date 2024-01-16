@@ -136,7 +136,7 @@ class FaqController extends Controller
         }
 
         return response()->json([
-            'message' => $translations
+            'message' => isset($translations)
                 ? __('api.faq_translation_deleted')
                 : __('api.faq_deleted'),
         ], 200);
