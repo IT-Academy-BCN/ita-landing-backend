@@ -4,9 +4,9 @@ namespace App\Http\Controllers\api;
 
 use App\Http\Controllers\Controller;
 use App\Models\App;
-use Illuminate\Http\Request;
 use Astrotomic\Translatable\Validation\RuleFactory;
 use Exception;
+use Illuminate\Http\Request;
 
 class AppController extends Controller
 {
@@ -51,23 +51,24 @@ class AppController extends Controller
         try {
             $app = App::find($id);
 
-            if (!$app) {
+            if (! $app) {
                 return response()->json(['error' => __('api.app_not_found')], 204);
             }
 
             $rules = RuleFactory::make([
                 '%title%' => ['required', 'string', 'max:255'],
-                '%description%' => ['string']
+                '%description%' => ['string'],
             ]);
 
             $validatedData = $request->validate([
                 'url' => 'url:http,https',
                 'github' => 'url:http,https',
-                'state' => 'in:COMPLETED,IN PROGRESS,SOON'
+                'state' => 'in:COMPLETED,IN PROGRESS,SOON',
             ]);
             $validatedData += $request->validate($rules);
 
             $app->update($validatedData);
+
             return response()->json(['message' => __('api.app_updated'), 200]);
         } catch (Exception $e) {
             return response()->json(['error' => $e->getMessage()], 422);
@@ -78,7 +79,7 @@ class AppController extends Controller
     {
         $app = App::find($id);
 
-        if (!$app) {
+        if (! $app) {
             return response()->json(['error' => __('api.app_not_found')], 404);
         }
         $app->delete();

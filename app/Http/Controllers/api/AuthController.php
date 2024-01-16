@@ -20,10 +20,10 @@ class AuthController extends Controller
             'password' => 'required|string',
         ]);
         // Get user's credentials
-           $credentials = [
-                'dni' => $request->dni,
-                'password' => $request->password,
-           ];
+        $credentials = [
+            'dni' => $request->dni,
+            'password' => $request->password,
+        ];
 
         // Verify user credentials
         if (Auth::attempt($credentials)) {

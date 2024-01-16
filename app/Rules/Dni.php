@@ -18,19 +18,20 @@ class Dni implements ValidationRule
             $fail('The :attribute is not valid.');
         }
     }
+
     /**
      * Return true if NIF is valid.
      */
     public function isValidNif($nif)
     {
-       $nifRegEx = '/^[0-9]{8}[A-Z]$/i';
-       $letters = "TRWAGMYFPDXBNJZSQVHLCKE";
+        $nifRegEx = '/^[0-9]{8}[A-Z]$/i';
+        $letters = 'TRWAGMYFPDXBNJZSQVHLCKE';
 
-       if (preg_match($nifRegEx, $nif)) {
-          return $letters[(substr($nif, 0, 8) % 23)] == $nif[8];
-       }
+        if (preg_match($nifRegEx, $nif)) {
+            return $letters[(substr($nif, 0, 8) % 23)] == $nif[8];
+        }
 
-       return false;
+        return false;
     }
 
     /**
@@ -38,16 +39,16 @@ class Dni implements ValidationRule
      */
     public function isValidNie($nif)
     {
-       $nieRegEx = '/^[KLMXYZ][0-9]{7}[A-Z]$/i';
-       $letters = "TRWAGMYFPDXBNJZSQVHLCKE";
+        $nieRegEx = '/^[KLMXYZ][0-9]{7}[A-Z]$/i';
+        $letters = 'TRWAGMYFPDXBNJZSQVHLCKE';
 
-       if (preg_match($nieRegEx, $nif)) {
+        if (preg_match($nieRegEx, $nif)) {
 
-          $r = str_replace(['X', 'Y', 'Z'], [0, 1, 2], $nif);
+            $r = str_replace(['X', 'Y', 'Z'], [0, 1, 2], $nif);
 
-          return $letters[(substr($r, 0, 8) % 23)] == $nif[8];
-       }
+            return $letters[(substr($r, 0, 8) % 23)] == $nif[8];
+        }
 
-       return false;
+        return false;
     }
 }

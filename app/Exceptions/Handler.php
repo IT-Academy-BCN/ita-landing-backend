@@ -2,12 +2,12 @@
 
 namespace App\Exceptions;
 
-use Throwable;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\ValidationException;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Symfony\Component\HttpKernel\Exception\HttpException;
-use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Throwable;
 
 class Handler extends ExceptionHandler
 {
@@ -55,23 +55,23 @@ class Handler extends ExceptionHandler
         //to keep a log for errors
         Log::error($exception);
 
-        switch(true) {
+        switch (true) {
             case $exception instanceof ModelNotFoundException:
                 return response()->json(['error' => ['message' => trans('http-statuses.404')]], 404);
                 break;
             case $exception instanceof ValidationException:
-                return response()->json(['error'=> ['message' => trans('http-statuses.422')]], 422);
+                return response()->json(['error' => ['message' => trans('http-statuses.422')]], 422);
                 break;
             case $exception instanceof HttpException:
-                    return response()->json([
-                        'error' => [
-                            'message' => trans('http-statuses.' . $exception->status)
-                            ]
-                        ], $exception->status);
-                    break;
+                return response()->json([
+                    'error' => [
+                        'message' => trans('http-statuses.'.$exception->status),
+                    ],
+                ], $exception->status);
+                break;
 
             default:
-            return parent::render($request, $exception);
+                return parent::render($request, $exception);
         }
     }
 }

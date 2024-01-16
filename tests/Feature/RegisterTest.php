@@ -115,7 +115,7 @@ class RegisterTest extends TestCase
         $response->assertStatus(200)
             ->assertJson([
                 'result' => [
-                    'message' => __('auth.registered')
+                    'message' => __('auth.registered'),
                 ],
                 'status' => true,
             ]);

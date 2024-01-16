@@ -27,11 +27,15 @@ class AnnotationsApps
      *   tags={"Apps"},
      *   summary="Create a new app",
      *   description="This endpoint is used to create a new application.",
+     *
      *   @OA\RequestBody(
      *     required=true,
+     *
      *     @OA\MediaType(
      *       mediaType="application/json",
+     *
      *       @OA\Schema(
+     *
      *         @OA\Property(
      *           property="ca",
      *           type="object",
@@ -196,6 +200,7 @@ class AnnotationsApps
      *       )
      *     )
      *   ),
+     *
      *   @OA\Response(
      *     response="200",
      *     description="Updated application details."
@@ -212,17 +217,20 @@ class AnnotationsApps
      *   tags={"Apps"},
      *   summary="Delete an app",
      *   description="This endpoint is used to remove an existing application.",
+     *
      *   @OA\Parameter(
      *     name="id",
      *     in="path",
      *     required=true,
      *     description="Application ID.",
+     *
      *     @OA\Schema(
      *       type="integer",
      *       example=1
      *     )
      *   ),
      *   security={{"bearer": {}}},
+     *
      *   @OA\Response(
      *     response="200",
      *     description="Success message indicating that the application has been removed."

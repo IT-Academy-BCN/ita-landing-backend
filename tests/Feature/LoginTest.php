@@ -2,9 +2,9 @@
 
 namespace Tests\Feature;
 
-use Illuminate\Support\Facades\Artisan;
 use Database\Factories\UserFactory;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Artisan;
 use Tests\TestCase;
 
 class LoginTest extends TestCase
@@ -53,11 +53,11 @@ class LoginTest extends TestCase
 
         $response->assertStatus(401);
         $response->assertJson([
-                'result' => [
-                    'message' => __('auth.failed')
-                ],
-                'status' => false
-            ]);
+            'result' => [
+                'message' => __('auth.failed'),
+            ],
+            'status' => false,
+        ]);
 
         $this->assertGuest();
     }
@@ -88,7 +88,7 @@ class LoginTest extends TestCase
         $response->assertStatus(401);
         $response->assertJson([
             'result' => [
-                'message' => __('auth.failed')
+                'message' => __('auth.failed'),
             ],
             'status' => false,
         ]);
@@ -113,7 +113,7 @@ class LoginTest extends TestCase
         $response->assertStatus(401);
         $response->assertJson([
             'result' => [
-                'message' => __('auth.failed')
+                'message' => __('auth.failed'),
             ],
             'status' => false,
         ]);

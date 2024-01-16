@@ -100,7 +100,7 @@ class UserController extends Controller
             }
 
             // Construct the password reset URL
-            $url = env('APP_URL', 'https://it-academy-landing.netlify.app') . '/reset-password/' . $token;
+            $url = env('APP_URL', 'https://it-academy-landing.netlify.app').'/reset-password/'.$token;
             //send password reset email
             Mail::to($email)->send(new ForgetPasswordMail($user->name, $url));
 
@@ -122,7 +122,7 @@ class UserController extends Controller
 
         $passwordResets = DB::table('password_reset_tokens')->where('token', $token)->first();
 
-        if (!$passwordResets) {
+        if (! $passwordResets) {
 
             return response()->json([
                 'error' => __('passwords.token'),

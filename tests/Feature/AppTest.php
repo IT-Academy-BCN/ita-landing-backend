@@ -2,11 +2,11 @@
 
 namespace Tests\Feature;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Tests\TestCase;
 use App\Models\App;
 use App\Models\User;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Artisan;
+use Tests\TestCase;
 
 class AppTest extends TestCase
 {
@@ -27,8 +27,8 @@ class AppTest extends TestCase
         App::factory(3)->create();
 
         $response = $this->withHeaders([
-            'Authorization' => 'Bearer ' . $this->authCreated()
-            ])->getJson(route('app.index'));
+            'Authorization' => 'Bearer '.$this->authCreated(),
+        ])->getJson(route('app.index'));
 
         $response->assertStatus(200);
         $response->json();
@@ -39,7 +39,7 @@ class AppTest extends TestCase
         $app = [
             'ca' => [
                 'title' => fake()->title(),
-                'description' => fake()->text()
+                'description' => fake()->text(),
             ],
             'es' => [
                 'title' => fake()->title(),
@@ -51,8 +51,8 @@ class AppTest extends TestCase
         ];
 
         $response = $this->withHeaders([
-            'Authorization' => 'Bearer ' . $this->authCreated()
-            ])->postJson(route('app.store'), $app);
+            'Authorization' => 'Bearer '.$this->authCreated(),
+        ])->postJson(route('app.store'), $app);
         $response->assertStatus(201);
     }
 
@@ -81,7 +81,7 @@ class AppTest extends TestCase
         ];
 
         $response = $this->withHeaders([
-            'Authorization' => 'Bearer ' . $this->authCreated()
+            'Authorization' => 'Bearer '.$this->authCreated(),
         ])->postJson(route('app.store'), $app);
 
         $response->assertStatus(422);
@@ -98,7 +98,7 @@ class AppTest extends TestCase
         ];
 
         $response = $this->withHeaders([
-            'Authorization' => 'Bearer ' . $this->authCreated()
+            'Authorization' => 'Bearer '.$this->authCreated(),
         ])->postJson(route('app.store'), $app);
 
         $response->assertStatus(422);
@@ -117,7 +117,7 @@ class AppTest extends TestCase
         ];
 
         $response = $this->withHeaders([
-            'Authorization' => 'Bearer ' . $this->authCreated()
+            'Authorization' => 'Bearer '.$this->authCreated(),
         ])->postJson(route('app.store'), $app);
 
         $response->assertStatus(422);
@@ -128,7 +128,7 @@ class AppTest extends TestCase
         $app = App::factory()->create();
 
         $response = $this->withHeaders([
-            'Authorization' => 'Bearer ' . $this->authCreated()
+            'Authorization' => 'Bearer '.$this->authCreated(),
         ])->getJson(route('app.show', $app));
 
         $response->assertJson([
@@ -154,7 +154,7 @@ class AppTest extends TestCase
         App::factory()->create();
 
         $response = $this->withHeaders([
-            'Authorization' => 'Bearer ' . $this->authCreated()
+            'Authorization' => 'Bearer '.$this->authCreated(),
         ])->getJson(route('app.show', ['id' => '2']));
 
         $response->assertStatus(404);
@@ -164,29 +164,29 @@ class AppTest extends TestCase
     {
         $app = [
             'ca' => ['title' => 'El joc de les cadires',
-                     'description' => 'Joc amb més d\'un jugador que consisteix en...'],
+                'description' => 'Joc amb més d\'un jugador que consisteix en...'],
             'es' => ['title' => 'El juego de las sillas',
-                     'description' => 'Juego con más de un jugador que consiste en...'],
+                'description' => 'Juego con más de un jugador que consiste en...'],
             'url' => 'https://chairgame.com',
             'github' => 'https://github.com',
-            'state' => 'COMPLETED'
+            'state' => 'COMPLETED',
         ];
 
         $token = $this->authCreated();
 
         $response1 = $this->withHeaders([
-            'Authorization' => 'Bearer ' . $token
-            ])->postJson(route('app.store'), $app);
+            'Authorization' => 'Bearer '.$token,
+        ])->postJson(route('app.store'), $app);
 
         $target_id = $response1['id'];
         $modifications = [
             'ca' => ['title' => 'El joc de les taules'],
-            'es' => ['title' => 'El juego de las sillas']
+            'es' => ['title' => 'El juego de las sillas'],
         ];
 
         $response2 = $this->withHeaders([
-            'Authorization' => 'Bearer ' . $token
-            ])->putJson(route('app.update', ['id' => $target_id]), $modifications);
+            'Authorization' => 'Bearer '.$token,
+        ])->putJson(route('app.update', ['id' => $target_id]), $modifications);
 
         $response2->assertStatus(200);
     }
@@ -220,7 +220,7 @@ class AppTest extends TestCase
         ];
 
         $response = $this->withHeaders([
-            'Authorization' => 'Bearer ' . $this->authCreated()
+            'Authorization' => 'Bearer '.$this->authCreated(),
         ])->putJson(route('app.update', $app->id), $newData);
 
         $response->assertStatus(422);
@@ -231,7 +231,7 @@ class AppTest extends TestCase
         $app = App::factory()->create();
 
         $this->withHeaders([
-            'Authorization' => 'Bearer ' . $this->authCreated()
+            'Authorization' => 'Bearer '.$this->authCreated(),
         ])->deleteJson(route('app.destroy', $app));
 
         $this->assertDatabaseCount('apps', 0);
@@ -242,7 +242,7 @@ class AppTest extends TestCase
         App::factory()->create();
 
         $response = $this->withHeaders([
-            'Authorization' => 'Bearer ' . $this->authCreated()
+            'Authorization' => 'Bearer '.$this->authCreated(),
         ])->deleteJson(route('app.destroy', ['id' => '2']));
 
         $response->assertStatus(404);
@@ -269,6 +269,7 @@ class AppTest extends TestCase
             'status' => 'ACTIVE',
             'role' => 'ADMIN',
         ]);
+
         return $user->createToken('auth_token')->accessToken;
 
     }

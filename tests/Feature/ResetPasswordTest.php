@@ -46,7 +46,7 @@ class ResetPasswordTest extends TestCase
 
         DB::table('password_reset_tokens')->insert([
             'email' => $email,
-            'token' => $token
+            'token' => $token,
         ]);
 
         $response = $this->post(route('forget.password'), [

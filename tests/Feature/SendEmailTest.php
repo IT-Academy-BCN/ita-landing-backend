@@ -14,6 +14,7 @@ class SendEmailTest extends TestCase
 
     /**
      * @test
+     *
      * @group SendEmailTest
      */
     public function test_ok_Response_when_email_is_sended_with_valid_email()
@@ -28,6 +29,7 @@ class SendEmailTest extends TestCase
 
     /**
      * @test
+     *
      * @group SendEmailTest
      */
     public function test_email_is_not_sended_with_invalid_email()
@@ -38,9 +40,10 @@ class SendEmailTest extends TestCase
 
         $response->assertStatus(400);
     }
-    
+
     /**
      * @test
+     *
      * @group SendEmailTest
      */
     public function test_email_is_sent_to_the_specified_email()

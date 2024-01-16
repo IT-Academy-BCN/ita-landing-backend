@@ -64,6 +64,7 @@ class CodeController extends Controller
         } else {
             $emailAddress = $request->input('email');
             Mail::to($emailAddress)->send(new MailableCode($this->store()));
+
             return response()->json(['status' => true, 'message' => __('auth.sent')]);
         }
     }
