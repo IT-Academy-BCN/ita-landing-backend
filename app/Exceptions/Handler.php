@@ -4,8 +4,8 @@ namespace App\Exceptions;
 
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\ValidationException;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Throwable;
 
@@ -52,18 +52,26 @@ class Handler extends ExceptionHandler
 
     public function render($request, Throwable $exception)
     {
-        if ($exception instanceof ModelNotFoundException) {
-            return response()->json(['error' => 'Resource not found'], Response::HTTP_NOT_FOUND);
-        }
+        //to keep a log for errors
+        Log::error($exception);
 
-        if ($exception instanceof ValidationException) {
-            return response()->json(['error' => $exception->getMessage()], Response::HTTP_INTERNAL_SERVER_ERROR);
-        }
+        switch (true) {
+            case $exception instanceof ModelNotFoundException:
+                return response()->json(['error' => ['message' => trans('http-statuses.404')]], 404);
+                break;
+            case $exception instanceof ValidationException:
+                return response()->json(['error' => ['message' => trans('http-statuses.422')]], 422);
+                break;
+            case $exception instanceof HttpException:
+                return response()->json([
+                    'error' => [
+                        'message' => trans('http-statuses.'.$exception->status),
+                    ],
+                ], $exception->status);
+                break;
 
-        if ($exception instanceof HttpException) {
-            return response()->json(['error' => 'Somethings wrong with the server: '.$exception->getMessage()], Response::HTTP_INTERNAL_SERVER_ERROR);
+            default:
+                return parent::render($request, $exception);
         }
-
-        return parent::render($request, $exception);
     }
 }

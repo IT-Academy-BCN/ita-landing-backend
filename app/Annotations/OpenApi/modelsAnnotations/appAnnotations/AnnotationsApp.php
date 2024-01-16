@@ -34,6 +34,12 @@ use OpenApi as OA;
  *         example="https://myapp.com"
  *     ),
  *     @OA\Property(
+ *         property="github",
+ *         type="string",
+ *         description="github repository",
+ *         example="https://github.com/IT-Academy-BCN/"
+ *     ),
+ *     @OA\Property(
  *         property="state",
  *         type="string",
  *         description="State",

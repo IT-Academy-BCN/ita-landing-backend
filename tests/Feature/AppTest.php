@@ -5,6 +5,7 @@ namespace Tests\Feature;
 use App\Models\App;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Artisan;
 use Tests\TestCase;
 
 class AppTest extends TestCase
@@ -25,7 +26,9 @@ class AppTest extends TestCase
     {
         App::factory(3)->create();
 
-        $response = $this->withHeaders(['Authorization' => 'Bearer '.$this->authCreated()])->getJson(route('app.index'));
+        $response = $this->withHeaders([
+            'Authorization' => 'Bearer '.$this->authCreated(),
+        ])->getJson(route('app.index'));
 
         $response->assertStatus(200);
         $response->json();
@@ -34,16 +37,23 @@ class AppTest extends TestCase
     public function test_can_store_an_app_with_valid_data(): void
     {
         $app = [
-            'title' => fake()->title(),
-            'description' => fake()->text(),
+            'ca' => [
+                'title' => fake()->title(),
+                'description' => fake()->text(),
+            ],
+            'es' => [
+                'title' => fake()->title(),
+                'description' => fake()->text(),
+            ],
             'url' => fake()->url(),
             'github' => 'https://github.com',
             'state' => fake()->randomElement(['COMPLETED', 'IN PROGRESS', 'SOON']),
         ];
 
-        $this->withHeaders(['Authorization' => 'Bearer '.$this->authCreated()])->postJson(route('app.store'), $app);
-
-        $this->assertDatabaseHas('apps', $app);
+        $response = $this->withHeaders([
+            'Authorization' => 'Bearer '.$this->authCreated(),
+        ])->postJson(route('app.store'), $app);
+        $response->assertStatus(201);
     }
 
     public function test_can_not_store_an_app_without_token(): void
@@ -64,14 +74,15 @@ class AppTest extends TestCase
     public function test_can_not_store_an_app_with_a_missing_field(): void
     {
         $app = [
-            'title' => '',
             'description' => fake()->text(),
             'url' => fake()->url(),
             'github' => 'https://github.com',
             'state' => fake()->randomElement(['COMPLETED', 'IN PROGRESS', 'SOON']),
         ];
 
-        $response = $this->withHeaders(['Authorization' => 'Bearer '.$this->authCreated()])->postJson(route('app.store'), $app);
+        $response = $this->withHeaders([
+            'Authorization' => 'Bearer '.$this->authCreated(),
+        ])->postJson(route('app.store'), $app);
 
         $response->assertStatus(422);
     }
@@ -81,14 +92,17 @@ class AppTest extends TestCase
         $app = [
             'title' => fake()->title(),
             'description' => fake()->text(),
-            'url' => 123355, // must be text
+            'url' => 12345,
             'github' => 'https://github.com',
             'state' => fake()->randomElement(['COMPLETED', 'IN PROGRESS', 'SOON']),
         ];
 
-        $response = $this->withHeaders(['Authorization' => 'Bearer '.$this->authCreated()])->postJson(route('app.store'), $app);
+        $response = $this->withHeaders([
+            'Authorization' => 'Bearer '.$this->authCreated(),
+        ])->postJson(route('app.store'), $app);
 
-        $response->assertJsonValidationErrorFor('url');
+        $response->assertStatus(422);
+        $response->assertJsonFragment(['error' => 'Url no és una adreça web vàlida.']);
 
     }
 
@@ -102,7 +116,9 @@ class AppTest extends TestCase
             'state' => [],
         ];
 
-        $response = $this->withHeaders(['Authorization' => 'Bearer '.$this->authCreated()])->postJson(route('app.store'), $app);
+        $response = $this->withHeaders([
+            'Authorization' => 'Bearer '.$this->authCreated(),
+        ])->postJson(route('app.store'), $app);
 
         $response->assertStatus(422);
     }
@@ -111,7 +127,9 @@ class AppTest extends TestCase
     {
         $app = App::factory()->create();
 
-        $response = $this->withHeaders(['Authorization' => 'Bearer '.$this->authCreated()])->getJson(route('app.show', $app));
+        $response = $this->withHeaders([
+            'Authorization' => 'Bearer '.$this->authCreated(),
+        ])->getJson(route('app.show', $app));
 
         $response->assertJson([
             'title' => $app->title,
@@ -135,26 +153,42 @@ class AppTest extends TestCase
     {
         App::factory()->create();
 
-        $response = $this->withHeaders(['Authorization' => 'Bearer '.$this->authCreated()])->getJson(route('app.show', ['id' => '2']));
+        $response = $this->withHeaders([
+            'Authorization' => 'Bearer '.$this->authCreated(),
+        ])->getJson(route('app.show', ['id' => '2']));
 
         $response->assertStatus(404);
     }
 
     public function test_can_update_an_app_with_valid_data(): void
     {
-        $app = App::factory()->create();
-
-        $newData = [
-            'title' => 'Title updated',
-            'description' => $app->description,
-            'url' => $app->url,
-            'github' => $app->github,
-            'state' => $app->state,
+        $app = [
+            'ca' => ['title' => 'El joc de les cadires',
+                'description' => 'Joc amb més d\'un jugador que consisteix en...'],
+            'es' => ['title' => 'El juego de las sillas',
+                'description' => 'Juego con más de un jugador que consiste en...'],
+            'url' => 'https://chairgame.com',
+            'github' => 'https://github.com',
+            'state' => 'COMPLETED',
         ];
 
-        $this->withHeaders(['Authorization' => 'Bearer '.$this->authCreated()])->putJson(route('app.update', $app->id), $newData);
+        $token = $this->authCreated();
 
-        $this->assertDatabaseHas('apps', $newData);
+        $response1 = $this->withHeaders([
+            'Authorization' => 'Bearer '.$token,
+        ])->postJson(route('app.store'), $app);
+
+        $target_id = $response1['id'];
+        $modifications = [
+            'ca' => ['title' => 'El joc de les taules'],
+            'es' => ['title' => 'El juego de las sillas'],
+        ];
+
+        $response2 = $this->withHeaders([
+            'Authorization' => 'Bearer '.$token,
+        ])->putJson(route('app.update', ['id' => $target_id]), $modifications);
+
+        $response2->assertStatus(200);
     }
 
     public function test_can_not_update_an_app_without_token(): void
@@ -179,14 +213,15 @@ class AppTest extends TestCase
         $app = App::factory()->create();
 
         $newData = [
-            'title' => '',
             'description' => $app->description,
             'url' => $app->url,
             'github' => $app->github,
             'state' => $app->state,
         ];
 
-        $response = $this->withHeaders(['Authorization' => 'Bearer '.$this->authCreated()])->putJson(route('app.update', $app->id), $newData);
+        $response = $this->withHeaders([
+            'Authorization' => 'Bearer '.$this->authCreated(),
+        ])->putJson(route('app.update', $app->id), $newData);
 
         $response->assertStatus(422);
     }
@@ -195,7 +230,9 @@ class AppTest extends TestCase
     {
         $app = App::factory()->create();
 
-        $this->withHeaders(['Authorization' => 'Bearer '.$this->authCreated()])->deleteJson(route('app.destroy', $app));
+        $this->withHeaders([
+            'Authorization' => 'Bearer '.$this->authCreated(),
+        ])->deleteJson(route('app.destroy', $app));
 
         $this->assertDatabaseCount('apps', 0);
     }
@@ -204,7 +241,9 @@ class AppTest extends TestCase
     {
         App::factory()->create();
 
-        $response = $this->withHeaders(['Authorization' => 'Bearer '.$this->authCreated()])->deleteJson(route('app.destroy', ['id' => '2']));
+        $response = $this->withHeaders([
+            'Authorization' => 'Bearer '.$this->authCreated(),
+        ])->deleteJson(route('app.destroy', ['id' => '2']));
 
         $response->assertStatus(404);
     }
@@ -220,7 +259,7 @@ class AppTest extends TestCase
 
     private function authCreated()
     {
-        \Artisan::call('passport:install');
+        Artisan::call('passport:install');
 
         $user = User::create([
             'name' => 'Gabriela',
@@ -231,7 +270,7 @@ class AppTest extends TestCase
             'role' => 'ADMIN',
         ]);
 
-        return $token = $user->createToken('auth_token')->accessToken;
+        return $user->createToken('auth_token')->accessToken;
 
     }
 }

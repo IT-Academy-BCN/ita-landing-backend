@@ -83,7 +83,7 @@ return [
     |
     */
 
-    'locale' => 'en',
+    'locale' => 'ca',
 
     /*
     |--------------------------------------------------------------------------
@@ -96,8 +96,9 @@ return [
     |
     */
 
-    'fallback_locale' => 'en',
+    'fallback_locale' => 'ca',
 
+    'supported_locales' => ['ca', 'es', 'en'],
     /*
     |--------------------------------------------------------------------------
     | Faker Locale
@@ -109,7 +110,7 @@ return [
     |
     */
 
-    'faker_locale' => 'en_US',
+    'faker_locale' => 'ca',
 
     /*
     |--------------------------------------------------------------------------
@@ -196,7 +197,6 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         L5Swagger\L5SwaggerServiceProvider::class,
-
     ],
 
     /*

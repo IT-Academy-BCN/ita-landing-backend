@@ -105,6 +105,7 @@ class RegisterTest extends TestCase
 
         $response = $this->post('/api/register', [
             'email' => $userData['email'],
+            'name' => null,
             'dni' => $userData['dni'],
             'password' => $userData['password'],
             'password_confirmation' => $userData['password'],
@@ -113,6 +114,9 @@ class RegisterTest extends TestCase
 
         $response->assertStatus(200)
             ->assertJson([
+                'result' => [
+                    'message' => __('auth.registered'),
+                ],
                 'status' => true,
             ]);
 

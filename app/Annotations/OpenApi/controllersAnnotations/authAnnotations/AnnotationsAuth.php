@@ -22,7 +22,7 @@ class AnnotationsAuth
      *         @OA\Property(
      *           property="dni",
      *           type="string",
-     *           example="12345678A"
+     *           example="X6288479A"
      *         ),
      *         @OA\Property(
      *           property="password",
@@ -35,7 +35,7 @@ class AnnotationsAuth
      *
      *   @OA\Response(
      *     response="200",
-     *     description="Access token for the user."
+     *     description="Access token for the user. The response message may vary based on user's language settings."
      *   )
      * )
      */

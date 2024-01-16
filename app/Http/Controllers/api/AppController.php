@@ -4,6 +4,8 @@ namespace App\Http\Controllers\api;
 
 use App\Http\Controllers\Controller;
 use App\Models\App;
+use Astrotomic\Translatable\Validation\RuleFactory;
+use Exception;
 use Illuminate\Http\Request;
 
 class AppController extends Controller
@@ -16,12 +18,17 @@ class AppController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'title' => 'required|max:255',
-            'description' => 'required',
             'url' => 'required|url',
             'github' => 'required|url',
             'state' => 'required|in:COMPLETED,IN PROGRESS,SOON',
         ]);
+
+        $rules = RuleFactory::make([
+            '%title%' => 'required|string|max:255',
+            '%description%' => 'required_with:"%title%"|string',
+        ]);
+
+        $validatedData += $request->validate($rules);
 
         $app = App::create($validatedData);
 
@@ -30,31 +37,53 @@ class AppController extends Controller
 
     public function show($id)
     {
-        $app = App::findOrFail($id);
+        $app = App::find($id);
+
+        if (! $app) {
+            return response()->json(['error' => __('api.app_not_found')], 404);
+        }
 
         return response()->json($app);
     }
 
     public function update(Request $request, $id)
     {
-        $app = App::findOrFail($id);
+        try {
+            $app = App::find($id);
 
-        $validatedData = $request->validate([
-            'title' => 'required|max:255',
-            'description' => 'required',
-            'url' => 'required|url',
-            'state' => 'required|in:COMPLETED,IN PROGRESS,SOON',
-        ]);
+            if (! $app) {
+                return response()->json(['error' => __('api.app_not_found')], 204);
+            }
 
-        $app->update($validatedData);
+            $rules = RuleFactory::make([
+                '%title%' => ['required', 'string', 'max:255'],
+                '%description%' => ['string'],
+            ]);
 
-        return response()->json($app, 200);
+            $validatedData = $request->validate([
+                'url' => 'url:http,https',
+                'github' => 'url:http,https',
+                'state' => 'in:COMPLETED,IN PROGRESS,SOON',
+            ]);
+            $validatedData += $request->validate($rules);
+
+            $app->update($validatedData);
+
+            return response()->json(['message' => __('api.app_updated'), 200]);
+        } catch (Exception $e) {
+            return response()->json(['error' => $e->getMessage()], 422);
+        }
     }
 
     public function destroy($id)
     {
-        $app = App::findOrFail($id)->delete();
+        $app = App::find($id);
 
-        return response()->json(['message' => 'Deleted successfully']);
+        if (! $app) {
+            return response()->json(['error' => __('api.app_not_found')], 404);
+        }
+        $app->delete();
+
+        return response()->json(['message' => __('api.app_deleted')]);
     }
 }

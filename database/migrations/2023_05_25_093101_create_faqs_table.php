@@ -13,9 +13,17 @@ return new class extends Migration
     {
         Schema::create('faqs', function (Blueprint $table) {
             $table->id();
-            $table->char('title', 255);
-            $table->longText('description');
             $table->timestamps();
+        });
+
+        Schema::create('faq_translations', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('faq_id')->constrained('faqs')->onDelete('cascade');
+            $table->string('title');
+            $table->text('description');
+            $table->string('locale')->index();
+
+            $table->unique(['faq_id', 'locale']);
         });
     }
 
@@ -24,6 +32,7 @@ return new class extends Migration
      */
     public function down(): void
     {
+        Schema::dropIfExists('faq_translations');
         Schema::dropIfExists('faqs');
     }
 };

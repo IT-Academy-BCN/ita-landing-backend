@@ -2,9 +2,9 @@
 
 namespace Tests\Feature;
 
-use App\Models\User;
 use Database\Factories\UserFactory;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Artisan;
 use Tests\TestCase;
 
 class LoginTest extends TestCase
@@ -16,7 +16,7 @@ class LoginTest extends TestCase
      */
     public function test_a_user_can_be_logged_in(): void
     {
-        \Artisan::call('passport:install');
+        Artisan::call('passport:install');
 
         $user = UserFactory::new()->create();
 
@@ -24,6 +24,7 @@ class LoginTest extends TestCase
             'dni' => $user->dni,
             'password' => 'password', // Default password from the factory
         ]);
+
         $response->assertOk();
         $response->assertJsonStructure([
             'result' => [
@@ -41,7 +42,7 @@ class LoginTest extends TestCase
      */
     public function test_a_user_can_not_be_logged_in_with_both_fields_wrong(): void
     {
-        \Artisan::call('passport:install');
+        Artisan::call('passport:install');
 
         UserFactory::new()->create(['dni' => 'Y5177867Y', 'password' => 'password']);
 
@@ -53,7 +54,7 @@ class LoginTest extends TestCase
         $response->assertStatus(401);
         $response->assertJson([
             'result' => [
-                'message' => 'Invalid credentials',
+                'message' => __('auth.failed'),
             ],
             'status' => false,
         ]);
@@ -67,7 +68,6 @@ class LoginTest extends TestCase
     public function test_a_user_cannot_be_logged_in_with_missing_fields(): void
     {
         $response = $this->postJson(route('login'), []);
-
         $response->assertStatus(422);
     }
 
@@ -76,7 +76,7 @@ class LoginTest extends TestCase
      */
     public function test_a_user_cannot_be_logged_in_with_wrong_password(): void
     {
-        \Artisan::call('passport:install');
+        Artisan::call('passport:install');
 
         $user = UserFactory::new()->create(['password' => bcrypt('password')]);
 
@@ -88,7 +88,7 @@ class LoginTest extends TestCase
         $response->assertStatus(401);
         $response->assertJson([
             'result' => [
-                'message' => 'Invalid credentials',
+                'message' => __('auth.failed'),
             ],
             'status' => false,
         ]);
@@ -101,7 +101,7 @@ class LoginTest extends TestCase
      */
     public function test_a_user_cannot_be_logged_in_with_wrong_dni(): void
     {
-        \Artisan::call('passport:install');
+        Artisan::call('passport:install');
 
         UserFactory::new()->create(['dni' => 'Y5177867Y']);
 
@@ -113,7 +113,7 @@ class LoginTest extends TestCase
         $response->assertStatus(401);
         $response->assertJson([
             'result' => [
-                'message' => 'Invalid credentials',
+                'message' => __('auth.failed'),
             ],
             'status' => false,
         ]);
@@ -126,7 +126,7 @@ class LoginTest extends TestCase
      */
     public function test_a_user_last_login_is_saved_and_updated(): void
     {
-        \Artisan::call('passport:install');
+        Artisan::call('passport:install');
 
         $user = UserFactory::new()->create();
         // Check if field is originally NULL
@@ -163,7 +163,7 @@ class LoginTest extends TestCase
      */
     public function test_last_login_at_is_not_updated_on_failed_login(): void
     {
-        \Artisan::call('passport:install');
+        Artisan::call('passport:install');
 
         $user = UserFactory::new()->create(['password' => bcrypt('password')]);
 

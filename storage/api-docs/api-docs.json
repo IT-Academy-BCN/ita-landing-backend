@@ -2,7 +2,7 @@
     "openapi": "3.0.0",
     "info": {
         "title": "ITA Landing page API documentation",
-        "description": "Documentation needed for the API Rest for the landing page to IT Academy. Some useful links below:\n *   [ITA Landing Backend](https://github.com/IT-Academy-BCN/ita-landing-backend)\n *   [ITA Landing Frontend](https://github.com/IT-Academy-BCN/ita-landing-frontend)",
+        "description": "Documentation needed for the API Rest for the landing page to IT Academy.\n *   This API supports Catalan, Spanish and English languages using the 'Accept-Language' header. Defaults Catalan.\n *   Also it is possible to add FAQs in a different language to the current one by using the language parameter.\n *     Some useful links below:\n * [ITA Landing Backend](https://github.com/IT-Academy-BCN/ita-landing-backend)\n * [ITA Landing Frontend](https://github.com/IT-Academy-BCN/ita-landing-frontend)",
         "version": "1.0.0"
     },
     "servers": [
@@ -38,13 +38,31 @@
                         "application/json": {
                             "schema": {
                                 "properties": {
-                                    "title": {
-                                        "type": "string",
-                                        "example": "My application"
+                                    "ca": {
+                                        "properties": {
+                                            "title": {
+                                                "type": "string",
+                                                "example": "Títol de la meva aplicació"
+                                            },
+                                            "description": {
+                                                "type": "string",
+                                                "example": "Descripció de la meva aplicació"
+                                            }
+                                        },
+                                        "type": "object"
                                     },
-                                    "description": {
-                                        "type": "string",
-                                        "example": "Description of my application"
+                                    "es": {
+                                        "properties": {
+                                            "title": {
+                                                "type": "string",
+                                                "example": "Título de mi aplicación"
+                                            },
+                                            "description": {
+                                                "type": "string",
+                                                "example": "Descripción de mi aplicación"
+                                            }
+                                        },
+                                        "type": "object"
                                     },
                                     "url": {
                                         "type": "string",
@@ -137,13 +155,31 @@
                         "application/json": {
                             "schema": {
                                 "properties": {
-                                    "title": {
-                                        "type": "string",
-                                        "example": "New title of my application"
+                                    "ca": {
+                                        "properties": {
+                                            "title": {
+                                                "type": "string",
+                                                "example": "Nou títol"
+                                            },
+                                            "description": {
+                                                "type": "string",
+                                                "example": "Nova descripció"
+                                            }
+                                        },
+                                        "type": "object"
                                     },
-                                    "description": {
-                                        "type": "string",
-                                        "example": "New description of my application"
+                                    "es": {
+                                        "properties": {
+                                            "title": {
+                                                "type": "string",
+                                                "example": "Nuevo título"
+                                            },
+                                            "description": {
+                                                "type": "string",
+                                                "example": "Nueva descripción"
+                                            }
+                                        },
+                                        "type": "object"
                                     },
                                     "url": {
                                         "type": "string",
@@ -226,7 +262,7 @@
                                 "properties": {
                                     "dni": {
                                         "type": "string",
-                                        "example": "12345678A"
+                                        "example": "X6288479A"
                                     },
                                     "password": {
                                         "type": "string",
@@ -240,7 +276,7 @@
                 },
                 "responses": {
                     "200": {
-                        "description": "Access token for the user."
+                        "description": "Access token for the user. The response message may vary based on user's language settings."
                     }
                 }
             }
@@ -411,44 +447,6 @@
                         "description": "Frequently asked questions list."
                     }
                 }
-            },
-            "post": {
-                "tags": [
-                    "Faqs"
-                ],
-                "summary": "Create a new Frequently Asked Question (FAQ)",
-                "description": "This endpoint is used to create a new FAQ.",
-                "operationId": "f745da180f28b0954139a601fc8fccc1",
-                "requestBody": {
-                    "required": true,
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "properties": {
-                                    "title": {
-                                        "type": "string",
-                                        "example": "My frequently asked question"
-                                    },
-                                    "description": {
-                                        "type": "string",
-                                        "example": "Description of my FAQ"
-                                    }
-                                },
-                                "type": "object"
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "201": {
-                        "description": "Details of the FAQ created."
-                    }
-                },
-                "security": [
-                    {
-                        "bearer": []
-                    }
-                ]
             }
         },
         "/faqs/{id}": {
@@ -456,10 +454,20 @@
                 "tags": [
                     "Faqs"
                 ],
-                "summary": "Get details of a specific Frequently Asked Question (FAQ)",
-                "description": "This endpoint is used to get the details of a specific FAQ.",
+                "summary": "Get details of a specific Frequently Asked Question (FAQ) with all its available translations",
+                "description": "This endpoint is used to get the details of a specific FAQ and its available translations.\n *     For translations in a specific language, use the /faqs/{id}?language endpoint.",
                 "operationId": "659268d1d09af0b0c1c38da843ca5800",
                 "parameters": [
+                    {
+                        "name": "Accept-Language",
+                        "in": "header",
+                        "description": "Language code (e.g., ca, es, en).",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "example": "ca"
+                        }
+                    },
                     {
                         "name": "id",
                         "in": "path",
@@ -473,7 +481,67 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "FAQ details."
+                        "description": "FAQ details.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "faq": {
+                                            "$ref": "#/components/schemas/AnnotationsFaq"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "FAQ not found.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "FAQ not found"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Translation key not available.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Translation key not available."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "406": {
+                        "description": "FAQ Translation not available.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "FAQ translation not available."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
                     }
                 },
                 "security": [
@@ -487,9 +555,19 @@
                     "Faqs"
                 ],
                 "summary": "Update an existing Frequently Asked Question (FAQ)",
-                "description": "This endpoint is used to update the details of an existing FAQ.",
+                "description": "This endpoint is used to update the details of an existing FAQ.\n *   'Accept-Language' header is the language to interact with the api, it's not the FAQ language.\n *     Language query parameter it's mandatory.\n *     If the FAQ doesn't exist in that language, a new translation will be kept for it.",
                 "operationId": "e574aafe3ec91f35d1279b67ab576c25",
                 "parameters": [
+                    {
+                        "name": "Accept-Language",
+                        "in": "header",
+                        "description": "Language code (e.g., ca, es, en). The language of the aplication",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "example": "ca"
+                        }
+                    },
                     {
                         "name": "id",
                         "in": "path",
@@ -498,6 +576,16 @@
                         "schema": {
                             "type": "integer",
                             "example": 1
+                        }
+                    },
+                    {
+                        "name": "language",
+                        "in": "query",
+                        "description": "Language code (e.g., ca, es, en). The language in the FAQ is going to be saved.",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "ca"
                         }
                     }
                 ],
@@ -509,11 +597,11 @@
                                 "properties": {
                                     "title": {
                                         "type": "string",
-                                        "example": "New title of my FAQ"
+                                        "example": "Títol de la meva pregunta freqüent"
                                     },
                                     "description": {
                                         "type": "string",
-                                        "example": "New description of my FAQ"
+                                        "example": "Descripció de la meva pregunta freqüent"
                                     }
                                 },
                                 "type": "object"
@@ -522,8 +610,40 @@
                     }
                 },
                 "responses": {
+                    "404": {
+                        "description": "FAQ not found.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "FAQ not found"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
                     "200": {
-                        "description": "Updated FAQ details."
+                        "description": "Updated FAQ details.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Faq actualitzada correctament."
+                                        },
+                                        "faq": {
+                                            "$ref": "#/components/schemas/AnnotationsFaq"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
                     }
                 },
                 "security": [
@@ -537,9 +657,19 @@
                     "Faqs"
                 ],
                 "summary": "Delete a frequently asked question (FAQ)",
-                "description": "This endpoint is used to delete an existing FAQ.",
+                "description": "This endpoint is used to delete an existing FAQ or its translation.\n *     If the language parameter is not provided, the whole FAQ will be deleted",
                 "operationId": "ae5eab98b5a620c4845a7bc3ccb7bb5a",
                 "parameters": [
+                    {
+                        "name": "Accept-Language",
+                        "in": "header",
+                        "description": "Language code (e.g., ca, es, en). The language of the aplication",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "example": "ca"
+                        }
+                    },
                     {
                         "name": "id",
                         "in": "path",
@@ -549,11 +679,293 @@
                             "type": "integer",
                             "example": 1
                         }
+                    },
+                    {
+                        "name": "language",
+                        "in": "query",
+                        "description": "Language code (e.g., ca, es, en). The language of the FAQ translation that will be deleted.",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "example": "ca"
+                        }
+                    }
+                ],
+                "responses": {
+                    "422": {
+                        "description": "Translation key not available.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Translation key not available."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "FAQ not found.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "FAQ not found"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "406": {
+                        "description": "FAQ Translation not available.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "FAQ translation not available."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "200": {
+                        "description": "Success message indicating that the FAQ or a FAQ translation has been removed.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "FAQ translation successfully deleted."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/faqs/{id}?language": {
+            "get": {
+                "tags": [
+                    "Faqs"
+                ],
+                "summary": "Get details of a specific Frequently Asked Question (FAQ) in a specific language",
+                "description": "This endpoint is used to get the details of a specific FAQ in a specific language.\n *     To get a response with all the available translations use the /faqs/{id} endpoint.",
+                "operationId": "347c3cdff5edbb265abafb09a5e16170",
+                "parameters": [
+                    {
+                        "name": "Accept-Language",
+                        "in": "header",
+                        "description": "Language code (e.g., ca, es, en).",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "example": "ca"
+                        }
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "FAQ ID.",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        }
+                    },
+                    {
+                        "name": "language",
+                        "in": "query",
+                        "description": "Language code (e.g., ca, es, en).",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "ca"
+                        }
                     }
                 ],
                 "responses": {
                     "200": {
-                        "description": "Success message indicating that the FAQ has been removed."
+                        "description": "FAQ details in the specified language.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "faq": {
+                                            "$ref": "#/components/schemas/AnnotationsFaqTranslation"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "FAQ not found.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "FAQ not found"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Translation key not available.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Translation key not available."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "406": {
+                        "description": "FAQ Translation not available.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "FAQ translation not available."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/faqs?language": {
+            "post": {
+                "tags": [
+                    "Faqs"
+                ],
+                "summary": "Create a new Frequently Asked Question (FAQ) in a specific language",
+                "description": "This endpoint is used to create a new FAQ in Catalan, Spanish or English.\n *     To save a new translation of an existentent FAQ please use the Update endpoint.",
+                "operationId": "4a99c1edc3c426987f2310495c98794c",
+                "parameters": [
+                    {
+                        "name": "Accept-Language",
+                        "in": "header",
+                        "description": "Language code (e.g., ca, es, en). The language of the aplication",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "example": "ca"
+                        }
+                    },
+                    {
+                        "name": "language",
+                        "in": "query",
+                        "description": "Language code (e.g., ca, es, en). The language in the FAQ is going to be saved.",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "ca"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "title": {
+                                        "type": "string",
+                                        "example": "Títol de la meva pregunta freqüent"
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "example": "Descripció de la meva pregunta freqüent"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Details of the FAQ created.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "faq": {
+                                            "$ref": "#/components/schemas/AnnotationsFaqStored"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Translation code key not available or validation fail.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "errors": {
+                                            "properties": {
+                                                "title": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "string",
+                                                        "example": "The title has already been taken."
+                                                    },
+                                                    "collectionFormat": "multi"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
                     }
                 },
                 "security": [
@@ -587,7 +999,7 @@
                                     },
                                     "dni": {
                                         "type": "string",
-                                        "example": "12345678A"
+                                        "example": "X6288479A"
                                     },
                                     "password": {
                                         "type": "string",
@@ -596,6 +1008,10 @@
                                     "password_confirmation": {
                                         "type": "string",
                                         "example": "password123"
+                                    },
+                                    "code": {
+                                        "type": "string",
+                                        "example": "1234"
                                     }
                                 },
                                 "type": "object"
@@ -713,6 +1129,11 @@
                         "type": "string",
                         "example": "https://myapp.com"
                     },
+                    "github": {
+                        "description": "github repository",
+                        "type": "string",
+                        "example": "https://github.com/IT-Academy-BCN/"
+                    },
                     "state": {
                         "description": "State",
                         "type": "string",
@@ -747,16 +1168,6 @@
                         "type": "integer",
                         "example": 1
                     },
-                    "title": {
-                        "description": "Title",
-                        "type": "string",
-                        "example": "FAQ Title"
-                    },
-                    "description": {
-                        "description": "Description",
-                        "type": "string",
-                        "example": "FAQ Description"
-                    },
                     "created_at": {
                         "description": "Creation timestamp",
                         "type": "string",
@@ -768,6 +1179,126 @@
                         "type": "string",
                         "format": "date-time",
                         "example": "2023-06-19T13:30:00+00:00"
+                    },
+                    "title": {
+                        "description": "Title",
+                        "type": "string",
+                        "example": "FAQ Title"
+                    },
+                    "description": {
+                        "description": "Description",
+                        "type": "string",
+                        "example": "FAQ Description"
+                    },
+                    "translations": {
+                        "description": "Array of translations",
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/AnnotationsFaqTranslation"
+                        },
+                        "example": [
+                            {
+                                "id": 1,
+                                "faq_id": 1,
+                                "title": "Títol de la meva pregunta freqüent",
+                                "description": "Descripció de la meva pregunta freqüent",
+                                "locale": "ca"
+                            },
+                            {
+                                "id": 2,
+                                "faq_id": 1,
+                                "title": "Título de mi pregunta frecuente",
+                                "description": "Descripción de mi pregunta frecuente",
+                                "locale": "es"
+                            },
+                            {
+                                "id": 3,
+                                "faq_id": 1,
+                                "title": "Title of my frequently asked question",
+                                "description": "Description of my frequently asked question",
+                                "locale": "en"
+                            }
+                        ]
+                    }
+                },
+                "type": "object"
+            },
+            "AnnotationsFaqTranslation": {
+                "title": "FaqTranslation",
+                "description": "Faq translation model",
+                "properties": {
+                    "id": {
+                        "description": "Translation ID",
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "faq_id": {
+                        "description": "Faq ID",
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "title": {
+                        "description": "Translated title",
+                        "type": "string",
+                        "example": "Títol de la meva pregunta freqüent"
+                    },
+                    "description": {
+                        "description": "Translated description",
+                        "type": "string",
+                        "example": "Descripció de la meva pregunta freqüent"
+                    },
+                    "locale": {
+                        "description": "Locale code",
+                        "type": "string",
+                        "example": "ca"
+                    }
+                },
+                "type": "object"
+            },
+            "AnnotationsFaqStored": {
+                "title": "Faq",
+                "description": "Faq model",
+                "properties": {
+                    "created_at": {
+                        "description": "Creation timestamp",
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2023-06-19T12:00:00+00:00"
+                    },
+                    "updated_at": {
+                        "description": "Last update timestamp",
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2023-06-19T13:30:00+00:00"
+                    },
+                    "id": {
+                        "description": "ID",
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "title": {
+                        "description": "Title",
+                        "type": "string",
+                        "example": "FAQ Title"
+                    },
+                    "description": {
+                        "description": "Description",
+                        "type": "string",
+                        "example": "FAQ Description"
+                    },
+                    "translations": {
+                        "description": "Array of translations",
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/AnnotationsFaqTranslation"
+                        },
+                        "example": {
+                            "locale": "ca",
+                            "title": "Títol de la meva pregunta freqüent",
+                            "description": "Descripció de la meva pregunta freqüent",
+                            "faq_id": 1,
+                            "id": 1
+                        }
                     }
                 },
                 "type": "object"
@@ -814,6 +1345,12 @@
                         ],
                         "example": "ADMIN"
                     },
+                    "last_login_at": {
+                        "description": "Last user log in timestamp",
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2023-06-19T12:00:00+00:00"
+                    },
                     "email_verified_at": {
                         "description": "Email verification timestamp",
                         "type": "string",
@@ -845,10 +1382,28 @@
                 "type": "object"
             }
         },
+        "responses": {
+            "422": {
+                "description": "Translation key not available.",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "properties": {
+                                "error": {
+                                    "type": "string",
+                                    "example": "Translation key not available."
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            }
+        },
         "securitySchemes": {
             "bearer": {
                 "type": "apiKey",
-                "description": "Enter token in format (Bearer token here)",
+                "description": "Enter token in format (Bearer <token>), it means: Bearer + space + token",
                 "name": "Authorization",
                 "in": "header"
             }
@@ -866,6 +1421,10 @@
         {
             "name": "Faqs",
             "description": "Operations for a faq"
+        },
+        {
+            "name": "Collaborators",
+            "description": "Operations for Collaborators"
         }
     ]
 }

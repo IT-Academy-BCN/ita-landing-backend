@@ -18,6 +18,7 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "api" middleware group. Make something great!
 |
 */
+
 Route::post('/register', [UserController::class, 'store'])->name('register');
 Route::post('/login', [AuthController::class, 'login'])->name('login');
 
@@ -25,24 +26,24 @@ Route::post('/login', [AuthController::class, 'login'])->name('login');
 Route::post('/forget-password', [UserController::class, 'forgetPassword'])->name('forget.password');
 Route::post('/reset-password/{token}', [UserController::class, 'resetPassword'])->name('reset.password');
 
-Route::get('/faqs', [FaqController::class, 'index']);
+Route::get('/faqs', [FaqController::class, 'index'])->name('faq.index');
 Route::get('/apps', [AppController::class, 'index'])->name('app.index');
 
 Route::get('/collaborators/{area}', [CollaboratorsController::class, 'index']);
 
-Route::middleware(['auth:api'])->prefix('faqs')->group(function () {
+Route::middleware(['auth:api'])->controller(FaqController::class)->prefix('faqs')->group(function () {
 
-    Route::get('/{id}', [FaqController::class, 'show']);
-    Route::post('/', [FaqController::class, 'store']);
-    Route::put('/{id}', [FaqController::class, 'update']);
-    Route::delete('/{id}', [FaqController::class, 'destroy']);
+    Route::get('/{faq}', 'show')->name('faq.show');
+    Route::post('/', 'store')->name('faq.store');
+    Route::put('/{faq}', 'update')->name('faq.update');
+    Route::delete('/{faq}', 'destroy')->name('faq.destroy');
 });
 
 Route::post('/send-code-by-email', [CodeController::class, 'sendCodeByEmail'])->middleware('auth:api');
 
-Route::middleware(['auth:api'])->group(function () {
-    Route::get('/apps/{id}', [AppController::class, 'show'])->name('app.show');
-    Route::post('/apps', [AppController::class, 'store'])->name('app.store');
-    Route::put('/apps/{id}', [AppController::class, 'update'])->name('app.update');
-    Route::delete('/apps/{id}', [AppController::class, 'destroy'])->name('app.destroy');
+Route::middleware(['auth:api'])->prefix('apps')->group(function () {
+    Route::get('/{id}', [AppController::class, 'show'])->name('app.show');
+    Route::post('/', [AppController::class, 'store'])->name('app.store');
+    Route::put('/{id}', [AppController::class, 'update'])->name('app.update');
+    Route::delete('/{id}', [AppController::class, 'destroy'])->name('app.destroy');
 });

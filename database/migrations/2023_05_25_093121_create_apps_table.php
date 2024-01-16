@@ -12,12 +12,21 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('apps', function (Blueprint $table) {
-            $table->id();
-            $table->char('title', 255);
-            $table->longText('description');
-            $table->text('url');
+            $table->increments('id');
+            $table->string('url');
             $table->enum('state', ['COMPLETED', 'IN PROGRESS', 'SOON']);
             $table->timestamps();
+        });
+
+        Schema::create('app_translations', function (Blueprint $table) {
+            $table->increments('id');
+            $table->integer('app_id')->unsigned();
+            $table->string('locale')->index();
+            $table->string('title');
+            $table->text('description');
+
+            $table->unique(['app_id', 'locale']);
+            $table->foreign('app_id')->references('id')->on('apps')->onDelete('cascade');
         });
     }
 
@@ -26,6 +35,7 @@ return new class extends Migration
      */
     public function down(): void
     {
+        Schema::dropIfExists('app_translations');
         Schema::dropIfExists('apps');
     }
 };

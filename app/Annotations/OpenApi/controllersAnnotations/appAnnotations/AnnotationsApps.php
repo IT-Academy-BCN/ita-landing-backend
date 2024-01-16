@@ -37,14 +37,32 @@ class AnnotationsApps
      *       @OA\Schema(
      *
      *         @OA\Property(
-     *           property="title",
-     *           type="string",
-     *           example="My application"
+     *           property="ca",
+     *           type="object",
+     *           @OA\Property(
+     *             property="title",
+     *             type="string",
+     *             example="Títol de la meva aplicació"
+     *           ),
+     *           @OA\Property(
+     *             property="description",
+     *             type="string",
+     *             example="Descripció de la meva aplicació"
+     *           ),
      *         ),
      *         @OA\Property(
-     *           property="description",
-     *           type="string",
-     *           example="Description of my application"
+     *           property="es",
+     *           type="object",
+     *           @OA\Property(
+     *             property="title",
+     *             type="string",
+     *             example="Título de mi aplicación"
+     *           ),
+     *           @OA\Property(
+     *             property="description",
+     *             type="string",
+     *             example="Descripción de mi aplicación"
+     *           ),
      *         ),
      *         @OA\Property(
      *           property="url",
@@ -136,21 +154,39 @@ class AnnotationsApps
      *       @OA\Schema(
      *
      *         @OA\Property(
-     *           property="title",
-     *           type="string",
-     *           example="New title of my application"
+     *           property="ca",
+     *           type="object",
+     *           @OA\Property(
+     *             property="title",
+     *             type="string",
+     *             example="Nou títol"
+     *           ),
+     *           @OA\Property(
+     *             property="description",
+     *             type="string",
+     *             example="Nova descripció"
+     *           ),
      *         ),
      *         @OA\Property(
-     *           property="description",
-     *           type="string",
-     *           example="New description of my application"
+     *           property="es",
+     *           type="object",
+     *           @OA\Property(
+     *             property="title",
+     *             type="string",
+     *             example="Nuevo título"
+     *           ),
+     *           @OA\Property(
+     *             property="description",
+     *             type="string",
+     *             example="Nueva descripción"
+     *           ),
      *         ),
      *         @OA\Property(
      *           property="url",
      *           type="string",
      *           example="https://myapp.com/new-version"
      *         ),
-     *          @OA\Property(
+     *         @OA\Property(
      *           property="github",
      *           type="string",
      *           example="https://github.com/IT-Academy-BCN/project-1"

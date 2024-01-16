@@ -18,7 +18,7 @@ class CollaboratorsController extends Controller
         }
 
         return response()->json([
-            'message' => 'this area is invalid',
+            'message' => __('api.invalid_area'),
         ], 404);
     }
 
@@ -91,8 +91,6 @@ class CollaboratorsController extends Controller
         $angular = $this->collaboratorLogic($collaboratorAngular);
         $java = $this->collaboratorLogic($collaboratorJava);
 
-        $uniqueCollaborators = $this->uniqueCollaborators($angular, $java);
-
-        return $uniqueCollaborators;
+        return $this->uniqueCollaborators($angular, $java);
     }
 }
