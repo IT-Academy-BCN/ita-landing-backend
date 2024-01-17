@@ -348,21 +348,30 @@
                     "Collaborators"
                 ],
                 "summary": "User Collaborators",
-                "description": "This endpoint is used to get persons that work on the specific project",
+                "description": "This endpoint is used to get persons that work on the specific project,\n     *    URL parameters: area (landing, wiki, challenges, profiles).",
                 "operationId": "9ed89cb2a49abd38189ba3c947d6c40f",
                 "parameters": [
                     {
                         "name": "area",
                         "in": "path",
-                        "description": "name of the area",
+                        "description": "name of the area.",
                         "required": true,
                         "schema": {
                             "type": "string",
+                            "enum": [
+                                "landing",
+                                "wiki",
+                                "challenges",
+                                "profiles"
+                            ],
                             "example": "landing"
                         }
                     }
                 ],
                 "responses": {
+                    "404": {
+                        "description": "Invalid area"
+                    },
                     "200": {
                         "description": "Collaborators details.",
                         "content": {
@@ -813,6 +822,12 @@
                             "REGISTERED"
                         ],
                         "example": "ADMIN"
+                    },
+                    "last_login_at": {
+                        "description": "Last user log in timestamp",
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2023-06-19T12:00:00+00:00"
                     },
                     "email_verified_at": {
                         "description": "Email verification timestamp",

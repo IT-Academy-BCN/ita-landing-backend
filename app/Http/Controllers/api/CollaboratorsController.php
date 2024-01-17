@@ -15,6 +15,8 @@ class CollaboratorsController extends Controller
             return $this->collaboratorItaWiki();
         } elseif ($area === 'challenges') {
             return $this->collaboratorItaChallenges();
+        } elseif ($area === 'profiles') {
+            return $this->collaboratorItaProfiles();
         }
 
         return response()->json([
@@ -24,7 +26,6 @@ class CollaboratorsController extends Controller
 
     public function collaboratorLogic($collaborator)
     {
-
         $url = env('URL_SERVER_API', 'https://api.github.com');
         $response = Http::withToken(env('MY_TOKEN'))->get($url.$collaborator);
 
@@ -40,7 +41,6 @@ class CollaboratorsController extends Controller
         }
 
         return $allCollaborators;
-
     }
 
     public function uniqueCollaborators(...$arrays)
@@ -60,7 +60,6 @@ class CollaboratorsController extends Controller
 
     public function collaboratorLanding()
     {
-
         $collaboratorPhp = '/ita-landing-backend/collaborators?affiliation=direct';
         $collaboratorReact = '/ita-landing-frontend/collaborators?affiliation=direct';
 
@@ -78,7 +77,11 @@ class CollaboratorsController extends Controller
 
         $collaboratorWiki = '/ita-wiki/collaborators?affiliation=direct';
 
-        return $this->collaboratorLogic($collaboratorWiki);
+        $wiki = $this->collaboratorLogic($collaboratorWiki);
+
+        $uniqueCollaborators = $this->uniqueCollaborators($wiki);
+
+        return $uniqueCollaborators;
 
     }
 
@@ -92,6 +95,19 @@ class CollaboratorsController extends Controller
         $java = $this->collaboratorLogic($collaboratorJava);
 
         $uniqueCollaborators = $this->uniqueCollaborators($angular, $java);
+
+        return $uniqueCollaborators;
+    }
+
+    public function collaboratorItaProfiles()
+    {
+        $collaboratorReactProfiles = '/ita-profiles-frontend/collaborators?affiliation=direct';
+        $collaboratorPhpProfiles = '/ita-profiles-backend/collaborators?affiliation=direct';
+
+        $reactProfiles = $this->collaboratorLogic($collaboratorReactProfiles);
+        $phpProfiles = $this->collaboratorLogic($collaboratorPhpProfiles);
+
+        $uniqueCollaborators = $this->uniqueCollaborators($reactProfiles, $phpProfiles);
 
         return $uniqueCollaborators;
     }

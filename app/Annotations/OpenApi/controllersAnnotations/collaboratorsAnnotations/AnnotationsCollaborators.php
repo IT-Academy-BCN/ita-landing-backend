@@ -9,20 +9,26 @@ class AnnotationsCollaborators
      *   path="/collaborators/{area}",
      *   tags={"Collaborators"},
      *   summary="User Collaborators",
-     *   description="This endpoint is used to get persons that work on the specific project",
+     *   description="This endpoint is used to get persons that work on the specific project,
+     *    URL parameters: area (landing, wiki, challenges, profiles).",
      *
      *   @OA\Parameter(
      *     name="area",
      *     in="path",
      *     required=true,
-     *     description="name of the area",
+     *     description="name of the area.",
      *
      *     @OA\Schema(
      *       type="string",
+     *       enum={"landing", "wiki", "challenges", "profiles"},
      *       example="landing"
-     *     )
+     *     ),
      *   ),
      *
+     *  @OA\Response(
+     *     response="404",
+     *     description="Invalid area"
+     *   ),
      *   @OA\Response(
      *     response="200",
      *     description="Collaborators details.",
