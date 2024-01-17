@@ -29,7 +29,6 @@ class AnnotationsCollaborators
      *     response="404",
      *     description="Invalid area"
      *   ),
-     *
      *   @OA\Response(
      *     response="200",
      *     description="Collaborators details.",
